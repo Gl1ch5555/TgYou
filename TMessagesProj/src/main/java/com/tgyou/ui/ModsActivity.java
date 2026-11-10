@@ -51,7 +51,7 @@ import java.util.zip.ZipOutputStream;
 /** The Mods window: marketplace, installed mods and a "create a mod" kit. */
 public class ModsActivity extends BaseFragment {
 
-    private static final String DOCS_URL = "https://github.com/Gl1ch5/TgYou/blob/ccr-baf0fc46-m69tv7/docs/MODS.md";
+    private static final String DOCS_URL = "https://github.com/Gl1ch5555/TgYou/blob/main/docs/MODS.md";
     private static final int REQUEST_PICK_ZIP = 4711;
 
     private static final int T_HEADER = 0;

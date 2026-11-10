@@ -17,7 +17,7 @@ import org.telegram.ui.ActionBar.AlertDialog;
 /** «Для разработчиков»: режим отладки поверх окон, сведения о сборке, журналы модов. */
 public class DeveloperScreen extends TgYouScreen {
 
-    private static final String CATALOG_URL = "https://raw.githubusercontent.com/Gl1ch5/TgYou/main/modding/hooks/catalog/README.md";
+    private static final String CATALOG_URL = "https://raw.githubusercontent.com/Gl1ch5555/TgYou/main/modding/hooks/catalog/README.md";
 
     @Override
     protected String screenTitle() {

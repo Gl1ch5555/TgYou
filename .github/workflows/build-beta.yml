@@ -84,7 +84,7 @@ jobs:
         env:
           TG_API_ID: ${{ secrets.TG_API_ID }}
           TG_API_HASH: ${{ secrets.TG_API_HASH }}
-          TG_RELEASE_TAG: ${{ inputs.release_tag }}
+          TG_RELEASE_TAG: ${{ inputs.release_tag || (startsWith(github.ref, 'refs/tags/v') && github.ref_name || '') }}
           # betas are arm64 only
           TG_ABIS: arm64-v8a
           # branch builds skip R8; release builds are minified
@@ -127,7 +127,7 @@ jobs:
             echo "## Что нового"
             if [ -n "$prev" ]; then
               gh api "repos/${{ github.repository }}/compare/${prev}...${{ github.sha }}" \
-                --jq '[.commits[].commit.message | split("\n")[0] | select(startswith("Merge") | not)] | reverse | .[:20][] | "- " + .' || true
+                --jq '[.commits[].commit.message | split("\n")[0] | select((startswith("Merge") or startswith("[checkpoint]")) | not)] | reverse | .[:20][] | "- " + .' || true
               echo
               echo "Full Changelog: https://github.com/${{ github.repository }}/compare/${prev}...${TAG}"
             fi

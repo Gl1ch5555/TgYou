@@ -79,7 +79,7 @@ public class TgYouSettingsActivity extends TgYouScreen {
         if (host != null) {
             item(R.drawable.tgy_list, "Все функции", String.valueOf(host.plugins().size()), () -> presentFragment(new TgYouSectionActivity((Section) null)));
         }
-        item(R.drawable.tgy_code, "Исходный код", "Gl1ch5/TgYou", () -> org.telegram.messenger.browser.Browser.openUrl(getParentActivity(), "https://github.com/Gl1ch5/TgYou"));
+        item(R.drawable.tgy_code, "Исходный код", "Gl1ch5555/TgYou", () -> org.telegram.messenger.browser.Browser.openUrl(getParentActivity(), "https://github.com/Gl1ch5555/TgYou"));
         item(R.drawable.tgy_globe, "Веб-сайт", "telegram-you.ru", () -> org.telegram.messenger.browser.Browser.openUrl(getParentActivity(), "https://telegram-you.ru"));
         gap();
     }

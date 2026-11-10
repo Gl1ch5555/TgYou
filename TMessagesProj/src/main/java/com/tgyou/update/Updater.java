@@ -23,7 +23,7 @@ import java.net.URL;
 /** Looks for newer TgYou builds in GitHub releases, downloads the APK and hands it to the system installer. */
 public final class Updater {
 
-    private static final String RELEASES = "https://api.github.com/repos/Gl1ch5/TgYou/releases?per_page=30";
+    private static final String RELEASES = "https://api.github.com/repos/Gl1ch5555/TgYou/releases?per_page=30";
 
     public static final class Release {
         public String tag;

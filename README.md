@@ -7,9 +7,9 @@
 **Клиент Telegram для Android, который настраивается под вас.**<br>
 Всё — плагины: встроенные на Java, внешние на Python. Функции AyuGram и exteraGram, моды, наборы иконок, маркетплейс.
 
-[Скачать](https://github.com/Gl1ch5/TgYou/releases) · [Сайт](http://64.188.66.249:8090) · [Документация](docs/README.md) · [Маркетплейс модов](https://grzxk.ru/tgyou/)
+[Скачать](https://github.com/Gl1ch5555/TgYou/releases) · [Сайт](http://64.188.66.249:8090) · [Документация](docs/README.md) · [Маркетплейс модов](https://grzxk.ru/tgyou/)
 
-`com.tgyou.app` · на базе [DrKLO/Telegram](https://github.com/DrKLO/Telegram) 13.0.3 · GPL v2 · arm64-v8a
+`com.tgyou.app` · на базе [DrKLO/Telegram](https://github.com/DrKLO/Telegram) 13.2.1 · GPL v2 · arm64-v8a
 
 </div>
 

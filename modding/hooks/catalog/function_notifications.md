@@ -1,4 +1,4 @@
-# function / notifications (160 методов)
+# function / notifications (164 методов)
 
 ## `org.telegram.messenger.AnimationNotificationsLocker`
 - `disable()` -> `void`
@@ -65,6 +65,7 @@
 ## `org.telegram.messenger.NotificationCenter`
 - `addObserver(NotificationCenterDelegate observer, int id)` -> `void`
 - `addPostponeNotificationsCallback(PostponeNotificationCallback callback)` -> `void`
+- `addWeakObserver(NotificationCenterDelegate observer, int id)` -> `void`
 - `createObserversGroup(NotificationCenterDelegate delegate)` -> `ObserversGroup`
 - `createWeakObserversGroup(NotificationCenterDelegate delegate)` -> `ObserversGroup`
 - `static diffObserverDumps(SparseArray<Integer> before, SparseArray<Integer> after)` -> `void`
@@ -108,6 +109,11 @@
 - `remove(int index)` -> `T`
 - `remove(@Nullable Object o)` -> `boolean`
 - `removeAll(@NonNull Collection<?> c)` -> `boolean`
+
+## `org.telegram.messenger.NotificationCenter$WeakDelegate`
+- `didReceivedNotification(int id, int account, Object... args)` -> `void`
+- `equals(@Nullable Object o)` -> `boolean`
+- `hashCode()` -> `int`
 
 ## `org.telegram.messenger.NotificationCenter$WeakObserversGroupImpl`
 - `add(int id)` -> `ObserversGroup`

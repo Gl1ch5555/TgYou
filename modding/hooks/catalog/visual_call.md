@@ -1,4 +1,4 @@
-# visual / call (882 методов)
+# visual / call (894 методов)
 
 ## `org.telegram.tgnet.tl.TL_keyboard$TL_inlineButtonTypeCallback`
 - `serializeToStream(OutputSerializedData stream)` -> `void`
@@ -13,11 +13,12 @@
 - `serializeToStream(OutputSerializedData stream)` -> `void`
 
 ## `org.telegram.ui.CallLogActivity`
-- `createActionBar(Context context)` -> `ActionBar`
 - `static createCallLink(Context context, int currentAccount, Theme.ResourcesProvider resourceProvider, Runnable done)` -> `void`
 - `createView(Context context)` -> `View`
 - `didReceivedNotification(int id, int account, Object... args)` -> `void`
-- `getGlassSource()` -> `BlurredBackgroundSourceRenderNode`
+- `getFrostedGlassSource()` -> `GlassSourceRenderNode`
+- `getGlassSource()` -> `GlassSourceRenderNode`
+- `getListViewForSimpleGlass()` -> `RecyclerListView`
 - `getThemeDescriptions()` -> `ArrayList<ThemeDescription>`
 - `isSupportEdgeToEdge()` -> `boolean`
 - `needDelayOpenAnimation()` -> `boolean`
@@ -29,9 +30,12 @@
 - `onParentScrollToTop()` -> `void`
 - `onRequestPermissionsResultFragment(int requestCode, String[] permissions, int[] grantResults)` -> `void`
 - `onResume()` -> `void`
+- `onThemeColorsChanged()` -> `void`
 - `onTransitionAnimationStart(boolean isOpen, boolean backward)` -> `void`
 - `static openCreateCall(BaseFragment parent)` -> `void`
 - `static showCallLinkSheet(Context context, int currentAccount, TLRPC.InputGroupCall inputGroupCall, String link, Theme.ResourcesProvider resourcesProvider, boolean withJoinButton, boolean creator)` -> `void`
+- `useFadeDrawableForActionBar()` -> `boolean`
+- `useSimpleActionBar()` -> `boolean`
 
 ## `org.telegram.ui.CallLogActivity$CallCell`
 - `set(CallLogRow row, View.OnClickListener imageOnClick)` -> `void`
@@ -48,11 +52,16 @@
 
 ## `org.telegram.ui.CallLogActivity$GroupCallCell`
 - `setChat(TLRPC.Chat chat, View.OnClickListener onJoinClick)` -> `void`
+- `updateColors()` -> `void`
 
 ## `org.telegram.ui.CallLogActivity$GroupCallCell$Factory`
 - `bindView(View view, UItem item, boolean divider, UniversalAdapter adapter, UniversalRecyclerView listView)` -> `void`
 - `createView(Context context, RecyclerListView listView, int currentAccount, int classGuid, Theme.ResourcesProvider resourcesProvider)` -> `GroupCallCell`
 - `static of(TLRPC.Chat chat, View.OnClickListener onJoinClick)` -> `UItem`
+
+## `org.telegram.ui.Cells.ChatMessagePhoneCall`
+- `drawCall(Canvas canvas)` -> `void`
+- `layoutCall(MessageObject messageObject, boolean drawAvatar)` -> `void`
 
 ## `org.telegram.ui.Cells.GroupCallInvitedCell`
 - `dispatchDraw(Canvas canvas)` -> `void`
@@ -63,6 +72,7 @@
 - `setData(int account, Long uid, boolean calling, boolean isShadyJoin, boolean isShadyLeft)` -> `void`
 - `setDrawDivider(boolean draw)` -> `void`
 - `setGrayIconColor(int key, int value)` -> `void`
+- `updateColors()` -> `void`
 
 ## `org.telegram.ui.Cells.GroupCallTextCell`
 - `getTextView()` -> `SimpleTextView`
@@ -82,6 +92,7 @@
 - `setTextAndValueAndIcon(String text, String value, int resId, boolean divider)` -> `void`
 - `setTextAndValueDrawable(String text, Drawable drawable, boolean divider)` -> `void`
 - `setTextColor(int color)` -> `void`
+- `updateColors()` -> `void`
 
 ## `org.telegram.ui.Cells.GroupCallUserCell`
 - `applyParticipantChanges(boolean animated)` -> `void`
@@ -111,6 +122,7 @@
 - `setGrayIconColor(int key, int value)` -> `void`
 - `setProgressToAvatarPreview(float progressToAvatarPreview)` -> `void`
 - `setUploadProgress(float progress, boolean animated)` -> `void`
+- `updateColors()` -> `void`
 
 ## `org.telegram.ui.Cells.GroupCallUserCell$AvatarWavesDrawable`
 - `draw(Canvas canvas, float cx, float cy, View parentView)` -> `void`
@@ -234,6 +246,7 @@
 - `setParticipant(ChatObject.VideoParticipant videoParticipant, TLRPC.GroupCallParticipant participant)` -> `void`
 - `setProgressToFullscreen(float progress)` -> `void`
 - `setRenderer(GroupCallMiniTextureView renderer)` -> `void`
+- `updateColors()` -> `void`
 - `updateState(boolean animated)` -> `void`
 
 ## `org.telegram.ui.Components.GroupCallRecordAlert`
@@ -275,6 +288,7 @@
 
 ## `org.telegram.ui.Components.JoinCallAlert`
 - `dismissInternal()` -> `void`
+- `onThemeColorsChanged()` -> `void`
 - `static open(Context context, long did, AccountInstance accountInstance, BaseFragment fragment, int type, TLRPC.Peer scheduledPeer, JoinCallAlertDelegate delegate)` -> `void`
 - `static resetCache()` -> `void`
 
@@ -532,6 +546,7 @@
 - `onDraw(Canvas canvas)` -> `void`
 - `onMeasure(int widthMeasureSpec, int heightMeasureSpec)` -> `void`
 - `setAmplitude(double value)` -> `void`
+- `updateColors()` -> `void`
 
 ## `org.telegram.ui.Components.voip.GroupCallRenderersContainer`
 - `attach(GroupCallMiniTextureView view)` -> `void`
@@ -924,6 +939,7 @@
 - `onPause()` -> `void`
 - `onResume()` -> `void`
 - `onStateChanged(int state)` -> `void`
+- `onThemeColorsChanged()` -> `void`
 - `openShareConferenceLink()` -> `void`
 - `setAudioOutputValue(int value)` -> `void`
 - `setOldRows(int encryptionRow, int addMemberRow, int usersStartRow, int usersEndRow, int invitedStartRow, int invitedEndRow, int shadyJoinStartRow, int shadyJoinEndRow, int shadyLeftStartRow, int shadyLeftEndRow, int usersVideoStartRow, int usersVideoEndRow, int videoDividerRow, int videoNotAvailableRow, int conferenceAddPeopleRow, int conferenceShareLinkRow)` -> `void`
@@ -1106,9 +1122,12 @@
 
 ## `org.telegram.ui.VoIPFragment`
 - `static clearInstance()` -> `void`
+- `closeWithoutPip()` -> `void`
 - `createPiPTransition(boolean enter)` -> `Animator`
 - `createView(Context context)` -> `View`
 - `didReceivedNotification(int id, int account, Object... args)` -> `void`
+- `enterSystemPip(VoIPTextureView view)` -> `void`
+- `exitSystemPip()` -> `void`
 - `finish()` -> `void`
 - `static getInstance()` -> `VoIPFragment`
 - `onAudioSettingsChanged()` -> `void`
@@ -1123,16 +1142,13 @@
 - `onSignalBarsCountChanged(int count)` -> `void`
 - `onStateChanged(int state)` -> `void`
 - `onVideoAvailableChange(boolean isAvailable)` -> `void`
-- `pipCreatePictureInPictureView()` -> `View`
-- `pipCreatePictureInPictureViewBitmap()` -> `Bitmap`
-- `pipCreatePrimaryWindowViewBitmap()` -> `Bitmap`
-- `pipHidePrimaryWindowView(Runnable firstFrameCallback)` -> `void`
-- `pipRenderBackground(Canvas canvas)` -> `void`
-- `pipShowPrimaryWindowView(Runnable firstFrameCallback)` -> `void`
 - `replaceEmojiToLottieFrame(CharSequence text, int[] emojiOnly)` -> `TLRPC.Document`
 - `static show(Activity activity, int account)` -> `void`
 - `startTransitionFromPiP()` -> `void`
 - `switchToPip()` -> `void`
+
+## `org.telegram.ui.VoIPFragment$BackCallbacks`
+- `static unregister(@NonNull View view, @NonNull Object callback)` -> `void`
 
 ## `org.telegram.ui.VoIPFragment$ConferenceParticipantsView`
 - `onDraw(@NonNull Canvas canvas)` -> `void`

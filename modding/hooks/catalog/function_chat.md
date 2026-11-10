@@ -1,4 +1,4 @@
-# function / chat (758 методов)
+# function / chat (782 методов)
 
 ## `org.telegram.messenger.MessageObject`
 - `addEntitiesToText(CharSequence text, boolean photoViewer, boolean useManualParse)` -> `boolean`
@@ -211,6 +211,7 @@
 - `static getStickerSetId(TLRPC.Document document)` -> `long`
 - `static getStickerSetName(TLRPC.Document document)` -> `String`
 - `getStoryMentionWebpage()` -> `TLRPC.WebPage`
+- `static getTabletChatWidth()` -> `int`
 - `getTextPaint()` -> `TextPaint`
 - `getTopicId()` -> `long`
 - `static getTopicId(int currentAccount, TLRPC.Message message, int sureIsForumTypeFlags)` -> `long`
@@ -269,6 +270,7 @@
 - `static isBlueBlock(TL_iv.PageBlock block)` -> `boolean`
 - `isBotPreview()` -> `boolean`
 - `isComments()` -> `boolean`
+- `isCompactMode()` -> `boolean`
 - `static isCompleted(MessageObject messageObject, int taskId)` -> `boolean`
 - `static isCompleted(TLRPC.TL_messageMediaToDo mediaTodo, int taskId)` -> `boolean`
 - `isConferenceCall()` -> `boolean`
@@ -445,6 +447,7 @@
 - `static normalizeFlags(TLRPC.Message message)` -> `void`
 - `obtainSuggestionOffer()` -> `MessageSuggestionParams`
 - `obtainSuggestionOfferFromReply()` -> `MessageSuggestionParams`
+- `onWidgetMessageSent(int oldId)` -> `void`
 - `static peerNameWithIcon(int currentAccount, TLRPC.Peer peer)` -> `CharSequence`
 - `static peerNameWithIcon(int currentAccount, TLRPC.Peer peer, boolean anotherChat)` -> `CharSequence`
 - `static peerNameWithIcon(int currentAccount, long did)` -> `CharSequence`
@@ -480,13 +483,15 @@
 - `shouldDrawWithoutBackground()` -> `boolean`
 - `static shouldEncryptPhotoOrVideo(int currentAccount, TLRPC.Message message)` -> `boolean`
 - `shouldEncryptPhotoOrVideo()` -> `boolean`
+- `shouldHideLinks()` -> `boolean`
 - `static span(String str, int icon)` -> `SpannableStringBuilder`
 - `spoilLoginCode()` -> `void`
 - `textHeight()` -> `int`
-- `textHeight(ChatMessageCell.TransitionParams tp)` -> `int`
+- `textHeight(ChatMessageTransitionParams tp)` -> `int`
 - `textHeightCached()` -> `int`
 - `toggleChannelRecommendations()` -> `void`
 - `static toggleTodo(int currentAccount, long dialogId, TLRPC.TL_messageMediaToDo mediaTodo, int taskId, boolean enable, int currentDate)` -> `void`
+- `updateLinksHidden()` -> `boolean`
 - `updateMessageText()` -> `void`
 - `static updatePollResults(TLRPC.TL_messageMediaPoll media, TLRPC.PollResults results)` -> `void`
 - `updateQualitiesCached(boolean useFileDatabaseQueue)` -> `void`
@@ -514,25 +519,29 @@
 
 ## `org.telegram.messenger.MessageObject$TextLayoutBlock`
 - `static capitalizeLanguage(String lng)` -> `String`
-- `collapsed(ChatMessageCell.TransitionParams tp)` -> `float`
+- `codeInset()` -> `int`
+- `collapsed(ChatMessageTransitionParams tp)` -> `float`
 - `collapsed()` -> `boolean`
+- `compactCodeTop()` -> `int`
+- `compactCopyTop()` -> `int`
 - `getLayout()` -> `Layout`
 - `getParentView()` -> `View`
 - `height()` -> `int`
-- `height(ChatMessageCell.TransitionParams tp)` -> `int`
+- `height(ChatMessageTransitionParams tp)` -> `int`
 - `heightCollapsed()` -> `int`
 - `isRtl()` -> `boolean`
 - `textYOffset(ArrayList<TextLayoutBlock> blocks)` -> `float`
-- `textYOffset(ArrayList<TextLayoutBlock> blocks, ChatMessageCell.TransitionParams tp)` -> `float`
+- `textYOffset(ArrayList<TextLayoutBlock> blocks, ChatMessageTransitionParams tp)` -> `float`
 
 ## `org.telegram.messenger.MessageObject$TextLayoutBlocks`
 - `textHeight()` -> `int`
-- `textHeight(ChatMessageCell.TransitionParams tp)` -> `int`
+- `textHeight(ChatMessageTransitionParams tp)` -> `int`
 
 ## `org.telegram.messenger.MessageObject$VCardData`
 - `static parse(String data)` -> `CharSequence`
 
 ## `org.telegram.ui.Business.ChatAttachAlertQuickRepliesLayout`
+- `addColorKeys(HashSet<Integer> colors)` -> `void`
 - `sendSelectedItems(boolean notify, int scheduleDate, int scheduleRepeatPeriod, long effectId, boolean invertMedia)` -> `boolean`
 
 ## `org.telegram.ui.Cells.ChatMessageCell`
@@ -547,6 +556,7 @@
 - `checkVideoPlayback(boolean allowStart, Bitmap thumb)` -> `void`
 - `hasCaptionLayout()` -> `boolean`
 - `hasCommentLayout()` -> `boolean`
+- `hasFactCheck()` -> `boolean`
 - `hasGradientService()` -> `boolean`
 - `hasNameLayout()` -> `boolean`
 - `hasOutboundsContent()` -> `boolean`
@@ -554,7 +564,10 @@
 - `markPollVotesAsRead()` -> `void`
 - `markReactionsAsRead()` -> `void`
 - `requestLayout()` -> `void`
+- `sendAccessibilityEventForVirtualView(int viewId, int eventType)` -> `void`
+- `sendAccessibilityEventForVirtualView(int viewId, int eventType, String text)` -> `void`
 - `shouldDrawAlphaLayer()` -> `boolean`
+- `shouldDrawMenuDrawable()` -> `boolean`
 - `shouldDrawSelectionOverlay()` -> `boolean`
 - `shouldDrawTimeOnMedia()` -> `boolean`
 
@@ -578,6 +591,7 @@
 - `shouldShowTopicButton(ChatMessageCell cell)` -> `default boolean`
 
 ## `org.telegram.ui.ChatActivity`
+- `addThemeColorKeys(HashSet<Integer> keys)` -> `void`
 - `canBeginSlide()` -> `boolean`
 - `canScheduleMessage()` -> `boolean`
 - `canSendMessage()` -> `boolean`
@@ -668,6 +682,8 @@
 - `canCollapseSearch()` -> `boolean`
 
 ## `org.telegram.ui.ChatActivity$ThemeDelegate`
+- `isCompactMode()` -> `boolean`
+- `isDark()` -> `boolean`
 - `isGiftTheme()` -> `boolean`
 - `isThemeChangeAvailable(boolean canEdit)` -> `boolean`
 - `isWallpaperMotion()` -> `boolean`
@@ -688,6 +704,7 @@
 - `addTextView(TextView textView, LayoutParams layoutParams)` -> `void`
 
 ## `org.telegram.ui.Components.ChatActivityEnterView`
+- `addColorKeys(HashSet<Integer> colors)` -> `void`
 - `addEmojiToRecent(String code)` -> `void`
 - `addRecentGif(TLRPC.Document searchImage)` -> `void`
 - `addStickerToRecent(TLRPC.Document sticker)` -> `void`
@@ -746,6 +763,7 @@
 - `checkCanRemoveRestrictionsByBoosts()` -> `boolean`
 - `checkCaption(CharSequence text)` -> `boolean`
 - `checkColors()` -> `void`
+- `checkEditingCaptionLimit()` -> `boolean`
 - `checkUi_moveCaptionButtonVisibility()` -> `void`
 - `hasCaption()` -> `boolean`
 - `shouldOverlayCameraViewOverNavBar()` -> `boolean`
@@ -775,7 +793,11 @@
 - `onContainerTranslationUpdated(float currentPanTranslationY)` -> `void`
 - `sendSelectedItems(boolean notify, int scheduleDate, int scheduleRepeatPeriod, long effectId, boolean invertMedia)` -> `boolean`
 
+## `org.telegram.ui.Components.ChatAttachAlertAudioLayout$EmptyView`
+- `addColorKeys(HashSet<Integer> colors)` -> `void`
+
 ## `org.telegram.ui.Components.ChatAttachAlertContactsLayout`
+- `addColorKeys(HashSet<Integer> colors)` -> `void`
 - `addOrRemoveSelectedContact(UserCell cell, Object object)` -> `void`
 - `sendSelectedItems(boolean notify, int scheduleDate, int scheduleRepeatPeriod, long effectId, boolean invertMedia)` -> `boolean`
 
@@ -783,6 +805,7 @@
 - `hashCode()` -> `int`
 
 ## `org.telegram.ui.Components.ChatAttachAlertDocumentLayout`
+- `checkColors()` -> `void`
 - `loadRecentFiles()` -> `void`
 - `sendSelectedItems(boolean notify, int scheduleDate, int scheduleRepeatPeriod, long effectId, boolean invertMedia)` -> `boolean`
 
@@ -791,17 +814,15 @@
 - `removeSearchFilter(FiltersView.MediaFilterData filterData)` -> `void`
 
 ## `org.telegram.ui.Components.ChatAttachAlertGramLayout`
+- `checkColors()` -> `void`
 - `hasCustomBackground()` -> `boolean`
 - `hasQueuedSend()` -> `boolean`
 - `onContainerTranslationUpdated(float currentPanTranslationY, float progress, boolean keyboardVisible)` -> `void`
 - `shouldRestoreKeyboardOnDismiss()` -> `boolean`
 
 ## `org.telegram.ui.Components.ChatAttachAlertLocationLayout`
+- `addColorKeys(HashSet<Integer> colors)` -> `void`
 - `shouldHideBottomButtons()` -> `boolean`
-
-## `org.telegram.ui.Components.ChatAttachAlertLocationLayout$MapOverlayView`
-- `addInfoView(IMapsProvider.IMarker marker)` -> `void`
-- `removeInfoView(IMapsProvider.IMarker marker)` -> `void`
 
 ## `org.telegram.ui.Components.ChatAttachAlertPhotoLayout`
 - `canDismissWithTouchOutside()` -> `boolean`
@@ -826,6 +847,7 @@
 - `cancelButtonPressed()` -> `boolean`
 
 ## `org.telegram.ui.Components.ChatAttachAlertPollLayout`
+- `addColorKeys(HashSet<Integer> colors)` -> `void`
 - `hasDoneItem()` -> `boolean`
 - `requestLayout()` -> `void`
 
@@ -844,11 +866,17 @@
 ## `org.telegram.ui.Components.chat.buttons.ChatActivityBlurredRoundPageDownButton`
 - `addButtonView(ChatActivityBlurredRoundButton button, int size)` -> `void`
 
+## `org.telegram.ui.Components.chat.layouts.ChatActivityFadeView`
+- `addColorKeys(HashSet<Integer> colors)` -> `void`
+
 ## `org.telegram.ui.Components.chat.layouts.ChatActivitySideControlsButtonsLayout`
 - `hasOverlappingRendering()` -> `boolean`
 
 ## `org.telegram.ui.Delegates.ChatActivityMemberRequestsDelegate`
 - `setChatInfo(@Nullable TLRPC.ChatFull chatInfo, boolean animated)` -> `void`
+
+## `org.telegram.ui.bots.ChatActivityBotWebViewButton`
+- `addColorKeys(HashSet<Integer> colors)` -> `void`
 
 ## `org.telegram.ui.bots.ChatAttachAlertBotWebViewLayout`
 - `canExpandByRequest()` -> `boolean`

@@ -1,4 +1,4 @@
-# visual / notifications (64 методов)
+# visual / notifications (67 методов)
 
 ## `org.telegram.messenger.NotificationsController`
 - `static loadMultipleAvatars(ArrayList<Object> avatars)` -> `Bitmap`
@@ -35,6 +35,7 @@
 ## `org.telegram.ui.NotificationPermissionDialog$CounterView`
 - `onDraw(Canvas canvas)` -> `void`
 - `setCount(int count)` -> `boolean`
+- `updateColors()` -> `void`
 - `verifyDrawable(@NonNull Drawable who)` -> `boolean`
 
 ## `org.telegram.ui.NotificationsSoundActivity`
@@ -42,16 +43,18 @@
 - `didReceivedNotification(int id, int account, Object... args)` -> `void`
 - `didSelectFiles(ArrayList<String> files, String caption, ArrayList<TLRPC.MessageEntity> captionEntities, ArrayList<MessageObject> fmessages, boolean notify, int scheduleDate, int scheduleRepeatPeriod, long effectId, boolean invertMedia, long payStars)` -> `void`
 - `static findRingtonePathByName(String title)` -> `String`
+- `getListViewForSimpleGlass()` -> `RecyclerListView`
 - `getResourceProvider()` -> `Theme.ResourcesProvider`
 - `isSupportEdgeToEdge()` -> `boolean`
 - `onActivityResultFragment(int requestCode, int resultCode, Intent data)` -> `void`
 - `onFragmentCreate()` -> `boolean`
 - `onFragmentDestroy()` -> `void`
-- `onInsets(int left, int top, int right, int bottom)` -> `void`
 - `onPause()` -> `void`
 - `onResume()` -> `void`
+- `onThemeColorsChanged()` -> `void`
 - `startDocumentSelectActivity()` -> `void`
 - `static trimTitle(TLRPC.Document document, String title)` -> `String`
+- `useSimpleActionBar()` -> `boolean`
 
 ## `org.telegram.ui.NotificationsSoundActivity$Adapter`
 - `getItemCount()` -> `int`

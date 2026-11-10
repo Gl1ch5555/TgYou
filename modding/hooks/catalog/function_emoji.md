@@ -1,4 +1,4 @@
-# function / emoji (162 методов)
+# function / emoji (167 методов)
 
 ## `org.telegram.messenger.AnimatedFileDrawableStream`
 - `cancel()` -> `void`
@@ -143,6 +143,9 @@
 ## `org.telegram.ui.Components.EmojiPacksAlert$EmojiPacksLoader`
 - `onUpdate()` -> `void`
 
+## `org.telegram.ui.Components.EmojiTabsStrip$EmojiTabButton`
+- `addColorKeys(java.util.HashSet<Integer> colors)` -> `void`
+
 ## `org.telegram.ui.Components.EmojiView`
 - `static addColorToCode(String code, String color)` -> `String`
 - `addEmojiToRecent(String code)` -> `void`
@@ -224,6 +227,9 @@
 ## `org.telegram.ui.Components.Reactions.UpdateReactionsButton`
 - `removeLvlRequiredState()` -> `void`
 
+## `org.telegram.ui.Components.ReactionsContainerLayout`
+- `addColorKeys(HashSet<Integer> colors)` -> `void`
+
 ## `org.telegram.ui.Components.ReactionsContainerLayout$Adapter`
 - `isEnabled(RecyclerView.ViewHolder holder)` -> `boolean`
 
@@ -244,6 +250,12 @@
 ## `org.telegram.ui.EmojiAnimationsOverlay$DrawingObject`
 - `isPlaying()` -> `boolean`
 
+## `org.telegram.ui.QrShare.EmojiPickOverlay`
+- `hasOverlappingRendering()` -> `boolean`
+
+## `org.telegram.ui.QrShare.QrEmojiPanel`
+- `addRecent(long documentId)` -> `void`
+
 ## `org.telegram.ui.SelectAnimatedEmojiDialog`
 - `putAnimatedEmojiToCache(AnimatedEmojiDrawable animatedEmojiDrawable)` -> `void`
 
@@ -251,6 +263,7 @@
 - `canHighlightChildAt(View child, float x, float y)` -> `boolean`
 
 ## `org.telegram.ui.SelectAnimatedEmojiDialog$SearchBox`
+- `addColorKeys(HashSet<Integer> colors)` -> `void`
 - `checkInitialization()` -> `void`
 
 ## `org.telegram.ui.Stars.StarsController$PendingPaidReactions`

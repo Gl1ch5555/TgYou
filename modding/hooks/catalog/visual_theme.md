@@ -1,4 +1,4 @@
-# visual / theme (2710 методов)
+# visual / theme (3202 методов)
 
 ## `org.telegram.messenger.MessagesController$PeerColor`
 - `getColor(int i, Theme.ResourcesProvider resourcesProvider)` -> `int`
@@ -12,6 +12,7 @@
 - `beginDelayedTransition()` -> `void`
 - `centerTitle()` -> `void`
 - `clearSearchFilters()` -> `void`
+- `closeMenuOverlay(boolean animated)` -> `void`
 - `closeSearchField()` -> `void`
 - `closeSearchField(boolean closeKeyboard)` -> `void`
 - `createActionMode()` -> `ActionBarMenu`
@@ -19,12 +20,15 @@
 - `createAdditionalSubTitleOverlayContainer()` -> `FrameLayout`
 - `createAdditionalSubtitleTextView()` -> `void`
 - `createMenu()` -> `ActionBarMenu`
+- `createMenuGlass(View owner)` -> `BlurredBackgroundDrawable`
 - `dispatchDraw(Canvas canvas)` -> `void`
 - `dispatchTouchEvent(MotionEvent ev)` -> `boolean`
+- `draw(@NonNull Canvas canvas)` -> `void`
 - `drawChild(Canvas canvas, View child, long drawingTime)` -> `boolean`
 - `static findChildUnder(ViewGroup parent, float x, float y, View exclude)` -> `View`
 - `getActionBarMenuOnItemClick()` -> `ActionBarMenuOnItemClick`
 - `getActionMode()` -> `ActionBarMenu`
+- `getActionModeColorFor(View view)` -> `int`
 - `getActionModeFactor()` -> `float`
 - `getAdditionalSubTitleOverlayContainer()` -> `FrameLayout`
 - `getAdditionalSubtitleTextView()` -> `SimpleTextView`
@@ -32,14 +36,26 @@
 - `getBackButtonDrawable()` -> `Drawable`
 - `getBackButtonState()` -> `INavigationLayout.BackButtonState`
 - `getBackgroundColor()` -> `int`
+- `getButtonsGlassBackgroundColor()` -> `int`
+- `getButtonsGlassColorProvider()` -> `BlurredBackgroundColorProvider`
 - `getCastShadows()` -> `boolean`
 - `static getCurrentActionBarHeight()` -> `int`
+- `getExtraHeight()` -> `int`
+- `getMeasuredHeightNoExtra()` -> `int`
+- `getMenuGlassColorProvider()` -> `BlurredBackgroundColorProvider`
+- `getMenuItemGlassRect(ActionBarMenuItem item, RectF out)` -> `boolean`
+- `getMenuResourcesProvider()` -> `Theme.ResourcesProvider`
+- `getMenuRise()` -> `int`
+- `getMenuView()` -> `View`
 - `getOccupyStatusBar()` -> `boolean`
+- `getOpenMenuOverlay()` -> `SimpleActionBarMenuOverlay`
 - `getSearchAvatarImageView()` -> `BackupImageView`
 - `getShadowAlpha()` -> `int`
 - `getSubtitle()` -> `String`
+- `getSubtitleColorInternal()` -> `int`
 - `getSubtitleTextView()` -> `SimpleTextView`
 - `getTitle()` -> `String`
+- `getTitleColorToSet()` -> `int`
 - `getTitleFontMetricsInt()` -> `Paint.FontMetricsInt`
 - `getTitleTextView()` -> `SimpleTextView`
 - `getTitleTextView2()` -> `SimpleTextView`
@@ -47,6 +63,8 @@
 - `hideActionMode()` -> `void`
 - `isActionModeShowed()` -> `boolean`
 - `isActionModeShowed(String tag)` -> `boolean`
+- `isActionModeView(View view)` -> `boolean`
+- `isMenuOverlayOpened()` -> `boolean`
 - `isSearchFieldVisible()` -> `boolean`
 - `listenToBackgroundUpdate(Runnable invalidate)` -> `void`
 - `onAttachedToWindow()` -> `void`
@@ -72,9 +90,7 @@
 - `setActionModeTopColor(int color)` -> `void`
 - `setAdaptiveBackground(RecyclerView list)` -> `void`
 - `setAdaptiveBackground(RecyclerView list, boolean hideTitle)` -> `void`
-- `setAdaptiveBackground(RecyclerView list, boolean hideTitle, final int topColorKey, final int lowerColorKey)` -> `void`
 - `setAdaptiveBackground(SectionsScrollView list)` -> `void`
-- `setAdaptiveBackground(SectionsScrollView list, final int topColorKey, final int lowerColorKey)` -> `void`
 - `setAddToContainer(boolean value)` -> `void`
 - `setAdditionalTextLeft(int x)` -> `void`
 - `setAllowOverlayTitle(boolean value)` -> `void`
@@ -83,6 +99,7 @@
 - `setBackButtonImage(int resource)` -> `void`
 - `setBackgroundColor(int color)` -> `void`
 - `setCastShadows(boolean value)` -> `void`
+- `setCenterTitleAndGlass(boolean value)` -> `void`
 - `setChatAvatarContainer(ChatAvatarContainer chatAvatarContainer)` -> `void`
 - `setClipContent(boolean value)` -> `void`
 - `setDrawBackButton(boolean b)` -> `void`
@@ -93,12 +110,17 @@
 - `setForceSkipTouches(boolean forceSkipTouches)` -> `void`
 - `setForcedMenuMinWidth(int width)` -> `void`
 - `setForcedMenuWidth(int width)` -> `void`
+- `setGlassCenterAlpha(int alpha)` -> `void`
 - `setGlassOnlyBack()` -> `void`
 - `setInterceptTouchEventListener(View.OnTouchListener listener)` -> `void`
 - `setInterceptTouches(boolean value)` -> `void`
 - `setItemsBackgroundColor(int color, boolean isActionMode)` -> `void`
 - `setItemsColor(int color, boolean isActionMode)` -> `void`
+- `setMenuGlass(BlurredBackgroundDrawableViewFactory factory, GlassSourceCrossfade source)` -> `void`
+- `setMenuGlassFrostedProgress(float progress)` -> `void`
 - `setMenuOffsetSuppressed(boolean menuOffsetSuppressed)` -> `void`
+- `setMenuOverlay(SimpleActionBarMenuOverlay overlay, ActionBarMenuItem item)` -> `void`
+- `setMenuRise(int rise)` -> `void`
 - `setOccupyStatusBar(boolean value)` -> `void`
 - `setOnActionModeFactorChangeListener(Runnable listener)` -> `void`
 - `setOverlayTitleAnimation(boolean ovelayTitleAnimation)` -> `void`
@@ -112,6 +134,7 @@
 - `setSearchFieldText(String text)` -> `void`
 - `setSearchFilter(FiltersView.MediaFilterData filter)` -> `void`
 - `setSearchTextColor(int color, boolean placeholder)` -> `void`
+- `setSectionsBackground()` -> `void`
 - `setShadowAlpha(int alpha)` -> `void`
 - `setSkipDrawChild(boolean skip)` -> `void`
 - `setSubtitle(CharSequence value)` -> `void`
@@ -193,6 +216,7 @@
 - `isTransitionAnimationInProgress()` -> `boolean`
 - `measureKeyboardHeight()` -> `int`
 - `movePreviewFragment(float dy)` -> `void`
+- `notifyFragmentsThemeColorsChanged()` -> `void`
 - `onActionModeFinished(Object mode)` -> `void`
 - `onActionModeStarted(Object mode)` -> `void`
 - `onAttachedToWindow()` -> `void`
@@ -263,6 +287,7 @@
 - `clearSearchFilters()` -> `void`
 - `closeSearchField(boolean closeKeyboard)` -> `void`
 - `dispatchTouchEvent(MotionEvent ev)` -> `boolean`
+- `getClosingSearchFieldWidth()` -> `int`
 - `getItem(int id)` -> `ActionBarMenuItem`
 - `getItemsMeasuredWidth(boolean ignoreAlpha)` -> `int`
 - `getItemsWidth()` -> `int`
@@ -317,6 +342,7 @@
 - `clearSearchText()` -> `void`
 - `closeSubMenu()` -> `void`
 - `collapseSearchFilters()` -> `void`
+- `dismissSubMenuOnClick()` -> `void`
 - `draw(Canvas canvas)` -> `void`
 - `forceUpdatePopupPosition()` -> `void`
 - `getContentView()` -> `View`
@@ -327,6 +353,8 @@
 - `getSearchContainer()` -> `FrameLayout`
 - `getSearchField()` -> `EditTextBoldCursor`
 - `getSubItem(int id)` -> `View`
+- `getSubMenuOverlay()` -> `SimpleActionBarMenuOverlay`
+- `getSubMenuOverlayHost()` -> `MenuOverlayHost`
 - `getTextView()` -> `TextView`
 - `getVisibleSubItemsCount()` -> `int`
 - `hideAllSubItems()` -> `void`
@@ -336,6 +364,7 @@
 - `isSearchFieldVisible2()` -> `boolean`
 - `isSubItemVisible(int id)` -> `boolean`
 - `isSubMenuShowing()` -> `boolean`
+- `layoutLazyItems()` -> `void`
 - `lazilyAddColoredGap()` -> `Item`
 - `lazilyAddSubItem(int id, int icon, CharSequence text)` -> `Item`
 - `lazilyAddSubItem(int id, Drawable iconDrawable, CharSequence text)` -> `Item`
@@ -346,9 +375,11 @@
 - `onDismiss()` -> `void`
 - `onInitializeAccessibilityNodeInfo(AccessibilityNodeInfo info)` -> `void`
 - `onLayout(boolean changed, int left, int top, int right, int bottom)` -> `void`
+- `onOverlayMenuClosed()` -> `void`
 - `onSearchPressed()` -> `void`
 - `onTouchEvent(MotionEvent event)` -> `boolean`
 - `openSearch(boolean openKeyboard)` -> `void`
+- `prepareSubMenu()` -> `void`
 - `redrawPopup(int color)` -> `void`
 - `setActionBarMenuItemSearchListener(ActionBarMenuItemSearchListener actionBarMenuItemSearchListener)` -> `ActionBarMenuItem`
 - `setAdditionalXOffset(int value)` -> `void`
@@ -388,6 +419,7 @@
 - `setSubItemShown(int id, boolean show)` -> `void`
 - `setSubMenuDelegate(ActionBarSubMenuItemDelegate actionBarSubMenuItemDelegate)` -> `void`
 - `setSubMenuOpenSide(int side)` -> `void`
+- `setSubMenuOverlayProvider(@Nullable Utilities.Callback0Return<SimpleActionBarMenuOverlay> provider)` -> `void`
 - `setText(CharSequence text)` -> `void`
 - `setTransitionOffset(float offset)` -> `void`
 - `setTranslationX(float translationX)` -> `void`
@@ -413,6 +445,7 @@
 - `showClearForCaption()` -> `boolean`
 
 ## `org.telegram.ui.ActionBar.ActionBarMenuItem$Item`
+- `getView()` -> `View`
 - `openSwipeBack()` -> `void`
 - `setColors(int textColor, int iconColor)` -> `void`
 - `setIcon(int icon)` -> `void`
@@ -461,6 +494,7 @@
 - `setStops(float[] stops)` -> `void`
 - `setTextColor(int color)` -> `void`
 - `setValue(float value, boolean animated)` -> `void`
+- `updateColors()` -> `void`
 
 ## `org.telegram.ui.ActionBar.ActionBarMenuSlider$SpeedSlider`
 - `getColorValue(float value)` -> `int`
@@ -488,6 +522,7 @@
 - `setAnimatedIcon(int resId)` -> `void`
 - `setCheckColor(int colorKey)` -> `void`
 - `setChecked(boolean checked)` -> `void`
+- `setColorKeys(int textKey, int iconKey)` -> `ActionBarMenuSubItem`
 - `setColors(int textColor, int iconColor)` -> `ActionBarMenuSubItem`
 - `setEmojiCacheType(int cacheType)` -> `void`
 - `setEnabledByColor(boolean enabled, int colorDisabled, int colorEnabled)` -> `void`
@@ -503,6 +538,7 @@
 - `setMultiline(boolean changeSize)` -> `void`
 - `setRightIcon(int icon)` -> `void`
 - `setSelectorColor(int selectorColor)` -> `void`
+- `setSelectorColorKey(int key, float alpha)` -> `void`
 - `setSubtext(CharSequence text)` -> `void`
 - `setSubtextColor(int color)` -> `void`
 - `setText(CharSequence text)` -> `void`
@@ -511,6 +547,7 @@
 - `setTextAndIcon(CharSequence text, ImageLocation imageLocation, String imageFilter, Drawable thumb, Object parentObject)` -> `void`
 - `setTextColor(int textColor)` -> `void`
 - `updateBackground()` -> `void`
+- `updateColors()` -> `void`
 - `updateSelectorBackground(boolean top, boolean bottom)` -> `void`
 - `updateSelectorBackground(boolean top, boolean bottom, int selectorRad)` -> `void`
 
@@ -648,6 +685,7 @@
 - `setTitle(CharSequence text)` -> `void`
 - `setTopAnimation(int resId, int backgroundColor)` -> `void`
 - `setTopAnimation(int resId, int size, int backgroundColor)` -> `void`
+- `setTopBackgroundColorKey(int key, Theme.ResourcesProvider resourcesProvider)` -> `void`
 - `setTopHeight(int value)` -> `void`
 - `setTopImage(int resId, int backgroundColor)` -> `void`
 - `setTopImage(Drawable drawable, int backgroundColor)` -> `void`
@@ -666,6 +704,7 @@
 - `onMeasure(int widthMeasureSpec, int heightMeasureSpec)` -> `void`
 - `onTouchEvent(MotionEvent event)` -> `boolean`
 - `requestLayout()` -> `void`
+- `updateColors()` -> `void`
 
 ## `org.telegram.ui.ActionBar.AlertDialog$Builder`
 - `aboveMessageView(View view)` -> `Builder`
@@ -702,6 +741,7 @@
 - `setTopAnimation(int resId, int size, boolean autoRepeat, int backgroundColor, Map<String, Integer> layerColors)` -> `Builder`
 - `setTopAnimation(int resId, int backgroundColor)` -> `Builder`
 - `setTopAnimationIsNew(boolean isNew)` -> `Builder`
+- `setTopBackgroundColorKey(int key, Theme.ResourcesProvider resourcesProvider)` -> `Builder`
 - `setTopImage(int resId, int backgroundColor)` -> `Builder`
 - `setTopImage(Drawable drawable, int backgroundColor)` -> `Builder`
 - `setTopView(View view)` -> `Builder`
@@ -711,6 +751,16 @@
 - `setWidth(int width)` -> `Builder`
 - `show()` -> `AlertDialog`
 - `twoRowsButtonsWhenNeeded()` -> `Builder`
+
+## `org.telegram.ui.ActionBar.AlertDialog$ThemedColors`
+- `getColor(int key)` -> `int`
+
+## `org.telegram.ui.ActionBar.AlertDialog$TopBackgroundDrawable`
+- `draw(@NonNull Canvas canvas)` -> `void`
+- `getOpacity()` -> `int`
+- `setAlpha(int alpha)` -> `void`
+- `setColorFilter(@Nullable ColorFilter colorFilter)` -> `void`
+- `updateColors()` -> `void`
 
 ## `org.telegram.ui.ActionBar.AlertDialogDecor`
 - `dismiss()` -> `void`
@@ -750,6 +800,7 @@
 - `createActionBar(Context context)` -> `ActionBar`
 - `createArticleViewer(boolean forceRecreate)` -> `ArticleViewer`
 - `createOverlayStoryViewer()` -> `StoryViewer`
+- `createSimpleActionBar(Context context)` -> `SimpleActionBar`
 - `createView(Context context)` -> `View`
 - `detachSheets()` -> `void`
 - `dismissCurrentDialog()` -> `void`
@@ -765,6 +816,7 @@
 - `getArguments()` -> `Bundle`
 - `getArticleViewer()` -> `ArticleViewer`
 - `getBackButtonState()` -> `INavigationLayout.BackButtonState`
+- `getBaseSimpleGlass()` -> `BaseFragmentSimpleGlass`
 - `getBottomInset()` -> `int`
 - `getBulletinDelegate()` -> `Bulletin.Delegate`
 - `getBulletinLayoutContainer()` -> `FrameLayout`
@@ -785,6 +837,7 @@
 - `getLastSheet()` -> `AttachedSheet`
 - `getLastStoryViewer()` -> `StoryViewer`
 - `getLayoutContainer()` -> `FrameLayout`
+- `getListViewForSimpleGlass()` -> `RecyclerListView`
 - `getLocationController()` -> `LocationController`
 - `getMediaController()` -> `MediaController`
 - `getMediaDataController()` -> `MediaDataController`
@@ -798,6 +851,9 @@
 - `getParentLayout()` -> `INavigationLayout`
 - `getPreviewHeight()` -> `int`
 - `getResourceProvider()` -> `Theme.ResourcesProvider`
+- `getScrollViewForSimpleGlass()` -> `SectionsScrollView`
+- `getSimpleActionBar()` -> `SimpleActionBar`
+- `getSimpleMenuOverlay()` -> `SimpleActionBarMenuOverlay`
 - `getThemeDescriptions()` -> `ArrayList<ThemeDescription>`
 - `getThemedColor(int key)` -> `int`
 - `getThemedDrawable(String key)` -> `Drawable`
@@ -828,6 +884,7 @@
 - `onRequestPermissionsResultFragment(int requestCode, String[] permissions, int[] grantResults)` -> `void`
 - `onResume()` -> `void`
 - `onSlideProgress(boolean isOpen, float progress)` -> `void`
+- `onThemeColorsChanged()` -> `void`
 - `onTransitionAnimationEnd(boolean isOpen, boolean backward)` -> `void`
 - `onTransitionAnimationProgress(boolean isOpen, float progress)` -> `void`
 - `onTransitionAnimationStart(boolean isOpen, boolean backward)` -> `void`
@@ -857,6 +914,7 @@
 - `setNavigationBarColor(int color)` -> `void`
 - `setParentActivityTitle(CharSequence title)` -> `void`
 - `setParentFragment(BaseFragment fragment)` -> `void`
+- `setParentGlass(@Nullable RectF position, @Nullable Runnable onCaptured)` -> `void`
 - `setParentLayout(INavigationLayout layout)` -> `void`
 - `setPaused(boolean paused)` -> `void`
 - `setPreviewDelegate(PreviewDelegate previewDelegate)` -> `void`
@@ -864,6 +922,7 @@
 - `setPreviewReplaceProgress(float progress)` -> `void`
 - `setRemovingFromStack(boolean b)` -> `void`
 - `setResourceProvider(Theme.ResourcesProvider resourceProvider)` -> `void`
+- `setSimpleMenuOverlayHost(@Nullable BaseFragment host)` -> `void`
 - `setTitleOverlayText(String title, int titleId, Runnable action)` -> `void`
 - `setTitleOverlayTextIfActionBarAttached(String title, int titleId, Runnable action)` -> `void`
 - `setVisibleDialog(Dialog dialog)` -> `void`
@@ -874,11 +933,16 @@
 - `showDialog(Dialog dialog, boolean allowInTransition, final Dialog.OnDismissListener onDismissListener)` -> `Dialog`
 - `startActivityForResult(final Intent intent, final int requestCode)` -> `void`
 - `updateSheetsVisibility()` -> `void`
+- `useFadeDrawableForActionBar()` -> `boolean`
+- `useSimpleActionBar()` -> `boolean`
 - `whenFullyVisible(Runnable callback)` -> `void`
 
 ## `org.telegram.ui.ActionBar.BaseFragment$AttachedSheet`
 - `dismiss(boolean tabs)` -> `default void`
 - `setLastVisible(boolean lastVisible)` -> `default void`
+
+## `org.telegram.ui.ActionBar.BaseFragment$ThemedColors`
+- `getColor(int key)` -> `int`
 
 ## `org.telegram.ui.ActionBar.BottomSheet`
 - `appendOpenAnimator(boolean opening, ArrayList<Animator> animators)` -> `void`
@@ -891,6 +955,7 @@
 - `dispatchTouchEvent(@NonNull MotionEvent ev)` -> `boolean`
 - `fixNavigationBar()` -> `void`
 - `fixNavigationBar(int bgColor)` -> `void`
+- `fixNavigationBarKey(int key)` -> `void`
 - `forceKeyboardOnDismiss()` -> `void`
 - `getBackDrawable()` -> `Drawable`
 - `getBackgroundPaddingLeft()` -> `int`
@@ -951,11 +1016,13 @@
 - `onSmoothContainerViewLayout(float ty)` -> `void`
 - `onStart()` -> `void`
 - `onSwipeStarts()` -> `void`
+- `onThemeColorsChanged()` -> `void`
 - `release()` -> `void`
 - `setAllowNestedScroll(boolean value)` -> `void`
 - `setApplyBottomPadding(boolean value)` -> `void`
 - `setApplyTopPadding(boolean value)` -> `void`
 - `setBackgroundColor(int color)` -> `void`
+- `setBackgroundColorKey(int key)` -> `void`
 - `setCalcMandatoryInsets(boolean value)` -> `void`
 - `setCanDismissWithSwipe(boolean value)` -> `void`
 - `setCanDismissWithTouchOutside(boolean value)` -> `void`
@@ -1050,6 +1117,11 @@
 - `onStopNestedScroll(@NonNull View target)` -> `void`
 - `onTouchEvent(MotionEvent ev)` -> `boolean`
 - `requestDisallowInterceptTouchEvent(boolean disallowIntercept)` -> `void`
+- `updateColors()` -> `void`
+
+## `org.telegram.ui.ActionBar.BottomSheet$FilterTrackingDrawable`
+- `getColorFilter()` -> `ColorFilter`
+- `setColorFilter(ColorFilter colorFilter)` -> `void`
 
 ## `org.telegram.ui.ActionBar.BottomSheet$SheetBackDrawable`
 - `draw(@NonNull Canvas canvas)` -> `void`
@@ -1066,6 +1138,11 @@
 - `dismiss()` -> `void`
 - `onCreate(Bundle savedInstanceState)` -> `void`
 - `updateNavigationBarColor()` -> `void`
+
+## `org.telegram.ui.ActionBar.BottomSheetTabDialog$NavigationBarView`
+- `dispatchDraw(@NonNull Canvas canvas)` -> `void`
+- `onMeasure(int widthMeasureSpec, int heightMeasureSpec)` -> `void`
+- `updateColors()` -> `void`
 
 ## `org.telegram.ui.ActionBar.BottomSheetTabDialog$WindowView`
 - `drawInto(Canvas canvas, RectF finalRect, float progress, RectF clipRect, float alpha, boolean opening)` -> `float`
@@ -1362,6 +1439,11 @@
 - `setType(int value, boolean animated)` -> `void`
 - `setUpdateDownloadProgress(float value, boolean animated)` -> `void`
 
+## `org.telegram.ui.ActionBar.MenuOverlayHost`
+- `getButtonsGlassColorProvider()` -> `default BlurredBackgroundColorProvider`
+- `getMenuHostView()` -> `default View`
+- `getMenuRise()` -> `default int`
+
 ## `org.telegram.ui.ActionBar.MessageDrawable`
 - `applyMatrixScale()` -> `void`
 - `draw(Canvas canvas)` -> `void`
@@ -1422,6 +1504,208 @@
 - `getOpacity()` -> `int`
 - `setAlpha(int alpha)` -> `void`
 - `setColorFilter(@Nullable ColorFilter colorFilter)` -> `void`
+
+## `org.telegram.ui.ActionBar.SimpleActionBar`
+- `actionModeIsExist()` -> `boolean`
+- `closeMenuOverlay(boolean animated)` -> `void`
+- `closeSearchField()` -> `void`
+- `closeSearchField(boolean closeKeyboard)` -> `void`
+- `createActionMode()` -> `SimpleActionBarMenu`
+- `createDoneButton(int id, CharSequence text)` -> `SimpleActionBarDoneButton`
+- `createMenu()` -> `SimpleActionBarMenu`
+- `createMenuGlass(View owner)` -> `BlurredBackgroundDrawable`
+- `didReceivedNotification(int id, int account, Object... args)` -> `void`
+- `dispatchDraw(@NonNull Canvas canvas)` -> `void`
+- `drawChild(@NonNull Canvas canvas, View child, long drawingTime)` -> `boolean`
+- `getActionBarMenuOnItemClick()` -> `ActionBar.ActionBarMenuOnItemClick`
+- `getActionMode()` -> `SimpleActionBarMenu`
+- `getActionModeFactor()` -> `float`
+- `getActionModeTitle()` -> `AnimatedTextView`
+- `getBackButton()` -> `View`
+- `getBackButtonDrawable()` -> `Drawable`
+- `getButtonsGlassBackgroundColor()` -> `int`
+- `getButtonsGlassColorProvider()` -> `BlurredBackgroundColorProvider`
+- `getDoneButton()` -> `SimpleActionBarDoneButton`
+- `getExtraHeight()` -> `int`
+- `getItemsBackgroundColor(boolean isActionMode)` -> `int`
+- `getItemsColor(boolean isActionMode)` -> `int`
+- `getMenu()` -> `SimpleActionBarMenu`
+- `getMenuGlassColorProvider()` -> `BlurredBackgroundColorProvider`
+- `getMenuItemGlassRect(ActionBarMenuItem item, RectF out)` -> `boolean`
+- `getMenuOverlay()` -> `SimpleActionBarMenuOverlay`
+- `getMenuPillLeft()` -> `float`
+- `getMenuResourcesProvider()` -> `Theme.ResourcesProvider`
+- `getMenuView()` -> `View`
+- `getOccupyStatusBar()` -> `boolean`
+- `getOpenMenuOverlay()` -> `SimpleActionBarMenuOverlay`
+- `getSearchFactor()` -> `float`
+- `getSearchField()` -> `EditTextBoldCursor`
+- `getSubtitle()` -> `String`
+- `getSubtitleTextView()` -> `SimpleTextView`
+- `getTitle()` -> `String`
+- `getTitleFontMetricsInt()` -> `Paint.FontMetricsInt`
+- `getTitleTextView()` -> `SimpleTextView`
+- `getTitleTextView2()` -> `SimpleTextView`
+- `getTitlesAlpha()` -> `float`
+- `hideActionMode()` -> `void`
+- `isActionModeShowed()` -> `boolean`
+- `isAnimationsAllowed()` -> `boolean`
+- `isMenuOverlayOpened()` -> `boolean`
+- `isSearchFieldVisible()` -> `boolean`
+- `onAttachedToWindow()` -> `void`
+- `onBackPressed()` -> `boolean`
+- `onDetachedFromWindow()` -> `void`
+- `onDoneButtonFactorChanged()` -> `void`
+- `onFactorChanged(int id, float factor, float fraction, FactorAnimator callee)` -> `void`
+- `onItemClick(int id)` -> `void`
+- `onLayout(boolean changed, int left, int top, int right, int bottom)` -> `void`
+- `onMeasure(int widthMeasureSpec, int heightMeasureSpec)` -> `void`
+- `onMenuButtonPressed()` -> `void`
+- `onTouchEvent(MotionEvent event)` -> `boolean`
+- `openSearchField(boolean animated)` -> `void`
+- `openSearchField(String text, boolean animated)` -> `void`
+- `openSearchField(boolean openKeyboard, boolean animated)` -> `boolean`
+- `setActionBarMenuOnItemClick(ActionBar.ActionBarMenuOnItemClick listener)` -> `void`
+- `setActionModeCount(int count, boolean animated)` -> `void`
+- `setActionModeSubtitle(CharSequence subtitle, boolean animated)` -> `void`
+- `setActionModeTitle(CharSequence title, boolean animated)` -> `void`
+- `setBackButtonContentDescription(CharSequence description)` -> `void`
+- `setBackButtonDrawable(@Nullable Drawable drawable)` -> `void`
+- `setBackButtonImage(int resId)` -> `void`
+- `setBackButtonImageAnimated(int resId)` -> `void`
+- `setButtonsGlass(@Nullable BlurredBackgroundDrawableViewFactory factory)` -> `void`
+- `setButtonsGlassColorProvider(@Nullable BlurredBackgroundColorProvider provider)` -> `void`
+- `setEnabled(boolean enabled)` -> `void`
+- `setExtraHeight(int value)` -> `void`
+- `setForceSkipTouches(boolean value)` -> `void`
+- `setItemsBackgroundColor(int color, boolean isActionMode)` -> `void`
+- `setItemsColor(int color, boolean isActionMode)` -> `void`
+- `setMenuGlass(@Nullable BlurredBackgroundDrawableViewFactory factory, @Nullable GlassSourceCrossfade source)` -> `void`
+- `setMenuGlassFrostedProgress(float progress)` -> `void`
+- `setMenuGlassStroke(boolean stroke)` -> `void`
+- `setMenuOverlay(@Nullable SimpleActionBarMenuOverlay overlay, @Nullable ActionBarMenuItem item)` -> `void`
+- `setMenuOverlayProvider(Utilities.Callback0Return<SimpleActionBarMenuOverlay> provider)` -> `void`
+- `setOccupyStatusBar(boolean value)` -> `void`
+- `setSearchFieldCaption(CharSequence caption)` -> `void`
+- `setSearchFieldHint(CharSequence hint)` -> `void`
+- `setSearchFieldText(CharSequence text)` -> `void`
+- `setSearchItem(@Nullable SimpleActionBarMenuItem item)` -> `void`
+- `setSubtitle(CharSequence value)` -> `void`
+- `setSubtitleAnimated(CharSequence value)` -> `void`
+- `setSubtitleColor(int color)` -> `void`
+- `setTitle(CharSequence value)` -> `void`
+- `setTitleAnimated(CharSequence title, boolean fromBottom, long duration)` -> `void`
+- `setTitleAnimated(CharSequence title, boolean fromBottom, long duration, Interpolator interpolator)` -> `void`
+- `setTitleColor(int color)` -> `void`
+- `setTitlesAlpha(float alpha)` -> `void`
+- `setupGlass(BlurredBackgroundDrawableViewFactory factory, BlurredBackgroundColorProvider colorProvider)` -> `void`
+- `showActionMode()` -> `void`
+- `showActionMode(boolean animated)` -> `void`
+- `updateButtonsGlassColors()` -> `void`
+- `updateColors()` -> `void`
+
+## `org.telegram.ui.ActionBar.SimpleActionBar$BackButtonView`
+- `onDraw(@NonNull Canvas canvas)` -> `void`
+- `onFactorChangeFinished(int id, float finalFactor, FactorAnimator callee)` -> `void`
+- `onFactorChanged(int id, float factor, float fraction, FactorAnimator callee)` -> `void`
+- `replaceDrawable(Drawable drawable)` -> `void`
+- `setActionMode(boolean value, boolean animated)` -> `void`
+- `setAlpha(float alpha)` -> `void`
+- `setDrawable(Drawable drawable)` -> `void`
+- `setTranslationX(float translationX)` -> `void`
+- `updateColors()` -> `void`
+- `verifyDrawable(@NonNull Drawable who)` -> `boolean`
+
+## `org.telegram.ui.ActionBar.SimpleActionBar$TitleLayout`
+- `createTitleView(int i)` -> `void`
+- `onLayout(boolean changed, int left, int top, int right, int bottom)` -> `void`
+- `onMeasure(int widthMeasureSpec, int heightMeasureSpec)` -> `void`
+- `setSideInset(int value)` -> `void`
+- `setSubtitle(CharSequence value)` -> `void`
+- `setSubtitleAnimated(CharSequence value)` -> `void`
+- `setTitle(CharSequence value)` -> `void`
+- `setTitleAnimated(CharSequence value, boolean fromBottom, long duration, Interpolator interpolator)` -> `void`
+- `updateColors()` -> `void`
+
+## `org.telegram.ui.ActionBar.SimpleActionBarDoneButton`
+- `drawsGlass()` -> `boolean`
+- `getButtonId()` -> `int`
+- `getButtonWidth()` -> `int`
+- `getShape()` -> `Shape`
+- `getStyle()` -> `Style`
+- `getTargetVisibleFactor()` -> `float`
+- `getVisibleFactor()` -> `float`
+- `isActive()` -> `boolean`
+- `isLoading()` -> `boolean`
+- `onDraw(@NonNull Canvas canvas)` -> `void`
+- `onFactorChanged(int id, float factor, float fraction, FactorAnimator callee)` -> `void`
+- `onMeasure(int widthMeasureSpec, int heightMeasureSpec)` -> `void`
+- `setActive(boolean active, boolean animated)` -> `void`
+- `setLoading(boolean loading, boolean animated)` -> `void`
+- `setText(CharSequence text)` -> `void`
+- `setTranslationX(float translationX)` -> `void`
+- `updateColors()` -> `void`
+- `verifyDrawable(@NonNull Drawable who)` -> `boolean`
+
+## `org.telegram.ui.ActionBar.SimpleActionBarMenu`
+- `clearItems()` -> `void`
+- `getItem(int id)` -> `SimpleActionBarMenuItem`
+- `getPillWidth()` -> `float`
+- `getTargetPillWidth()` -> `float`
+- `hideAllPopupMenus()` -> `void`
+- `onItemClick(int id)` -> `void`
+- `onItemShownChanged(boolean animated)` -> `void`
+- `onLayout(boolean changed, int l, int t, int r, int b)` -> `void`
+- `onMenuButtonPressed()` -> `void`
+- `onViewAdded(View child)` -> `void`
+- `onViewRemoved(View child)` -> `void`
+- `updateItemsColors()` -> `void`
+
+## `org.telegram.ui.ActionBar.SimpleActionBarMenu$Slot`
+- `equals(Object obj)` -> `boolean`
+- `getHeight()` -> `int`
+- `getWidth()` -> `int`
+- `performDestroy()` -> `void`
+- `setVisibilityFactor(float factor, float pillScale)` -> `void`
+
+## `org.telegram.ui.ActionBar.SimpleActionBarMenuItem`
+- `clearSearchText()` -> `void`
+- `getParentMenu()` -> `SimpleActionBarMenu`
+- `getSearchField()` -> `EditTextBoldCursor`
+- `getSearchListener()` -> `ActionBarMenuItemSearchListener`
+- `getSubMenuOverlay()` -> `SimpleActionBarMenuOverlay`
+- `getSubMenuOverlayHost()` -> `MenuOverlayHost`
+- `onHideFinished()` -> `void`
+- `onSearchPressed()` -> `void`
+- `openSearch(boolean openKeyboard)` -> `void`
+- `setActionBarMenuItemSearchListener(ActionBarMenuItemSearchListener listener)` -> `ActionBarMenuItem`
+- `setIsSearchField(boolean value)` -> `ActionBarMenuItem`
+- `setIsSearchField(boolean value, boolean wrapInScrollView)` -> `ActionBarMenuItem`
+- `setSearchFieldCaption(CharSequence caption)` -> `void`
+- `setSearchFieldHint(CharSequence hint)` -> `void`
+- `setSearchFieldText(CharSequence text, boolean animated)` -> `void`
+- `setShown(boolean shown, boolean animated)` -> `void`
+- `setVisibility(int visibility)` -> `void`
+- `toggleSearch(boolean openKeyboard)` -> `boolean`
+
+## `org.telegram.ui.ActionBar.SimpleActionBarMenuOverlay`
+- `close(boolean animated)` -> `void`
+- `dispatchDraw(@NonNull Canvas canvas)` -> `void`
+- `dispatchKeyEvent(KeyEvent event)` -> `boolean`
+- `dispatchTouchEvent(MotionEvent ev)` -> `boolean`
+- `getItem()` -> `ActionBarMenuItem`
+- `isOpened()` -> `boolean`
+- `isShown(ActionBarMenuItem item)` -> `boolean`
+- `isShown(MenuOverlayHost host)` -> `boolean`
+- `onDetachedFromWindow()` -> `void`
+- `onLayout(boolean changed, int left, int top, int right, int bottom)` -> `void`
+- `onMeasure(int widthMeasureSpec, int heightMeasureSpec)` -> `void`
+- `open(MenuOverlayHost host, ActionBarPopupWindow.ActionBarPopupWindowLayout content)` -> `void`
+- `open(MenuOverlayHost bar, @Nullable ActionBarMenuItem item, ActionBarPopupWindow.ActionBarPopupWindowLayout content)` -> `void`
+- `setOnClosed(Runnable onClosed)` -> `void`
+
+## `org.telegram.ui.ActionBar.SimpleActionBarMenuOverlay$PopupState`
+- `restore()` -> `void`
 
 ## `org.telegram.ui.ActionBar.SimpleTextView`
 - `copyScrolling(SimpleTextView textView)` -> `void`
@@ -1608,6 +1892,8 @@
 - `static getColor(int key)` -> `int`
 - `static getColor(int key, boolean[] isDefault)` -> `int`
 - `static getColor(int key, boolean[] isDefault, boolean ignoreAnimation)` -> `int`
+- `static getCompactColor(int key, ResourcesProvider resourcesProvider)` -> `Integer`
+- `static getCompactOutBubbleColor(ResourcesProvider resourcesProvider)` -> `int`
 - `static getCurrentAudiVisualizerDrawable()` -> `AudioVisualizerDrawable`
 - `static getCurrentColor(int key)` -> `int`
 - `static getCurrentGradientWallpaper()` -> `BackgroundGradientDrawable`
@@ -1646,6 +1932,7 @@
 - `static getThemeDrawablesMap()` -> `Map<String, Drawable>`
 - `static getThemeFileValues(File file, String assetName, String[] wallpaperLink)` -> `SparseIntArray`
 - `static getThemeFileValuesInBackground(File file, String assetName, String[] wallpaperLink, Utilities.Callback<SparseIntArray> onDone)` -> `void`
+- `static getThemeGenerationId()` -> `int`
 - `static getThemeIntensity(float value)` -> `float`
 - `static getThemePaint(String key, ResourcesProvider resourcesProvider)` -> `Paint`
 - `static getThemePaint(String paintKey)` -> `Paint`
@@ -1656,6 +1943,7 @@
 - `static getThemedDrawableByKey(Context context, int resId, int key)` -> `Drawable`
 - `static getThemedWallpaper(boolean thumb, View ownerView)` -> `Drawable`
 - `static getWallpaperColor(int color)` -> `int`
+- `static invalidateTheme()` -> `void`
 - `static multAlpha(int color, float multiply)` -> `int`
 - `static percentSV(int color1, int color2, float satT, float valT)` -> `int`
 - `static refreshThemeColors()` -> `void`
@@ -1681,6 +1969,7 @@
 - `static setThemeFileReference(TLRPC.TL_theme info)` -> `void`
 - `static setThemeUploadInfo(ThemeInfo theme, ThemeAccent accent, TLRPC.TL_theme info, int account, boolean update)` -> `void`
 - `static setThemeWallpaper(ThemeInfo themeInfo, Bitmap bitmap, File path)` -> `void`
+- `static switchThemeWithReveal(ThemeInfo theme, boolean nightTheme, int accentId, View from)` -> `void`
 - `static turnOffAutoNight(@NonNull BaseFragment fragment)` -> `void`
 - `static turnOffAutoNight(BulletinFactory bulletinFactory, Runnable openSettings)` -> `void`
 - `static unrefAudioVisualizeDrawable(MessageObject messageObject)` -> `void`
@@ -1725,7 +2014,7 @@
 - `setColorFilter(@Nullable ColorFilter colorFilter)` -> `void`
 
 ## `org.telegram.ui.ActionBar.Theme$Colorable`
-- `getColorKeys()` -> `default int[]`
+- `addColorKeys(HashSet<Integer> colors)` -> `default void`
 
 ## `org.telegram.ui.ActionBar.Theme$IvButtonColors`
 - `getBackgroundKey(boolean out)` -> `int`
@@ -1785,6 +2074,98 @@
 - `setPreviewBackgroundColor(int color)` -> `void`
 - `setPreviewInColor(int color)` -> `void`
 - `setPreviewOutColor(int color)` -> `void`
+
+## `org.telegram.ui.ActionBar.ThemeBind`
+- `static actionBarItemsBackgroundColor(ActionBar actionBar, int key, boolean isActionMode)` -> `void`
+- `static actionBarItemsBackgroundColor(ActionBar actionBar, int key, Theme.ResourcesProvider resourcesProvider, boolean isActionMode)` -> `void`
+- `static actionBarItemsColor(ActionBar actionBar, int key, boolean isActionMode)` -> `void`
+- `static actionBarItemsColor(ActionBar actionBar, int key, Theme.ResourcesProvider resourcesProvider, boolean isActionMode)` -> `void`
+- `static actionBarSubtitleColor(ActionBar actionBar, int key)` -> `void`
+- `static actionBarSubtitleColor(ActionBar actionBar, int key, Theme.ResourcesProvider resourcesProvider)` -> `void`
+- `static actionBarTitleColor(ActionBar actionBar, int key)` -> `void`
+- `static actionBarTitleColor(ActionBar actionBar, int key, Theme.ResourcesProvider resourcesProvider)` -> `void`
+- `static adaptiveRipple(int key)` -> `Spec`
+- `static alpha(int key, int alpha)` -> `Spec`
+- `static backgroundColor(View view, int key)` -> `void`
+- `static backgroundColor(View view, int key, Theme.ResourcesProvider resourcesProvider)` -> `void`
+- `static backgroundColor(View view, Spec spec)` -> `void`
+- `static backgroundColor(View view, Spec spec, Theme.ResourcesProvider resourcesProvider)` -> `void`
+- `static blend(int key1, int key2, float ratio)` -> `Spec`
+- `static blendOver(int key1, int key2)` -> `Spec`
+- `static clear(View view)` -> `void`
+- `static collectColorKeys(View root, HashSet<Integer> out)` -> `void`
+- `static collectColorKeys()` -> `HashSet<Integer>`
+- `static colorFilter(ImageView view, int key, PorterDuff.Mode mode)` -> `void`
+- `static colorFilter(ImageView view, int key, Theme.ResourcesProvider resourcesProvider, PorterDuff.Mode mode)` -> `void`
+- `static colorFilter(ImageView view, Spec spec, PorterDuff.Mode mode)` -> `void`
+- `static colorFilter(ImageView view, Spec spec, Theme.ResourcesProvider resourcesProvider, PorterDuff.Mode mode)` -> `void`
+- `static cursorColor(EditTextBoldCursor editText, int key)` -> `void`
+- `static cursorColor(EditTextBoldCursor editText, int key, Theme.ResourcesProvider resourcesProvider)` -> `void`
+- `static custom(View owner, int slot, int key, Theme.ResourcesProvider resourcesProvider, ColorGetter getter, ColorSetter setter)` -> `void`
+- `static custom(View owner, int slot, Spec spec, Theme.ResourcesProvider resourcesProvider, ColorGetter getter, ColorSetter setter)` -> `void`
+- `static custom(V owner, int slot, int key, Theme.ResourcesProvider resourcesProvider, ViewColorGetter<V> getter, ViewColorSetter<V> setter)` -> `void`
+- `static custom(V owner, int slot, Spec spec, Theme.ResourcesProvider resourcesProvider, ViewColorGetter<V> getter, ViewColorSetter<V> setter)` -> `void`
+- `static drawableColorFilter(View owner, Drawable drawable, int key, PorterDuff.Mode mode)` -> `void`
+- `static drawableColorFilter(View owner, Drawable drawable, int key, Theme.ResourcesProvider resourcesProvider, PorterDuff.Mode mode)` -> `void`
+- `static drawableColorFilter(View owner, Drawable drawable, Spec spec, PorterDuff.Mode mode)` -> `void`
+- `static drawableColorFilter(View owner, Drawable drawable, Spec spec, Theme.ResourcesProvider resourcesProvider, PorterDuff.Mode mode)` -> `void`
+- `static fillBackground(View view, Drawable drawable, Spec fill, Theme.ResourcesProvider resourcesProvider)` -> `void`
+- `static fillBackground(View view, Drawable drawable, Spec fill)` -> `void`
+- `static generation()` -> `int`
+- `static highlightColor(TextView view, int key)` -> `void`
+- `static highlightColor(TextView view, int key, Theme.ResourcesProvider resourcesProvider)` -> `void`
+- `static highlightColor(TextView view, Spec spec)` -> `void`
+- `static highlightColor(TextView view, Spec spec, Theme.ResourcesProvider resourcesProvider)` -> `void`
+- `static hintTextColor(TextView view, int key)` -> `void`
+- `static hintTextColor(TextView view, int key, Theme.ResourcesProvider resourcesProvider)` -> `void`
+- `static hintTextColor(TextView view, Spec spec)` -> `void`
+- `static hintTextColor(TextView view, Spec spec, Theme.ResourcesProvider resourcesProvider)` -> `void`
+- `static lineColors(EditTextBoldCursor editText, int key, int activeKey, int errorKey)` -> `void`
+- `static lineColors(EditTextBoldCursor editText, int key, int activeKey, int errorKey, Theme.ResourcesProvider resourcesProvider)` -> `void`
+- `static linkTextColor(TextView view, int key)` -> `void`
+- `static linkTextColor(TextView view, int key, Theme.ResourcesProvider resourcesProvider)` -> `void`
+- `static linkTextColor(TextView view, Spec spec)` -> `void`
+- `static linkTextColor(TextView view, Spec spec, Theme.ResourcesProvider resourcesProvider)` -> `void`
+- `static listGlowColor(RecyclerView listView, int key)` -> `void`
+- `static listGlowColor(RecyclerView listView, int key, Theme.ResourcesProvider resourcesProvider)` -> `void`
+- `static listSelectorColor(RecyclerListView listView, int key)` -> `void`
+- `static listSelectorColor(RecyclerListView listView, int key, Theme.ResourcesProvider resourcesProvider)` -> `void`
+- `static multAlpha(int key, float multiplier)` -> `Spec`
+- `static of(int key)` -> `Spec`
+- `static radioColors(RadioButton radioButton, int key, int checkedKey)` -> `void`
+- `static radioColors(RadioButton radioButton, int key, int checkedKey, Theme.ResourcesProvider resourcesProvider)` -> `void`
+- `static selectorBackground(View view, Drawable drawable, Spec content, Spec ripple, Theme.ResourcesProvider resourcesProvider)` -> `void`
+- `static selectorBackground(View view, Drawable drawable, Spec content, Spec ripple)` -> `void`
+- `static textColor(TextView view, int key)` -> `void`
+- `static textColor(TextView view, int key, Theme.ResourcesProvider resourcesProvider)` -> `void`
+- `static textColor(TextView view, Spec spec)` -> `void`
+- `static textColor(TextView view, Spec spec, Theme.ResourcesProvider resourcesProvider)` -> `void`
+- `static textColor(SimpleTextView view, int key)` -> `void`
+- `static textColor(SimpleTextView view, int key, Theme.ResourcesProvider resourcesProvider)` -> `void`
+- `static textColor(SimpleTextView view, Spec spec)` -> `void`
+- `static textColor(SimpleTextView view, Spec spec, Theme.ResourcesProvider resourcesProvider)` -> `void`
+- `static textColor(AnimatedTextView view, int key)` -> `void`
+- `static textColor(AnimatedTextView view, int key, Theme.ResourcesProvider resourcesProvider)` -> `void`
+- `static textColor(AnimatedTextView view, Spec spec)` -> `void`
+- `static textColor(AnimatedTextView view, Spec spec, Theme.ResourcesProvider resourcesProvider)` -> `void`
+- `static themedBackground(View view, android.content.Context context, int resId, int key)` -> `void`
+- `static themedBackground(View view, android.content.Context context, int resId, int key, Theme.ResourcesProvider resourcesProvider)` -> `void`
+- `static update(View view)` -> `void`
+- `static updateAll(boolean withPool, View extraRoot)` -> `void`
+- `static updateAll()` -> `void`
+- `static updateAllForFrame(float progress, View extraRoot)` -> `void`
+- `static updateTree(View root, boolean withPool)` -> `void`
+
+## `org.telegram.ui.ActionBar.ThemeBind$Binding`
+- `providerGone()` -> `boolean`
+- `resolve()` -> `int`
+- `set(int key, int key2, int op, float value, Theme.ResourcesProvider resourcesProvider)` -> `void`
+
+## `org.telegram.ui.ActionBar.ThemeBind$Walker`
+- `accept(View child)` -> `void`
+- `begin(boolean withPool, int mode, HashSet<Integer> keys)` -> `void`
+- `end()` -> `void`
+- `walk(View view)` -> `void`
 
 ## `org.telegram.ui.ActionBar.ThemeColors`
 - `static createColorKeysMap()` -> `SparseArray<String>`
@@ -1882,6 +2263,7 @@
 - `onInterceptTouchEvent(MotionEvent e)` -> `boolean`
 - `scrollToCurrentTheme(int width, boolean animated)` -> `void`
 - `selectTheme(Theme.ThemeInfo themeInfo)` -> `void`
+- `selectTheme(Theme.ThemeInfo themeInfo, View from)` -> `void`
 - `setBackgroundColor(int color)` -> `void`
 - `setDrawDivider(boolean draw)` -> `void`
 - `showOptionsForTheme(Theme.ThemeInfo themeInfo)` -> `void`
@@ -1906,6 +2288,8 @@
 - `onCreateViewHolder(ViewGroup parent, int viewType)` -> `RecyclerView.ViewHolder`
 
 ## `org.telegram.ui.ChannelColorActivity`
+- `applyActionBarThemeColors()` -> `void`
+- `applyThemeColors()` -> `void`
 - `createListView()` -> `void`
 - `createView(Context context)` -> `View`
 - `didReceivedNotification(int id, int account, Object... args)` -> `void`
@@ -1917,6 +2301,7 @@
 - `getEmojiStatusLevelMin()` -> `int`
 - `getEmojiStatusStrRes()` -> `int`
 - `getEmojiStickersLevelMin()` -> `int`
+- `getListViewForSimpleGlass()` -> `RecyclerListView`
 - `getMessagePreviewType()` -> `int`
 - `getProfileIconLevelMin()` -> `int`
 - `getProfileInfoStrRes()` -> `int`
@@ -1926,12 +2311,16 @@
 - `getWallpaperLevelMin()` -> `int`
 - `getWallpaperStrRes()` -> `int`
 - `isForum()` -> `boolean`
+- `isSupportEdgeToEdge()` -> `boolean`
 - `isSwipeBackEnabled(MotionEvent event)` -> `boolean`
 - `minLevelRequired()` -> `int`
 - `needBoostInfoSection()` -> `boolean`
 - `onBackPressed(boolean invoked)` -> `boolean`
 - `onFragmentCreate()` -> `boolean`
 - `onFragmentDestroy()` -> `void`
+- `onInsets(int left, int top, int right, int bottom)` -> `void`
+- `onThemeColorsChanged()` -> `void`
+- `onViewCreated(View view)` -> `void`
 - `openBoostDialog(int type)` -> `void`
 - `seesLoading()` -> `boolean`
 - `setForceDark(boolean isDark, boolean playAnimation)` -> `void`
@@ -1945,6 +2334,7 @@
 - `updateProfilePreview(boolean animated)` -> `void`
 - `updateRows()` -> `void`
 - `updateThemeColors()` -> `void`
+- `useSimpleActionBar()` -> `boolean`
 
 ## `org.telegram.ui.ChannelColorActivity$Adapter`
 - `getItemCount()` -> `int`
@@ -2003,6 +2393,10 @@
 - `getDrawable(String drawableKey)` -> `Drawable`
 - `getPaint(String paintKey)` -> `Paint`
 - `toggle()` -> `void`
+
+## `org.telegram.ui.Components.AlertsCreator$ThemedCursorEditText`
+- `setCursorColorKey(int key, Theme.ResourcesProvider resourcesProvider)` -> `void`
+- `updateColors()` -> `void`
 
 ## `org.telegram.ui.Components.AnimatedColor`
 - `force(int mustBeColor)` -> `int`
@@ -2112,6 +2506,7 @@
 - `onContainerTouchEvent(MotionEvent event)` -> `boolean`
 - `onContainerTranslationYChanged(float y)` -> `void`
 - `onCreate(Bundle savedInstanceState)` -> `void`
+- `onThemeColorsChanged()` -> `void`
 - `static openGalleryForBackground(Activity activity, BaseFragment fragment, long dialogId, Theme.ResourcesProvider resourcesProvider, Utilities.Callback<TLRPC.WallPaper> onSet, ThemePreviewActivity.DayNightSwitchDelegate toggleTheme, TL_stories.TL_premium_boostsStatus cachedBoostsStatus)` -> `void`
 - `setupLightDarkTheme(boolean isDark)` -> `void`
 
@@ -2142,6 +2537,7 @@
 - `setMinBrightness(float limit)` -> `void`
 - `setResourcesProvider(Theme.ResourcesProvider resourcesProvider)` -> `void`
 - `setType(int resetType, boolean hasChanges, int maxColorsCount, int newColorsCount, boolean myMessages, int angle, boolean animated)` -> `void`
+- `updateColors()` -> `void`
 
 ## `org.telegram.ui.Components.ColorPicker$ColorPickerDelegate`
 - `getDefaultColor(int num)` -> `default int`
@@ -2181,6 +2577,9 @@
 - `setWidth(int width)` -> `void`
 - `translate(float tx, float ty)` -> `ColoredImageSpan`
 
+## `org.telegram.ui.Components.CreateBotAlert$ColorsLayout`
+- `updateColors()` -> `void`
+
 ## `org.telegram.ui.Components.EmojiColorPickerWindow`
 - `static create(Context context, Theme.ResourcesProvider resourcesProvider)` -> `EmojiColorPickerWindow`
 - `dismiss()` -> `void`
@@ -2219,12 +2618,21 @@
 - `setColorKey(int colorKey)` -> `void`
 - `updateDrawState(@NonNull TextPaint textPaint)` -> `void`
 
+## `org.telegram.ui.Components.MapGlassSnapshot`
+- `draw(Canvas canvas, RectF rect, float alpha)` -> `void`
+- `hasSurface()` -> `boolean`
+- `poke()` -> `void`
+- `release()` -> `void`
+- `setRunning(boolean running)` -> `void`
+- `setSurface(@Nullable SurfaceView surface)` -> `void`
+
 ## `org.telegram.ui.Components.MessagePreviewView$ActionBar`
 - `dispatchDraw(Canvas canvas)` -> `void`
 - `onMeasure(int widthMeasureSpec, int heightMeasureSpec)` -> `void`
 - `setAnimationForward(boolean forward)` -> `void`
 - `setSubtitle(CharSequence text, boolean animated)` -> `void`
 - `setTitle(CharSequence text, boolean animated)` -> `void`
+- `updateColors()` -> `void`
 - `verifyDrawable(@NonNull Drawable who)` -> `boolean`
 
 ## `org.telegram.ui.Components.MotionBackgroundPaint$ShaderImpl$ColorShaderState`
@@ -2355,6 +2763,16 @@
 - `setAlpha(int alpha)` -> `void`
 - `setColorFilter(@Nullable ColorFilter colorFilter)` -> `void`
 
+## `org.telegram.ui.Components.PasscodeView$QrGlassButton`
+- `draw(@NonNull Canvas canvas)` -> `void`
+- `getOpacity()` -> `int`
+- `invalidateDrawable(@NonNull Drawable who)` -> `void`
+- `onBoundsChange(@NonNull Rect b)` -> `void`
+- `scheduleDrawable(@NonNull Drawable who, @NonNull Runnable what, long when)` -> `void`
+- `setAlpha(int alpha)` -> `void`
+- `setColorFilter(@Nullable ColorFilter colorFilter)` -> `void`
+- `unscheduleDrawable(@NonNull Drawable who, @NonNull Runnable what)` -> `void`
+
 ## `org.telegram.ui.Components.PhotoFilterBlurControl`
 - `onDraw(Canvas canvas)` -> `void`
 - `onTouchEvent(MotionEvent event)` -> `boolean`
@@ -2367,6 +2785,30 @@
 
 ## `org.telegram.ui.Components.PostsSearchContainer$ForegroundColorAlphaSpan`
 - `updateDrawState(TextPaint tp)` -> `void`
+
+## `org.telegram.ui.Components.QrColorsPanel`
+- `dispatchDraw(@NonNull Canvas canvas)` -> `void`
+- `dispatchTouchEvent(MotionEvent ev)` -> `boolean`
+- `getPreferredHeight(int bottomInset, int maxHeight)` -> `int`
+- `setBottomInset(int bottomInset)` -> `void`
+- `setColors(@Nullable MessagesController.PeerColors peerColors, int selectedId)` -> `void`
+- `setGlass(BlurredBackgroundDrawable glass)` -> `void`
+- `setMorph(RectF from, float fromRadius, float progress)` -> `void`
+- `setSelected(int id, boolean animated)` -> `void`
+
+## `org.telegram.ui.Components.QrColorsPanel$Adapter`
+- `getItemCount()` -> `int`
+- `isEnabled(RecyclerView.ViewHolder holder)` -> `boolean`
+- `onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position)` -> `void`
+- `onCreateViewHolder(@NonNull ViewGroup parent, int viewType)` -> `RecyclerView.ViewHolder`
+
+## `org.telegram.ui.Components.QrColorsPanel$ColorCell`
+- `onDraw(@NonNull Canvas canvas)` -> `void`
+- `setColor(MessagesController.PeerColor color)` -> `void`
+- `setSelected(boolean selected, boolean animated)` -> `void`
+
+## `org.telegram.ui.Components.SearchViewPager$ThemedNumberTextView`
+- `setTextColor(int value)` -> `void`
 
 ## `org.telegram.ui.Components.SimpleThemeDescription`
 - `static createThemeDescription(ThemeDescription.ThemeDescriptionDelegate del, int key)` -> `ThemeDescription`
@@ -2434,6 +2876,15 @@
 ## `org.telegram.ui.Components.ThemePreviewDrawable`
 - `getThemeDocument()` -> `DocumentObject.ThemeDocument`
 
+## `org.telegram.ui.Components.ThemeRevealView`
+- `clearMask()` -> `void`
+- `static coverRadius(float cx, float cy, float w, float h)` -> `float`
+- `static eraseFromSnapshot(Bitmap bitmap, View snapshotOf, ImageView icon)` -> `void`
+- `onDraw(Canvas canvas)` -> `void`
+- `setIcon(ImageView icon, ColorFilter oldFilter)` -> `void`
+- `setMask(float cx, float cy, boolean hole)` -> `void`
+- `setRadius(float radius)` -> `void`
+
 ## `org.telegram.ui.Components.ThemeSmallPreviewView`
 - `cancelAnimation()` -> `void`
 - `didReceivedNotification(int id, int account, Object... args)` -> `void`
@@ -2451,11 +2902,18 @@
 - `setItem(ChatThemeBottomSheet.ChatThemeItem item, boolean animated)` -> `void`
 - `setItem(ChatThemeBottomSheet.ChatThemeItem item, long parentDialogId, boolean animated)` -> `void`
 - `setSelected(boolean selected, boolean animated)` -> `void`
+- `updateColors()` -> `void`
 - `updatePreviewBackground(ThemeDrawable themeDrawable)` -> `void`
 
 ## `org.telegram.ui.Components.ThemeSmallPreviewView$ThemeDrawable`
 - `draw(Canvas canvas, float alpha)` -> `void`
 - `drawBackground(Canvas canvas, float alpha)` -> `void`
+
+## `org.telegram.ui.Components.UniversalAdapter$ThemedColorDrawable`
+- `draw(Canvas canvas)` -> `void`
+
+## `org.telegram.ui.Components.UniversalAdapter$ThemedColors`
+- `getColor(int key)` -> `int`
 
 ## `org.telegram.ui.Components.blur3.Blur3HashImpl`
 - `get()` -> `long`
@@ -2468,6 +2926,10 @@
 - `create(View view, boolean multiwindow)` -> `BlurredBackgroundDrawable`
 - `create(View view, BlurredBackgroundColorProvider provider)` -> `BlurredBackgroundDrawable`
 - `create(View view, BlurredBackgroundColorProvider provider, boolean multiwindow)` -> `BlurredBackgroundDrawable`
+- `static createDrawable(GlassSource source)` -> `BlurredBackgroundDrawable`
+- `getFrostedSource()` -> `GlassSource`
+- `getSource()` -> `GlassSource`
+- `getStaticSource()` -> `GlassSource`
 - `invalidateAllLinkedViews()` -> `void`
 - `setGlassEngine(GlassEngine engine)` -> `void`
 - `setLinkedDrawablesRef(@Nullable ReferenceList<BlurredBackgroundDrawable> linkedDrawables)` -> `void`
@@ -2476,6 +2938,9 @@
 - `setOutset(int outset)` -> `void`
 - `setOutset(int dx, int dy)` -> `void`
 - `setSourceRootView(ViewPositionWatcher watcher, ViewGroup parent)` -> `void`
+
+## `org.telegram.ui.Components.blur3.BlurredBackgroundDrawableViewFactory$DrawableOwner`
+- `attachDrawable(BlurredBackgroundDrawable drawable)` -> `default void`
 
 ## `org.telegram.ui.Components.blur3.BlurredBackgroundWithFadeDrawable`
 - `draw(@NonNull Canvas canvas)` -> `void`
@@ -2487,6 +2952,7 @@
 - `setColorFilter(@Nullable ColorFilter colorFilter)` -> `void`
 - `setFadeHeight(int fadeHeight, boolean opacity)` -> `void`
 - `setIgnoreFastWay(boolean ignoreFastWay)` -> `void`
+- `updateColors()` -> `void`
 
 ## `org.telegram.ui.Components.blur3.DownscaleScrollableNoiseSuppressor`
 - `static convertRadiusToSigma(float radius)` -> `float`
@@ -2495,6 +2961,7 @@
 - `draw(Canvas canvas, int index)` -> `void`
 - `drawDebugPositions(Canvas canvas)` -> `void`
 - `drawInline(Canvas canvas, int index)` -> `void`
+- `getDownsample(int index)` -> `int`
 - `getRenderNodesCount()` -> `int`
 - `invalidateResultRenderNodes(IBlur3Capture capture, int width, int height)` -> `boolean`
 - `onScrolled(float dx, float dy)` -> `void`
@@ -2515,7 +2982,9 @@
 - `invalidate()` -> `void`
 
 ## `org.telegram.ui.Components.blur3.LiquidGlassEffect`
-- `update(float left, float top, float right, float bottom, float radiusLeftTop, float radiusRightTop, float radiusRightBottom, float radiusLeftBottom, float thickness, float intensity, float index, int foregroundColor)` -> `void`
+- `clearArrow()` -> `void`
+- `setArrow(float axisX, float axisY, float dirX, float dirY, float height, float tipRadius, float filletRadius, float stripe)` -> `void`
+- `update(float width, float height, float bodyX, float bodyY, float radiusLeftTop, float radiusRightTop, float radiusRightBottom, float radiusLeftBottom, float thickness, float intensity, float index, int foregroundColor, float nodeOffsetX, float nodeOffsetY, int downsample)` -> `void`
 
 ## `org.telegram.ui.Components.blur3.RenderNodeWithHash`
 - `invalidate()` -> `void`
@@ -2542,77 +3011,116 @@
 - `captureCalculateHash(IBlur3Hash builder, RectF position)` -> `default void`
 
 ## `org.telegram.ui.Components.blur3.drawable.BlurredBackgroundDrawable`
-- `drawSource(Canvas canvas, BlurredBackgroundSource source)` -> `void`
-- `static drawStroke(Canvas canvas, float left, float top, float right, float bottom, float[] radii, float strokeWidth, boolean isTop, Paint paint)` -> `void`
-- `static drawStroke(Canvas canvas, RectF rect, float radii, float strokeWidth, boolean isTop, Paint paint)` -> `void`
-- `static drawStroke(Canvas canvas, float left, float top, float right, float bottom, float radii, float strokeWidth, boolean isTop, Paint paint)` -> `void`
+- `buildDisplayList()` -> `void`
+- `clearArrow()` -> `BlurredBackgroundDrawable`
+- `draw(@NonNull Canvas canvas)` -> `void`
 - `enableInAppKeyboardOptimization()` -> `void`
-- `getAlpha()` -> `int`
+- `getBoundsWithPaddingInset(@NonNull Rect rect)` -> `void`
 - `getOpacity()` -> `int`
 - `getOutline(@NonNull Outline outline)` -> `void`
-- `static getOutline(Outline outline, Rect rect, float[] radii)` -> `void`
 - `getOutsetX()` -> `int`
 - `getOutsetY()` -> `int`
 - `getPaddedBounds()` -> `Rect`
 - `getPadding(@NonNull Rect padding)` -> `boolean`
 - `getPath()` -> `Path`
-- `getPositionRelativeSource(RectF position)` -> `void`
-- `getSourceOffsetX()` -> `float`
-- `getSourceOffsetY()` -> `float`
-- `getUnwrappedSource()` -> `BlurredBackgroundSource`
+- `getSource()` -> `GlassSource`
+- `getUnwrappedSource()` -> `GlassSource`
 - `getViewOutlineProvider()` -> `ViewOutlineProvider`
-- `onBoundPropsChanged()` -> `void`
+- `invalidateDisplayList()` -> `void`
+- `onAlphaChanged(int oldAlpha, int alpha)` -> `void`
 - `onBoundsChange(@NonNull Rect bounds)` -> `void`
+- `onGlassSettingsChanged(GlassSettings glassSettings)` -> `void`
 - `onSourceOffsetChange(float sourceOffsetX, float sourceOffsetY)` -> `void`
-- `onSourceRelativePositionChanged(RectF position)` -> `void`
-- `setAlpha(int alpha)` -> `void`
+- `setArrow(int side, float position, float height, float tipRadius, float filletRadius)` -> `BlurredBackgroundDrawable`
 - `setClipToOutline(boolean clipToOutline)` -> `BlurredBackgroundDrawable`
 - `setColorFilter(@Nullable ColorFilter colorFilter)` -> `void`
 - `setColorProvider(BlurredBackgroundColorProvider colorProvider)` -> `BlurredBackgroundDrawable`
+- `setEvenRim(boolean evenRim)` -> `BlurredBackgroundDrawable`
 - `setHasPadding(boolean hasPadding)` -> `BlurredBackgroundDrawable`
 - `setIntensity(float intensity)` -> `void`
+- `setLightAngle(float lightAngle)` -> `BlurredBackgroundDrawable`
+- `setLiquidGlassEffectAllowed()` -> `void`
 - `setOutset(int dx, int dy)` -> `BlurredBackgroundDrawable`
 - `setPadding(int padding)` -> `BlurredBackgroundDrawable`
 - `setRadius(float radius)` -> `BlurredBackgroundDrawable`
 - `setRadius(float topLeft, float topRight, float bottomRight, float bottomLeft)` -> `BlurredBackgroundDrawable`
 - `setRadius(float topLeft, float topRight, float bottomRight, float bottomLeft, boolean forceBottomZero)` -> `void`
+- `setRim(@Nullable GlassRim rim)` -> `BlurredBackgroundDrawable`
 - `setShadowAlpha(float alpha)` -> `void`
 - `setShadowParams(float radius, float dx, float dy)` -> `void`
-- `setSourceOffset(float sourceOffsetX, float sourceOffsetY)` -> `void`
 - `setStrokeWidth(float strokeWidthTop, float strokeWidthBottom)` -> `void`
 - `setThickness(int thickness)` -> `BlurredBackgroundDrawable`
 - `updateColors()` -> `void`
 - `updateDisplayList()` -> `void`
 
+## `org.telegram.ui.Components.blur3.drawable.BlurredBackgroundDrawable$Impl`
+- `discard()` -> `void`
+- `invalidate()` -> `void`
+- `onBoundPropsChanged()` -> `void`
+- `onColorsChanged()` -> `void`
+- `record()` -> `void`
+- `setAlpha(float alpha)` -> `void`
+- `setClipToOutline(boolean clipToOutline)` -> `void`
+- `setLiquidGlassEnabled(boolean enabled)` -> `void`
+
+## `org.telegram.ui.Components.blur3.drawable.BlurredBackgroundDrawable$ImplBitmap`
+- `draw(Canvas canvas, GlassSource s)` -> `void`
+
+## `org.telegram.ui.Components.blur3.drawable.BlurredBackgroundDrawable$ImplCanvas`
+- `draw(Canvas canvas, GlassSource source)` -> `void`
+
+## `org.telegram.ui.Components.blur3.drawable.BlurredBackgroundDrawable$ImplColor`
+- `draw(Canvas canvas, GlassSource source)` -> `void`
+- `drawFill(Canvas canvas, int fillColor)` -> `void`
+
+## `org.telegram.ui.Components.blur3.drawable.BlurredBackgroundDrawable$ImplRenderNode`
+- `discard()` -> `void`
+- `draw(Canvas canvas, GlassSource source)` -> `void`
+- `invalidate()` -> `void`
+- `onBoundPropsChanged()` -> `void`
+- `onColorsChanged()` -> `void`
+- `record()` -> `void`
+- `setAlpha(float alpha)` -> `void`
+- `setClipToOutline(boolean clipToOutline)` -> `void`
+- `setLiquidGlassEnabled(boolean enabled)` -> `void`
+
 ## `org.telegram.ui.Components.blur3.drawable.BlurredBackgroundDrawable$Props`
+- `arrowAxisX()` -> `float`
+- `arrowAxisY()` -> `float`
+- `arrowDirX()` -> `float`
+- `arrowDirY()` -> `float`
 - `build()` -> `void`
 - `draw(Canvas canvas, Paint paint)` -> `void`
 - `drawShadows(Canvas canvas, Paint paint, boolean useInAppKeyboardOptimization)` -> `void`
 
-## `org.telegram.ui.Components.blur3.drawable.BlurredBackgroundDrawableRenderNode`
-- `draw(@NonNull Canvas canvas)` -> `void`
-- `getSource()` -> `BlurredBackgroundSource`
-- `hasDisplayList()` -> `boolean`
-- `invalidateDisplayList()` -> `void`
-- `onBoundPropsChanged()` -> `void`
-- `onSourceOffsetChange(float sourceOffsetX, float sourceOffsetY)` -> `void`
-- `onSourceRelativePositionChanged(RectF position)` -> `void`
-- `setAlpha(int alpha)` -> `void`
-- `setClipToOutline(boolean clipToOutline)` -> `BlurredBackgroundDrawable`
-- `setLiquidGlassEffectAllowed()` -> `void`
-- `updateColors()` -> `void`
-- `updateDisplayList()` -> `void`
+## `org.telegram.ui.Components.blur3.drawable.GlassRim`
+- `static evenOf(float topWidth, int topColor, float bottomWidth, int bottomColor, float outlineWidth, int outlineColor)` -> `GlassRim`
+- `static of(float lightAngle, float topWidth, int topColor, float bottomWidth, int bottomColor, float outlineWidth, int outlineColor)` -> `GlassRim`
+- `static qrBig()` -> `GlassRim`
+- `static qrSheet()` -> `GlassRim`
+- `static qrSmall()` -> `GlassRim`
+- `static qrSwatch()` -> `GlassRim`
+- `withLightAngle(float lightAngle)` -> `GlassRim`
 
-## `org.telegram.ui.Components.blur3.drawable.BlurredBackgroundDrawableSource`
-- `draw(@NonNull Canvas canvas)` -> `void`
-- `getSource()` -> `BlurredBackgroundSource`
+## `org.telegram.ui.Components.blur3.drawable.GlassRimRenderer`
+- `draw(@NonNull Canvas canvas, float left, float top, float right, float bottom, @NonNull float[] shapeRadii, @NonNull GlassRim rim, float alpha)` -> `void`
+- `drawPath(@NonNull Canvas canvas, @NonNull Path shape, long shapeKey, float left, float top, float right, float bottom, @NonNull GlassRim rim, float alpha)` -> `void`
+
+## `org.telegram.ui.Components.blur3.drawable.GlassRimRenderer$Geometry`
+- `key()` -> `long`
 
 ## `org.telegram.ui.Components.blur3.drawable.color.BlurredBackgroundColorProviderThemed`
 - `getBackgroundColor()` -> `int`
+- `getOutlineColor()` -> `int`
+- `getOutlineShadowColor()` -> `int`
+- `getOutlineWidth()` -> `float`
 - `getShadowColor()` -> `int`
+- `getShadowDyOverride()` -> `float`
+- `getShadowRadiusOverride()` -> `float`
 - `getStrokeColorBottom()` -> `int`
 - `getStrokeColorTop()` -> `int`
 - `setAlpha(float alpha)` -> `void`
+- `setCompactOutlineKey(int key)` -> `BlurredBackgroundColorProviderThemed`
 - `updateColors()` -> `void`
 
 ## `org.telegram.ui.Components.blur3.drawable.color.BlurredBackgroundProviderBuilder`
@@ -2642,6 +3150,8 @@
 - `static bulletin(Theme.ResourcesProvider resourcesProvider)` -> `BlurredBackgroundProvider`
 - `static counterMini(Theme.ResourcesProvider resourcesProvider)` -> `BlurredBackgroundProvider`
 - `static emojiViewButton(Theme.ResourcesProvider resourcesProvider)` -> `BlurredBackgroundProvider`
+- `static frostedSheet(Theme.ResourcesProvider resourcesProvider)` -> `BlurredBackgroundProvider`
+- `static hint(Theme.ResourcesProvider resourcesProvider)` -> `BlurredBackgroundProvider`
 - `static inputFieldDialogActivity(Theme.ResourcesProvider resourcesProvider)` -> `BlurredBackgroundProvider`
 - `static inputFieldShareAlert(Theme.ResourcesProvider resourcesProvider)` -> `BlurredBackgroundProvider`
 - `static mainTabs(Theme.ResourcesProvider resourcesProvider)` -> `BlurredBackgroundProvider`
@@ -2653,61 +3163,13 @@
 - `static scrimMenuBackground(Theme.ResourcesProvider resourcesProvider)` -> `BlurredBackgroundProvider`
 - `static searchFloatingDate(Theme.ResourcesProvider resourcesProvider)` -> `BlurredBackgroundProvider`
 - `static shadow(Theme.ResourcesProvider resourcesProvider)` -> `BlurredBackgroundProvider`
+- `static simpleActionBar(Theme.ResourcesProvider resourcesProvider)` -> `BlurredBackgroundProvider`
 - `static solveSrcColor(int bgColor, int outColor, float alpha)` -> `int`
 - `static tabsPanelNoShadow(Theme.ResourcesProvider resourcesProvider)` -> `BlurredBackgroundProvider`
 - `static topPanel(Theme.ResourcesProvider resourcesProvider)` -> `BlurredBackgroundProvider`
 - `static topPanelChatActivity(Theme.ResourcesProvider resourcesProvider)` -> `BlurredBackgroundProvider`
 - `static topPanelChatActivitySearchListBg(Theme.ResourcesProvider resourcesProvider)` -> `BlurredBackgroundProvider`
 - `static topPanelChatActivityTags(Theme.ResourcesProvider resourcesProvider)` -> `BlurredBackgroundProvider`
-
-## `org.telegram.ui.Components.blur3.source.BlurredBackgroundSource`
-- `dispatchOnDrawablesRelativePositionChange()` -> `default void`
-
-## `org.telegram.ui.Components.blur3.source.BlurredBackgroundSourceBitmap`
-- `beginRecording(int width, int height)` -> `Canvas`
-- `beginRecording(int width, int height, float scale)` -> `Canvas`
-- `createDrawable()` -> `BlurredBackgroundDrawable`
-- `draw(Canvas canvas, float left, float top, float right, float bottom)` -> `void`
-- `endRecording()` -> `void`
-- `getMatrix()` -> `Matrix`
-- `inRecording()` -> `boolean`
-- `setBitmap(Bitmap bitmap)` -> `void`
-- `setMatrix(Matrix matrix)` -> `void`
-- `setParentSize(int width, int height, int actionBarHeight)` -> `void`
-
-## `org.telegram.ui.Components.blur3.source.BlurredBackgroundSourceColor`
-- `createDrawable()` -> `BlurredBackgroundDrawable`
-- `draw(Canvas canvas, float left, float top, float right, float bottom)` -> `void`
-- `getColor()` -> `int`
-- `setColor(int color)` -> `void`
-
-## `org.telegram.ui.Components.blur3.source.BlurredBackgroundSourceRenderNode`
-- `beginRecording(int width, int height)` -> `RecordingCanvas`
-- `createDrawable()` -> `BlurredBackgroundDrawable`
-- `dispatchOnDrawablesRelativePositionChange()` -> `void`
-- `draw(Canvas canvas, float left, float top, float right, float bottom)` -> `void`
-- `endRecording()` -> `void`
-- `getFallbackSource()` -> `BlurredBackgroundSource`
-- `getVisiblePositions(List<RectF> positions, int index, int expand)` -> `int`
-- `inRecording()` -> `boolean`
-- `invalidateDisplayListForDrawables()` -> `void`
-- `isRecordingCanvas(Canvas canvas)` -> `boolean`
-- `needUpdateDisplayList(int width, int height)` -> `boolean`
-- `noClip()` -> `void`
-- `setBlur(float radius)` -> `void`
-- `setBlur(float radius, RenderEffect effect)` -> `void`
-- `setOnDrawablesRelativePositionChangeListener(Runnable callback)` -> `void`
-- `setScrollableNoiseSuppressor(DownscaleScrollableNoiseSuppressor scrollableNoiseSuppressor, int index)` -> `void`
-- `setSize(int width, int height)` -> `void`
-- `setUnderSource(BlurredBackgroundSource underSource)` -> `void`
-- `setupRenderer(RenderNodeWithHash.Renderer renderer)` -> `void`
-- `updateDisplayListIfNeeded()` -> `void`
-
-## `org.telegram.ui.Components.blur3.source.BlurredBackgroundSourceWrapped`
-- `createDrawable()` -> `BlurredBackgroundDrawable`
-- `draw(Canvas canvas, float left, float top, float right, float bottom)` -> `void`
-- `getSource()` -> `BlurredBackgroundSource`
-- `setSource(BlurredBackgroundSource sourceInternal)` -> `void`
 
 ## `org.telegram.ui.Components.blur3.utils.BitmapChangeTracker`
 - `invalidate()` -> `void`
@@ -2755,6 +3217,7 @@
 - `setText(CharSequence text)` -> `void`
 - `setTextSizeDp(float textSizeDp)` -> `void`
 - `setVisualWidth(float width)` -> `void`
+- `updateColors()` -> `void`
 - `updateColorsLottie()` -> `void`
 - `updateUserAvatar(int currentAccount)` -> `void`
 
@@ -2790,6 +3253,7 @@
 - `setPreviewText(CharSequence text, boolean animated)` -> `void`
 
 ## `org.telegram.ui.GroupColorActivity`
+- `applyThemeColors()` -> `void`
 - `createListView()` -> `void`
 - `createView(Context context)` -> `View`
 - `didReceivedNotification(int id, int account, Object... args)` -> `void`
@@ -2834,6 +3298,7 @@
 - `onFragmentClosed()` -> `void`
 - `onFragmentCreate()` -> `boolean`
 - `onFragmentDestroy()` -> `void`
+- `onThemeColorsChanged()` -> `void`
 - `setForceDark(boolean isDark, boolean playAnimation)` -> `void`
 - `setOnApplied(BaseFragment bulletinFragment)` -> `PeerColorActivity`
 - `setResourceProvider(Theme.ResourcesProvider resourceProvider)` -> `void`
@@ -2955,21 +3420,15 @@
 - `setSelected(int selected, boolean animated)` -> `void`
 - `updateColors()` -> `void`
 
-## `org.telegram.ui.QrActivity$ThemeListViewController`
-- `didReceivedNotification(int id, int account, Object... args)` -> `void`
-- `getThemeDescriptions()` -> `ArrayList<ThemeDescription>`
-- `onCreate()` -> `void`
-- `onDataLoaded()` -> `void`
-- `onDestroy()` -> `void`
-- `onItemClicked(View view, int position)` -> `void`
-- `setDarkTheme(boolean isDark)` -> `void`
-- `setForceDark(boolean isDark, boolean playAnimation)` -> `void`
-- `setItemSelectedListener(OnItemSelectedListener itemSelectedListener)` -> `void`
-- `setSelectedPosition(int selectedPosition)` -> `void`
+## `org.telegram.ui.QrShare.QrGlass`
+- `static controlFill()` -> `int`
+- `static drawRim(Canvas c, RectF r, float radius, int grp, float alpha)` -> `boolean`
+- `static drawSheen(Canvas c, RectF r, boolean light, float alpha)` -> `void`
+- `static drawSheenRound(Canvas c, RectF r, float radius, boolean light, float alpha)` -> `void`
 
-## `org.telegram.ui.QrActivity$ThemeResourcesProvider`
-- `getColor(int key)` -> `int`
-- `initColors(EmojiThemes theme, boolean isDark)` -> `void`
+## `org.telegram.ui.Stars.StarsController$ThemedTimerView`
+- `static bindColor(ThemedTimerView view, int key, Theme.ResourcesProvider resourcesProvider)` -> `void`
+- `setColor(int color)` -> `void`
 
 ## `org.telegram.ui.Stories.DarkThemeResourceProvider`
 - `appendColors()` -> `void`
@@ -3008,6 +3467,7 @@
 - `onProgressUpload(String fileName, long uploadedSize, long totalSize, boolean isEncrypted)` -> `void`
 - `onResume()` -> `void`
 - `onSuccessDownload(String fileName)` -> `void`
+- `onThemeColorsChanged()` -> `void`
 - `onTransitionAnimationStart(boolean isOpen, boolean backward)` -> `void`
 - `setDelegate(WallpaperActivityDelegate wallpaperActivityDelegate)` -> `void`
 - `setDialogId(long dialogId)` -> `void`
@@ -3069,6 +3529,7 @@
 - `onFragmentCreate()` -> `boolean`
 - `onFragmentDestroy()` -> `void`
 - `onResume()` -> `void`
+- `onThemeColorsChanged()` -> `void`
 - `onTransitionAnimationEnd(boolean isOpen, boolean backward)` -> `void`
 
 ## `org.telegram.ui.ThemeSetUrlActivity$LinkMovementMethodMy`
@@ -3077,6 +3538,10 @@
 ## `org.telegram.ui.ThemeSetUrlActivity$LinkSpan`
 - `onClick(View widget)` -> `void`
 - `updateDrawState(TextPaint ds)` -> `void`
+
+## `org.telegram.ui.Wallet.WalletActivity$ThemedLinkSpan`
+- `onClick(@NonNull View view)` -> `void`
+- `updateDrawState(@NonNull TextPaint ds)` -> `void`
 
 ## `org.telegram.ui.WallpapersListActivity$ColorCell`
 - `onDraw(Canvas canvas)` -> `void`
@@ -3159,5 +3624,132 @@
 ## `org.telegram.ui.web.WebActionBar$Title`
 - `draw(Canvas canvas, float w, float h, float alpha)` -> `void`
 
+## `org.telegram.utils.glass.BaseFragmentSimpleGlass`
+- `setCapture(IBlur3Capture capture)` -> `void`
+- `setClipView(View clipView)` -> `void`
+
+## `org.telegram.utils.glass.GlassCaptureSourceCanvas`
+- `invalidate()` -> `void`
+- `setFilteredColorFilter(@Nullable ColorFilter colorFilter)` -> `void`
+
+## `org.telegram.utils.glass.GlassCaptureSourceCanvas$GlassCaptureDebugView`
+- `onDraw(@NonNull Canvas recordingCanvas)` -> `void`
+
+## `org.telegram.utils.glass.GlassCaptureSourceCanvas$Position`
+- `setFilteredColorFilter(@Nullable ColorFilter colorFilter)` -> `void`
+
+## `org.telegram.utils.glass.GlassCaptureSourceCanvas$SourceImpl`
+- `draw(@NonNull Canvas canvas, float left, float top, float right, float bottom)` -> `void`
+- `drawDownsampled(@NonNull Canvas canvas, @NonNull RectF boundsRelativeRoot, int targetDownsample, float targetOriginX, float targetOriginY)` -> `void`
+- `getDownsampleOffsetY()` -> `int`
+
+## `org.telegram.utils.glass.GlassDrawable`
+- `clearReservedBounds()` -> `void`
+- `getAlpha()` -> `int`
+- `getBoundsWithPaddingInset(@NonNull Rect rect)` -> `void`
+- `getGlassSettings()` -> `GlassSettings`
+- `getOutsetX()` -> `int`
+- `getOutsetY()` -> `int`
+- `getReservedBounds(@NonNull Rect rect)` -> `boolean`
+- `getSourceOffsetX()` -> `float`
+- `getSourceOffsetY()` -> `float`
+- `isInvalidated()` -> `boolean`
+- `onAlphaChanged(int oldAlpha, int newAlpha)` -> `void`
+- `onGlassSettingsChanged(GlassSettings glassSettings)` -> `void`
+- `onSourceOffsetChange(float sourceOffsetX, float sourceOffsetY)` -> `void`
+- `setAlpha(int alpha)` -> `void`
+- `setGlassSettings(GlassSettings glassSettings)` -> `void`
+- `setReservedBounds(int left, int top, int right, int bottom)` -> `void`
+- `setSourceOffset(float sourceOffsetX, float sourceOffsetY)` -> `void`
+
 ## `org.telegram.utils.glass.GlassEngine`
 - `invalidate()` -> `void`
+- `invalidateScroll()` -> `void`
+
+## `org.telegram.utils.glass.fade.GlassFadeBlurredDrawable`
+- `static alignDownsampleOrigin(float value, int phase, int downsample)` -> `float`
+- `buildDisplayList()` -> `void`
+- `draw(@NonNull Canvas canvas)` -> `void`
+- `getOpacity()` -> `int`
+- `isInvalidated()` -> `boolean`
+- `onAlphaChanged(int oldAlpha, int alpha)` -> `void`
+- `onBoundsChange(@NonNull Rect bounds)` -> `void`
+- `onGlassSettingsChanged(GlassSettings glassSettings)` -> `void`
+- `setColorFilter(@Nullable ColorFilter colorFilter)` -> `void`
+- `setDirection(@NonNull GlassFadeDirection direction)` -> `void`
+- `setInefficientRenderPathsAllowed(boolean allowed)` -> `void`
+- `setMaskRange(@NonNull GlassFadeRangeParams range)` -> `void`
+- `setOverlayAlpha(int overlayAlpha)` -> `void`
+- `setOverlayColorSource(GlassSourceColor sourceColor)` -> `void`
+- `setOverlayOnlyAlpha(int overlayOnlyAlpha)` -> `void`
+- `setOverlayOnlyRange(@NonNull GlassFadeRangeParams range)` -> `void`
+- `setOverlayRange(@NonNull GlassFadeRangeParams range)` -> `void`
+- `shouldHaveDisplayList()` -> `boolean`
+- `updateColors()` -> `void`
+
+## `org.telegram.utils.glass.fade.GlassFadeBlurredDrawable$Impl`
+- `shouldHaveDisplayList()` -> `boolean`
+- `supportsSoftwareCanvas()` -> `boolean`
+
+## `org.telegram.utils.glass.fade.GlassFadeBlurredDrawable$ImplLegacy`
+- `draw(Canvas canvas)` -> `void`
+- `setAlpha(float alpha)` -> `void`
+- `supportsSoftwareCanvas()` -> `boolean`
+
+## `org.telegram.utils.glass.fade.GlassFadeBlurredDrawable$ImplOverlayOnly`
+- `discard()` -> `void`
+- `draw(Canvas canvas)` -> `void`
+- `hasDisplayList()` -> `boolean`
+- `setAlpha(float alpha)` -> `void`
+
+## `org.telegram.utils.glass.fade.GlassFadeBlurredDrawable$ImplSdk31`
+- `draw(Canvas canvas)` -> `void`
+- `setAlpha(float alpha)` -> `void`
+
+## `org.telegram.utils.glass.fade.GlassFadeBlurredDrawable$ImplSdk33`
+- `draw(Canvas canvas)` -> `void`
+- `setAlpha(float alpha)` -> `void`
+
+## `org.telegram.utils.glass.source.GlassSourceBitmap`
+- `beginRecording(int width, int height)` -> `Canvas`
+- `draw(@NonNull Canvas canvas, float left, float top, float right, float bottom)` -> `void`
+- `getMatrix()` -> `Matrix`
+- `setMatrix(Matrix matrix)` -> `void`
+
+## `org.telegram.utils.glass.source.GlassSourceColor`
+- `draw(@NonNull Canvas canvas, float left, float top, float right, float bottom)` -> `void`
+- `getColor()` -> `int`
+- `setColor(int color)` -> `void`
+
+## `org.telegram.utils.glass.source.GlassSourceCrossfade`
+- `draw(@NonNull Canvas canvas, float left, float top, float right, float bottom)` -> `void`
+- `drawDownsampled(@NonNull Canvas canvas, @NonNull RectF boundsRelativeRoot, int targetDownsample, float targetOriginX, float targetOriginY)` -> `void`
+- `getDownsample()` -> `int`
+- `getDownsampleOffsetX()` -> `int`
+- `getDownsampleOffsetY()` -> `int`
+- `getProgress()` -> `float`
+- `setProgress(float progress)` -> `void`
+
+## `org.telegram.utils.glass.source.GlassSourceEmpty`
+- `draw(@NonNull Canvas canvas, float left, float top, float right, float bottom)` -> `void`
+
+## `org.telegram.utils.glass.source.GlassSourceRenderNode`
+- `beginRecording(int width, int height)` -> `RecordingCanvas`
+- `draw(@NonNull Canvas canvas, float left, float top, float right, float bottom)` -> `void`
+- `drawDownsampled(@NonNull Canvas canvas, @NonNull RectF boundsRelativeRoot, int targetDownsample, float targetOriginX, float targetOriginY)` -> `void`
+- `endRecording()` -> `void`
+- `getDownsampleOffsetY()` -> `int`
+- `inRecording()` -> `boolean`
+- `invalidateDisplayListForDrawables()` -> `void`
+- `invalidateRenderer()` -> `void`
+- `isRecordingCanvas(Canvas canvas)` -> `boolean`
+- `needUpdateDisplayList(int width, int height)` -> `boolean`
+- `noClip()` -> `void`
+- `setBlur(float radius, RenderEffect effect)` -> `void`
+- `setGlassCaptureSourceCanvas(GlassCaptureSourceCanvas glassCaptureSourceCanvas, GlassCaptureSourceCanvas.SourceIndex sourceIndex)` -> `void`
+- `setScrollableNoiseSuppressor(DownscaleScrollableNoiseSuppressor scrollableNoiseSuppressor, int index)` -> `void`
+
+## `org.telegram.utils.glass.source.GlassSourceWrapped`
+- `draw(@NonNull Canvas canvas, float left, float top, float right, float bottom)` -> `void`
+- `getSource()` -> `GlassSource`
+- `setSource(GlassSource sourceInternal)` -> `void`

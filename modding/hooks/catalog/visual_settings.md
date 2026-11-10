@@ -1,4 +1,4 @@
-# visual / settings (365 методов)
+# visual / settings (391 методов)
 
 ## `org.telegram.messenger.SharedConfig`
 - `static measureDevicePerformanceClass()` -> `int`
@@ -7,10 +7,11 @@
 ## `org.telegram.ui.ArchiveSettingsActivity`
 - `createView(Context context)` -> `View`
 - `didReceivedNotification(int id, int account, Object... args)` -> `void`
+- `getListViewForSimpleGlass()` -> `RecyclerListView`
 - `isSupportEdgeToEdge()` -> `boolean`
 - `onFragmentCreate()` -> `boolean`
 - `onFragmentDestroy()` -> `void`
-- `onInsets(int left, int top, int right, int bottom)` -> `void`
+- `useSimpleActionBar()` -> `boolean`
 
 ## `org.telegram.ui.ArchiveSettingsActivity$ItemInner`
 - `equals(Object o)` -> `boolean`
@@ -109,16 +110,6 @@
 - `setJoinToSend(boolean newJoinToSend)` -> `void`
 - `showJoinToSend(boolean show)` -> `void`
 
-## `org.telegram.ui.Components.RoundVideoSettings`
-- `static getVideoBitrate()` -> `int`
-- `static setCameraResolution(@NonNull RoundVideoSession.CameraResolution value)` -> `void`
-- `static setCompositionEnabled(boolean enabled)` -> `void`
-- `static setEnabled(boolean enabled)` -> `void`
-- `static setFrameRate(@NonNull RoundVideoSession.FrameRate value)` -> `void`
-- `static setLastCameraFacing(@NonNull RoundVideoSession.CameraFacing value)` -> `void`
-- `static setOutputResolution(@NonNull RoundVideoSession.OutputResolution value)` -> `void`
-- `static setVideoBitrate(int value)` -> `void`
-
 ## `org.telegram.ui.Components.SwipeGestureSettingsView`
 - `getIcon(int i)` -> `RLottieDrawable`
 - `onDraw(Canvas canvas)` -> `void`
@@ -131,13 +122,14 @@
 
 ## `org.telegram.ui.DataSettingsActivity`
 - `createView(Context context)` -> `View`
+- `getListViewForSimpleGlass()` -> `RecyclerListView`
 - `getThemeDescriptions()` -> `ArrayList<ThemeDescription>`
 - `isSupportEdgeToEdge()` -> `boolean`
 - `onDialogDismiss(Dialog dialog)` -> `void`
 - `onFragmentCreate()` -> `boolean`
 - `onFragmentDestroy()` -> `void`
-- `onInsets(int left, int top, int right, int bottom)` -> `void`
 - `onResume()` -> `void`
+- `useSimpleActionBar()` -> `boolean`
 
 ## `org.telegram.ui.DataSettingsActivity$ListAdapter`
 - `getItemCount()` -> `int`
@@ -148,16 +140,35 @@
 - `onCreateViewHolder(ViewGroup parent, int viewType)` -> `RecyclerView.ViewHolder`
 - `onViewAttachedToWindow(RecyclerView.ViewHolder holder)` -> `void`
 
+## `org.telegram.ui.DebugSettingsActivity`
+- `createView(Context context)` -> `View`
+- `fillItems(ArrayList<UItem> items, UniversalAdapter adapter)` -> `void`
+- `getListViewForSimpleGlass()` -> `RecyclerListView`
+- `getTitle()` -> `CharSequence`
+- `onClick(UItem item, View view, int position, float x, float y)` -> `void`
+- `onLongClick(UItem item, View view, int position, float x, float y)` -> `boolean`
+- `useSimpleActionBar()` -> `boolean`
+
+## `org.telegram.ui.HeaderSettingsActivity`
+- `createView(Context context)` -> `View`
+- `fillItems(ArrayList<UItem> items, UniversalAdapter adapter)` -> `void`
+- `getListViewForSimpleGlass()` -> `RecyclerListView`
+- `getTitle()` -> `CharSequence`
+- `onClick(UItem item, View view, int position, float x, float y)` -> `void`
+- `onLongClick(UItem item, View view, int position, float x, float y)` -> `boolean`
+- `useSimpleActionBar()` -> `boolean`
+
 ## `org.telegram.ui.LiteModeSettingsActivity`
 - `createView(Context context)` -> `View`
+- `getListViewForSimpleGlass()` -> `RecyclerListView`
 - `isSupportEdgeToEdge()` -> `boolean`
 - `onBecomeFullyHidden()` -> `void`
 - `onBecomeFullyVisible()` -> `void`
 - `onFragmentDestroy()` -> `void`
-- `onInsets(int left, int top, int right, int bottom)` -> `void`
 - `scrollToFlags(int flags)` -> `void`
 - `scrollToType(int type)` -> `void`
 - `setExpanded(int flags, boolean expand)` -> `void`
+- `useSimpleActionBar()` -> `boolean`
 
 ## `org.telegram.ui.LiteModeSettingsActivity$Adapter`
 - `getItemCount()` -> `int`
@@ -181,6 +192,7 @@
 - `onPopulateAccessibilityEvent(AccessibilityEvent event)` -> `void`
 - `performAccessibilityAction(int action, @Nullable Bundle arguments)` -> `boolean`
 - `update()` -> `void`
+- `updateColors()` -> `void`
 
 ## `org.telegram.ui.LiteModeSettingsActivity$SwitchCell`
 - `onDraw(Canvas canvas)` -> `void`
@@ -194,16 +206,18 @@
 - `static areStoriesNotMuted(int currentAccount, long did)` -> `boolean`
 - `createView(Context context)` -> `View`
 - `didReceivedNotification(int id, int account, Object... args)` -> `void`
+- `getListViewForSimpleGlass()` -> `RecyclerListView`
 - `getThemeDescriptions()` -> `ArrayList<ThemeDescription>`
 - `isSupportEdgeToEdge()` -> `boolean`
 - `onActivityResultFragment(int requestCode, int resultCode, Intent data)` -> `void`
 - `onBecomeFullyVisible()` -> `void`
 - `onFragmentCreate()` -> `boolean`
-- `onInsets(int left, int top, int right, int bottom)` -> `void`
 - `onPause()` -> `void`
 - `onResume()` -> `void`
+- `onThemeColorsChanged()` -> `void`
 - `toggleShowAutoExceptions()` -> `void`
 - `updateRows(boolean animated)` -> `void`
+- `useSimpleActionBar()` -> `boolean`
 
 ## `org.telegram.ui.NotificationsCustomSettingsActivity$ExpandView`
 - `onLayout(boolean changed, int left, int top, int right, int bottom)` -> `void`
@@ -243,14 +257,15 @@
 ## `org.telegram.ui.NotificationsSettingsActivity`
 - `createView(Context context)` -> `View`
 - `didReceivedNotification(int id, int account, Object... args)` -> `void`
+- `getListViewForSimpleGlass()` -> `RecyclerListView`
 - `getThemeDescriptions()` -> `ArrayList<ThemeDescription>`
 - `isSupportEdgeToEdge()` -> `boolean`
 - `makeNotificationsCustomSettingsActivity(int type)` -> `NotificationsCustomSettingsActivity`
 - `onActivityResultFragment(int requestCode, int resultCode, Intent data)` -> `void`
 - `onFragmentCreate()` -> `boolean`
 - `onFragmentDestroy()` -> `void`
-- `onInsets(int left, int top, int right, int bottom)` -> `void`
 - `onResume()` -> `void`
+- `useSimpleActionBar()` -> `boolean`
 
 ## `org.telegram.ui.NotificationsSettingsActivity$ListAdapter`
 - `getItemCount()` -> `int`
@@ -263,14 +278,15 @@
 - `createView(Context context)` -> `View`
 - `didReceivedNotification(int id, int account, Object... args)` -> `void`
 - `static formatRulesString(AccountInstance accountInstance, int rulesType)` -> `String`
+- `getListViewForSimpleGlass()` -> `RecyclerListView`
 - `getThemeDescriptions()` -> `ArrayList<ThemeDescription>`
 - `isSupportEdgeToEdge()` -> `boolean`
 - `onFragmentCreate()` -> `boolean`
 - `onFragmentDestroy()` -> `void`
-- `onInsets(int left, int top, int right, int bottom)` -> `void`
 - `onResume()` -> `void`
 - `setCurrentPassword(TL_account.Password currentPassword)` -> `PrivacySettingsActivity`
 - `updateRows(boolean notify)` -> `void`
+- `useSimpleActionBar()` -> `boolean`
 
 ## `org.telegram.ui.PrivacySettingsActivity$ListAdapter`
 - `getItemCount()` -> `int`
@@ -281,10 +297,14 @@
 
 ## `org.telegram.ui.ProxySettingsActivity`
 - `createView(Context context)` -> `View`
+- `getScrollViewForSimpleGlass()` -> `SectionsScrollView`
 - `getThemeDescriptions()` -> `ArrayList<ThemeDescription>`
+- `isSupportEdgeToEdge()` -> `boolean`
 - `onPause()` -> `void`
 - `onResume()` -> `void`
+- `onThemeColorsChanged()` -> `void`
 - `onTransitionAnimationEnd(boolean isOpen, boolean backward)` -> `void`
+- `useSimpleActionBar()` -> `boolean`
 
 ## `org.telegram.ui.ProxySettingsActivity$TypeCell`
 - `onDraw(Canvas canvas)` -> `void`
@@ -292,22 +312,11 @@
 - `setTypeChecked(boolean value)` -> `void`
 - `setValue(String name, boolean checked, boolean divider)` -> `void`
 
-## `org.telegram.ui.QuickRepliesSettingsActivity`
-- `createView(Context context)` -> `View`
-- `getThemeDescriptions()` -> `ArrayList<ThemeDescription>`
-- `onFragmentCreate()` -> `boolean`
-- `onFragmentDestroy()` -> `void`
-- `onResume()` -> `void`
-
-## `org.telegram.ui.QuickRepliesSettingsActivity$ListAdapter`
-- `getItemCount()` -> `int`
-- `getItemViewType(int position)` -> `int`
-- `isEnabled(RecyclerView.ViewHolder holder)` -> `boolean`
-- `onBindViewHolder(RecyclerView.ViewHolder holder, int position)` -> `void`
-- `onCreateViewHolder(ViewGroup parent, int viewType)` -> `RecyclerView.ViewHolder`
-
 ## `org.telegram.ui.RoundVideoSettingsActivity`
 - `createView(Context context)` -> `View`
+- `getListViewForSimpleGlass()` -> `RecyclerListView`
+- `isSupportEdgeToEdge()` -> `boolean`
+- `useSimpleActionBar()` -> `boolean`
 
 ## `org.telegram.ui.RoundVideoSettingsActivity$ListAdapter`
 - `getItemCount()` -> `int`
@@ -323,7 +332,9 @@
 - `didStartUpload(boolean fromAvatarConstructor, boolean isVideo)` -> `void`
 - `didUploadPhoto(final TLRPC.InputFile photo, final TLRPC.InputFile video, double videoStartTimestamp, String videoPath, TLRPC.PhotoSize bigSize, final TLRPC.PhotoSize smallSize, boolean isVideo, TLRPC.VideoSize emojiMarkup)` -> `void`
 - `drawEdgeNavigationBar()` -> `boolean`
-- `getGlassSource()` -> `BlurredBackgroundSourceRenderNode`
+- `getFrostedGlassSource()` -> `GlassSourceRenderNode`
+- `getGlassSource()` -> `GlassSourceRenderNode`
+- `getListViewForSimpleGlass()` -> `RecyclerListView`
 - `getVersionName()` -> `String`
 - `isSupportEdgeToEdge()` -> `boolean`
 - `isSwipeBackEnabled(MotionEvent event)` -> `boolean`
@@ -332,11 +343,13 @@
 - `onFragmentCreate()` -> `boolean`
 - `onFragmentDestroy()` -> `void`
 - `onParentScrollToTop()` -> `void`
+- `onResume()` -> `void`
 - `onUploadProgressChanged(float progress)` -> `void`
-- `openDebugMenu()` -> `void`
 - `setInfo()` -> `void`
 - `setInfo(TLRPC.User user)` -> `void`
 - `updateColors()` -> `void`
+- `useFadeDrawableForActionBar()` -> `boolean`
+- `useSimpleActionBar()` -> `boolean`
 
 ## `org.telegram.ui.SettingsActivity$AccountCell`
 - `onMeasure(int widthMeasureSpec, int heightMeasureSpec)` -> `void`
@@ -385,14 +398,15 @@
 ## `org.telegram.ui.ThemeActivity`
 - `createView(Context context)` -> `View`
 - `didReceivedNotification(int id, int account, Object... args)` -> `void`
+- `getListViewForSimpleGlass()` -> `RecyclerListView`
 - `getThemeDescriptions()` -> `ArrayList<ThemeDescription>`
 - `highlightSensitiveRow()` -> `ThemeActivity`
 - `isSupportEdgeToEdge()` -> `boolean`
 - `onFragmentCreate()` -> `boolean`
 - `onFragmentDestroy()` -> `void`
-- `onInsets(int left, int top, int right, int bottom)` -> `void`
 - `onResume()` -> `void`
 - `onTransitionAnimationEnd(boolean isOpen, boolean backward)` -> `void`
+- `useSimpleActionBar()` -> `boolean`
 - `static verifyAge(Context context, int currentAccount, Utilities.Callback<Boolean> done, Theme.ResourcesProvider resourcesProvider)` -> `void`
 
 ## `org.telegram.ui.ThemeActivity$BubbleRadiusCell`
@@ -401,6 +415,7 @@
 - `onInitializeAccessibilityNodeInfo(AccessibilityNodeInfo info)` -> `void`
 - `onMeasure(int widthMeasureSpec, int heightMeasureSpec)` -> `void`
 - `performAccessibilityAction(int action, Bundle arguments)` -> `boolean`
+- `updateColors()` -> `void`
 
 ## `org.telegram.ui.ThemeActivity$GpsLocationListener`
 - `onLocationChanged(Location location)` -> `void`
@@ -432,11 +447,13 @@
 - `onViewAttachedToWindow(RecyclerView.ViewHolder holder)` -> `void`
 
 ## `org.telegram.ui.ThemeActivity$TextSizeCell`
+- `addColorKeys(HashSet<Integer> colors)` -> `void`
 - `invalidate()` -> `void`
 - `onDraw(Canvas canvas)` -> `void`
 - `onInitializeAccessibilityNodeInfo(AccessibilityNodeInfo info)` -> `void`
 - `onMeasure(int widthMeasureSpec, int heightMeasureSpec)` -> `void`
 - `performAccessibilityAction(int action, Bundle arguments)` -> `boolean`
+- `updateColors()` -> `void`
 
 ## `org.telegram.ui.ThemeActivity$ThemeAccentsListAdapter`
 - `getItemCount()` -> `int`
@@ -446,10 +463,16 @@
 - `onBindViewHolder(RecyclerView.ViewHolder holder, int position)` -> `void`
 - `onCreateViewHolder(ViewGroup parent, int viewType)` -> `RecyclerView.ViewHolder`
 
+## `org.telegram.ui.ThemeActivity$ThemedBrightnessControlCell`
+- `updateColors()` -> `void`
+
 ## `org.telegram.ui.TopicsNotifySettingsFragments`
 - `createView(Context context)` -> `View`
+- `getListViewForSimpleGlass()` -> `RecyclerListView`
+- `isSupportEdgeToEdge()` -> `boolean`
 - `onFragmentCreate()` -> `boolean`
 - `setExceptions(HashSet<Integer> notificationsExceptionTopics)` -> `void`
+- `useSimpleActionBar()` -> `boolean`
 
 ## `org.telegram.ui.TopicsNotifySettingsFragments$Adapter`
 - `getItemCount()` -> `int`
@@ -470,17 +493,20 @@
 - `createView(Context context)` -> `View`
 - `didReceivedNotification(int id, int account, Object... args)` -> `void`
 - `fillItems(ArrayList<UItem> items, UniversalAdapter adapter)` -> `void`
+- `getListViewForSimpleGlass()` -> `RecyclerListView`
 - `getTitle()` -> `CharSequence`
 - `onClick(UItem item, View view, int position, float x, float y)` -> `void`
 - `onFragmentCreate()` -> `boolean`
 - `onFragmentDestroy()` -> `void`
-- `onInsets(int left, int top, int right, int bottom)` -> `void`
 - `onLongClick(UItem item, View view, int position, float x, float y)` -> `boolean`
+- `onThemeColorsChanged()` -> `void`
+- `useSimpleActionBar()` -> `boolean`
 
 ## `org.telegram.ui.web.WebBrowserSettings$WebsiteView`
 - `dispatchDraw(@NonNull Canvas canvas)` -> `void`
 - `onMeasure(int widthMeasureSpec, int heightMeasureSpec)` -> `void`
 - `set(CharSequence title, String domain, long favicon, boolean divider)` -> `void`
+- `updateColors()` -> `void`
 
 ## `org.telegram.ui.web.WebBrowserSettings$WebsiteView$Factory`
 - `static as(String domain, String title, long favicon)` -> `UItem`

@@ -1,4 +1,4 @@
-# function / media (1685 методов)
+# function / media (1737 методов)
 
 ## `org.telegram.messenger.AudioRecorderV2Controller`
 - `cancel()` -> `void`
@@ -84,6 +84,7 @@
 - `getPlayingMessageObjectNum()` -> `int`
 - `getPlaylist()` -> `ArrayList<MessageObject>`
 - `getProgressMs(MessageObject messageObject)` -> `long`
+- `getRecordingGuid()` -> `int`
 - `static getStickerExt(Uri uri)` -> `String`
 - `static getVideoBitrate(String path)` -> `int`
 - `getVideoPlayer()` -> `VideoPlayer`
@@ -148,8 +149,10 @@
 - `setPlaylist(ArrayList<MessageObject> messageObjects, MessageObject current, long mergeDialogId, PlaylistGlobalSearchParams globalSearchParams)` -> `boolean`
 - `setPlaylist(ArrayList<MessageObject> messageObjects, MessageObject current, long mergeDialogId)` -> `boolean`
 - `setPlaylist(ArrayList<MessageObject> messageObjects, MessageObject current, long mergeDialogId, boolean loadMusic, PlaylistGlobalSearchParams params)` -> `boolean`
+- `setPlaylist(ArrayList<MessageObject> messageObjects, MessageObject current, long mergeDialogId, boolean loadMusic, PlaylistGlobalSearchParams params, long topicId)` -> `boolean`
 - `setReplyingMessage(MessageObject replyToMsg, MessageObject replyToTopMsg, TL_stories.StoryItem storyItem)` -> `void`
 - `setVoiceMessagesPlaylist(ArrayList<MessageObject> playlist, boolean unread)` -> `void`
+- `static shouldUseAudioRecorderV2(int account)` -> `boolean`
 - `startMediaObserver()` -> `void`
 - `startRaiseToEarSensors(ChatActivity chatActivity)` -> `void`
 - `startRecording(int currentAccount, long dialogId, MessageObject replyToMsg, MessageObject replyToTopMsg, TL_stories.StoryItem replyStory, int guid, boolean manual, SendMessageChatArguments sendMessageChatArguments, long monoForumPeerId, MessageSuggestionParams suggestionParams)` -> `void`
@@ -207,7 +210,9 @@
 - `deleteAll()` -> `void`
 - `getPath()` -> `String`
 - `isLivePhoto()` -> `boolean`
+- `isLivePhotoLoaded()` -> `boolean`
 - `isUnalivePhoto()` -> `boolean`
+- `loadLivePhoto(Runnable onLoaded)` -> `boolean`
 - `rebuildPhoto(boolean highQuality)` -> `void`
 - `reset()` -> `void`
 - `setOrientation(Pair<Integer, Integer> rotationAndInvert)` -> `PhotoEntry`
@@ -643,147 +648,6 @@
 - `static parseSize(String string)` -> `Size`
 - `toString()` -> `String`
 
-## `org.telegram.messenger.pip.PipActivityController`
-- `addActionListener(String sourceId, IPipActivityActionListener listener)` -> `void`
-- `addAnimationListener(IPipActivityAnimationListener listener)` -> `void`
-- `addPipListener(IPipActivityListener listener)` -> `void`
-- `dispatchSourceAvailabilityChanged(PipSource source)` -> `void`
-- `dispatchSourceParamsChanged(PipSource source)` -> `void`
-- `dispatchSourceRegister(PipSource source)` -> `void`
-- `dispatchSourceUnregister(PipSource source)` -> `void`
-- `getHandler()` -> `IPipActivityHandler`
-- `getPipContentView()` -> `ViewGroup`
-- `hasContentForPictureInPictureMode()` -> `boolean`
-- `removeActionListener(String sourceId, IPipActivityActionListener listener)` -> `void`
-- `removeAnimationListener(IPipActivityAnimationListener listener)` -> `void`
-- `removePipListener(IPipActivityListener listener)` -> `void`
-
-## `org.telegram.messenger.pip.PipActivityHandler`
-- `addActionListener(String sourceId, IPipActivityActionListener listener)` -> `void`
-- `addAnimationListener(IPipActivityAnimationListener listener)` -> `void`
-- `addPipListener(IPipActivityListener listener)` -> `void`
-- `onConfigurationChanged(Configuration ignoredNewConfig)` -> `void`
-- `onDestroy()` -> `void`
-- `onPause()` -> `void`
-- `onPictureInPictureModeChanged(boolean isInPictureInPictureMode, @NonNull Configuration ignoredNewConfig)` -> `void`
-- `onPictureInPictureRequested()` -> `void`
-- `onPictureInPictureUiStateChanged(@NonNull PictureInPictureUiState pipState)` -> `void`
-- `onResume()` -> `void`
-- `onStart()` -> `void`
-- `onStop()` -> `void`
-- `onUserLeaveHint()` -> `void`
-- `removeActionListener(String sourceId, IPipActivityActionListener listener)` -> `void`
-- `removeAnimationListener(IPipActivityAnimationListener listener)` -> `void`
-- `removePipListener(IPipActivityListener listener)` -> `void`
-- `setPictureInPictureParams(PictureInPictureParams params)` -> `void`
-
-## `org.telegram.messenger.pip.PipSource`
-- `buildPictureInPictureParams()` -> `PictureInPictureParams`
-- `destroy()` -> `void`
-- `getPlayer()` -> `Player`
-- `isAvailable()` -> `boolean`
-- `setContentRatio(int width, int height)` -> `void`
-- `setContentView(View contentView)` -> `void`
-- `setPlaceholderView(View placeholderView)` -> `void`
-- `setPlayer(Player player)` -> `void`
-
-## `org.telegram.messenger.pip.PipSource$Builder`
-- `build()` -> `PipSource`
-- `setActionListener(IPipActivityActionListener actionListener)` -> `Builder`
-- `setContentLocationView(View contentLocationView)` -> `Builder`
-- `setContentRatio(int width, int height)` -> `Builder`
-- `setContentView(View contentView)` -> `Builder`
-- `setCornerRadius(int cornerRadius)` -> `Builder`
-- `setNeedMediaSession(boolean needMediaSession)` -> `Builder`
-- `setPlaceholderView(View placeholderView)` -> `Builder`
-- `setPlayer(Player player)` -> `Builder`
-- `setPriority(int priority)` -> `Builder`
-- `setTagPrefix(String tagPrefix)` -> `Builder`
-
-## `org.telegram.messenger.pip.activity.IPipActivityAnimationListener`
-- `onEnterAnimationEnd(long duration)` -> `default void`
-- `onEnterAnimationStart(long estimatedDuration)` -> `default void`
-- `onLeaveAnimationEnd(long duration)` -> `default void`
-- `onLeaveAnimationStart(long estimatedDuration)` -> `default void`
-- `onTransitionAnimationFrame()` -> `default void`
-- `onTransitionAnimationProgress(float estimatedProgress)` -> `default void`
-
-## `org.telegram.messenger.pip.activity.IPipActivityListener`
-- `onCompleteEnterToPip()` -> `default void`
-- `onCompleteExitFromPip(boolean byActivityStop)` -> `default void`
-- `onPipStashEnd()` -> `default void`
-- `onPipStashStart()` -> `default void`
-- `onStartEnterToPip()` -> `default void`
-- `onStartExitFromPip(boolean byActivityStop)` -> `default void`
-
-## `org.telegram.messenger.pip.source.IPipSourceDelegate`
-- `pipCreateActionsList(ArrayList<RemoteAction> output, String sourceId, int maxActions)` -> `default void`
-- `pipIsAvailable()` -> `default boolean`
-- `pipRenderForeground(Canvas canvas)` -> `default void`
-
-## `org.telegram.messenger.pip.source.PipSourceHandlerState2`
-- `isAttachedToPip()` -> `boolean`
-- `onCompleteExitFromPip(boolean byActivityStop)` -> `void`
-- `onLoseMaxPriority()` -> `void`
-- `onPipStashEnd()` -> `void`
-- `onPipStashStart()` -> `void`
-- `onReceiveMaxPriority()` -> `void`
-- `onStartEnterToPip()` -> `void`
-- `onTransitionAnimationFrame()` -> `void`
-- `onTransitionAnimationProgress(float estimatedProgress)` -> `void`
-
-## `org.telegram.messenger.pip.source.PipSourcePlaceholder`
-- `clear()` -> `void`
-- `setPlaceholder(Bitmap bitmap)` -> `void`
-- `stopPlaceholderForActivity()` -> `void`
-- `stopPlaceholderForSource()` -> `void`
-
-## `org.telegram.messenger.pip.source.PipSourceSnapshot`
-- `release()` -> `void`
-
-## `org.telegram.messenger.pip.utils.PipActions`
-- `static create(Context context, String sourceId, int actionId, String title, String description, Icon icon)` -> `RemoteAction`
-- `static getActionId(Intent intent)` -> `int`
-- `static getSourceId(Intent intent)` -> `String`
-- `static isPipIntent(Intent intent)` -> `boolean`
-
-## `org.telegram.messenger.pip.utils.PipDuration`
-- `end()` -> `long`
-- `estimated()` -> `long`
-- `isStarted()` -> `boolean`
-- `progress()` -> `float`
-- `start()` -> `void`
-
-## `org.telegram.messenger.pip.utils.PipPositionObserver`
-- `start(View v)` -> `void`
-- `stop()` -> `void`
-
-## `org.telegram.messenger.pip.utils.PipSourceParams`
-- `build()` -> `PictureInPictureParams.Builder`
-- `getHeight()` -> `int`
-- `getPosition(Rect outRect)` -> `void`
-- `getWidth()` -> `int`
-- `isValid()` -> `boolean`
-- `set(Rect position, Point ratio)` -> `boolean`
-- `setPosition(Rect position)` -> `boolean`
-- `setPosition(int left, int top, int right, int bottom)` -> `boolean`
-- `setRatio(int width, int height)` -> `boolean`
-- `setRatio(Point ratio)` -> `boolean`
-
-## `org.telegram.messenger.pip.utils.PipUtils`
-- `static applyPictureInPictureParams(Activity activity, PipSource source)` -> `void`
-- `static checkAnyPipPermissions(Context context)` -> `boolean`
-- `static createWindowLayoutParams(Context context, boolean inAppOnly)` -> `WindowManager.LayoutParams`
-- `static getPipSourceRectHintPosition(Activity activity, View view, Rect out)` -> `void`
-- `static getWindowLayoutParamsType(Context context, boolean inAppOnly)` -> `int`
-- `static useAutoEnterInPictureInPictureMode()` -> `boolean`
-
-## `org.telegram.messenger.pip.utils.Trigger`
-- `cancel()` -> `void`
-- `static run(Callback action, long timeoutMs)` -> `Trigger`
-- `static run(Handler handler, Callback action, long timeoutMs)` -> `Trigger`
-- `run()` -> `void`
-
 ## `org.telegram.messenger.video.AudioBufferConverter`
 - `calculateRequiredOutputSize(int inputSize, int inputSampleRate, int inputChannelCount, int outputSampleRate, int outputChannelCount)` -> `int`
 - `convert(@NonNull ShortBuffer inputBuffer, int inputSampleRate, int inputChannelCount, int outputSampleRate, int outputChannelCount)` -> `ShortBuffer`
@@ -1138,6 +1002,10 @@
 - `serializeToStream(OutputSerializedData stream)` -> `void`
 
 ## `org.telegram.tgnet.TLRPC$TL_inputPrivacyKeyVoiceMessages`
+- `serializeToStream(OutputSerializedData stream)` -> `void`
+
+## `org.telegram.tgnet.TLRPC$TL_inputShareThemeGift`
+- `readParams(InputSerializedData stream, boolean exception)` -> `void`
 - `serializeToStream(OutputSerializedData stream)` -> `void`
 
 ## `org.telegram.tgnet.TLRPC$TL_inputStickerSetAnimatedEmoji`
@@ -1616,6 +1484,10 @@
 - `serializeToStream(OutputSerializedData stream)` -> `void`
 
 ## `org.telegram.tgnet.TLRPC$TL_sendMessageUploadAudioAction_old`
+- `readParams(InputSerializedData stream, boolean exception)` -> `void`
+- `serializeToStream(OutputSerializedData stream)` -> `void`
+
+## `org.telegram.tgnet.TLRPC$TL_shareThemeGift`
 - `readParams(InputSerializedData stream, boolean exception)` -> `void`
 - `serializeToStream(OutputSerializedData stream)` -> `void`
 
@@ -2156,8 +2028,20 @@
 - `deserializeResponse(InputSerializedData stream, int constructor, boolean exception)` -> `TLObject`
 - `serializeToStream(OutputSerializedData stream)` -> `void`
 
+## `org.telegram.tgnet.tl.TL_stars$deleteStarGift`
+- `deserializeResponse(InputSerializedData stream, int constructor, boolean exception)` -> `TLObject`
+- `serializeToStream(OutputSerializedData stream)` -> `void`
+
 ## `org.telegram.tgnet.tl.TL_stars$deleteStarGiftCollection`
 - `deserializeResponse(InputSerializedData stream, int constructor, boolean exception)` -> `TLObject`
+- `serializeToStream(OutputSerializedData stream)` -> `void`
+
+## `org.telegram.tgnet.tl.TL_stars$depositStarGift`
+- `deserializeResponseT(InputSerializedData stream, int constructor, boolean exception)` -> `starGiftDepositPayload`
+- `serializeToStream(OutputSerializedData stream)` -> `void`
+
+## `org.telegram.tgnet.tl.TL_stars$displayStarGift`
+- `deserializeResponseT(InputSerializedData stream, int constructor, boolean exception)` -> `TLRPC.Bool`
 - `serializeToStream(OutputSerializedData stream)` -> `void`
 
 ## `org.telegram.tgnet.tl.TL_stars$getCraftStarGifts`
@@ -2270,6 +2154,11 @@
 - `readParams(InputSerializedData stream, boolean exception)` -> `void`
 - `serializeToStream(OutputSerializedData stream)` -> `void`
 
+## `org.telegram.tgnet.tl.TL_stars$starGiftDepositPayload`
+- `static TLdeserialize(InputSerializedData stream, int constructor, boolean exception)` -> `starGiftDepositPayload`
+- `readParams(InputSerializedData stream, boolean exception)` -> `void`
+- `serializeToStream(OutputSerializedData stream)` -> `void`
+
 ## `org.telegram.tgnet.tl.TL_stars$starGiftUpgradeAttributes`
 - `static TLdeserialize(InputSerializedData stream, int constructor, boolean exception)` -> `starGiftUpgradeAttributes`
 - `readParams(InputSerializedData stream, boolean exception)` -> `void`
@@ -2307,6 +2196,10 @@
 
 ## `org.telegram.tgnet.tl.TL_stars$upgradeStarGift`
 - `deserializeResponse(InputSerializedData stream, int constructor, boolean exception)` -> `TLObject`
+- `serializeToStream(OutputSerializedData stream)` -> `void`
+
+## `org.telegram.tgnet.tl.TL_stars$withdrawStarGift`
+- `deserializeResponseT(InputSerializedData stream, int constructor, boolean exception)` -> `TLRPC.Bool`
 - `serializeToStream(OutputSerializedData stream)` -> `void`
 
 ## `org.telegram.tgnet.tl.TL_stories$TL_mediaAreaStarGift`
@@ -2364,6 +2257,27 @@
 - `readParams(InputSerializedData stream, boolean exception)` -> `void`
 - `serializeToStream(OutputSerializedData stream)` -> `void`
 
+## `org.telegram.tgnet.tl.TL_wallet$cardSticker`
+- `static TLdeserialize(InputSerializedData stream, int constructor, boolean exception)` -> `cardSticker`
+- `readParams(InputSerializedData stream, boolean exception)` -> `void`
+- `serializeToStream(OutputSerializedData stream)` -> `void`
+
+## `org.telegram.tgnet.tl.TL_wallet$inputWalletCardSticker`
+- `static TLdeserialize(InputSerializedData stream, int constructor, boolean exception)` -> `inputWalletCardSticker`
+- `readParams(InputSerializedData stream, boolean exception)` -> `void`
+- `serializeToStream(OutputSerializedData stream)` -> `void`
+
+## `org.telegram.tgnet.tl.TL_wallet$setCardStickers`
+- `deserializeResponseT(InputSerializedData stream, int constructor, boolean exception)` -> `card`
+- `serializeToStream(OutputSerializedData stream)` -> `void`
+
+## `org.telegram.tgnet.tl.TL_wallet$walletTransactionPeerTelegramGift`
+- `readParams(InputSerializedData stream, boolean exception)` -> `void`
+- `serializeToStream(OutputSerializedData stream)` -> `void`
+
+## `org.telegram.ui.ArchivedStickersActivity`
+- `addThemeColorKeys(HashSet<Integer> keys)` -> `void`
+
 ## `org.telegram.ui.CameraScanActivity`
 - `processShot(Bitmap bitmap)` -> `void`
 
@@ -2373,7 +2287,17 @@
 ## `org.telegram.ui.Cells.ActiveGiftAuctionsHintCell`
 - `onActiveAuctionsUpdate(List<GiftAuctionController.Auction> auctions)` -> `void`
 
+## `org.telegram.ui.Cells.FeaturedStickerSetCell2`
+- `addColorKeys(java.util.HashSet<Integer> colors)` -> `void`
+
+## `org.telegram.ui.Cells.FeaturedStickerSetInfoCell`
+- `addColorKeys(HashSet<Integer> colors)` -> `void`
+
+## `org.telegram.ui.Cells.StickerSetCell`
+- `addColorKeys(java.util.HashSet<Integer> colors)` -> `void`
+
 ## `org.telegram.ui.Components.AudioPlayerAlert`
+- `addThemeColorKeys(HashSet<Integer> keys)` -> `void`
 - `canDismissWithSwipe()` -> `boolean`
 
 ## `org.telegram.ui.Components.CaptionPhotoViewer`
@@ -2392,6 +2316,7 @@
 
 ## `org.telegram.ui.Components.GroupCallPip`
 - `static checkInlinePermissions()` -> `boolean`
+- `isOverlay()` -> `boolean`
 - `static isShowing()` -> `boolean`
 - `pinnedToCenter(boolean pinned)` -> `void`
 
@@ -2425,11 +2350,6 @@
 - `hasYoutubeStoryboards()` -> `boolean`
 - `processTouch(MotionEvent event)` -> `void`
 
-## `org.telegram.ui.Components.PipVideoOverlay`
-- `static isPipSurfaceTexture(SurfaceTexture texture)` -> `boolean`
-- `static isVisible()` -> `boolean`
-- `static onUpdateRewindProgressUi(long timeDiff, float progress, boolean rewindByBackSeek)` -> `void`
-
 ## `org.telegram.ui.Components.Premium.GiftPremiumBottomSheet$GiftTier`
 - `isStarsPaymentAvailable()` -> `boolean`
 
@@ -2456,6 +2376,7 @@
 - `saveXPosition()` -> `void`
 
 ## `org.telegram.ui.Components.StickersAlert`
+- `addThemeColorKeys(HashSet<Integer> keys)` -> `void`
 - `canDismissWithSwipe()` -> `boolean`
 - `static editSticker(BaseFragment parentFragment, TLRPC.TL_messages_stickerSet stickerSet, TLRPC.Document document)` -> `void`
 - `loadStickerSet(boolean force)` -> `void`
@@ -2464,6 +2385,7 @@
 - `isEnabled(ViewHolder holder)` -> `boolean`
 
 ## `org.telegram.ui.Components.TrendingStickersAlert`
+- `addThemeColorKeys(HashSet<Integer> keys)` -> `void`
 - `canDismissWithSwipe()` -> `boolean`
 
 ## `org.telegram.ui.Components.TrendingStickersLayout$Delegate`
@@ -2502,12 +2424,46 @@
 ## `org.telegram.ui.Components.VideoPlayerSeekBar`
 - `isDragging()` -> `boolean`
 
-## `org.telegram.ui.Components.voip.RTMPStreamPipOverlay`
-- `static isVisible()` -> `boolean`
+## `org.telegram.ui.Components.emojiview.FoundStickerPackCell`
+- `addColorKeys(HashSet<Integer> colors)` -> `void`
+
+## `org.telegram.ui.Components.emojiview.FoundStickerPacksHeaderCell`
+- `addColorKeys(HashSet<Integer> colors)` -> `void`
+
+## `org.telegram.ui.Components.voip.CallSystemPipView`
+- `static hasRemoteVideo(@Nullable VoIPService service)` -> `boolean`
+
+## `org.telegram.ui.Components.voip.GroupCallPipContent`
+- `canEnterWithoutUi()` -> `boolean`
+- `isCompleted()` -> `boolean`
+- `static isInSystemPip()` -> `boolean`
+- `isOverlayAllowed()` -> `boolean`
+- `isPlaying()` -> `boolean`
+- `isPrimaryVisible()` -> `boolean`
+
+## `org.telegram.ui.Components.voip.RtmpStreamPipContent`
+- `hasPlaybackControls()` -> `boolean`
+- `isCompleted()` -> `boolean`
+- `static isFloating()` -> `boolean`
+- `isPlaying()` -> `boolean`
+- `isPrimaryVisible()` -> `boolean`
+
+## `org.telegram.ui.Components.voip.RtmpStreamPipContent$FrameFanout`
+- `isShowingVideo(long since)` -> `boolean`
 
 ## `org.telegram.ui.Components.voip.VoIPPiPView`
+- `static checkWindowType(@NonNull Activity activity)` -> `void`
 - `static isExpanding()` -> `boolean`
+- `isOverlay()` -> `boolean`
 - `onMediaStateUpdated(int audioState, int videoState)` -> `void`
+
+## `org.telegram.ui.Components.voip.VoIPPipContent`
+- `isCompleted()` -> `boolean`
+- `isPlaying()` -> `boolean`
+- `isPrimaryVisible()` -> `boolean`
+
+## `org.telegram.ui.FeaturedStickersActivity`
+- `addThemeColorKeys(HashSet<Integer> keys)` -> `void`
 
 ## `org.telegram.ui.Gifts.ActiveAuctionsSheet`
 - `onActiveAuctionsUpdate(List<GiftAuctionController.Auction> auctions)` -> `void`
@@ -2525,6 +2481,7 @@
 - `canDismissWithSwipe()` -> `boolean`
 
 ## `org.telegram.ui.Gifts.GiftSheet$GiftCell`
+- `addColorKeys(HashSet<Integer> colors)` -> `void`
 - `removeImage()` -> `void`
 
 ## `org.telegram.ui.Gifts.ProfileGiftsContainer`
@@ -2544,6 +2501,9 @@
 
 ## `org.telegram.ui.Gifts.SendGiftSheet`
 - `onUpdate(GiftAuctionController.Auction auction)` -> `void`
+
+## `org.telegram.ui.GroupStickersActivity`
+- `addThemeColorKeys(HashSet<Integer> keys)` -> `void`
 
 ## `org.telegram.ui.PhotoViewer`
 - `addPhoto(MessageObject message, int classGuid)` -> `void`
@@ -2601,6 +2561,10 @@
 ## `org.telegram.ui.PhotoViewer$VideoPlayerControlFrameLayout`
 - `requestLayout()` -> `void`
 
+## `org.telegram.ui.QrShare.QrGiftSymbol$Loader`
+- `cancel()` -> `void`
+- `isDone()` -> `boolean`
+
 ## `org.telegram.ui.SaveToGallerySettingsActivity$Adapter`
 - `isEnabled(RecyclerView.ViewHolder holder)` -> `boolean`
 
@@ -2643,6 +2607,7 @@
 
 ## `org.telegram.ui.Stars.StarGiftUniqueActionLayout`
 - `getMessageDrawable()` -> `GiftMessageDrawable`
+- `setOnMessageClickListener(Runnable onMessageClick)` -> `void`
 
 ## `org.telegram.ui.Stars.StarsController$GiftsCollections`
 - `addGift(int id, TL_stars.SavedStarGift gift, boolean insert)` -> `void`
@@ -2651,6 +2616,7 @@
 - `load()` -> `void`
 - `removeCollection(int id)` -> `void`
 - `removeGift(int id, final TL_stars.SavedStarGift gift)` -> `void`
+- `removeGiftLocally(TL_stars.SavedStarGift gift)` -> `void`
 - `removeGifts(int id, final ArrayList<TL_stars.SavedStarGift> gifts)` -> `void`
 - `sendOrder()` -> `void`
 
@@ -2665,14 +2631,20 @@
 - `isInclude_upgradable()` -> `boolean`
 - `load()` -> `void`
 - `processCrafting(ArrayList<TL_stars.StarGift> giftsToRemove, TL_stars.StarGift giftToAdd)` -> `void`
+- `removeGiftLocally(TL_stars.SavedStarGift gift)` -> `boolean`
 - `sendPinnedOrder()` -> `void`
 
 ## `org.telegram.ui.StickersActivity`
+- `addThemeColorKeys(HashSet<Integer> keys)` -> `void`
 - `hasSelected()` -> `boolean`
 
-## `org.telegram.ui.Stories.LiveStoryPipOverlay`
-- `static isVisible()` -> `boolean`
-- `static isVisible(LivePlayer livePlayer)` -> `boolean`
+## `org.telegram.ui.Stories.LiveStoryPipContent`
+- `hasPlaybackControls()` -> `boolean`
+- `isCompleted()` -> `boolean`
+- `static isFloating()` -> `boolean`
+- `static isInPip(@Nullable LivePlayer player)` -> `boolean`
+- `isPlaying()` -> `boolean`
+- `isPrimaryVisible()` -> `boolean`
 
 ## `org.telegram.ui.Stories.PeerStoriesView$VideoPlayerSharedScope`
 - `isBuffering()` -> `boolean`
@@ -2683,6 +2655,126 @@
 
 ## `org.telegram.ui.Stories.recorder.GallerySheet`
 - `canDismissWithSwipe()` -> `boolean`
+
+## `org.telegram.ui.Wallet.WalletGiftPalette`
+- `static putBackdrop(float[] style, int side, TL_stars.starGiftAttributeBackdrop backdrop)` -> `void`
+
+## `org.telegram.ui.iv.RichAudioCell`
+- `addColorKeys(HashSet<Integer> colors)` -> `void`
+
+## `org.telegram.utils.pip.FloatingHost`
+- `attachAfterSystem(@NonNull PipTextureView target)` -> `void`
+- `checkWindowType()` -> `void`
+- `dismiss(boolean animated, @NonNull Runnable onContentRelease)` -> `void`
+- `static getCornerRadius()` -> `float`
+- `getRect(@NonNull RectF out)` -> `void`
+- `static getTargetRect(int contentWidth, int contentHeight, @NonNull RectF out)` -> `void`
+- `hasFloatingView()` -> `boolean`
+- `isOverlay()` -> `boolean`
+- `onAppHidden()` -> `void`
+- `onAppShown()` -> `void`
+- `onConfigurationChanged()` -> `void`
+- `onRewindCanceled()` -> `void`
+- `onRewindProgress(float progress, boolean byBackSeek)` -> `void`
+- `onRewindStart(boolean forward)` -> `void`
+- `onVideoCompleted()` -> `void`
+- `removeForExpand(@NonNull Utilities.Callback<SurfaceTexture> onTexture)` -> `void`
+
+## `org.telegram.utils.pip.FloatingHost$PipConfig`
+- `static get()` -> `PipConfig`
+- `getScaleFactor()` -> `float`
+- `getX()` -> `float`
+- `getY()` -> `float`
+- `static reset()` -> `void`
+- `setScaleFactor(float scaleFactor)` -> `void`
+- `setX(float x)` -> `void`
+- `setY(float y)` -> `void`
+
+## `org.telegram.utils.pip.MosaicLayout`
+- `static compositions(int n)` -> `int[][]`
+
+## `org.telegram.utils.pip.MosaicLayout$Evaluator`
+- `evaluate(int[] order, int[] counts, float baseCost, Result best, boolean transposed)` -> `void`
+
+## `org.telegram.utils.pip.MosaicLayout$Result`
+- `toString()` -> `String`
+
+## `org.telegram.utils.pip.PipContent`
+- `canEnterWithoutUi()` -> `default boolean`
+- `getPriority()` -> `default int`
+- `getSystemActions(@NonNull java.util.List<PipAction> out, int maxActions)` -> `default void`
+- `hasPlaybackControls()` -> `default boolean`
+- `isOverlayAllowed()` -> `default boolean`
+- `onSystemAction(int actionId)` -> `default void`
+- `onSystemEnter(@NonNull View systemView)` -> `default void`
+- `onSystemEntered(@NonNull View systemView)` -> `default void`
+- `onSystemExit(@NonNull View systemView)` -> `default void`
+- `releaseSystemView(@NonNull View systemView)` -> `default void`
+- `resumesWithApp()` -> `default boolean`
+
+## `org.telegram.utils.pip.PipCoordinator`
+- `static canEnterSystemPip()` -> `boolean`
+- `dismissOtherFloating(PipSession except)` -> `void`
+- `enterSystemPip(PipSession session)` -> `boolean`
+- `static getInstance()` -> `PipCoordinator`
+- `getSessions()` -> `ArrayList<PipSession>`
+- `isActivityStarted()` -> `boolean`
+- `static log(String message)` -> `void`
+- `onActivityCreate(@NonNull Activity activity, @Nullable WindowVisibilityManager.Controller contentVisibility)` -> `void`
+- `onActivityDestroy(@NonNull Activity activity)` -> `void`
+- `onActivityPause(@NonNull Activity activity)` -> `void`
+- `onActivityResume(@NonNull Activity activity)` -> `void`
+- `onActivityStart(@NonNull Activity activity)` -> `void`
+- `onActivityStop(@NonNull Activity activity)` -> `void`
+- `onConfigurationChanged(@NonNull Configuration newConfig)` -> `void`
+- `onPictureInPictureModeChanged(boolean isInPictureInPictureMode)` -> `void`
+- `onPictureInPictureRequested()` -> `void`
+- `onPictureInPictureUiStateChanged(@NonNull Object pipState)` -> `void`
+- `onSessionDismissed(PipSession session, int prevState)` -> `void`
+- `onUserLeaveHint()` -> `void`
+- `runWhenAppResumed(Runnable action)` -> `void`
+
+## `org.telegram.utils.pip.PipEnvironment`
+- `static canDrawOverlays(Context context)` -> `boolean`
+- `static canUseSystemPip(Context context)` -> `boolean`
+- `static startWatching(Context context, Runnable onChanged)` -> `void`
+- `static useAutoEnter()` -> `boolean`
+
+## `org.telegram.utils.pip.PipSession`
+- `completeExpand(@NonNull Utilities.Callback<SurfaceTexture> onTexture)` -> `void`
+- `dismiss()` -> `void`
+- `enterSystemPip()` -> `boolean`
+- `expand()` -> `void`
+- `static getFloatingCornerRadius()` -> `float`
+- `getFloatingRect(@NonNull RectF out)` -> `boolean`
+- `static getFloatingTargetRect(int contentWidth, int contentHeight, @NonNull RectF out)` -> `void`
+- `getState()` -> `int`
+- `isAlive()` -> `boolean`
+- `isFloating()` -> `boolean`
+- `onRewindCanceled()` -> `void`
+- `onRewindProgress(long timeDiff, float progress, boolean byBackSeek)` -> `void`
+- `onRewindStart(boolean forward)` -> `void`
+- `onVideoCompleted()` -> `void`
+- `release()` -> `void`
+- `setOwnFloating(boolean shown, boolean overlay)` -> `void`
+
+## `org.telegram.utils.pip.PipTextureView`
+- `hasSurfaceTexture()` -> `boolean`
+- `onSurfaceTextureUpdated(@NonNull SurfaceTexture surface)` -> `void`
+
+## `org.telegram.utils.pip.SystemHost`
+- `attach(@NonNull Activity activity, @Nullable WindowVisibilityManager.Controller contentVisibility)` -> `void`
+- `detach()` -> `void`
+- `enterNow(@NonNull PipSession session)` -> `boolean`
+- `isOwner()` -> `boolean`
+- `onPause()` -> `void`
+- `onPictureInPictureModeChanged(boolean isInPictureInPictureMode)` -> `void`
+- `onPictureInPictureUiStateChanged(@NonNull Object state)` -> `void`
+- `onResume()` -> `void`
+- `onSessionDismissed(@NonNull PipSession session, int prevState)` -> `void`
+- `onStop()` -> `void`
+- `onUserLeaveHint()` -> `void`
+- `update()` -> `void`
 
 ## `org.telegram.utils.recorder.audio.AudioCapture`
 - `start()` -> `void`

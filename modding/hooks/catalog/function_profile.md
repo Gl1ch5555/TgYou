@@ -1,4 +1,4 @@
-# function / profile (90 методов)
+# function / profile (104 методов)
 
 ## `org.telegram.tgnet.TLRPC$ProfileTab`
 - `static TLdeserialize(InputSerializedData stream, int constructor, boolean exception)` -> `ProfileTab`
@@ -141,14 +141,30 @@
 - `hasAvatarSet()` -> `boolean`
 
 ## `org.telegram.ui.Cells.ProfileChannelCell`
+- `addColorKeys(HashSet<Integer> colors)` -> `void`
 - `processColor(int color)` -> `int`
 
 ## `org.telegram.ui.Cells.ProfileChannelCell$ChannelMessageFetcher`
 - `fetch(TLRPC.UserFull userInfo)` -> `void`
 - `fetch(long channel_id, int message_id)` -> `void`
 
+## `org.telegram.ui.Cells.ProfileSearchCell`
+- `addColorKeys(HashSet<Integer> colors)` -> `void`
+
+## `org.telegram.ui.Cells.UserCell`
+- `addColorKeys(HashSet<Integer> colors)` -> `void`
+
 ## `org.telegram.ui.Cells.UserCell2`
 - `hasOverlappingRendering()` -> `boolean`
+
+## `org.telegram.ui.ChannelColorActivity$ProfilePreview`
+- `addColorKeys(HashSet<Integer> colors)` -> `void`
+
+## `org.telegram.ui.Components.PollVotesAlert$UserCell`
+- `addColorKeys(java.util.HashSet<Integer> colors)` -> `void`
+
+## `org.telegram.ui.Components.Premium.boosts.cells.selector.SelectorUserCell`
+- `addColorKeys(java.util.HashSet<Integer> colors)` -> `void`
 
 ## `org.telegram.ui.Components.ProfileActionsView`
 - `addCameraAction()` -> `void`
@@ -159,6 +175,12 @@
 
 ## `org.telegram.ui.Components.ProfileActionsView$Action`
 - `delete()` -> `void`
+
+## `org.telegram.ui.Components.ProfileButtonsGlass$SettingsSource`
+- `isDownsampledSourceSupported()` -> `boolean`
+
+## `org.telegram.ui.Components.ProfileButtonsGlass$Source`
+- `isDownsampledSourceSupported()` -> `boolean`
 
 ## `org.telegram.ui.Components.ProfileGooeyView`
 - `hasNotchInfo()` -> `boolean`
@@ -171,7 +193,14 @@
 - `canUse(BlurBitmapHolder holder)` -> `boolean`
 - `ready()` -> `void`
 
+## `org.telegram.ui.MessageSeenView$UserCell`
+- `addColorKeys(java.util.HashSet<Integer> colors)` -> `void`
+
+## `org.telegram.ui.PeerColorActivity$ProfilePreview`
+- `addColorKeys(HashSet<Integer> colors)` -> `void`
+
 ## `org.telegram.ui.ProfileActivity`
+- `addThemeColorKeys(HashSet<Integer> keys)` -> `void`
 - `canBeginSlide()` -> `boolean`
 - `canParentTabsSlide(MotionEvent ev, boolean forward)` -> `boolean`
 - `canSearchMembers()` -> `boolean`
@@ -186,6 +215,9 @@
 - `addRecent(Object object)` -> `void`
 - `loadFaqWebPage()` -> `void`
 
+## `org.telegram.ui.ProfileActivity$TextView2`
+- `addColorKeys(HashSet<Integer> colors)` -> `void`
+
 ## `org.telegram.ui.ProfileActivity2`
 - `canSearchMembers()` -> `boolean`
 
@@ -195,5 +227,11 @@
 - `isLoaded()` -> `boolean`
 - `removeView(ProfileBirthdayEffect effect)` -> `void`
 
+## `org.telegram.ui.ProfileNotificationsActivity`
+- `addThemeColorKeys(HashSet<Integer> keys)` -> `void`
+
 ## `org.telegram.ui.ProfileStoriesCollectionTabs$Adapter`
 - `canReorder(int position)` -> `boolean`
+
+## `org.telegram.ui.Stories.recorder.StoryPrivacyBottomSheet$UserCell`
+- `addColorKeys(HashSet<Integer> colors)` -> `void`

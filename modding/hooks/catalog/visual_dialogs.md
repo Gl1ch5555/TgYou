@@ -1,4 +1,4 @@
-# visual / dialogs (401 методов)
+# visual / dialogs (406 методов)
 
 ## `org.telegram.ui.ActionBar.AlertDialog$AlertDialogCell`
 - `getThemedColor(int key)` -> `int`
@@ -94,6 +94,7 @@
 ## `org.telegram.ui.Adapters.FiltersView$FilterView`
 - `getThemedColor(int key)` -> `int`
 - `setData(MediaFilterData data)` -> `void`
+- `updateColors()` -> `void`
 
 ## `org.telegram.ui.Adapters.FiltersView$MediaFilterData`
 - `getTitle()` -> `String`
@@ -210,6 +211,7 @@
 - `showPremiumBlocked()` -> `void`
 - `update(int mask)` -> `void`
 - `update()` -> `void`
+- `updateColors()` -> `void`
 
 ## `org.telegram.ui.Cells.ShareDialogCell`
 - `didReceivedNotification(int id, int account, Object... args)` -> `void`
@@ -312,7 +314,8 @@
 - `getContactsAlpha()` -> `float`
 - `getCustomSlideTransition(boolean topFragment, boolean backAnimation, float distanceToMove)` -> `Animator`
 - `getDialogsArray(int currentAccount, int dialogsType, int folderId, boolean frozen)` -> `ArrayList<TLRPC.Dialog>`
-- `getGlassSource()` -> `BlurredBackgroundSourceRenderNode`
+- `getFrostedGlassSource()` -> `GlassSourceRenderNode`
+- `getGlassSource()` -> `GlassSourceRenderNode`
 - `getListView()` -> `RecyclerListView`
 - `getOpenedDialogId()` -> `MessagesStorage.TopicKey`
 - `getSearchListView()` -> `RecyclerListView`
@@ -351,6 +354,7 @@
 - `onRequestPermissionsResultFragment(int requestCode, String[] permissions, int[] grantResults)` -> `void`
 - `onResume()` -> `void`
 - `onSlideProgress(boolean isOpen, float progress)` -> `void`
+- `onThemeColorsChanged()` -> `void`
 - `onTransitionAnimationEnd(boolean isOpen, boolean backward)` -> `void`
 - `onTransitionAnimationProgress(boolean isOpen, float progress)` -> `void`
 - `onlyDialogsAdapter()` -> `boolean`
@@ -459,6 +463,7 @@
 - `setAnimatedEmojiDrawable(AnimatedEmojiDrawable animatedEmojiDrawable)` -> `void`
 - `setForumIcon(Drawable drawable)` -> `void`
 - `setTopicIcon(TLRPC.TL_forumTopic topic)` -> `void`
+- `updateColors()` -> `void`
 
 ## `org.telegram.ui.community.CommunityUtils$DialogCellFactory`
 - `static asCell(MessagesController.CommunityPeerDialog peerDialog, DialogCell.DialogCellDelegate delegate)` -> `UItem`

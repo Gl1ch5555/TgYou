@@ -1,4 +1,4 @@
-# function / dialogs (27 методов)
+# function / dialogs (29 методов)
 
 ## `org.telegram.ui.Adapters.DialogsAdapter`
 - `canClickButtonInside()` -> `boolean`
@@ -20,6 +20,7 @@
 - `isEnabled(RecyclerView.ViewHolder holder)` -> `boolean`
 
 ## `org.telegram.ui.Cells.DialogCell`
+- `addColorKeys(HashSet<Integer> colors)` -> `void`
 - `checkCurrentDialogIndex(boolean frozen)` -> `boolean`
 - `checkHeight()` -> `void`
 - `hasTags()` -> `boolean`
@@ -33,6 +34,7 @@
 
 ## `org.telegram.ui.DialogsActivity`
 - `addOrRemoveSelectedDialog(long did, View cell)` -> `boolean`
+- `addThemeColorKeys(HashSet<Integer> keys)` -> `void`
 - `canBeginSlide()` -> `boolean`
 - `canParentTabsSlide(MotionEvent ev, boolean forward)` -> `boolean`
 - `hasHiddenArchive()` -> `boolean`

@@ -1,4 +1,4 @@
-# function / other (5339 методов)
+# function / other (5773 методов)
 
 ## `org.telegram.DispatchQueuePriority`
 - `cancelRunnable(Runnable runnable)` -> `void`
@@ -137,6 +137,7 @@
 - `static appCenterLog(Throwable e)` -> `void`
 - `static applyColorMatrix(int argb, ColorMatrix matrix)` -> `int`
 - `static applyEdgeToEdgeLayoutParams(WindowManager.LayoutParams windowLayoutParams)` -> `void`
+- `static applyPendingOrientationUnlock(Activity activity)` -> `void`
 - `static applySpring(Animator anim, double stiffness, double damping)` -> `void`
 - `static applySpring(Animator anim, double stiffness, double damping, double mass)` -> `void`
 - `static applySpring(Animator anim, double stiffness, double damping, double mass, double initialVelocity)` -> `void`
@@ -155,9 +156,9 @@
 - `static checkHostForPunycode(String url)` -> `boolean`
 - `static checkInlinePermissions(Context context)` -> `boolean`
 - `static checkPhonePattern(String pattern, String phone)` -> `boolean`
-- `static checkPipPermissions(Context context)` -> `boolean`
 - `static cleanValue(float p_val, float p_limit)` -> `float`
 - `static clearDrawableAnimation(View view)` -> `void`
+- `static clearPendingOrientationUnlock()` -> `void`
 - `static cloneByteBuffer(ByteBuffer original)` -> `ByteBuffer`
 - `static compare(int lhs, int rhs)` -> `int`
 - `static compare(long lhs, long rhs)` -> `int`
@@ -424,6 +425,8 @@
 - `static replaceSingleLink(String str, int color, Runnable onClick)` -> `SpannableStringBuilder`
 - `static replaceSingleLinkBold(String str, int color)` -> `SpannableStringBuilder`
 - `static replaceSingleLinkBold(String str, int color, Runnable onClick)` -> `SpannableStringBuilder`
+- `static replaceSingleLinkBoldKey(String str, int colorKey, Theme.ResourcesProvider resourcesProvider, Runnable onClick)` -> `SpannableStringBuilder`
+- `static replaceSingleLinkKey(String str, int colorKey, Theme.ResourcesProvider resourcesProvider, Runnable onClick)` -> `SpannableStringBuilder`
 - `static replaceSingleTag(String str, Runnable runnable)` -> `SpannableStringBuilder`
 - `static replaceSingleTag(String str, int colorKey, int type, Runnable runnable)` -> `SpannableStringBuilder`
 - `static replaceSingleTag(String str, int colorKey, int type, Runnable runnable, Theme.ResourcesProvider resourcesProvider)` -> `SpannableStringBuilder`
@@ -442,7 +445,7 @@
 - `static rgbToHsv(int color)` -> `double[]`
 - `static rgbToHsv(int r, int g, int b)` -> `double[]`
 - `static roundPercents(float[] percents, int[] output)` -> `int[]`
-- `static roundPlayingMessageSize(boolean withSidemenu)` -> `int`
+- `static roundPlayingMessageSize(boolean withSidemenu, boolean compact)` -> `int`
 - `static runOnUIThread(Runnable runnable)` -> `void`
 - `static runOnUIThread(Runnable runnable, long delay)` -> `void`
 - `static scaleRect(RectF rect, float scale)` -> `void`
@@ -530,6 +533,14 @@
 - `get()` -> `long`
 
 ## `org.telegram.messenger.AppGlobalConfig$ConfigLong$Internal`
+- `apply(SharedPreferences.Editor editor, TLRPC.JSONValue tlValue)` -> `boolean`
+- `load(SharedPreferences preferences)` -> `void`
+
+## `org.telegram.messenger.AppGlobalConfig$ConfigLongSet`
+- `contains(long id)` -> `boolean`
+- `get()` -> `Set<Long>`
+
+## `org.telegram.messenger.AppGlobalConfig$ConfigLongSet$Internal`
 - `apply(SharedPreferences.Editor editor, TLRPC.JSONValue tlValue)` -> `boolean`
 - `load(SharedPreferences preferences)` -> `void`
 
@@ -801,11 +812,7 @@
 - `useCache(Args arguments)` -> `boolean`
 
 ## `org.telegram.messenger.CaptchaController`
-- `static request(int currentAccount, int requestToken, String action, String key_id)` -> `void`
-
-## `org.telegram.messenger.CaptchaController$Request`
-- `done(String token)` -> `void`
-- `hashCode()` -> `int`
+- `static request(int currentAccount, int requestToken, int generation, String action, String key_id)` -> `void`
 
 ## `org.telegram.messenger.ChannelBoostsController`
 - `applyBoost(long dialogId, int slot, Utilities.Callback<TL_stories.TL_premium_myBoosts> onDone, Utilities.Callback<TLRPC.TL_error> onError)` -> `void`
@@ -935,6 +942,7 @@
 - `static isPossibleRemoveChatRestrictionsByBoosts(TLRPC.Chat chat)` -> `boolean`
 - `static isPossibleRemoveChatRestrictionsByBoosts(TLRPC.ChatFull chatFull)` -> `boolean`
 - `static isPublic(TLRPC.Chat chat)` -> `boolean`
+- `static isSidebarEnabled(TLRPC.Chat chat)` -> `boolean`
 - `static isUserCollapsedInCommunity(LongSparseArray<TLRPC.Chat> chats, TLRPC.User user)` -> `boolean`
 - `static isUserCollapsedInCommunity(int currentAccount, TLRPC.User user)` -> `boolean`
 - `static reactionIsAvailable(TLRPC.ChatFull chatInfo, String reaction)` -> `boolean`
@@ -1132,6 +1140,21 @@
 - `run()` -> `void`
 - `sendMessage(Message msg, int delay)` -> `void`
 
+## `org.telegram.messenger.DispatchQueue2`
+- `cancelRunnable(Runnable runnable)` -> `void`
+- `cancelRunnables(Runnable[] runnables)` -> `void`
+- `cleanupQueue()` -> `void`
+- `getHandlerSync()` -> `Handler`
+- `getLastTaskTime()` -> `long`
+- `handleMessage(Message inputMessage)` -> `void`
+- `isReady()` -> `boolean`
+- `postRunnable(Runnable runnable)` -> `boolean`
+- `postRunnable(Runnable runnable, long delay)` -> `boolean`
+- `postToFrontRunnable(Runnable runnable)` -> `boolean`
+- `recycle()` -> `void`
+- `run()` -> `void`
+- `sendMessage(Message msg, int delay)` -> `void`
+
 ## `org.telegram.messenger.DispatchQueuePoolBackground`
 - `static execute(Runnable runnable)` -> `void`
 - `static execute(Runnable runnable, boolean now)` -> `void`
@@ -1202,6 +1225,11 @@
 - `onRequestSent(long now)` -> `void`
 - `remainingDelay(long now)` -> `long`
 
+## `org.telegram.messenger.DownloadSpeedEstimator`
+- `static getBitrate()` -> `long`
+- `static isFast()` -> `boolean`
+- `static onSample(long bits, long durationMs)` -> `void`
+
 ## `org.telegram.messenger.EmuDetector`
 - `addPackageName(String pPackageName)` -> `EmuDetector`
 - `addPackageName(List<String> pListPackageName)` -> `EmuDetector`
@@ -1260,6 +1288,7 @@
 - `getPositionInQueue()` -> `int`
 - `getPriority()` -> `int`
 - `getQueue()` -> `FileLoaderPriorityQueue`
+- `hasStoryStartData()` -> `boolean`
 - `isFinished()` -> `boolean`
 - `isForceRequest()` -> `boolean`
 - `isPaused()` -> `boolean`
@@ -1337,7 +1366,7 @@
 - `static getExtensionByMimeType(String mime)` -> `String`
 - `getFileDatabase()` -> `FilePathDatabase`
 - `static getFileExtension(File file)` -> `String`
-- `getFileLoaderQueue()` -> `DispatchQueue`
+- `getFileLoaderQueue()` -> `DispatchQueue2`
 - `static getFileMetadataFromParent(int currentAccount, Object parentObject)` -> `FilePathDatabase.FileMeta`
 - `getFileReference(Object parentObject)` -> `int`
 - `static getInstance(int num)` -> `FileLoader`
@@ -1381,6 +1410,7 @@
 - `setLoadingVideoInternal(TLRPC.Document document, boolean player)` -> `void`
 - `setLocalPathTo(TLObject attach, String attachPath)` -> `void`
 - `static setMediaDirs(SparseArray<File> dirs)` -> `void`
+- `startVideoStream(TLRPC.Document document, Object parentObject)` -> `void`
 - `uploadFile(final String location, final boolean encrypted, final boolean small, final int type)` -> `void`
 - `uploadFile(final String location, final boolean encrypted, final boolean small, final long estimatedSize, final int type, boolean forceSmallFile)` -> `void`
 - `uploadFile(final String path, Utilities.Callback<TLRPC.InputFile> done)` -> `void`
@@ -1428,7 +1458,7 @@
 - `ensureDatabaseCreated()` -> `void`
 - `getFileDialogId(File file, FileMeta metaTmp)` -> `FileMeta`
 - `getPath(long documentId, int dc, int type, boolean useQueue)` -> `String`
-- `getQueue()` -> `DispatchQueue`
+- `getQueue()` -> `DispatchQueue2`
 - `hasAnotherRefOnFile(String path)` -> `boolean`
 - `isLocallyCreated(String path)` -> `boolean`
 - `lookupFiles(ArrayList<? extends CacheByChatsController.KeepMediaFile> keepMediaFiles)` -> `LongSparseArray<ArrayList<CacheByChatsController.KeepMediaFile>>`
@@ -1475,6 +1505,7 @@
 - `migrateOldFolder()` -> `void`
 - `onBind(Intent intent)` -> `IBinder`
 - `onStartCommand(Intent intent, int flags, int startId)` -> `int`
+- `onTimeout(int startId, int fgsType)` -> `void`
 - `static start()` -> `void`
 
 ## `org.telegram.messenger.FilesMigrationService$FilesMigrationBottomSheet`
@@ -1487,6 +1518,11 @@
 - `static checkKeyReady(boolean notifyCheckFingerprint)` -> `void`
 - `static deleteInvalidKey()` -> `void`
 - `static isKeyReady()` -> `boolean`
+
+## `org.telegram.messenger.FirebasePhoneNumberVerificationHelper`
+- `static getSimInfo(Context context, VerificationSupportResult result)` -> `SimInfo`
+- `static getVerificationSupportInfo(Utilities.Callback<List<VerificationSupportResult>> callback)` -> `void`
+- `static loginViaFirebasePhoneNumberVerification(Context context, int currentAccount, CancellationToken cancellationToken, @Nullable Runnable onVerifying)` -> `Task<TLRPC.auth_Authorization>`
 
 ## `org.telegram.messenger.FlagSecureReason`
 - `attach()` -> `void`
@@ -1653,6 +1689,10 @@
 ## `org.telegram.messenger.HashtagSearchController$SearchResult`
 - `clear()` -> `void`
 - `getMask()` -> `int`
+
+## `org.telegram.messenger.HeifMotionPhoto`
+- `isMotionPhoto()` -> `boolean`
+- `static parse(File file)` -> `HeifMotionPhoto`
 
 ## `org.telegram.messenger.IMapsProvider$IMapView`
 - `getGlSurfaceView()` -> `default GLSurfaceView`
@@ -1974,6 +2014,7 @@
 - `onBind(Intent arg2)` -> `IBinder`
 - `onDestroy()` -> `void`
 - `onStartCommand(Intent intent, int flags, int startId)` -> `int`
+- `onTimeout(int startId, int fgsType)` -> `void`
 
 ## `org.telegram.messenger.KeepAliveJob`
 - `static finishJob()` -> `void`
@@ -1995,6 +2036,7 @@
 - `static isEnabledSetting(int flag)` -> `boolean`
 - `static isPowerSaverApplied()` -> `boolean`
 - `static loadPreference()` -> `void`
+- `static registerBatteryReceiver()` -> `void`
 - `static removeOnPowerSaverAppliedListener(Utilities.Callback<Boolean> listener)` -> `void`
 - `static savePreference()` -> `void`
 - `static setAllFlags(int flags)` -> `void`
@@ -2013,6 +2055,7 @@
 - `applyLanguageFile(File file, int currentAccount)` -> `boolean`
 - `static bold(CharSequence text)` -> `CharSequence`
 - `calculateTranslatedCount(HashMap<String, String> map)` -> `int`
+- `cancelRemoteLanguageRequest(int requestId)` -> `void`
 - `checkForcePatchLangpack(int currentAccount, Runnable ifDone)` -> `void`
 - `checkPatchLangpack(int currentAccount)` -> `void`
 - `checkUpdateForCurrentRemoteLocale(int currentAccount, int version, int baseVersion)` -> `void`
@@ -2145,6 +2188,9 @@
 - `saveRemoteLocaleStringsForCurrentLocale(final TLRPC.TL_langPackDifference difference, int currentAccount)` -> `void`
 - `static stringForMessageListDate(long date)` -> `String`
 
+## `org.telegram.messenger.LocaleController$LangpackRequest`
+- `runWaiters()` -> `void`
+
 ## `org.telegram.messenger.LocaleController$LocaleInfo`
 - `static createWithString(String string)` -> `LocaleInfo`
 - `getBaseLangCode()` -> `String`
@@ -2241,6 +2287,7 @@
 - `isSharingLocation(long did)` -> `boolean`
 - `loadLiveLocations(long did)` -> `void`
 - `markLiveLoactionsAsRead(long dialogId)` -> `void`
+- `static onAppResumed()` -> `void`
 - `onConnected(Bundle bundle)` -> `void`
 - `onConnectionFailed()` -> `void`
 - `onConnectionSuspended(int i)` -> `void`
@@ -2263,10 +2310,12 @@
 
 ## `org.telegram.messenger.LocationSharingService`
 - `didReceivedNotification(int id, int account, Object... args)` -> `void`
+- `static hidePausedNotification()` -> `void`
 - `onBind(Intent arg2)` -> `IBinder`
 - `onCreate()` -> `void`
 - `onDestroy()` -> `void`
 - `onStartCommand(Intent intent, int flags, int startId)` -> `int`
+- `static showPausedNotification()` -> `void`
 
 ## `org.telegram.messenger.LruCache`
 - `contains(String key)` -> `boolean`
@@ -2451,7 +2500,7 @@
 - `loadHints(boolean cache)` -> `void`
 - `loadMedia(long dialogId, int count, int max_id, int min_id, int type, long topicId, int fromCache, int classGuid, int requestIndex, ReactionsLayoutInBubble.VisibleReaction tag, String query)` -> `void`
 - `loadMoreSearchMessages(boolean fromList)` -> `void`
-- `loadMusic(long dialogId, long maxId, long minId)` -> `void`
+- `loadMusic(long dialogId, long topicId, long maxId, long minId)` -> `void`
 - `loadPinnedMessages(long dialogId, int maxId, int fallback)` -> `void`
 - `loadPinnedMessages(long dialogId, long channelId, ArrayList<Integer> mids, boolean useQueue)` -> `ArrayList<MessageObject>`
 - `loadPremiumPromo(boolean cache)` -> `void`
@@ -2672,6 +2721,7 @@
 - `formatText(TL_iv.RichText text)` -> `CharSequence`
 - `formatText(TL_iv.RichText text, int flags)` -> `CharSequence`
 - `formatText(TL_iv.RichText text, SpannableStringBuilder out, int flags)` -> `CharSequence`
+- `formatTextRecording(TL_iv.RichText text, int flags, IdentityHashMap<TL_iv.RichText, int[]> recorder)` -> `CharSequence`
 - `getAnimatorBlocks()` -> `List<MultiLayoutTypingAnimator.Block>`
 - `getCell()` -> `ChatMessageCell`
 - `getDelegate()` -> `ChatMessageCell.ChatMessageCellDelegate`
@@ -2679,6 +2729,7 @@
 - `getGap()` -> `int`
 - `getHeight()` -> `int`
 - `getLastLineWidth()` -> `int`
+- `getMaxWidth()` -> `int`
 - `getMediaSpoilerEffect()` -> `SpoilerEffect2`
 - `getMinWidth()` -> `int`
 - `getPhoto(long photoId)` -> `TLRPC.Photo`
@@ -2692,6 +2743,7 @@
 - `hasRootUnsupportedBlocks()` -> `boolean`
 - `hasUnsupportedBlocks()` -> `boolean`
 - `isAttached()` -> `boolean`
+- `isCompactIn()` -> `boolean`
 - `isHorizontallyDragging()` -> `boolean`
 - `isOut()` -> `boolean`
 - `isOverlayActive()` -> `boolean`
@@ -2701,6 +2753,7 @@
 - `isTranslating()` -> `boolean`
 - `needsUpdate(TL_iv.RichMessage newRichMessage, int maxWidth)` -> `boolean`
 - `onTouchEvent(MotionEvent event)` -> `boolean`
+- `openDetails(List<RichDetailsBlock> details)` -> `void`
 - `reposition()` -> `void`
 - `static setBlockFlags(int textFlags, int blockFlags)` -> `int`
 - `setChatMessageCellDelegate(ChatMessageCell cell, ChatMessageCell.ChatMessageCellDelegate delegate)` -> `void`
@@ -2753,6 +2806,7 @@
 - `getBlockAccessibilityElementCount()` -> `int`
 - `getBlockAccessibilityElementStateDescription(int element)` -> `CharSequence`
 - `getBlockAccessibilityElementText(int element)` -> `CharSequence`
+- `getCellBounds()` -> `RectF`
 - `getContentPaddingTop()` -> `int`
 - `getText()` -> `TextSelectionHelper.TextLayoutBlock[]`
 - `isAccessibilityElementCheckbox(int element)` -> `boolean`
@@ -2906,6 +2960,7 @@
 - `appendAccessibilityText(SpannableStringBuilder sb)` -> `void`
 - `findLink(CharacterStyle link, int blockY, FoundLink out)` -> `boolean`
 - `getAccessibilityLabel()` -> `CharSequence`
+- `static getCodeSizeDecrement(int length)` -> `int`
 - `getHeight()` -> `int`
 - `getLastLineWidth()` -> `int`
 - `getLayout()` -> `Layout`
@@ -2973,8 +3028,8 @@
 - `onTouchEvent(MotionEvent event)` -> `boolean`
 
 ## `org.telegram.messenger.RichMessageLayout$RichUnsupportedBlock`
-- `getHeight(ChatMessageCell.TransitionParams tp)` -> `float`
-- `getY(ChatMessageCell.TransitionParams tp)` -> `float`
+- `getHeight(ChatMessageTransitionParams tp)` -> `float`
+- `getY(ChatMessageTransitionParams tp)` -> `float`
 - `onTouchEvent(MotionEvent event)` -> `boolean`
 - `scheduleDrawable(@NonNull Drawable who, @NonNull Runnable what, long when)` -> `void`
 - `unscheduleDrawable(@NonNull Drawable who, @NonNull Runnable what)` -> `void`
@@ -3027,6 +3082,32 @@
 - `setRow(int row)` -> `void`
 - `setX(int x)` -> `void`
 - `setY(int y)` -> `void`
+
+## `org.telegram.messenger.RichQuote`
+- `static canQuote(MessageObject messageObject)` -> `boolean`
+- `static collectNodes(TL_iv.RichMessage message)` -> `ArrayList<TL_iv.RichText>`
+- `static containsQuote(TL_iv.RichMessage message, String quote)` -> `boolean`
+- `static copyList(ArrayList<TL_iv.RichText> list)` -> `ArrayList<TL_iv.RichText>`
+- `static equals(ArrayList<TL_iv.RichText> a, ArrayList<TL_iv.RichText> b)` -> `boolean`
+- `static fillFlat(TLRPC.MessageReplyHeader header)` -> `void`
+- `static findCollapsedDetails(MessageObject messageObject, String quote, int quoteOffset)` -> `ArrayList<RichMessageLayout.RichDetailsBlock>`
+- `static findQuote(MessageObject messageObject, String quote, int quoteOffset)` -> `int[]`
+- `static flatLength(TL_iv.RichText text)` -> `int`
+- `static flatText(TL_iv.RichText text)` -> `String`
+- `static flatText(ArrayList<TL_iv.RichText> fragments, ArrayList<TLRPC.MessageEntity> entities)` -> `String`
+- `static fromSelection(MessageObject messageObject, int start, int end)` -> `RichQuote`
+
+## `org.telegram.messenger.RichQuote$Range`
+- `formattedOffset(int i, int flatOffset)` -> `int`
+- `fragment(int i)` -> `TL_iv.RichText`
+- `setEnd(int index, int offset)` -> `void`
+- `slicer(int i)` -> `Sliced`
+- `startOffset(int i)` -> `int`
+
+## `org.telegram.messenger.RichQuote$Sliced`
+- `static of(RichMessageLayout layout, Position position)` -> `Sliced`
+- `static ofNode(RichMessageLayout layout, TL_iv.RichText node)` -> `Sliced`
+- `slice(int from, int to)` -> `TL_iv.RichText`
 
 ## `org.telegram.messenger.RuntimeClassNameTypeAdapterFactory`
 - `create(Gson gson, TypeToken<R> type)` -> `TypeAdapter<R>`
@@ -3147,7 +3228,7 @@
 - `prepareImportHistory(long dialogId, Uri uri, ArrayList<Uri> mediaUris, MessagesStorage.LongCallback onStartImport)` -> `void`
 - `prepareImportStickers(String title, String shortName, String sofrware, ArrayList<ImportingSticker> paths, MessagesStorage.StringCallback onStartImport)` -> `void`
 - `static prepareSendingArticle(AccountInstance accountInstance, ArrayList<TL_iv.PageBlock> blocks, boolean rtl, long dialogId, MessageObject replyToMsg, MessageObject replyToTopMsg, boolean notify, int scheduleDate, int scheduleRepeatPeriod, SendMessageChatArguments sendMessageChatArguments, long effectId, long monoForumPeerId, long payStars)` -> `void`
-- `static prepareSendingArticle(AccountInstance accountInstance, ArrayList<TL_iv.PageBlock> blocks, ArrayList<TLRPC.Photo> photos, ArrayList<TLRPC.Document> documents, ArrayList<TLRPC.InputUser> users, boolean rtl, long dialogId, MessageObject replyToMsg, MessageObject replyToTopMsg, boolean notify, int scheduleDate, int scheduleRepeatPeriod, SendMessageChatArguments sendMessageChatArguments, long effectId, long monoForumPeerId, long payStars)` -> `void`
+- `static prepareSendingArticle(AccountInstance accountInstance, ArrayList<TL_iv.PageBlock> blocks, ArrayList<TLRPC.Photo> photos, ArrayList<TLRPC.Document> documents, ArrayList<TLRPC.InputUser> users, boolean rtl, long dialogId, MessageObject replyToMsg, MessageObject replyToTopMsg, ChatActivity.ReplyQuote quote, boolean notify, int scheduleDate, int scheduleRepeatPeriod, SendMessageChatArguments sendMessageChatArguments, long effectId, long monoForumPeerId, long payStars)` -> `void`
 - `static prepareSendingAudioDocuments(AccountInstance accountInstance, ArrayList<MessageObject> messageObjects, CharSequence caption, long dialogId, MessageObject replyToMsg, MessageObject replyToTopMsg, TL_stories.StoryItem storyItem, boolean notify, int scheduleDate, int scheduledRepeatPeriod, MessageObject editingMessageObject, SendMessageChatArguments sendMessageChatArguments, long effectId, boolean invertMedia, long payStars)` -> `void`
 - `static prepareSendingAudioDocuments(AccountInstance accountInstance, ArrayList<MessageObject> messageObjects, CharSequence caption, long dialogId, MessageObject replyToMsg, MessageObject replyToTopMsg, TL_stories.StoryItem storyItem, boolean notify, int scheduleDate, int scheduledRepeatPeriod, MessageObject editingMessageObject, SendMessageChatArguments sendMessageChatArguments, long effectId, boolean invertMedia, long payStars, PollSendParams pollSendParams, ArrayList<Integer> pollSendIndexes, boolean forcedPollDoNotSendFinal, Runnable afterCommandsDone)` -> `void`
 - `static prepareSendingBotContextResult(BaseFragment fragment, AccountInstance accountInstance, TLRPC.BotInlineResult result, HashMap<String, String> params, long dialogId, MessageObject replyToMsg, MessageObject replyToTopMsg, TL_stories.StoryItem storyItem, ChatActivity.ReplyQuote quote, boolean notify, int scheduleDate, int scheduleRepeatPeriod, SendMessageChatArguments sendMessageChatArguments, long stars)` -> `void`
@@ -3389,6 +3470,7 @@
 - `markAllReactionsAsRead(long chatId)` -> `void`
 - `onTopicCreated(long dialogId, TLRPC.TL_forumTopic forumTopic, boolean saveInDatabase)` -> `void`
 - `onTopicEdited(long dialogId, TLRPC.TL_forumTopic forumTopic)` -> `void`
+- `onTopicEditedServerSide(long dialogId, TL_update.TL_updateEditForumTopic update)` -> `void`
 - `onTopicFragmentPause(long chatId)` -> `void`
 - `onTopicFragmentResume(long chatId)` -> `void`
 - `onTopicsDeletedServerSide(long chatId, long topicId)` -> `void`
@@ -3405,6 +3487,7 @@
 - `reorderPinnedTopics(long chatId, ArrayList<Integer> topics)` -> `void`
 - `saveLoadOffset(long chatId, int lastMessageId, int lastMessageDate, long lastTopicId)` -> `void`
 - `saveTopics(long chatId)` -> `void`
+- `searchTopics(long chatId, String query, Utilities.Callback<ArrayList<TLRPC.TL_forumTopic>> onResult)` -> `int`
 - `sortTopics(long chatId, boolean notify)` -> `void`
 - `toggleCloseTopic(long chatId, int topicId, boolean close)` -> `void`
 - `toggleShowTopic(long chatId, int topicId, boolean show)` -> `void`
@@ -3483,6 +3566,7 @@
 - `getEmojiStatus()` -> `Long`
 - `getGlobalTTl()` -> `int`
 - `static getInstance(int num)` -> `UserConfig`
+- `static getLoggedInAccountIds()` -> `ArrayList<Long>`
 - `static getMaxAccountCount()` -> `int`
 - `getNewMessageId()` -> `int`
 - `getPreferences()` -> `SharedPreferences`
@@ -3546,6 +3630,7 @@
 - `static isBot(TLRPC.User user)` -> `boolean`
 - `static isBotForum(int currentAccount, long userId)` -> `boolean`
 - `static isBotForum(TLRPC.User user)` -> `boolean`
+- `static isBotForumSidebar(TLRPC.User user)` -> `boolean`
 - `static isBotForumWithEditableTopics(int currentAccount, long userId)` -> `boolean`
 - `static isBotForumWithEditableTopics(TLRPC.User user)` -> `boolean`
 - `static isContact(TLRPC.User user)` -> `boolean`
@@ -3627,6 +3712,7 @@
 - `onBind(Intent arg2)` -> `IBinder`
 - `onDestroy()` -> `void`
 - `onStartCommand(Intent intent, int flags, int startId)` -> `int`
+- `onTimeout(int startId, int fgsType)` -> `void`
 - `static start(boolean cancelled)` -> `void`
 - `static stop()` -> `void`
 
@@ -3647,9 +3733,11 @@
 ## `org.telegram.messenger.browser.Browser`
 - `static IDN_toUnicode(String host)` -> `String`
 - `static extractUsername(String link)` -> `String`
+- `static formatUrlForDisplay(String url, boolean unicodeHost)` -> `String`
 - `static getBrowserPackageName(String browser)` -> `String`
 - `static hasAppToOpen(Context context, String url)` -> `boolean`
 - `static isBrowserPackageName(String name)` -> `boolean`
+- `static isGetPremiumUrl(String url)` -> `boolean`
 - `static isInternalUri(Uri uri, boolean[] forceBrowser)` -> `boolean`
 - `static isInternalUri(Uri uri, boolean all, boolean[] forceBrowser)` -> `boolean`
 - `static isInternalUrl(String url, boolean[] forceBrowser)` -> `boolean`
@@ -3677,11 +3765,15 @@
 - `static openUrl(final Context context, Uri uri, final boolean allowCustom, boolean tryTelegraph)` -> `void`
 - `static openUrl(final Context context, Uri uri, final boolean allowCustom, boolean tryTelegraph, Progress inCaseLoading)` -> `void`
 - `static openUrl(final Context context, Uri uri, boolean _allowCustom, boolean tryTelegraph, boolean forceNotInternalForApps, Progress inCaseLoading, String browser, boolean allowIntent, boolean allowInAppBrowser, boolean forceRequest)` -> `void`
+- `static openUrl(final Context context, Uri uri, boolean _allowCustom, boolean tryTelegraph, boolean forceNotInternalForApps, Progress inCaseLoading, String browser, boolean allowIntent, boolean allowInAppBrowser, boolean forceRequest, boolean keepWebAuthTokens)` -> `void`
 - `static openUrlInSystemBrowser(Context context, String url)` -> `void`
+- `static openUrlInSystemBrowser(Context context, String url, boolean keepWebAuthTokens)` -> `void`
+- `static parseWebIntent(String url)` -> `Intent`
 - `static replace(Uri originalUri, String newScheme, String newUserInfo, String newHostname, String newPath)` -> `String`
 - `static replaceHostname(Uri originalUri, String newHostname, String newScheme)` -> `String`
 - `static unbindCustomTabsService(Activity activity)` -> `void`
 - `static urlMustNotHaveConfirmation(String url)` -> `boolean`
+- `static withoutWebAuthTokens(Uri uri)` -> `Uri`
 
 ## `org.telegram.messenger.browser.Browser$Progress`
 - `cancel()` -> `void`
@@ -4310,7 +4402,6 @@
 - `addFrameCallbackOnce(Runnable callback, int fps)` -> `void`
 - `doFrame(long frameTimeNanos)` -> `void`
 - `static getInstance()` -> `Choreographer60FpsContent`
-- `post(FrameCallback callback)` -> `void`
 - `postInvalidateDrawable(Drawable drawable)` -> `void`
 - `postInvalidateDrawable30fps(Drawable drawable)` -> `void`
 - `postInvalidateView(View view)` -> `void`
@@ -4486,6 +4577,7 @@
 - `static boundsWithPaddingFromViewAndRoundRect(float radius)` -> `ViewOutlineProvider`
 - `static boundsWithPaddingRoundRect(int padding, float radius)` -> `ViewOutlineProvider`
 - `static boundsWithPaddingRoundRect(int padding)` -> `ViewOutlineProvider`
+- `static boundsWithRound(int radius, boolean left, boolean top, boolean right, boolean bottom)` -> `ViewOutlineProvider`
 - `static fromDrawable(Drawable drawable)` -> `ViewOutlineProvider`
 
 ## `org.telegram.messenger.utils.WindowVisibilityManager`
@@ -4697,6 +4789,10 @@
 ## `org.telegram.messenger.video.MediaCodecVideoConvertor$ConvertVideoParams`
 - `static of(String videoPath, File cacheFile, long videoOffset, int rotationValue, boolean isSecret, int originalWidth, int originalHeight, int resultWidth, int resultHeight, int framerate, int bitrate, int originalBitrate, long startTime, long endTime, long avatarStartTime, boolean needCompress, long duration, MediaController.VideoConvertorListener callback, VideoEditedInfo info)` -> `ConvertVideoParams`
 
+## `org.telegram.messenger.video.MediaCodecVideoConvertor$DecoderFeeder`
+- `finish()` -> `void`
+- `run()` -> `void`
+
 ## `org.telegram.messenger.video.MediaCodecVideoConvertor$Muxer`
 - `addTrack(MediaFormat format, boolean isAudio)` -> `int`
 - `finishMovie()` -> `void`
@@ -4847,6 +4943,15 @@
 - `static hasInstance()` -> `boolean`
 - `static loadChannel(IArticleViewer parent, final BlockChannelCell cell, WebpageAdapter adapter, TLRPC.Chat channel)` -> `void`
 
+## `org.telegram.ui.ArticleViewer$BlockChannelCell`
+- `addColorKeys(HashSet<Integer> colors)` -> `void`
+
+## `org.telegram.ui.ArticleViewer$BlockRelatedArticlesShadowCell`
+- `addColorKeys(HashSet<Integer> colors)` -> `void`
+
+## `org.telegram.ui.ArticleViewer$BlockSlideshowCell`
+- `addColorKeys(HashSet<Integer> colors)` -> `void`
+
 ## `org.telegram.ui.ArticleViewer$PageLayout`
 - `addProgress(float delta)` -> `void`
 - `forward()` -> `void`
@@ -4873,6 +4978,7 @@
 - `static isVideo(TLRPC.WebPage page, TL_iv.PageBlock block)` -> `boolean`
 
 ## `org.telegram.ui.ArticleViewer$WindowView`
+- `addColorKeys(HashSet<Integer> colors)` -> `void`
 - `requestDisallowInterceptTouchEvent(boolean disallowIntercept)` -> `void`
 
 ## `org.telegram.ui.AvatarPreviewPagerIndicator`
@@ -4913,6 +5019,9 @@
 ## `org.telegram.ui.Business.BusinessIntroActivity`
 - `hasChanges()` -> `boolean`
 - `isEmpty()` -> `boolean`
+- `isSupportEdgeToEdge()` -> `boolean`
+
+## `org.telegram.ui.Business.BusinessLinksActivity`
 - `isSupportEdgeToEdge()` -> `boolean`
 
 ## `org.telegram.ui.Business.BusinessLinksController`
@@ -4966,6 +5075,15 @@
 
 ## `org.telegram.ui.CacheChatsExceptionsFragment$Adapter`
 - `isEnabled(RecyclerView.ViewHolder holder)` -> `boolean`
+
+## `org.telegram.ui.CacheControlActivity`
+- `addThemeColorKeys(HashSet<Integer> keys)` -> `void`
+
+## `org.telegram.ui.CacheControlActivity$CacheChartHeader`
+- `addColorKeys(HashSet<Integer> colors)` -> `void`
+
+## `org.telegram.ui.CacheControlActivity$ClearCacheButton`
+- `addColorKeys(HashSet<Integer> colors)` -> `void`
 
 ## `org.telegram.ui.CacheControlActivity$DialogFileEntities`
 - `addFile(CacheModel.FileInfo file, int type)` -> `void`
@@ -5023,6 +5141,27 @@
 ## `org.telegram.ui.Cells.ChatLoadingCell`
 - `hasGradientService()` -> `boolean`
 
+## `org.telegram.ui.Cells.ChatMessageBotButtons`
+- `checkMotionEvent(MotionEvent event)` -> `boolean`
+
+## `org.telegram.ui.Cells.ChatMessageContact`
+- `checkMotionEvent(MotionEvent event)` -> `boolean`
+
+## `org.telegram.ui.Cells.ChatMessageFactCheck`
+- `checkMotionEvent(MotionEvent event)` -> `boolean`
+- `static isNeeded(ChatMessageCell cell)` -> `boolean`
+
+## `org.telegram.ui.Cells.ChatMessageLinkPreview`
+- `checkGameMotionEvent(MotionEvent event)` -> `boolean`
+- `checkMotionEvent(MotionEvent event)` -> `boolean`
+
+## `org.telegram.ui.Cells.ChatMessagePoll`
+- `checkExplanationMotionEvent(MotionEvent event)` -> `boolean`
+- `checkInstantButtonForPoll(boolean animated)` -> `void`
+- `checkPollButtonMotionEvent(MotionEvent event)` -> `boolean`
+- `checkPollMediaMotionEvent(MotionEvent event)` -> `boolean`
+- `setMessageContentIfPoll(final MessageObject messageObject, boolean messageIdChanged)` -> `void`
+
 ## `org.telegram.ui.Cells.CheckBoxCell`
 - `hasIcon()` -> `boolean`
 
@@ -5043,6 +5182,9 @@
 - `addAttachView()` -> `View`
 - `addTextChangedListener(TextWatcher watcher)` -> `void`
 - `shouldShowCheckBox()` -> `boolean`
+
+## `org.telegram.ui.Cells.SendLocationCell`
+- `addColorKeys(java.util.HashSet<Integer> colors)` -> `void`
 
 ## `org.telegram.ui.Cells.SharedDocumentCell`
 - `requestLayout()` -> `void`
@@ -5102,13 +5244,27 @@
 ## `org.telegram.ui.Cells.UserInfoCell`
 - `hasGradientService()` -> `boolean`
 
+## `org.telegram.ui.ChangeBioActivity`
+- `addThemeColorKeys(HashSet<Integer> keys)` -> `void`
+
+## `org.telegram.ui.ChangeNameActivity`
+- `addThemeColorKeys(HashSet<Integer> keys)` -> `void`
+
+## `org.telegram.ui.ChangeUsernameActivity`
+- `addThemeColorKeys(HashSet<Integer> keys)` -> `void`
+
+## `org.telegram.ui.ChangeUsernameActivity$UsernameCell`
+- `addColorKeys(java.util.HashSet<Integer> colors)` -> `void`
+
 ## `org.telegram.ui.ChannelAdminLogActivity`
+- `addThemeColorKeys(HashSet<Integer> keys)` -> `void`
 - `saveScrollPosition(boolean fromTop)` -> `void`
 
 ## `org.telegram.ui.ChannelBoostLayout$ItemInternal`
 - `hashCode()` -> `int`
 
 ## `org.telegram.ui.ChannelCreateActivity`
+- `addThemeColorKeys(HashSet<Integer> keys)` -> `void`
 - `saveSelfArgs(Bundle args)` -> `void`
 
 ## `org.telegram.ui.ChannelMonetizationLayout$ChannelTransactionsView`
@@ -5126,22 +5282,34 @@
 - `static hash(TLRPC.WallPaperSettings settings)` -> `String`
 
 ## `org.telegram.ui.ChatEditActivity`
+- `addThemeColorKeys(HashSet<Integer> keys)` -> `void`
 - `saveSelfArgs(Bundle args)` -> `void`
 
 ## `org.telegram.ui.ChatEditTypeActivity`
+- `addThemeColorKeys(HashSet<Integer> keys)` -> `void`
 - `hasActiveLink()` -> `boolean`
+
+## `org.telegram.ui.ChatLinkActivity`
+- `addThemeColorKeys(HashSet<Integer> keys)` -> `void`
 
 ## `org.telegram.ui.ChatPullingDownDrawable`
 - `static getNextUnreadDialog(long currentDialogId, int folderId, int filterId)` -> `TLRPC.Dialog`
 - `static getNextUnreadDialog(long currentDialogId, int folderId, int filterId, boolean searchNext, int[] params)` -> `TLRPC.Dialog`
 
+## `org.telegram.ui.ChatRightsEditActivity`
+- `addThemeColorKeys(HashSet<Integer> keys)` -> `void`
+
 ## `org.telegram.ui.ChatUsersActivity`
+- `addThemeColorKeys(HashSet<Integer> keys)` -> `void`
 - `canBeginSlide()` -> `boolean`
 - `hasSelectType()` -> `boolean`
 - `saveState()` -> `DiffCallback`
 
 ## `org.telegram.ui.ChatUsersActivity$SearchAdapter`
 - `removeUserId(long userId)` -> `void`
+
+## `org.telegram.ui.ChooseChannelFragment`
+- `isSupportEdgeToEdge()` -> `boolean`
 
 ## `org.telegram.ui.CodeFieldContainer`
 - `processNextPressed()` -> `void`
@@ -5232,6 +5400,9 @@
 ## `org.telegram.ui.Components.ChatGreetingsView`
 - `requestLayout()` -> `void`
 
+## `org.telegram.ui.Components.ChatReplyContainer$Layout`
+- `addColorKeys(HashSet<Integer> colors)` -> `void`
+
 ## `org.telegram.ui.Components.ChatSearchTabs`
 - `onShownUpdate(boolean finish)` -> `void`
 
@@ -5304,6 +5475,7 @@
 - `hasErrorText()` -> `boolean`
 - `removeCallbacks(Runnable action)` -> `boolean`
 - `removeTextChangedListener(TextWatcher watcher)` -> `void`
+- `shouldShowQuoteButton()` -> `boolean`
 
 ## `org.telegram.ui.Components.EditTextCaption`
 - `addStyle(int flag, int start, int end)` -> `void`
@@ -5353,6 +5525,9 @@
 ## `org.telegram.ui.Components.FiltersListBottomSheet`
 - `canDismissWithSwipe()` -> `boolean`
 
+## `org.telegram.ui.Components.FlickerLoadingView`
+- `addColorKeys(HashSet<Integer> colors)` -> `void`
+
 ## `org.telegram.ui.Components.FloatSeekBarAccessibilityDelegate`
 - `canScrollBackward(View host)` -> `boolean`
 - `canScrollForward(View host)` -> `boolean`
@@ -5396,6 +5571,7 @@
 - `addAdditionalView(View view)` -> `void`
 
 ## `org.telegram.ui.Components.FragmentSearchField`
+- `addColorKeys(HashSet<Integer> colors)` -> `void`
 - `addSearchFilter(FiltersView.MediaFilterData filter)` -> `void`
 - `removeSearchFilter(FiltersView.MediaFilterData filter)` -> `void`
 
@@ -5539,9 +5715,12 @@
 - `processColor(int color)` -> `int`
 
 ## `org.telegram.ui.Components.MarkdownParser`
+- `static isDiff(MessageObject msg)` -> `boolean`
+- `static isExtensionDiff(String ext)` -> `boolean`
 - `static isExtensionMarkdown(String ext)` -> `boolean`
 - `static isMarkdown(MessageObject msg)` -> `boolean`
 - `static isMarkdown(ArrayList<TL_iv.PageBlock> blocks)` -> `boolean`
+- `static isMimeDiff(String mime)` -> `boolean`
 - `static isMimeMarkdown(String mime)` -> `boolean`
 
 ## `org.telegram.ui.Components.MediaActivity`
@@ -5584,7 +5763,11 @@
 - `removeReply()` -> `void`
 
 ## `org.telegram.ui.Components.MessagePreviewView$TabsView`
+- `addColorKeys(HashSet<Integer> colors)` -> `void`
 - `addTab(int id, String text)` -> `void`
+
+## `org.telegram.ui.Components.MessagePreviewView$ToggleButton`
+- `addColorKeys(HashSet<Integer> colors)` -> `void`
 
 ## `org.telegram.ui.Components.MotionBackgroundDrawable`
 - `hasPattern()` -> `boolean`
@@ -5597,11 +5780,17 @@
 - `saveLayerAlpha(float left, float top, float right, float bottom, int alpha)` -> `int`
 - `saveLayerAlpha(float left, float top, float right, float bottom, int alpha, int saveFlags)` -> `int`
 
+## `org.telegram.ui.Components.NumberPicker`
+- `addColorKeys(java.util.HashSet<Integer> colors)` -> `void`
+
 ## `org.telegram.ui.Components.NumberPicker$PressedStateHelper`
 - `cancel()` -> `void`
 
 ## `org.telegram.ui.Components.OtherDocumentPlaceholderDrawable`
 - `checkFileExist()` -> `void`
+
+## `org.telegram.ui.Components.OutlineTextContainerView`
+- `addColorKeys(java.util.HashSet<Integer> colors)` -> `void`
 
 ## `org.telegram.ui.Components.Paint.Brush`
 - `isEraser()` -> `boolean`
@@ -5651,6 +5840,7 @@
 - `isEntityDeletable()` -> `default boolean`
 
 ## `org.telegram.ui.Components.Paint.Views.LPhotoPaintView`
+- `addColorKeys(HashSet<Integer> colors)` -> `void`
 - `requestLayout()` -> `void`
 
 ## `org.telegram.ui.Components.Paint.Views.LinkPreview$WebPagePreview`
@@ -5681,6 +5871,9 @@
 ## `org.telegram.ui.Components.PathAnimator`
 - `addSvgKeyFrame(String svg, float ms)` -> `void`
 
+## `org.telegram.ui.Components.PermanentLinkBottomSheet`
+- `addThemeColorKeys(HashSet<Integer> keys)` -> `void`
+
 ## `org.telegram.ui.Components.PermissionRequest`
 - `static canAskPermission(String permission)` -> `boolean`
 - `static hasPermission(String permission)` -> `boolean`
@@ -5708,7 +5901,11 @@
 - `saveValues()` -> `void`
 
 ## `org.telegram.ui.Components.PollVotesAlert`
+- `addThemeColorKeys(HashSet<Integer> keys)` -> `void`
 - `canDismissWithSwipe()` -> `boolean`
+
+## `org.telegram.ui.Components.PopupSwipeBackLayout`
+- `addOnSwipeBackProgressListener(OnSwipeBackProgressListener onSwipeBackProgressListener)` -> `void`
 
 ## `org.telegram.ui.Components.PostRunnableHolder`
 - `cancel(Runnable runnable)` -> `void`
@@ -5772,6 +5969,7 @@
 - `hasChanges()` -> `boolean`
 
 ## `org.telegram.ui.Components.Premium.boosts.UserSelectorBottomSheet`
+- `addMyGiftsOption()` -> `void`
 - `addTONOption(int days)` -> `void`
 
 ## `org.telegram.ui.Components.Premium.boosts.adapters.BoostAdapter`
@@ -5845,6 +6043,9 @@
 ## `org.telegram.ui.Components.RadialProgress`
 - `isDrawCheckDrawable()` -> `boolean`
 
+## `org.telegram.ui.Components.RadialProgressView`
+- `addColorKeys(HashSet<Integer> colors)` -> `void`
+
 ## `org.telegram.ui.Components.ReactedHeaderView`
 - `requestLayout()` -> `void`
 
@@ -5864,16 +6065,24 @@
 - `checkSection(boolean force)` -> `void`
 - `hasActiveEdgeEffects()` -> `boolean`
 - `hasOverlappingRendering()` -> `boolean`
+- `static hasSectionContentAboveTop(View child)` -> `boolean`
 - `hasSections()` -> `boolean`
 - `removeHighlightRow()` -> `void`
 - `removeOverlayView(View view)` -> `void`
 - `requestLayout()` -> `void`
+
+## `org.telegram.ui.Components.RecyclerListView$FastScroll`
+- `addColorKeys(HashSet<Integer> colors)` -> `void`
 
 ## `org.telegram.ui.Components.RecyclerListView$OnItemClickListenerExtended`
 - `hasDoubleTap(View view, int position)` -> `default boolean`
 
 ## `org.telegram.ui.Components.RecyclerListView$SectionsAdapter`
 - `isEnabled(ViewHolder holder)` -> `boolean`
+
+## `org.telegram.ui.Components.RecyclerPagerView`
+- `canScroll(MotionEvent event)` -> `boolean`
+- `onTabAnimationUpdate(boolean manual)` -> `void`
 
 ## `org.telegram.ui.Components.ReplaceableIconDrawable`
 - `addView(View view)` -> `void`
@@ -5898,6 +6107,7 @@
 - `removeTabs()` -> `void`
 
 ## `org.telegram.ui.Components.ScrollSlidingTextTabStrip`
+- `addColorKeys(HashSet<Integer> colors)` -> `void`
 - `addTextTab(final int id, CharSequence text)` -> `void`
 - `addTextTab(final int id, CharSequence text, SparseArray<View> viewsCache)` -> `void`
 - `hasTab(int id)` -> `boolean`
@@ -5931,6 +6141,11 @@
 - `cancelEnterAnimation()` -> `void`
 - `removeSearchFilter(FiltersView.MediaFilterData filterData)` -> `void`
 
+## `org.telegram.ui.Components.SectionsScrollView`
+- `addOnOverscrollChangedListener(OnOverscrollChangedListener listener)` -> `void`
+- `hasActiveOverscroll()` -> `boolean`
+- `removeOnOverscrollChangedListener(OnOverscrollChangedListener listener)` -> `void`
+
 ## `org.telegram.ui.Components.SeekBar`
 - `isDragging()` -> `boolean`
 - `onTimestampUpdate(URLSpanNoUnderline link)` -> `void`
@@ -5949,6 +6164,8 @@
 
 ## `org.telegram.ui.Components.SharedMediaLayout`
 - `addActionButtons()` -> `boolean`
+- `addColorKeys(HashSet<Integer> colors)` -> `void`
+- `addPagesOverlay(View view, int height)` -> `void`
 - `canClickButtonInside()` -> `boolean`
 - `canEditStories()` -> `boolean`
 - `canShowSearchItem()` -> `boolean`
@@ -5957,6 +6174,8 @@
 - `checkPinchToZoom(MotionEvent ev)` -> `boolean`
 - `checkTabsAnimationInProgress()` -> `boolean`
 - `hasInternet()` -> `boolean`
+- `hasSectionContentAboveTop()` -> `boolean`
+- `hasSimpleOptions()` -> `boolean`
 - `onActionModeSelectedUpdate(SparseArray<MessageObject> messageObjects)` -> `void`
 - `processColor(int color)` -> `int`
 - `saveAndStopAlbumsReorder()` -> `void`
@@ -5967,6 +6186,9 @@
 
 ## `org.telegram.ui.Components.SharedMediaLayout$GroupUsersSearchAdapter`
 - `removeUserId(long userId)` -> `void`
+
+## `org.telegram.ui.Components.SharedMediaLayout$MoreRecommendationsCell`
+- `addColorKeys(HashSet<Integer> colors)` -> `void`
 
 ## `org.telegram.ui.Components.SharedMediaLayout$SavedMessagesSearchAdapter`
 - `loadMore()` -> `void`
@@ -5986,7 +6208,11 @@
 ## `org.telegram.ui.Components.SharingLocationsAlert`
 - `canDismissWithSwipe()` -> `boolean`
 
+## `org.telegram.ui.Components.SiblingRecyclerPagerLayout`
+- `canStartPageSwipe()` -> `boolean`
+
 ## `org.telegram.ui.Components.SizeNotifierFrameLayout`
+- `addColorKeys(HashSet<Integer> colors)` -> `void`
 - `addDelegate(SizeNotifierFrameLayoutDelegate delegate)` -> `void`
 - `onUpdateBackgroundDrawable(Drawable drawable)` -> `void`
 - `removeDelegate(SizeNotifierFrameLayoutDelegate delegate)` -> `void`
@@ -6078,6 +6304,22 @@
 ## `org.telegram.ui.Components.ThanosEffect$DrawingThread$Animation`
 - `isDead()` -> `boolean`
 
+## `org.telegram.ui.Components.TopViewCell`
+- `addColorKeys(HashSet<Integer> colors)` -> `void`
+
+## `org.telegram.ui.Components.TopicsSidePanel`
+- `cancelAnimation()` -> `void`
+
+## `org.telegram.ui.Components.TopicsTabsView`
+- `addColorKeys(HashSet<Integer> colors)` -> `void`
+- `hasTopics()` -> `boolean`
+
+## `org.telegram.ui.Components.TopicsTabsView$HorizontalTabView`
+- `addColorKeys(HashSet<Integer> colors)` -> `void`
+
+## `org.telegram.ui.Components.TopicsTabsView$VerticalTabView`
+- `addColorKeys(HashSet<Integer> colors)` -> `void`
+
 ## `org.telegram.ui.Components.TranscribeButton`
 - `static canTranscribeTrial(MessageObject messageObject)` -> `boolean`
 - `static isFreeTranscribeInChat(MessageObject messageObject)` -> `boolean`
@@ -6087,17 +6329,27 @@
 ## `org.telegram.ui.Components.TranslateAlert2`
 - `canDismissWithSwipe()` -> `boolean`
 
+## `org.telegram.ui.Components.TranslateAlert3$Header`
+- `addColorKeys(HashSet<Integer> colors)` -> `void`
+
 ## `org.telegram.ui.Components.TranslateAlert3$Header$Factory`
 - `isClickable()` -> `boolean`
 
+## `org.telegram.ui.Components.TranslateAlert3$Text`
+- `addColorKeys(HashSet<Integer> colors)` -> `void`
+
 ## `org.telegram.ui.Components.TranslateAlert3$Text$Factory`
 - `isClickable()` -> `boolean`
+
+## `org.telegram.ui.Components.TranslateButton`
+- `addColorKeys(HashSet<Integer> colors)` -> `void`
 
 ## `org.telegram.ui.Components.UItem$UItemFactory`
 - `isClickable()` -> `boolean`
 - `isShadow()` -> `boolean`
 
 ## `org.telegram.ui.Components.UndoView`
+- `addColorKeys(HashSet<Integer> colors)` -> `void`
 - `canUndo()` -> `boolean`
 
 ## `org.telegram.ui.Components.UniversalAdapter`
@@ -6126,6 +6378,8 @@
 
 ## `org.telegram.ui.Components.ViewPagerFixed`
 - `addMoreTabs()` -> `void`
+- `addOnScrollListener(@NonNull OnScrollListener listener)` -> `void`
+- `addOnTabAnimationUpdateListener(OnTabAnimationUpdateListener listener)` -> `void`
 - `canScroll(MotionEvent e)` -> `boolean`
 - `canScrollBackward(MotionEvent e)` -> `boolean`
 - `canScrollForward(MotionEvent e)` -> `boolean`
@@ -6133,6 +6387,8 @@
 - `cancelTouches()` -> `void`
 - `checkTabsAnimationInProgress()` -> `boolean`
 - `onTabAnimationUpdate(boolean manual)` -> `void`
+- `onTabAnimationUpdateInternal(boolean manual)` -> `void`
+- `removeOnScrollListener(@NonNull OnScrollListener listener)` -> `void`
 - `requestDisallowInterceptTouchEvent(boolean disallowIntercept)` -> `void`
 
 ## `org.telegram.ui.Components.ViewPagerFixed$Adapter`
@@ -6159,6 +6415,9 @@
 
 ## `org.telegram.ui.Components.WebPlayerView$ControlsView`
 - `requestDisallowInterceptTouchEvent(boolean disallowIntercept)` -> `void`
+
+## `org.telegram.ui.Components.WidgetSandboxPlayer`
+- `isVisible()` -> `boolean`
 
 ## `org.telegram.ui.Components.chat.ChatInputViewsContainer`
 - `checkInsets()` -> `void`
@@ -6222,11 +6481,13 @@
 - `addView(View view)` -> `void`
 
 ## `org.telegram.ui.ContactAddActivity`
+- `addThemeColorKeys(HashSet<Integer> keys)` -> `void`
 - `canFinishFragment()` -> `boolean`
 
 ## `org.telegram.ui.ContactsActivity`
 - `addOrRemoveSelectedContact(UserCell cell)` -> `boolean`
 - `addOrRemoveSelectedContact(ProfileSearchCell cell)` -> `boolean`
+- `addThemeColorKeys(HashSet<Integer> keys)` -> `void`
 - `canParentTabsSlide(MotionEvent ev, boolean forward)` -> `boolean`
 
 ## `org.telegram.ui.ContentPreviewViewer`
@@ -6258,11 +6519,23 @@
 - `sendSticker(String emoji)` -> `default void`
 - `sendSticker(TLRPC.Document sticker, String query, Object parent, boolean notify, int scheduleDate, int scheduleRepeatPeriod)` -> `default void`
 
+## `org.telegram.ui.CountrySelectActivity`
+- `addThemeColorKeys(HashSet<Integer> keys)` -> `void`
+
 ## `org.telegram.ui.CountrySelectActivity$Country`
 - `hashCode()` -> `int`
 
+## `org.telegram.ui.DataAutoDownloadActivity`
+- `addThemeColorKeys(HashSet<Integer> keys)` -> `void`
+
+## `org.telegram.ui.DataUsage2Activity$ListView`
+- `checkInsets()` -> `void`
+
 ## `org.telegram.ui.DataUsage2Activity$ListView$Adapter`
 - `isEnabled(RecyclerView.ViewHolder holder)` -> `boolean`
+
+## `org.telegram.ui.DataUsageActivity`
+- `addThemeColorKeys(HashSet<Integer> keys)` -> `void`
 
 ## `org.telegram.ui.Delegates.MemberRequestsDelegate`
 - `hasAllImporters()` -> `boolean`
@@ -6273,6 +6546,15 @@
 
 ## `org.telegram.ui.DialogCacheBottomSheet`
 - `canDismissWithSwipe()` -> `boolean`
+
+## `org.telegram.ui.DialogOrContactPickerActivity`
+- `addThemeColorKeys(HashSet<Integer> keys)` -> `void`
+
+## `org.telegram.ui.EditWidgetActivity`
+- `addThemeColorKeys(HashSet<Integer> keys)` -> `void`
+
+## `org.telegram.ui.EnableTopicsActivity$TopicsLayoutSwitcher`
+- `addColorKeys(java.util.HashSet<Integer> colors)` -> `void`
 
 ## `org.telegram.ui.ExternalActionActivity`
 - `checkPasscode(final Intent intent, final boolean isNew, final boolean restore, final boolean fromPassword, final int intentAccount, int state)` -> `boolean`
@@ -6285,6 +6567,7 @@
 - `editname()` -> `void`
 
 ## `org.telegram.ui.FilterCreateActivity`
+- `addThemeColorKeys(HashSet<Integer> keys)` -> `void`
 - `static canAddToFolder(TLRPC.Chat chat)` -> `boolean`
 - `canBeginSlide()` -> `boolean`
 - `hasAnimatedEmojis(CharSequence cs)` -> `boolean`
@@ -6302,26 +6585,41 @@
 - `isEnabled(RecyclerView.ViewHolder holder)` -> `boolean`
 
 ## `org.telegram.ui.FilteredSearchView`
+- `addColorKeys(HashSet<Integer> colors)` -> `void`
 - `requestLayout()` -> `void`
 
 ## `org.telegram.ui.FilteredSearchView$MessageHashId`
 - `hashCode()` -> `int`
 
+## `org.telegram.ui.FiltersSetupActivity`
+- `addThemeColorKeys(HashSet<Integer> keys)` -> `void`
+
 ## `org.telegram.ui.FiltersSetupActivity$ListAdapter`
 - `isEnabled(RecyclerView.ViewHolder holder)` -> `boolean`
+
+## `org.telegram.ui.FiltersSetupActivity$TextCell`
+- `addColorKeys(HashSet<Integer> colors)` -> `void`
 
 ## `org.telegram.ui.GradientHeaderActivity`
 - `saveScrollPosition()` -> `void`
 
 ## `org.telegram.ui.GroupCreateActivity`
+- `addThemeColorKeys(HashSet<Integer> keys)` -> `void`
 - `canBeginSlide()` -> `boolean`
 
 ## `org.telegram.ui.GroupCreateFinalActivity`
+- `addThemeColorKeys(HashSet<Integer> keys)` -> `void`
 - `saveSelfArgs(Bundle args)` -> `void`
+
+## `org.telegram.ui.GroupInviteActivity`
+- `addThemeColorKeys(HashSet<Integer> keys)` -> `void`
 
 ## `org.telegram.ui.IArticleViewer`
 - `canStartSelection(View block)` -> `boolean`
 - `checkLayoutForLinks(MotionEvent event, View parentView)` -> `void`
+
+## `org.telegram.ui.IdenticonActivity`
+- `addThemeColorKeys(HashSet<Integer> keys)` -> `void`
 
 ## `org.telegram.ui.IntroActivity`
 - `hasForceLightStatusBar()` -> `boolean`
@@ -6330,12 +6628,18 @@
 - `isViewFromObject(View view, @NonNull Object object)` -> `boolean`
 - `saveState()` -> `Parcelable`
 
+## `org.telegram.ui.InviteContactsActivity`
+- `addThemeColorKeys(HashSet<Integer> keys)` -> `void`
+
 ## `org.telegram.ui.InviteContactsActivity$SpansContainer`
 - `addSpan(final GroupCreateSpan span)` -> `void`
 - `removeSpan(final GroupCreateSpan span)` -> `void`
 
 ## `org.telegram.ui.KeepMediaPopupView$ExceptionsView`
 - `requestLayout()` -> `void`
+
+## `org.telegram.ui.LanguageSelectActivity`
+- `addThemeColorKeys(HashSet<Integer> keys)` -> `void`
 
 ## `org.telegram.ui.LaunchActivity`
 - `addOnUserLeaveHintListener(Runnable callback)` -> `void`
@@ -6353,16 +6657,25 @@
 ## `org.telegram.ui.LauncherIconController`
 - `static isEnabled(LauncherIcon icon)` -> `boolean`
 
+## `org.telegram.ui.LinkEditActivity`
+- `addThemeColorKeys(HashSet<Integer> keys)` -> `void`
+
 ## `org.telegram.ui.LinkManager`
 - `getMessagesController()` -> `MessagesController`
 - `getUserConfig()` -> `UserConfig`
 - `static isWebAppLink(String url)` -> `boolean`
 
-## `org.telegram.ui.LocationActivity$MapOverlayView`
-- `addInfoView(IMapsProvider.IMarker marker)` -> `void`
-- `removeInfoView(IMapsProvider.IMarker marker)` -> `void`
+## `org.telegram.ui.LocationActivity`
+- `addThemeColorKeys(HashSet<Integer> keys)` -> `void`
+
+## `org.telegram.ui.LocationActivity$MapTextureListener`
+- `onSurfaceTextureUpdated(@NonNull SurfaceTexture surface)` -> `void`
+
+## `org.telegram.ui.LogoutActivity`
+- `addThemeColorKeys(HashSet<Integer> keys)` -> `void`
 
 ## `org.telegram.ui.MainTabsActivity`
+- `addThemeColorKeys(HashSet<Integer> keys)` -> `void`
 - `canBeginSlide()` -> `boolean`
 - `canScrollBackward(MotionEvent ev)` -> `boolean`
 - `canScrollForward(MotionEvent ev)` -> `boolean`
@@ -6375,11 +6688,15 @@
 - `addTabToIgnoreClick(View v)` -> `void`
 
 ## `org.telegram.ui.ManageLinksActivity`
+- `addThemeColorKeys(HashSet<Integer> keys)` -> `void`
 - `deleteLink(TLRPC.TL_chatInviteExported invite)` -> `void`
 - `editLink(TLRPC.TL_chatInviteExported invite)` -> `void`
 
 ## `org.telegram.ui.MessageSeenView`
 - `requestLayout()` -> `void`
+
+## `org.telegram.ui.MessageStatisticActivity`
+- `addThemeColorKeys(HashSet<Integer> keys)` -> `void`
 
 ## `org.telegram.ui.MultiLayoutTypingAnimator`
 - `isFadeBlock(Block block)` -> `boolean`
@@ -6387,20 +6704,35 @@
 - `isRunning()` -> `boolean`
 
 ## `org.telegram.ui.NewContactBottomSheet`
+- `addThemeColorKeys(HashSet<Integer> keys)` -> `void`
 - `static saveContact(Context context, String phone, String firstName, String lastName, String notes, AccountInfo into)` -> `boolean`
+
+## `org.telegram.ui.OrientationController`
+- `requestPortrait()` -> `Request`
 
 ## `org.telegram.ui.PasskeysActivity`
 - `added(TL_account.Passkey passkey)` -> `void`
 
 ## `org.telegram.ui.PassportActivity`
+- `addThemeColorKeys(HashSet<Integer> keys)` -> `void`
 - `static checkSecret(byte[] secret, Long id)` -> `boolean`
 - `saveSelfArgs(Bundle args)` -> `void`
 
+## `org.telegram.ui.PaymentFormActivity`
+- `addThemeColorKeys(HashSet<Integer> keys)` -> `void`
+
+## `org.telegram.ui.PhotoAlbumPickerActivity`
+- `addThemeColorKeys(HashSet<Integer> keys)` -> `void`
+
 ## `org.telegram.ui.PhotoPickerActivity`
+- `addThemeColorKeys(HashSet<Integer> keys)` -> `void`
 - `onPanTranslationUpdate(float y)` -> `void`
 
 ## `org.telegram.ui.PhotoPickerActivity$PhotoPickerActivityDelegate`
 - `canFinishFragment()` -> `default boolean`
+
+## `org.telegram.ui.PhotoPickerSearchActivity`
+- `addThemeColorKeys(java.util.HashSet<Integer> keys)` -> `void`
 
 ## `org.telegram.ui.PinchToZoomHelper`
 - `checkPinchToZoom(MotionEvent ev, View child, ImageReceiver image, View textureViewContainer, View textureView, MessageObject messageObject)` -> `boolean`
@@ -6409,16 +6741,45 @@
 - `isInOverlayModeFor(View child)` -> `boolean`
 
 ## `org.telegram.ui.PollCreateActivity`
+- `addThemeColorKeys(HashSet<Integer> keys)` -> `void`
 - `deleteItem(View v)` -> `void`
 
 ## `org.telegram.ui.PremiumPreviewFragment`
 - `canBeginSlide()` -> `boolean`
 
 ## `org.telegram.ui.PrivacyControlActivity`
+- `addThemeColorKeys(HashSet<Integer> keys)` -> `void`
 - `canBeginSlide()` -> `boolean`
 
 ## `org.telegram.ui.PrivacyUsersActivity`
+- `addThemeColorKeys(HashSet<Integer> keys)` -> `void`
 - `loadBlocked()` -> `PrivacyUsersActivity`
+
+## `org.telegram.ui.ProxyListActivity`
+- `addThemeColorKeys(HashSet<Integer> keys)` -> `void`
+
+## `org.telegram.ui.QrShare.QrBackdrops`
+- `load(@Nullable Runnable onDone)` -> `void`
+
+## `org.telegram.ui.QrShare.QrCodeLayer`
+- `isAnimating()` -> `boolean`
+
+## `org.telegram.ui.QrShare.QrRender`
+- `static hasEffects()` -> `boolean`
+- `static hasNodes()` -> `boolean`
+
+## `org.telegram.ui.QrShare.QrScanOverlay`
+- `static checkGalleryPermission(@Nullable android.app.Activity activity)` -> `boolean`
+- `static readQr(Bitmap bitmap, Utilities.CallbackReturn<String, Boolean> accept)` -> `String`
+
+## `org.telegram.ui.QrShare.QrShareActivity`
+- `canBeginSlide()` -> `boolean`
+
+## `org.telegram.ui.QrShare.QrShareView`
+- `canConsumeBack()` -> `boolean`
+- `cancelFree(String error)` -> `void`
+- `hasOverlappingRendering()` -> `boolean`
+- `removePickAt(int i)` -> `void`
 
 ## `org.telegram.ui.RecyclerListViewScroller`
 - `cancel()` -> `void`
@@ -6428,6 +6789,7 @@
 - `canDismissWithSwipe()` -> `boolean`
 
 ## `org.telegram.ui.RestrictedLanguagesSelectActivity`
+- `addThemeColorKeys(HashSet<Integer> keys)` -> `void`
 - `static checkRestrictedLanguages(boolean accountsChanged)` -> `void`
 
 ## `org.telegram.ui.RightSlidingDialogContainer`
@@ -6446,6 +6808,7 @@
 - `load()` -> `void`
 
 ## `org.telegram.ui.SessionsActivity`
+- `addThemeColorKeys(HashSet<Integer> keys)` -> `void`
 - `loadSessions(boolean silent)` -> `void`
 
 ## `org.telegram.ui.Stars.BotStarsController`
@@ -6491,6 +6854,7 @@
 - `loadSubscriptions()` -> `void`
 - `loadTransactions(int type)` -> `void`
 - `processUpdateMonoForumNoPaidException(long channelId, long userId, boolean nopaidMessagesException)` -> `void`
+- `removeProfileGiftLocally(long dialogId, TL_stars.SavedStarGift gift)` -> `void`
 - `sendPaidReaction(MessageObject messageObject, ChatActivity chatActivity)` -> `StarsController.PendingPaidReactions`
 - `sendPaidReaction(MessageObject messageObject, ChatActivity chatActivity, long amount, boolean affect, boolean checkBalance, Long peer)` -> `StarsController.PendingPaidReactions`
 
@@ -6505,8 +6869,11 @@
 ## `org.telegram.ui.Stars.StarsIntroActivity`
 - `static addAvailabilityRow(TableView tableView, int currentAccount, TL_stars.StarGift gift, Theme.ResourcesProvider resourcesProvider)` -> `void`
 - `static addStatusRow(TableView tableView, int currentAccount, long user_id, int msg_id, Theme.ResourcesProvider resourcesProvider, Runnable openUpgrade)` -> `void`
+- `isSwipeBackEnabled(MotionEvent event)` -> `boolean`
+- `saveScrollPosition()` -> `void`
 
 ## `org.telegram.ui.StatisticActivity`
+- `addThemeColorKeys(HashSet<Integer> keys)` -> `void`
 - `static putColorFromData(ChartViewData chartViewData, ArrayList<ThemeDescription> arrayList, ThemeDescription.ThemeDescriptionDelegate themeDelegate)` -> `void`
 
 ## `org.telegram.ui.StatisticActivity$ChartCell`
@@ -6529,10 +6896,18 @@
 - `remove(CacheControlActivity.DialogFileEntities dialogEntities)` -> `void`
 - `removeSelectedFiles()` -> `CacheControlActivity.DialogFileEntities`
 
+## `org.telegram.ui.TON.TONIntroActivity`
+- `isSwipeBackEnabled(MotionEvent event)` -> `boolean`
+- `saveScrollPosition()` -> `void`
+
+## `org.telegram.ui.TooManyCommunitiesActivity`
+- `addThemeColorKeys(HashSet<Integer> keys)` -> `void`
+
 ## `org.telegram.ui.TooManyCommunitiesActivity$SearchAdapter`
 - `processSearch(String query, int id)` -> `void`
 
 ## `org.telegram.ui.TopicsFragment`
+- `addThemeColorKeys(HashSet<Integer> keys)` -> `void`
 - `checkUi_listViewPadding()` -> `void`
 - `sendReorder()` -> `void`
 
@@ -6544,10 +6919,12 @@
 - `requestLayout()` -> `void`
 
 ## `org.telegram.ui.TwoStepVerificationActivity`
+- `addThemeColorKeys(HashSet<Integer> keys)` -> `void`
 - `static canHandleCurrentPassword(TL_account.Password password, boolean login)` -> `boolean`
 
 ## `org.telegram.ui.TwoStepVerificationSetupActivity`
 - `addFragmentToClose(BaseFragment fragment)` -> `void`
+- `addThemeColorKeys(HashSet<Integer> keys)` -> `void`
 - `hasForceLightStatusBar()` -> `boolean`
 
 ## `org.telegram.ui.UserInfoActivity`
@@ -6557,11 +6934,15 @@
 ## `org.telegram.ui.UserInfoActivity$AdminedChannelsFetcher`
 - `fetch()` -> `void`
 
+## `org.telegram.ui.UsersSelectActivity`
+- `addThemeColorKeys(HashSet<Integer> keys)` -> `void`
+
 ## `org.telegram.ui.UsersSelectActivity$SpansContainer`
 - `addSpan(final GroupCreateSpan span, boolean animated)` -> `void`
 - `removeSpan(final GroupCreateSpan span)` -> `void`
 
 ## `org.telegram.ui.ViewPagerActivity`
+- `addThemeColorKeys(HashSet<Integer> keys)` -> `void`
 - `canScrollBackward(MotionEvent ev)` -> `boolean`
 - `canScrollForward(MotionEvent ev)` -> `boolean`
 - `onViewPagerTabAnimationUpdate(boolean manual)` -> `void`
@@ -6571,6 +6952,9 @@
 - `canScrollBackward(MotionEvent e)` -> `boolean`
 - `canScrollForward(MotionEvent e)` -> `boolean`
 - `onTabAnimationUpdate(boolean manual)` -> `void`
+
+## `org.telegram.ui.Wallet.CollectibleCell`
+- `addColorKeys(HashSet<Integer> colors)` -> `void`
 
 ## `org.telegram.ui.Wallet.GramWallet`
 - `static addressEquals(String first, String second)` -> `boolean`
@@ -6601,6 +6985,7 @@
 - `isEndReached()` -> `boolean`
 - `isLoaded()` -> `boolean`
 - `isLoading()` -> `boolean`
+- `isSending(String address)` -> `boolean`
 - `load()` -> `void`
 
 ## `org.telegram.ui.Wallet.GramWallet$EmulationRequest`
@@ -6633,6 +7018,7 @@
 - `load(long sessionId, int messageId, Utilities.Callback2<Pending, String> callback)` -> `void`
 - `markProcessed(long sessionId, int messageId)` -> `void`
 - `onSessionUpdate(TL_wallet.tonConnectSession session)` -> `void`
+- `static requestText(Context context, CharSequence text, int size, Theme.ResourcesProvider provider)` -> `TextView`
 - `requestsProof(ConnectRequest context)` -> `boolean`
 
 ## `org.telegram.ui.Wallet.GramWalletTonConnect$Pending`
@@ -6644,21 +7030,39 @@
 - `canDismissWithSwipe()` -> `boolean`
 - `canSwipeToBack(MotionEvent event)` -> `boolean`
 
+## `org.telegram.ui.Wallet.NewBottomSheet`
+- `addColorKeys(HashSet<Integer> colors)` -> `void`
+
+## `org.telegram.ui.Wallet.TransactionCell`
+- `addColorKeys(HashSet<Integer> colors)` -> `void`
+
 ## `org.telegram.ui.Wallet.TransactionCell$SmartWalletAddressFormatter`
 - `add(String address)` -> `void`
 
 ## `org.telegram.ui.Wallet.WalletActionLayout`
 - `isDiamondDragging()` -> `boolean`
 - `isDiamondTouch(float x, float y)` -> `boolean`
+- `setCardUser(int account, long userId, boolean animated)` -> `void`
 
 ## `org.telegram.ui.Wallet.WalletActivity`
+- `canBeginSlide()` -> `boolean`
 - `isSupportEdgeToEdge()` -> `boolean`
+- `static isWalletQrLink(Uri uri)` -> `boolean`
+
+## `org.telegram.ui.Wallet.WalletActivity$LearnCell`
+- `addColorKeys(HashSet<Integer> colors)` -> `void`
+
+## `org.telegram.ui.Wallet.WalletActivity$TabsView`
+- `addColorKeys(HashSet<Integer> colors)` -> `void`
 
 ## `org.telegram.ui.Wallet.WalletActivity$WalletHeaderSnapHelper`
 - `cancelGesture()` -> `void`
 
-## `org.telegram.ui.Wallet.WalletCardView$WalletCardTextureView`
-- `onSurfaceTextureUpdated(SurfaceTexture surface)` -> `void`
+## `org.telegram.ui.Wallet.WalletActivity$WalletNestedLayout`
+- `cancelChildTouches()` -> `void`
+
+## `org.telegram.ui.Wallet.WalletCard2DMaterial`
+- `static isPrepared(int icon)` -> `boolean`
 
 ## `org.telegram.ui.Wallet.WalletChatSendTransition`
 - `cancel()` -> `void`
@@ -6682,6 +7086,9 @@
 ## `org.telegram.ui.Wallet.WalletKeysBackupFragment`
 - `isSupportEdgeToEdge()` -> `boolean`
 
+## `org.telegram.ui.Wallet.WalletKeysBackupFragment$LocalWalletCell`
+- `addColorKeys(HashSet<Integer> colors)` -> `void`
+
 ## `org.telegram.ui.Wallet.WalletSendEnterAmount`
 - `isSupportEdgeToEdge()` -> `boolean`
 - `setAllowOpenChat()` -> `WalletSendEnterAmount`
@@ -6695,15 +7102,22 @@
 ## `org.telegram.ui.Wallet.WalletTonConnectSessionsFragment`
 - `isSupportEdgeToEdge()` -> `boolean`
 
+## `org.telegram.ui.Wallet.WalletTonConnectSessionsFragment$TONConnectionCell`
+- `addColorKeys(HashSet<Integer> colors)` -> `void`
+
 ## `org.telegram.ui.Wallet.WalletWordCell`
 - `hasError()` -> `boolean`
 - `requestFieldFocus()` -> `void`
 
 ## `org.telegram.ui.WallpapersListActivity`
+- `addThemeColorKeys(HashSet<Integer> keys)` -> `void`
 - `saveSelfArgs(Bundle args)` -> `void`
 
 ## `org.telegram.ui.WallpapersListActivity$SearchAdapter`
 - `loadMoreResults()` -> `void`
+
+## `org.telegram.ui.WebviewActivity`
+- `addThemeColorKeys(HashSet<Integer> keys)` -> `void`
 
 ## `org.telegram.ui.WrappedResourceProvider`
 - `hasGradientService()` -> `boolean`
@@ -6716,6 +7130,9 @@
 - `static removeBot(Context context, int currentAccount, long botId)` -> `void`
 - `requestToken(String reason, Utilities.Callback2<Boolean, String> whenDecrypted)` -> `void`
 - `save()` -> `void`
+
+## `org.telegram.ui.bots.BotCommandsMenuView`
+- `addColorKeys(java.util.HashSet<Integer> colors)` -> `void`
 
 ## `org.telegram.ui.bots.BotDownloads`
 - `cancel(FileDownload file)` -> `void`
@@ -6750,11 +7167,13 @@
 - `static hasPrivacyCommand(TLRPC.UserFull userFull)` -> `boolean`
 - `isAttachedLightStatusBar()` -> `boolean`
 - `isFullSize()` -> `boolean`
+- `isFullyVisible()` -> `boolean`
 - `isShown()` -> `boolean`
 - `requestWebView(BaseFragment fragment, WebViewRequestProps props)` -> `void`
 - `saveState()` -> `BottomSheetTabs.WebTabData`
 
 ## `org.telegram.ui.bots.BotWebViewMenuContainer`
+- `addColorKeys(java.util.HashSet<Integer> colors)` -> `void`
 - `hasSavedText()` -> `boolean`
 - `saveState()` -> `BottomSheetTabs.WebTabData`
 
@@ -6764,6 +7183,12 @@
 - `requestWebView(BaseFragment fragment, WebViewRequestProps props)` -> `void`
 - `requestWebView(BaseFragment fragment, int currentAccount, String name, String url)` -> `void`
 - `saveState()` -> `BottomSheetTabs.WebTabData`
+
+## `org.telegram.ui.bots.BotWebViewSheet$WindowView`
+- `addColorKeys(HashSet<Integer> colors)` -> `void`
+
+## `org.telegram.ui.community.CommunityCreateActivity$CommunityHeaderView`
+- `addColorKeys(HashSet<Integer> colors)` -> `void`
 
 ## `org.telegram.ui.community.CommunityEditActivity`
 - `saveSelfArgs(Bundle args)` -> `void`
@@ -6785,6 +7210,18 @@
 - `loadNext()` -> `void`
 - `markAsViewed()` -> `void`
 
+## `org.telegram.ui.community.cells.CommunityLinkView`
+- `addColorKeys(HashSet<Integer> colors)` -> `void`
+
+## `org.telegram.ui.community.cells.CommunityLinkView2`
+- `addColorKeys(HashSet<Integer> colors)` -> `void`
+
+## `org.telegram.ui.community.cells.CommunityPendingRequestCell`
+- `addColorKeys(HashSet<Integer> colors)` -> `void`
+
+## `org.telegram.ui.community.cells.CommunityRequestsCell`
+- `addColorKeys(HashSet<Integer> colors)` -> `void`
+
 ## `org.telegram.ui.iv.BlockRow`
 - `isChecklist()` -> `boolean`
 - `isInList()` -> `boolean`
@@ -6795,9 +7232,15 @@
 - `isPending()` -> `boolean`
 - `isReady()` -> `boolean`
 
+## `org.telegram.ui.iv.RichButtonRowCell`
+- `addColorKeys(HashSet<Integer> colors)` -> `void`
+
 ## `org.telegram.ui.iv.RichCaptionController`
 - `isPressOnCaption(int localX, int localY)` -> `boolean`
 - `requestFocus()` -> `void`
+
+## `org.telegram.ui.iv.RichCommand$View`
+- `addColorKeys(HashSet<Integer> colors)` -> `void`
 
 ## `org.telegram.ui.iv.RichContainer`
 - `isDetails()` -> `boolean`
@@ -6805,7 +7248,14 @@
 - `isQuote()` -> `boolean`
 
 ## `org.telegram.ui.iv.RichDetailsCell`
+- `addColorKeys(HashSet<Integer> colors)` -> `void`
 - `requestEditFocus()` -> `void`
+
+## `org.telegram.ui.iv.RichDividerCell`
+- `addColorKeys(HashSet<Integer> colors)` -> `void`
+
+## `org.telegram.ui.iv.RichDocumentCell`
+- `addColorKeys(HashSet<Integer> colors)` -> `void`
 
 ## `org.telegram.ui.iv.RichEditText`
 - `addStyle(int flag, int start, int end)` -> `void`
@@ -6813,6 +7263,9 @@
 - `removeStyle(int flag, int start, int end)` -> `void`
 - `requestEditFocus()` -> `void`
 - `requestEditFocusRebuild()` -> `void`
+
+## `org.telegram.ui.iv.RichEditor$Button`
+- `addColorKeys(HashSet<Integer> colors)` -> `void`
 
 ## `org.telegram.ui.iv.RichEditorLimits`
 - `isWithin(AppGlobalConfig config)` -> `boolean`
@@ -6846,7 +7299,14 @@
 - `removeNestedReplacementSpans(Spannable text)` -> `void`
 
 ## `org.telegram.ui.iv.RichMapCell`
+- `addColorKeys(HashSet<Integer> colors)` -> `void`
 - `static hasGeo(TL_iv.pageBlockMap map)` -> `boolean`
+
+## `org.telegram.ui.iv.RichMathCell`
+- `addColorKeys(HashSet<Integer> colors)` -> `void`
+
+## `org.telegram.ui.iv.RichMediaCell`
+- `addColorKeys(HashSet<Integer> colors)` -> `void`
 
 ## `org.telegram.ui.iv.RichMediaConverter`
 - `cancel()` -> `void`
@@ -6869,12 +7329,14 @@
 
 ## `org.telegram.ui.iv.RichTableCell`
 - `addCellToSelection(TL_iv.pageTableCell cell)` -> `void`
+- `addColorKeys(HashSet<Integer> colors)` -> `void`
 - `addColumn()` -> `void`
 - `addRow()` -> `void`
 - `editTextForChildPos(int childPos)` -> `RichEditText`
 - `hasCellSelection()` -> `boolean`
 
 ## `org.telegram.ui.iv.RichTextCell`
+- `addColorKeys(HashSet<Integer> colors)` -> `void`
 - `static readAuthorPlain(TL_iv.PageBlock block)` -> `String`
 - `static readAuthorStyled(TL_iv.PageBlock block)` -> `CharSequence`
 - `static readPlainText(TL_iv.PageBlock block)` -> `String`
@@ -6897,6 +7359,9 @@
 - `isAnchor(int r, int c)` -> `boolean`
 - `static readPlainText(TL_iv.pageTableCell cell)` -> `String`
 - `static readStyledText(TL_iv.pageTableCell cell)` -> `CharSequence`
+
+## `org.telegram.ui.web.AddressBarList$BookmarkView`
+- `addColorKeys(HashSet<Integer> colors)` -> `void`
 
 ## `org.telegram.ui.web.AddressBarList$BookmarksList`
 - `delete(ArrayList<Integer> ids)` -> `void`
@@ -6965,6 +7430,7 @@
 - `static getTextSizeDecrement(int codeLength)` -> `int`
 - `static highlight(Spannable text, int start, int end, String language, int type, TextStyleSpan.TextStyleRun style, boolean smallerSize)` -> `void`
 - `static highlightEditable(CharSequence text, String language, Utilities.Callback<SpannableString> whenDone)` -> `void`
+- `static highlightMasked(Spannable text, String masked, String language, Runnable whenDone)` -> `void`
 - `static prepare()` -> `void`
 
 ## `org.telegram.utils.code.highlight.CodeHighlighting$CacheKey`
@@ -7064,7 +7530,10 @@
 - `static stopConnectionCheck()` -> `void`
 
 ## `org.telegram.utils.recorder.round.RoundVideoCodecRecorder`
+- `static createVideoEncoderFormat(int outputSize, int videoBitrate, int videoFrameRate)` -> `MediaFormat`
+- `static getPrependedHeaderSize(@NonNull MediaFormat format)` -> `int`
 - `getTimeOriginNs()` -> `long`
+- `getVideoFrameRate()` -> `int`
 - `isStarted()` -> `boolean`
 - `onFrameSubmitted(long presentationTimeUs, long submittedNs)` -> `void`
 - `prepare()` -> `Surface`
@@ -7097,7 +7566,11 @@
 - `closeForReplacement()` -> `void`
 - `createPreview(@NonNull File previewFile)` -> `void`
 - `finish()` -> `void`
+- `getDurationMs()` -> `long`
+- `getEncoderFrameRate()` -> `int`
 - `getFile()` -> `File`
+- `static sameCodecSpecificData(@Nullable MediaFormat first, @NonNull MediaFormat second, @NonNull String... keys)` -> `boolean`
+- `setEncoderFrameRate(int frameRate)` -> `void`
 - `setTrackFormat(boolean video, @NonNull MediaFormat format)` -> `void`
 - `writeSample(boolean video, @NonNull ByteBuffer source, @NonNull MediaCodec.BufferInfo sourceInfo, long timelineOffsetUs)` -> `void`
 
@@ -7120,9 +7593,8 @@
 - `release()` -> `void`
 
 ## `org.telegram.utils.recorder.round.RoundVideoRemuxer`
-- `static copyRange(@NonNull File source, @NonNull RoundVideoMp4Writer writer, long requestedStartMs, long requestedEndMs, boolean includeAudio)` -> `Result`
+- `static copyRange(@NonNull File source, @NonNull RoundVideoMp4Writer writer, long requestedStartMs, long requestedEndMs, boolean includeAudio, @NonNull EncoderConfig config)` -> `Result`
 - `static erase(@NonNull File file)` -> `void`
-- `static getDurationMs(@NonNull File file)` -> `long`
 
 ## `org.telegram.utils.recorder.round.RoundVideoSession`
 - `cancel()` -> `boolean`
@@ -7192,3 +7664,225 @@
 ## `org.telegram.utils.recorder.round.RoundVideoSwitchTimingStore`
 - `static getAverageMs(@NonNull RoundVideoSession.CameraFacing from, @NonNull RoundVideoSession.CameraFacing to)` -> `int`
 - `static recordAndGetAverageMs(@NonNull RoundVideoSession.CameraFacing from, @NonNull RoundVideoSession.CameraFacing to, int durationMs)` -> `int`
+
+## `org.telegram.utils.recorder.round.RoundVideoTranscoder`
+- `static transcode(@NonNull File source, long decodeFromUs, long startUs, long endUs, int outputSize, int videoBitrate, int videoFrameRate, @NonNull Sink sink)` -> `int`
+
+## `org.telegram.utils.recorder.round.RoundVideoTranscoder$CollectingSink`
+- `onFormat(@NonNull MediaFormat format)` -> `void`
+- `onSample(@NonNull ByteBuffer data, @NonNull MediaCodec.BufferInfo info)` -> `void`
+
+## `org.telegram.utils.recorder.round.RoundVideoTranscoder$FrameRenderer`
+- `awaitFrame()` -> `void`
+- `getInputSurface()` -> `Surface`
+- `release()` -> `void`
+
+## `org.telegram.utils.twidget.WidgetCanvas`
+- `allocationBytes()` -> `long`
+- `bitmap()` -> `Bitmap`
+- `read(int x, int y, int width, int height)` -> `byte[]`
+- `release()` -> `void`
+- `run(int width, int height, int[] ops, Resources resources)` -> `void`
+- `snapshot()` -> `Bitmap`
+
+## `org.telegram.utils.twidget.WidgetCanvas$Blend`
+- `static apply(Paint target, int index)` -> `void`
+
+## `org.telegram.utils.twidget.WidgetFrameNode$Node`
+- `beginRecording()` -> `Canvas`
+
+## `org.telegram.utils.twidget.WidgetFrameNode$PictureNode`
+- `beginRecording()` -> `Canvas`
+
+## `org.telegram.utils.twidget.WidgetGestureArbiter`
+- `static action(int verdict)` -> `int`
+- `cancel()` -> `void`
+- `static cancel(int verdict)` -> `boolean`
+- `down(double t, double x, double y, boolean claimX, boolean claimY, boolean hold)` -> `int`
+- `down(double t, double x, double y, boolean claimX, boolean claimY, boolean hold, boolean mouse, int button)` -> `int`
+- `static edge(int verdict)` -> `boolean`
+- `static gesture(int verdict)` -> `int`
+- `holdDeadline()` -> `double`
+- `move(double t, double x, double y)` -> `int`
+- `static owner(int verdict)` -> `int`
+- `release()` -> `void`
+- `tick(double t)` -> `int`
+- `up(double t, double x, double y)` -> `int`
+
+## `org.telegram.utils.twidget.WidgetMedia`
+- `static anchorBottom(String url, WidgetSandboxMessage message)` -> `boolean`
+- `static attach(String url, RichWidgetBlock block)` -> `boolean`
+- `static contentHeightPx(String url, WidgetSandboxMessage message, int widthPx)` -> `int`
+- `static detach(String url, RichWidgetBlock block)` -> `void`
+- `static find(String url)` -> `WidgetSandboxMessage`
+- `static heightSource(String url, WidgetSandboxMessage message, int widthPx)` -> `String`
+- `static isPreview(String url)` -> `boolean`
+- `static isWidget(TLRPC.MessageMedia media)` -> `boolean`
+- `static isWidgetUrl(String url)` -> `boolean`
+- `static onAppPaused(boolean paused)` -> `void`
+- `static onDataEdited(int account, long dialogId, int messageId, String publicData, long publicDataHash, String chatData)` -> `void`
+- `static onHeightsCleared(int account)` -> `void`
+- `static onHidden(WidgetSandboxMessage message)` -> `void`
+- `static onKillSwitch()` -> `void`
+- `static onMessageSent(int account, long dialogId, int oldId, int newId)` -> `void`
+- `static onShown(WidgetSandboxMessage message)` -> `void`
+- `static onStateCleared(int account)` -> `void`
+- `static previewUrl(int account, TLRPC.BotInlineResult result)` -> `String`
+- `static register(String url, RichWidgetBlock block)` -> `void`
+- `static registered(String url)` -> `RichWidgetBlock`
+- `static richMessage(MessageObject object, TLRPC.TL_messageMediaWidget media)` -> `TL_iv.RichMessage`
+- `static whenShownHeightsKnown(Runnable then, long limitMs)` -> `void`
+- `static widgetWidthPx(String url, int bubbleWidthPx)` -> `int`
+
+## `org.telegram.utils.twidget.WidgetMedia$Entry`
+- `storageKey()` -> `String`
+
+## `org.telegram.utils.twidget.WidgetMedia$Heights`
+- `anchorBottom()` -> `boolean`
+- `load(ArrayList<int[]> rows)` -> `void`
+- `near(int width)` -> `int`
+- `nearest(int width)` -> `int[]`
+- `put(int width, int height)` -> `boolean`
+- `put(int width, int height, boolean anchorBottom)` -> `boolean`
+
+## `org.telegram.utils.twidget.WidgetPng`
+- `static decodeBroken(byte[] bytes)` -> `Bitmap`
+
+## `org.telegram.utils.twidget.WidgetSandboxBackend`
+- `static featureSettings(String features)` -> `String`
+- `formatIntl(byte[] request)` -> `byte[]`
+- `loadImage(int id, byte[] encodedUrl)` -> `float[]`
+- `record(byte[] encodedList, byte[] encodedComposition, double nativeClock, int width, int height, float density, float layoutMs, int passes, int builds)` -> `void`
+- `recordLayer(int index, int version, byte[] encodedList)` -> `void`
+- `selectableText(byte[] encodedRuns)` -> `void`
+- `signal(int kind, byte[] message)` -> `void`
+
+## `org.telegram.utils.twidget.WidgetSandboxIntl`
+- `static format(String json)` -> `String`
+
+## `org.telegram.utils.twidget.WidgetSandboxMessage`
+- `activate()` -> `void`
+- `anchorBottom()` -> `boolean`
+- `answerRequest(long id, int failure, String result)` -> `void`
+- `dark()` -> `boolean`
+- `dropSnapshot()` -> `void`
+- `ensureDisplayList()` -> `void`
+- `failure()` -> `String`
+- `forget()` -> `void`
+- `frame()` -> `WidgetSandboxSession.Frame`
+- `frameWidthPx()` -> `int`
+- `hasLoadedFrame()` -> `boolean`
+- `hasSession()` -> `boolean`
+- `hasSnapshot()` -> `boolean`
+- `hasTheme()` -> `boolean`
+- `heightPx()` -> `int`
+- `hover(int action, float x, float y, int modifiers)` -> `void`
+- `isActive()` -> `boolean`
+- `onAction(JSONObject action)` -> `void`
+- `onCopyText(String text)` -> `void`
+- `onCursor(String cursor)` -> `void`
+- `onDiagnostics(JSONObject diagnostics)` -> `void`
+- `onFailure(String message)` -> `void`
+- `onFrame(WidgetSandboxSession from)` -> `void`
+- `onGesture(boolean x, boolean y, boolean hold)` -> `void`
+- `onRequest(long id, String data, boolean wallet)` -> `void`
+- `onStorageCommit(String area, JSONObject values)` -> `void`
+- `onWallet(long id, JSONObject call)` -> `void`
+- `onWatchPublicData(boolean on)` -> `void`
+- `release()` -> `void`
+- `reload()` -> `void`
+- `static safeAreaJson(float bottom, float corner)` -> `String`
+- `scriptsRunning()` -> `boolean`
+- `session()` -> `WidgetSandboxSession`
+- `sessions()` -> `int`
+- `setContext(String context)` -> `void`
+- `setDarkTheme(boolean dark)` -> `void`
+- `setData(String data)` -> `void`
+- `setEvents(Events events)` -> `void`
+- `setPaused(boolean paused)` -> `void`
+- `setSafeArea(float bottom, float corner, boolean exact)` -> `void`
+- `setSdk(String locale, String storage)` -> `void`
+- `setTheme(String theme)` -> `void`
+- `setVisible(boolean visible)` -> `void`
+- `setWidthPx(int width)` -> `void`
+- `touch(int action, float x, float y, int pointer, boolean primary, boolean mouse, int modifiers, int button)` -> `void`
+- `unbind(WidgetSandboxPlayer player)` -> `void`
+- `unload()` -> `void`
+- `watchesPublicData()` -> `boolean`
+
+## `org.telegram.utils.twidget.WidgetSandboxMessage$Events`
+- `onCopyText(WidgetSandboxMessage message, String text)` -> `default void`
+- `onLoadedFrame(WidgetSandboxMessage message)` -> `default void`
+- `onRequest(WidgetSandboxMessage message, long id, String data, boolean wallet)` -> `default void`
+- `onResized(WidgetSandboxMessage message)` -> `default void`
+- `onStorageCommit(WidgetSandboxMessage message, String area, JSONObject values)` -> `default void`
+- `onWallet(WidgetSandboxMessage message, long id, JSONObject call)` -> `default void`
+- `onWatchPublicData(WidgetSandboxMessage message)` -> `default void`
+
+## `org.telegram.utils.twidget.WidgetSandboxPainter`
+- `static argb(JSONObject json, String key)` -> `int`
+- `static floats(JSONArray array, float[] out, int count, float... fallback)` -> `void`
+- `static lineStyle(Paint paint, JSONObject json, float width, float defaultMiter)` -> `void`
+- `paint(Canvas canvas, JSONArray list, Resources resources, float density)` -> `void`
+- `static readPath(JSONObject json, Path into)` -> `Path`
+- `static readRect(JSONObject json, String key, RectF out)` -> `RectF`
+- `static stopColors(JSONArray stops)` -> `int[]`
+
+## `org.telegram.utils.twidget.WidgetSandboxPainter$Effects`
+- `static backdrop(WidgetSandboxPainter painter, State s, JSONArray list, int end, JSONObject command, Resources resources, float density)` -> `void`
+- `static beginFilter(FilterFrame frame, RectF box, JSONArray functions, float density)` -> `Canvas`
+- `static effect(JSONArray functions, float density, Shader.TileMode edges)` -> `RenderEffect`
+- `static endFilter(FilterFrame frame, float density)` -> `void`
+
+## `org.telegram.utils.twidget.WidgetSandboxResources`
+- `static prepare(Context context)` -> `File`
+- `static read(InputStream stream)` -> `String`
+
+## `org.telegram.utils.twidget.WidgetSandboxSession`
+- `answerRequest(long request, int failure, String result)` -> `void`
+- `close()` -> `void`
+- `closed()` -> `boolean`
+- `static disabledByConfig()` -> `boolean`
+- `dump()` -> `String`
+- `ensureDisplayList()` -> `void`
+- `failure()` -> `String`
+- `frame()` -> `Frame`
+- `hasLoadedFrame()` -> `boolean`
+- `hover(int action, float x, float y, int modifiers)` -> `void`
+- `loaded()` -> `boolean`
+- `onRecorded(float parseMs, float canvasMs)` -> `void`
+- `onWorkerFrame(WidgetFrameNode node, Layer[] layers, double clockOffset, int width, int height, float layout, float record, int passes, int builds, int ops, WidgetText text)` -> `void`
+- `onWorkerSignal(int kind, String message)` -> `void`
+- `releaseScripts()` -> `void`
+- `scriptsReleased()` -> `boolean`
+- `setAttackListener(Utilities.Callback<String> listener)` -> `void`
+- `setConformanceListener(Utilities.Callback<String> listener)` -> `void`
+- `setDarkTheme(boolean dark)` -> `void`
+- `setData(String data)` -> `void`
+- `setListener(Listener listener)` -> `void`
+- `setSafeArea(String area)` -> `void`
+- `setSdk(String json)` -> `void`
+- `setStressListener(Utilities.Callback2<Integer, String> listener)` -> `void`
+- `setTheme(String theme)` -> `void`
+- `setVisible(boolean visible)` -> `void`
+- `setWidthPx(int width)` -> `void`
+- `setWorkListener(Utilities.Callback<float[]> listener)` -> `void`
+- `start(int widthPx, boolean holdScripts)` -> `void`
+- `touch(int action, float x, float y, int pointer, boolean primary)` -> `void`
+- `touch(int action, float x, float y, int pointer, boolean primary, boolean mouse, int modifiers, int button)` -> `void`
+- `widthPx()` -> `int`
+
+## `org.telegram.utils.twidget.WidgetSandboxSession$Frame`
+- `recorded()` -> `boolean`
+
+## `org.telegram.utils.twidget.WidgetSandboxSession$Listener`
+- `onAction(JSONObject action)` -> `default void`
+- `onCopyText(String text)` -> `default void`
+- `onCursor(String cursor)` -> `default void`
+- `onRequest(long id, String data, boolean wallet)` -> `default void`
+- `onStorageCommit(String area, JSONObject values)` -> `default void`
+- `onWallet(long id, JSONObject call)` -> `default void`
+- `onWatchPublicData(boolean on)` -> `default void`
+
+## `org.telegram.utils.twidget.WidgetText`
+- `static parse(String json, Fonts fonts, float density)` -> `WidgetText`

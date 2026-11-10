@@ -1,4 +1,4 @@
-# function / settings (322 методов)
+# function / settings (339 методов)
 
 ## `org.telegram.messenger.GoogleMapsProvider$GoogleUISettings`
 - `setCompassEnabled(boolean enabled)` -> `void`
@@ -53,6 +53,7 @@
 - `static isAppUpdateAvailable()` -> `boolean`
 - `static isAutoplayGifs()` -> `boolean`
 - `static isAutoplayVideo()` -> `boolean`
+- `static isCompactMode(int currentAccount, long dialogId)` -> `boolean`
 - `static isPassportConfigLoaded()` -> `boolean`
 - `static isProxyEnabled()` -> `boolean`
 - `static isSecretMapPreviewSet()` -> `boolean`
@@ -97,6 +98,7 @@
 - `static toggleBigEmoji()` -> `void`
 - `static toggleBrowserAdaptableColors()` -> `void`
 - `static toggleChatBlur()` -> `void`
+- `static toggleCompactMode()` -> `void`
 - `static toggleDebugVideoQualities()` -> `void`
 - `static toggleDebugWebView()` -> `void`
 - `static toggleDirectShare()` -> `void`
@@ -130,6 +132,7 @@
 - `static toggleUseCamera2(int currentAccount)` -> `void`
 - `static toggleUseNewBlur()` -> `void`
 - `static toggleUseSystemBoldFont()` -> `void`
+- `static toggleWidgetStaticLayers()` -> `void`
 - `static updateChatListSwipeSetting(int newAction)` -> `void`
 - `static updateEmojiInteractionsHintCount(int count)` -> `void`
 - `static updateMessageSeenHintCount(int count)` -> `void`
@@ -411,24 +414,58 @@
 ## `org.telegram.ui.Cells.EditTextSettingsCell`
 - `addTextWatcher(TextWatcher watcher)` -> `void`
 
-## `org.telegram.ui.Components.RoundVideoSettings`
-- `static isCompositionEnabled()` -> `boolean`
-- `static isEnabled()` -> `boolean`
+## `org.telegram.ui.DataSettingsActivity`
+- `addThemeColorKeys(HashSet<Integer> keys)` -> `void`
+
+## `org.telegram.ui.DebugSettingsActivity`
+- `isSupportEdgeToEdge()` -> `boolean`
+
+## `org.telegram.ui.HeaderSettingsActivity`
+- `isSupportEdgeToEdge()` -> `boolean`
 
 ## `org.telegram.ui.LiteModeSettingsActivity$Adapter`
 - `isEnabled(RecyclerView.ViewHolder holder)` -> `boolean`
+
+## `org.telegram.ui.LiteModeSettingsActivity$PowerSaverSlider`
+- `addColorKeys(java.util.HashSet<Integer> colors)` -> `void`
+
+## `org.telegram.ui.NotificationsCustomSettingsActivity`
+- `addThemeColorKeys(HashSet<Integer> keys)` -> `void`
 
 ## `org.telegram.ui.NotificationsCustomSettingsActivity$ListAdapter`
 - `isEnabled(RecyclerView.ViewHolder holder)` -> `boolean`
 
 ## `org.telegram.ui.NotificationsSettingsActivity`
+- `addThemeColorKeys(HashSet<Integer> keys)` -> `void`
 - `loadExceptions(Runnable onDone)` -> `void`
+
+## `org.telegram.ui.PrivacySettingsActivity`
+- `addThemeColorKeys(HashSet<Integer> keys)` -> `void`
+
+## `org.telegram.ui.ProxySettingsActivity`
+- `addThemeColorKeys(HashSet<Integer> keys)` -> `void`
 
 ## `org.telegram.ui.SettingsActivity`
 - `canParentTabsSlide(MotionEvent ev, boolean forward)` -> `boolean`
 
+## `org.telegram.ui.SettingsActivity$AccountCell`
+- `addColorKeys(HashSet<Integer> colors)` -> `void`
+
+## `org.telegram.ui.SettingsActivity$SettingCell`
+- `addColorKeys(HashSet<Integer> colors)` -> `void`
+
+## `org.telegram.ui.SettingsActivity$SuggestionCell`
+- `addColorKeys(HashSet<Integer> colors)` -> `void`
+
 ## `org.telegram.ui.ThemeActivity`
+- `addThemeColorKeys(HashSet<Integer> keys)` -> `void`
 - `checkCurrentDayNight()` -> `void`
+
+## `org.telegram.ui.ThemeActivity$BubbleRadiusCell`
+- `addColorKeys(HashSet<Integer> colors)` -> `void`
+
+## `org.telegram.ui.ThemeActivity$ThemedBrightnessControlCell`
+- `addColorKeys(HashSet<Integer> colors)` -> `void`
 
 ## `org.telegram.ui.TopicsNotifySettingsFragments$Adapter`
 - `isEnabled(RecyclerView.ViewHolder holder)` -> `boolean`
@@ -436,6 +473,10 @@
 ## `org.telegram.ui.web.WebBrowserSettings`
 - `isLightStatusBar()` -> `boolean`
 - `isSupportEdgeToEdge()` -> `boolean`
+
+## `org.telegram.utils.glass.GlassSettings`
+- `equals(Object object)` -> `boolean`
+- `hashCode()` -> `int`
 
 ## `org.telegram.utils.proxy.ProxySettings`
 - `static builder()` -> `Builder`

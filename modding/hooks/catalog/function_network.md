@@ -1,4 +1,4 @@
-# function / network (6363 методов)
+# function / network (6466 методов)
 
 ## `org.telegram.messenger.MessagesController`
 - `addDialogAction(long did, boolean clean)` -> `void`
@@ -32,6 +32,8 @@
 - `checkCanOpenChat(Bundle bundle, BaseFragment fragment, MessageObject originalMessage, Browser.Progress progress)` -> `boolean`
 - `checkChatInviter(long chatId, boolean _createMessage)` -> `void`
 - `checkChatlistFolderUpdate(int filterId, boolean invalidate)` -> `void`
+- `checkDialogReplied(long dialogId, ArrayList<MessageObject> messages)` -> `void`
+- `checkDialogRepliedMessages(long dialogId, ArrayList<TLRPC.Message> messages)` -> `void`
 - `checkEmailSuggestion()` -> `int`
 - `checkIfFolderEmpty(int folderId)` -> `void`
 - `checkIsInChat(boolean tryCacheFirst, TLRPC.Chat chat, TLRPC.User user, IsInChatCheckedCallback callback)` -> `void`
@@ -259,6 +261,7 @@
 - `static isSupportUser(TLRPC.User user)` -> `boolean`
 - `isTranslationsAutoEnabled()` -> `boolean`
 - `isTranslationsManualEnabled()` -> `boolean`
+- `isUntrustedDialog(long dialogId)` -> `boolean`
 - `isUserContactBlocked(long userId)` -> `TL_account.RequirementToContact`
 - `isUserContactBlocked(long userId, boolean cache)` -> `TL_account.RequirementToContact`
 - `isUserNoForwards(long userId)` -> `boolean`
@@ -427,7 +430,7 @@
 - `storyEntitiesAllowed(TLRPC.User user)` -> `boolean`
 - `static toInputDocument(TLRPC.Document document)` -> `TLRPC.InputDocument`
 - `static toInputMedia(TLRPC.MessageMedia media)` -> `TLRPC.InputMedia`
-- `toggleChannelForum(long chatId, boolean enabled, boolean tabsEnabled)` -> `void`
+- `toggleChannelForum(long chatId, boolean enabled, boolean tabsEnabled, boolean sidebarEnabled)` -> `void`
 - `toggleChannelInvitesHistory(long chatId, boolean enabled)` -> `void`
 - `toggleChannelSignatures(long chatId, boolean signaturesEnabled, boolean profilesEnabled)` -> `void`
 - `toggleChatJoinRequest(long chatId, boolean enabled, Runnable onSuccess, Runnable onError)` -> `void`
@@ -539,6 +542,7 @@
 - `clearUserPhoto(long dialogId, long pid)` -> `void`
 - `clearUserPhotos(long dialogId)` -> `void`
 - `clearWidgetDialogs(int widgetId)` -> `void`
+- `clearWidgetHeights()` -> `void`
 - `closeHolesInMedia(long did, int minId, int maxId, int type, long topicId)` -> `void`
 - `completeTaskForGuid(Runnable runnable, int guid)` -> `void`
 - `containsLocalDialog(long did)` -> `boolean`
@@ -591,7 +595,6 @@
 - `getEncryptedChatsInternal(String chatsToLoad, ArrayList<TLRPC.EncryptedChat> result, ArrayList<Long> usersToLoad)` -> `void`
 - `getEphemeralMessages(long dialogId, long topicId, Utilities.Callback<ArrayList<TL_ephemeral.EphemeralMessage>> callback)` -> `void`
 - `getEphemeralMessagesInternal(long dialogId, ArrayList<Integer> ids)` -> `ArrayList<TL_ephemeral.EphemeralMessage>`
-- `getForumTypeFlags(long dialogId)` -> `int`
 - `static getInstance(int num)` -> `MessagesStorage`
 - `getLastDateValue()` -> `int`
 - `getLastPtsValue()` -> `int`
@@ -611,7 +614,7 @@
 - `getSecretPBytes()` -> `byte[]`
 - `getSentFile(String path, int type)` -> `Object[]`
 - `getSmallGroupsParticipantsCount()` -> `HashMap<Long, Integer>`
-- `getStorageQueue()` -> `DispatchQueue`
+- `getStorageQueue()` -> `DispatchQueue2`
 - `getUnreadMention(long dialog_id, long topicId, IntCallback callback)` -> `void`
 - `getUnsentMessages(int count)` -> `void`
 - `getUser(long userId)` -> `TLRPC.User`
@@ -623,13 +626,12 @@
 - `getWallpapers()` -> `void`
 - `getWidgetDialogIds(int widgetId, int type, ArrayList<Long> dids, ArrayList<TLRPC.User> users, ArrayList<TLRPC.Chat> chats, boolean edit)` -> `void`
 - `getWidgetDialogs(int widgetId, int type, ArrayList<Long> dids, LongSparseArray<TLRPC.Dialog> dialogs, LongSparseArray<TLRPC.Message> messages, ArrayList<TLRPC.User> users, ArrayList<TLRPC.Chat> chats)` -> `void`
+- `getWidgetState(long dialogId, int messageId)` -> `Object[]`
 - `hasAuthMessage(int date)` -> `boolean`
 - `hasInviteMeMessage(long chatId)` -> `boolean`
 - `isDatabaseMigrationInProgress()` -> `boolean`
 - `isDialogHasTopMessage(long did, Runnable onDontExist)` -> `void`
-- `isForum(long dialogId, int type)` -> `boolean`
 - `isMigratedChat(long chatId)` -> `boolean`
-- `isMonoForum(long dialogId)` -> `boolean`
 - `static isValidKeyboardToSave(TLRPC.Message message)` -> `boolean`
 - `loadChannelAdmins(long chatId)` -> `void`
 - `loadChatInfo(long chatId, boolean isChannel, CountDownLatch countDownLatch, boolean force, boolean byChannelUsers)` -> `TLRPC.ChatFull`
@@ -658,6 +660,7 @@
 - `markMessagesAsRead(LongSparseIntArray inbox, LongSparseIntArray outbox, SparseIntArray encryptedMessages, boolean useQueue)` -> `void`
 - `markMessagesContentAsRead(long dialogId, ArrayList<Integer> mids, int currentDate, int readDate)` -> `void`
 - `markVoiceMessageContentAsRead(long dialogId, ArrayList<Integer> mids)` -> `void`
+- `moveWidgetState(long dialogId, int oldId, int newId)` -> `void`
 - `onDeleteQueryComplete(long did)` -> `void`
 - `openDatabase(int openTries)` -> `void`
 - `overwriteChannel(long channelId, TLRPC.TL_updates_channelDifferenceTooLong difference, int newDialogType, Runnable onDone)` -> `void`
@@ -685,6 +688,8 @@
 - `putWallpapers(ArrayList<TLRPC.WallPaper> wallPapers, int action)` -> `void`
 - `putWebPages(LongSparseArray<TLRPC.WebPage> webPages)` -> `void`
 - `putWidgetDialogs(int widgetId, ArrayList<TopicKey> dids)` -> `void`
+- `putWidgetHeight(long dialogId, int messageId, int width, int height, int anchor, int keep)` -> `void`
+- `putWidgetStorage(long dialogId, int messageId, String local)` -> `void`
 - `readAllDialogs(int folderId)` -> `void`
 - `removeAllTopics(long dialogId)` -> `void`
 - `removeFromDownloadQueue(long id, int type, boolean move)` -> `void`
@@ -749,6 +754,7 @@
 - `updateMessageVoiceTranscription(long dialogId, int messageId, String text, long transcriptionId, boolean isFinal)` -> `void`
 - `updateMessageVoiceTranscription(long dialogId, int messageId, String text, TLRPC.Message saveFromMessage)` -> `void`
 - `updateMessageVoiceTranscriptionOpen(long dialogId, int msgId, TLRPC.Message saveFromMessage)` -> `void`
+- `updateMessageWidgetData(long dialogId, int msgId, String publicData, long publicDataHash, String chatData)` -> `void`
 - `updateMutedDialogsFiltersCounters()` -> `void`
 - `updatePinnedMessages(long dialogId, ArrayList<Integer> ids, boolean pin, int totalCount, int maxId, boolean end, HashMap<Integer, MessageObject> messages)` -> `void`
 - `updateRanksInLastMessages(long dialogId, long userId, String rank)` -> `void`
@@ -840,7 +846,7 @@
 - `isTestBackend()` -> `boolean`
 - `static onBytesReceived(int amount, int networkType, final int currentAccount)` -> `void`
 - `static onBytesSent(int amount, int networkType, final int currentAccount)` -> `void`
-- `static onCaptchaCheck(final int currentAccount, final int requestToken, final String action, final String key_id)` -> `void`
+- `static onCaptchaCheck(final int currentAccount, final int requestToken, final int generation, final String action, final String key_id)` -> `void`
 - `static onConnectionStateChanged(final int state, final int currentAccount)` -> `void`
 - `static onIntegrityCheckClassic(final int currentAccount, final int requestToken, final String project, final String nonce)` -> `void`
 - `static onInternalPushReceived(final int currentAccount)` -> `void`
@@ -892,6 +898,9 @@
 ## `org.telegram.tgnet.ConnectionsManager$MozillaDnsLoadTask`
 - `doInBackground(Void... voids)` -> `NativeByteBuffer`
 - `onPostExecute(final NativeByteBuffer result)` -> `void`
+
+## `org.telegram.tgnet.ConnectionsManager$RequestException`
+- `getMessage()` -> `String`
 
 ## `org.telegram.tgnet.ConnectionsManager$ResolveHostByNameTask`
 - `addAddress(long address)` -> `void`
@@ -1495,12 +1504,29 @@
 - `readParams(InputSerializedData stream, boolean exception)` -> `void`
 - `serializeToStream(OutputSerializedData stream)` -> `void`
 
+## `org.telegram.tgnet.TLRPC$TL_auth_finishFirebasePnvLogin`
+- `deserializeResponseT(InputSerializedData stream, int constructor, boolean exception)` -> `auth_Authorization`
+- `serializeToStream(OutputSerializedData stream)` -> `void`
+
+## `org.telegram.tgnet.TLRPC$TL_auth_firebasePnvIntent`
+- `static TLdeserialize(InputSerializedData stream, int constructor, boolean exception)` -> `TL_auth_firebasePnvIntent`
+- `readParams(InputSerializedData stream, boolean exception)` -> `void`
+- `serializeToStream(OutputSerializedData stream)` -> `void`
+
+## `org.telegram.tgnet.TLRPC$TL_auth_firebasePnvSignUp`
+- `deserializeResponseT(InputSerializedData stream, int constructor, boolean exception)` -> `auth_Authorization`
+- `serializeToStream(OutputSerializedData stream)` -> `void`
+
 ## `org.telegram.tgnet.TLRPC$TL_auth_importAuthorization`
 - `deserializeResponse(InputSerializedData stream, int constructor, boolean exception)` -> `TLObject`
 - `serializeToStream(OutputSerializedData stream)` -> `void`
 
 ## `org.telegram.tgnet.TLRPC$TL_auth_importLoginToken`
 - `deserializeResponse(InputSerializedData stream, int constructor, boolean exception)` -> `TLObject`
+- `serializeToStream(OutputSerializedData stream)` -> `void`
+
+## `org.telegram.tgnet.TLRPC$TL_auth_initFirebasePnvLogin`
+- `deserializeResponseT(InputSerializedData stream, int constructor, boolean exception)` -> `TL_auth_firebasePnvIntent`
 - `serializeToStream(OutputSerializedData stream)` -> `void`
 
 ## `org.telegram.tgnet.TLRPC$TL_auth_logOut`
@@ -1614,7 +1640,7 @@
 - `serializeToStream(OutputSerializedData stream)` -> `void`
 
 ## `org.telegram.tgnet.TLRPC$TL_auth_signUp`
-- `deserializeResponse(InputSerializedData stream, int constructor, boolean exception)` -> `TLObject`
+- `deserializeResponseT(InputSerializedData stream, int constructor, boolean exception)` -> `auth_Authorization`
 - `serializeToStream(OutputSerializedData stream)` -> `void`
 
 ## `org.telegram.tgnet.TLRPC$TL_authorization`
@@ -1708,6 +1734,10 @@
 - `serializeToStream(OutputSerializedData stream)` -> `void`
 
 ## `org.telegram.tgnet.TLRPC$TL_botInlineMessageText`
+- `readParams(InputSerializedData stream, boolean exception)` -> `void`
+- `serializeToStream(OutputSerializedData stream)` -> `void`
+
+## `org.telegram.tgnet.TLRPC$TL_botInlineMessageWidget`
 - `readParams(InputSerializedData stream, boolean exception)` -> `void`
 - `serializeToStream(OutputSerializedData stream)` -> `void`
 
@@ -2046,6 +2076,10 @@
 - `readParams(InputSerializedData stream, boolean exception)` -> `void`
 - `serializeToStream(OutputSerializedData stream)` -> `void`
 
+## `org.telegram.tgnet.TLRPC$TL_channelFull_layer231`
+- `readParams(InputSerializedData stream, boolean exception)` -> `void`
+- `serializeToStream(OutputSerializedData stream)` -> `void`
+
 ## `org.telegram.tgnet.TLRPC$TL_channelFull_layer48`
 - `readParams(InputSerializedData stream, boolean exception)` -> `void`
 - `serializeToStream(OutputSerializedData stream)` -> `void`
@@ -2287,6 +2321,10 @@
 - `serializeToStream(OutputSerializedData stream)` -> `void`
 
 ## `org.telegram.tgnet.TLRPC$TL_channel_layer227`
+- `readParams(InputSerializedData stream, boolean exception)` -> `void`
+- `serializeToStream(OutputSerializedData stream)` -> `void`
+
+## `org.telegram.tgnet.TLRPC$TL_channel_layer232`
 - `readParams(InputSerializedData stream, boolean exception)` -> `void`
 - `serializeToStream(OutputSerializedData stream)` -> `void`
 
@@ -2938,6 +2976,10 @@
 - `deserializeResponse(InputSerializedData stream, int constructor, boolean exception)` -> `TLObject`
 - `serializeToStream(OutputSerializedData stream)` -> `void`
 
+## `org.telegram.tgnet.TLRPC$TL_contacts_exportNoPaidMessagesToken`
+- `deserializeResponseT(InputSerializedData stream, int constructor, boolean exception)` -> `TL_exportedNoPaidMessagesToken`
+- `serializeToStream(OutputSerializedData stream)` -> `void`
+
 ## `org.telegram.tgnet.TLRPC$TL_contacts_found`
 - `static TLdeserialize(InputSerializedData stream, int constructor, boolean exception)` -> `TL_contacts_found`
 - `readParams(InputSerializedData stream, boolean exception)` -> `void`
@@ -2973,6 +3015,10 @@
 
 ## `org.telegram.tgnet.TLRPC$TL_contacts_importContacts`
 - `deserializeResponse(InputSerializedData stream, int constructor, boolean exception)` -> `TLObject`
+- `serializeToStream(OutputSerializedData stream)` -> `void`
+
+## `org.telegram.tgnet.TLRPC$TL_contacts_importNoPaidMessagesToken`
+- `deserializeResponseT(InputSerializedData stream, int constructor, boolean exception)` -> `User`
 - `serializeToStream(OutputSerializedData stream)` -> `void`
 
 ## `org.telegram.tgnet.TLRPC$TL_contacts_importedContacts`
@@ -3524,6 +3570,19 @@
 
 ## `org.telegram.tgnet.TLRPC$TL_exportedMessageLink`
 - `static TLdeserialize(InputSerializedData stream, int constructor, boolean exception)` -> `TL_exportedMessageLink`
+- `readParams(InputSerializedData stream, boolean exception)` -> `void`
+- `serializeToStream(OutputSerializedData stream)` -> `void`
+
+## `org.telegram.tgnet.TLRPC$TL_exportedNoPaidMessagesToken`
+- `static TLdeserialize(InputSerializedData stream, int constructor, boolean exception)` -> `TL_exportedNoPaidMessagesToken`
+- `readParams(InputSerializedData stream, boolean exception)` -> `void`
+- `serializeToStream(OutputSerializedData stream)` -> `void`
+
+## `org.telegram.tgnet.TLRPC$TL_exportedNoPaidMessagesToken_layer232`
+- `readParams(InputSerializedData stream, boolean exception)` -> `void`
+- `serializeToStream(OutputSerializedData stream)` -> `void`
+
+## `org.telegram.tgnet.TLRPC$TL_exportedNoPaidMessagesToken_legacy`
 - `readParams(InputSerializedData stream, boolean exception)` -> `void`
 - `serializeToStream(OutputSerializedData stream)` -> `void`
 
@@ -4099,6 +4158,14 @@
 - `readParams(InputSerializedData stream, boolean exception)` -> `void`
 - `serializeToStream(OutputSerializedData stream)` -> `void`
 
+## `org.telegram.tgnet.TLRPC$TL_inputMediaWidget`
+- `readParams(InputSerializedData stream, boolean exception)` -> `void`
+- `serializeToStream(OutputSerializedData stream)` -> `void`
+
+## `org.telegram.tgnet.TLRPC$TL_inputMediaWidgetId`
+- `readParams(InputSerializedData stream, boolean exception)` -> `void`
+- `serializeToStream(OutputSerializedData stream)` -> `void`
+
 ## `org.telegram.tgnet.TLRPC$TL_inputMessageEntityMentionName`
 - `readParams(InputSerializedData stream, boolean exception)` -> `void`
 - `serializeToStream(OutputSerializedData stream)` -> `void`
@@ -4355,6 +4422,10 @@
 - `serializeToStream(OutputSerializedData stream)` -> `void`
 
 ## `org.telegram.tgnet.TLRPC$TL_inputReplyToMessage_layer223`
+- `readParams(InputSerializedData stream, boolean exception)` -> `void`
+- `serializeToStream(OutputSerializedData stream)` -> `void`
+
+## `org.telegram.tgnet.TLRPC$TL_inputReplyToMessage_layer231`
 - `readParams(InputSerializedData stream, boolean exception)` -> `void`
 - `serializeToStream(OutputSerializedData stream)` -> `void`
 
@@ -4752,6 +4823,10 @@
 - `serializeToStream(OutputSerializedData stream)` -> `void`
 
 ## `org.telegram.tgnet.TLRPC$TL_messageActionNoForwardsToggle`
+- `readParams(InputSerializedData stream, boolean exception)` -> `void`
+- `serializeToStream(OutputSerializedData stream)` -> `void`
+
+## `org.telegram.tgnet.TLRPC$TL_messageActionNoPaidMessagesTokenUsed`
 - `readParams(InputSerializedData stream, boolean exception)` -> `void`
 - `serializeToStream(OutputSerializedData stream)` -> `void`
 
@@ -5242,6 +5317,17 @@
 - `readParams(InputSerializedData stream, boolean exception)` -> `void`
 - `serializeToStream(OutputSerializedData stream)` -> `void`
 
+## `org.telegram.tgnet.TLRPC$TL_messageMediaWidget`
+- `readParams(InputSerializedData stream, boolean exception)` -> `void`
+- `serializeToStream(OutputSerializedData stream)` -> `void`
+
+## `org.telegram.tgnet.TLRPC$TL_messageMediaWidget_layer233`
+- `readParams(InputSerializedData stream, boolean exception)` -> `void`
+
+## `org.telegram.tgnet.TLRPC$TL_messageMediaWidget_old`
+- `readParams(InputSerializedData stream, boolean exception)` -> `void`
+- `serializeToStream(OutputSerializedData stream)` -> `void`
+
 ## `org.telegram.tgnet.TLRPC$TL_messagePeerReaction`
 - `readParams(InputSerializedData stream, boolean exception)` -> `void`
 - `serializeToStream(OutputSerializedData stream)` -> `void`
@@ -5328,6 +5414,10 @@
 - `serializeToStream(OutputSerializedData stream)` -> `void`
 
 ## `org.telegram.tgnet.TLRPC$TL_messageReplyHeader_layer223`
+- `readParams(InputSerializedData stream, boolean exception)` -> `void`
+- `serializeToStream(OutputSerializedData stream)` -> `void`
+
+## `org.telegram.tgnet.TLRPC$TL_messageReplyHeader_layer231`
 - `readParams(InputSerializedData stream, boolean exception)` -> `void`
 - `serializeToStream(OutputSerializedData stream)` -> `void`
 
@@ -5506,6 +5596,11 @@
 - `serializeToStream(OutputSerializedData stream)` -> `void`
 
 ## `org.telegram.tgnet.TLRPC$TL_messages_botResults_layer71`
+- `readParams(InputSerializedData stream, boolean exception)` -> `void`
+- `serializeToStream(OutputSerializedData stream)` -> `void`
+
+## `org.telegram.tgnet.TLRPC$TL_messages_botWidgetQueryAnswer`
+- `static TLdeserialize(InputSerializedData stream, int constructor, boolean exception)` -> `TL_messages_botWidgetQueryAnswer`
 - `readParams(InputSerializedData stream, boolean exception)` -> `void`
 - `serializeToStream(OutputSerializedData stream)` -> `void`
 
@@ -5708,8 +5803,16 @@
 - `deserializeResponse(InputSerializedData stream, int constructor, boolean exception)` -> `TLObject`
 - `serializeToStream(OutputSerializedData stream)` -> `void`
 
+## `org.telegram.tgnet.TLRPC$TL_messages_editInlineBotMessageWidgetData`
+- `deserializeResponseT(InputSerializedData stream, int constructor, boolean exception)` -> `Bool`
+- `serializeToStream(OutputSerializedData stream)` -> `void`
+
 ## `org.telegram.tgnet.TLRPC$TL_messages_editMessage`
 - `deserializeResponseT(InputSerializedData stream, int constructor, boolean exception)` -> `TLRPC.Updates`
+- `serializeToStream(OutputSerializedData stream)` -> `void`
+
+## `org.telegram.tgnet.TLRPC$TL_messages_editMessageWidgetData`
+- `deserializeResponseT(InputSerializedData stream, int constructor, boolean exception)` -> `Updates`
 - `serializeToStream(OutputSerializedData stream)` -> `void`
 
 ## `org.telegram.tgnet.TLRPC$TL_messages_editMessage_layer226`
@@ -5717,6 +5820,10 @@
 
 ## `org.telegram.tgnet.TLRPC$TL_messages_editQuickReplyShortcut`
 - `deserializeResponse(InputSerializedData stream, int constructor, boolean exception)` -> `TLObject`
+- `serializeToStream(OutputSerializedData stream)` -> `void`
+
+## `org.telegram.tgnet.TLRPC$TL_messages_editWidgetData`
+- `deserializeResponseT(InputSerializedData stream, int constructor, boolean exception)` -> `Bool`
 - `serializeToStream(OutputSerializedData stream)` -> `void`
 
 ## `org.telegram.tgnet.TLRPC$TL_messages_emojiGameOutcome`
@@ -5791,6 +5898,13 @@
 
 ## `org.telegram.tgnet.TLRPC$TL_messages_getBotApp`
 - `deserializeResponse(InputSerializedData stream, int constructor, boolean exception)` -> `TLObject`
+- `serializeToStream(OutputSerializedData stream)` -> `void`
+
+## `org.telegram.tgnet.TLRPC$TL_messages_getBotWidgetQueryAnswer`
+- `deserializeResponseT(InputSerializedData stream, int constructor, boolean exception)` -> `TL_messages_botWidgetQueryAnswer`
+- `serializeToStream(OutputSerializedData stream)` -> `void`
+
+## `org.telegram.tgnet.TLRPC$TL_messages_getBotWidgetQueryAnswer_layer233`
 - `serializeToStream(OutputSerializedData stream)` -> `void`
 
 ## `org.telegram.tgnet.TLRPC$TL_messages_getChatInviteImporters`
@@ -6051,6 +6165,10 @@
 
 ## `org.telegram.tgnet.TLRPC$TL_messages_getWebViewResult`
 - `deserializeResponse(InputSerializedData stream, int constructor, boolean exception)` -> `TLObject`
+- `serializeToStream(OutputSerializedData stream)` -> `void`
+
+## `org.telegram.tgnet.TLRPC$TL_messages_getWidgetPublicData`
+- `deserializeResponseT(InputSerializedData stream, int constructor, boolean exception)` -> `messages_WidgetPublicData`
 - `serializeToStream(OutputSerializedData stream)` -> `void`
 
 ## `org.telegram.tgnet.TLRPC$TL_messages_hideAllChatJoinRequests`
@@ -6413,6 +6531,10 @@
 - `readParams(InputSerializedData stream, boolean exception)` -> `void`
 - `serializeToStream(OutputSerializedData stream)` -> `void`
 
+## `org.telegram.tgnet.TLRPC$TL_messages_setBotWidgetQueryAnswer`
+- `deserializeResponseT(InputSerializedData stream, int constructor, boolean exception)` -> `Bool`
+- `serializeToStream(OutputSerializedData stream)` -> `void`
+
 ## `org.telegram.tgnet.TLRPC$TL_messages_setChatAvailableReactions`
 - `deserializeResponse(InputSerializedData stream, int constructor, boolean exception)` -> `TLObject`
 - `serializeToStream(OutputSerializedData stream)` -> `void`
@@ -6574,6 +6696,14 @@
 
 ## `org.telegram.tgnet.TLRPC$TL_messages_webViewResult`
 - `static TLdeserialize(InputSerializedData stream, int constructor, boolean exception)` -> `TL_messages_webViewResult`
+- `readParams(InputSerializedData stream, boolean exception)` -> `void`
+- `serializeToStream(OutputSerializedData stream)` -> `void`
+
+## `org.telegram.tgnet.TLRPC$TL_messages_widgetPublicData`
+- `readParams(InputSerializedData stream, boolean exception)` -> `void`
+- `serializeToStream(OutputSerializedData stream)` -> `void`
+
+## `org.telegram.tgnet.TLRPC$TL_messages_widgetPublicDataNotModified`
 - `readParams(InputSerializedData stream, boolean exception)` -> `void`
 - `serializeToStream(OutputSerializedData stream)` -> `void`
 
@@ -7846,7 +7976,11 @@
 - `readParams(InputSerializedData stream, boolean exception)` -> `void`
 - `serializeToStream(OutputSerializedData stream)` -> `void`
 
-## `org.telegram.tgnet.TLRPC$TL_userFull_layer230`
+## `org.telegram.tgnet.TLRPC$TL_userFull_layer231`
+- `readParams(InputSerializedData stream, boolean exception)` -> `void`
+- `serializeToStream(OutputSerializedData stream)` -> `void`
+
+## `org.telegram.tgnet.TLRPC$TL_userFull_layer232`
 - `readParams(InputSerializedData stream, boolean exception)` -> `void`
 - `serializeToStream(OutputSerializedData stream)` -> `void`
 
@@ -7910,6 +8044,11 @@
 - `serializeToStream(OutputSerializedData stream)` -> `void`
 
 ## `org.telegram.tgnet.TLRPC$TL_userStatusRecently_layer171`
+- `readParams(InputSerializedData stream, boolean exception)` -> `void`
+- `serializeToStream(OutputSerializedData stream)` -> `void`
+
+## `org.telegram.tgnet.TLRPC$TL_userWallet`
+- `static TLdeserialize(InputSerializedData stream, int constructor, boolean exception)` -> `TL_userWallet`
 - `readParams(InputSerializedData stream, boolean exception)` -> `void`
 - `serializeToStream(OutputSerializedData stream)` -> `void`
 
@@ -8146,6 +8285,18 @@
 - `readParams(InputSerializedData stream, boolean exception)` -> `void`
 - `serializeToStream(OutputSerializedData stream)` -> `void`
 
+## `org.telegram.tgnet.TLRPC$TL_widgetQueryTypeData`
+- `readParams(InputSerializedData stream, boolean exception)` -> `void`
+- `serializeToStream(OutputSerializedData stream)` -> `void`
+
+## `org.telegram.tgnet.TLRPC$TL_widgetQueryTypeSentTransaction`
+- `readParams(InputSerializedData stream, boolean exception)` -> `void`
+- `serializeToStream(OutputSerializedData stream)` -> `void`
+
+## `org.telegram.tgnet.TLRPC$TL_widgetQueryTypeSignData`
+- `readParams(InputSerializedData stream, boolean exception)` -> `void`
+- `serializeToStream(OutputSerializedData stream)` -> `void`
+
 ## `org.telegram.tgnet.TLRPC$TodoCompletion`
 - `static TLdeserialize(InputSerializedData stream, int constructor, boolean exception)` -> `TodoCompletion`
 
@@ -8203,6 +8354,9 @@
 
 ## `org.telegram.tgnet.TLRPC$WebPageAttribute`
 - `static TLdeserialize(InputSerializedData stream, int constructor, boolean exception)` -> `WebPageAttribute`
+
+## `org.telegram.tgnet.TLRPC$WidgetQueryType`
+- `static TLdeserialize(InputSerializedData stream, int constructor, boolean exception)` -> `WidgetQueryType`
 
 ## `org.telegram.tgnet.TLRPC$auth_Authorization`
 - `static TLdeserialize(InputSerializedData stream, int constructor, boolean exception)` -> `auth_Authorization`
@@ -8305,6 +8459,10 @@
 
 ## `org.telegram.tgnet.TLRPC$messages_SponsoredMessages`
 - `static TLdeserialize(InputSerializedData stream, int constructor, boolean exception)` -> `messages_SponsoredMessages`
+
+## `org.telegram.tgnet.TLRPC$messages_WidgetPublicData`
+- `static TLdeserialize(InputSerializedData stream, int constructor, boolean exception)` -> `messages_WidgetPublicData`
+- `static fromConstructor(int constructor)` -> `messages_WidgetPublicData`
 
 ## `org.telegram.tgnet.TLRPC$messages_quickReplies`
 - `static TLdeserialize(InputSerializedData stream, int constructor, boolean exception)` -> `messages_quickReplies`
@@ -11183,6 +11341,22 @@
 - `readParams(InputSerializedData stream, boolean exception)` -> `void`
 - `serializeToStream(OutputSerializedData stream)` -> `void`
 
+## `org.telegram.tgnet.tl.TL_update$TL_updateBotWidgetCopyQuery`
+- `readParams(InputSerializedData stream, boolean exception)` -> `void`
+- `serializeToStream(OutputSerializedData stream)` -> `void`
+
+## `org.telegram.tgnet.tl.TL_update$TL_updateBotWidgetCopyQuery_layer233`
+- `readParams(InputSerializedData stream, boolean exception)` -> `void`
+- `serializeToStream(OutputSerializedData stream)` -> `void`
+
+## `org.telegram.tgnet.tl.TL_update$TL_updateBotWidgetQuery`
+- `readParams(InputSerializedData stream, boolean exception)` -> `void`
+- `serializeToStream(OutputSerializedData stream)` -> `void`
+
+## `org.telegram.tgnet.tl.TL_update$TL_updateBotWidgetQuery_layer233`
+- `readParams(InputSerializedData stream, boolean exception)` -> `void`
+- `serializeToStream(OutputSerializedData stream)` -> `void`
+
 ## `org.telegram.tgnet.tl.TL_update$TL_updateChannel`
 - `readParams(InputSerializedData stream, boolean exception)` -> `void`
 - `serializeToStream(OutputSerializedData stream)` -> `void`
@@ -11320,6 +11494,10 @@
 - `readParams(InputSerializedData stream, boolean exception)` -> `void`
 - `serializeToStream(OutputSerializedData stream)` -> `void`
 
+## `org.telegram.tgnet.tl.TL_update$TL_updateEditForumTopic`
+- `readParams(InputSerializedData stream, boolean exception)` -> `void`
+- `serializeToStream(OutputSerializedData stream)` -> `void`
+
 ## `org.telegram.tgnet.tl.TL_update$TL_updateEditMessage`
 - `readParams(InputSerializedData stream, boolean exception)` -> `void`
 - `serializeToStream(OutputSerializedData stream)` -> `void`
@@ -11345,6 +11523,14 @@
 - `serializeToStream(OutputSerializedData stream)` -> `void`
 
 ## `org.telegram.tgnet.tl.TL_update$TL_updateGeoLiveViewed`
+- `readParams(InputSerializedData stream, boolean exception)` -> `void`
+- `serializeToStream(OutputSerializedData stream)` -> `void`
+
+## `org.telegram.tgnet.tl.TL_update$TL_updateInlineBotWidgetQuery`
+- `readParams(InputSerializedData stream, boolean exception)` -> `void`
+- `serializeToStream(OutputSerializedData stream)` -> `void`
+
+## `org.telegram.tgnet.tl.TL_update$TL_updateInlineBotWidgetQuery_layer233`
 - `readParams(InputSerializedData stream, boolean exception)` -> `void`
 - `serializeToStream(OutputSerializedData stream)` -> `void`
 
@@ -11384,6 +11570,10 @@
 - `serializeToStream(OutputSerializedData stream)` -> `void`
 
 ## `org.telegram.tgnet.tl.TL_update$TL_updateMessageReactions`
+- `readParams(InputSerializedData stream, boolean exception)` -> `void`
+- `serializeToStream(OutputSerializedData stream)` -> `void`
+
+## `org.telegram.tgnet.tl.TL_update$TL_updateMessageWidgetData`
 - `readParams(InputSerializedData stream, boolean exception)` -> `void`
 - `serializeToStream(OutputSerializedData stream)` -> `void`
 
@@ -11641,6 +11831,11 @@
 - `static TLdeserialize(InputSerializedData stream, int constructor, boolean exception)` -> `WalletTransactionPeer`
 - `equals(@Nullable Object obj)` -> `boolean`
 
+## `org.telegram.tgnet.tl.TL_wallet$card`
+- `static TLdeserialize(InputSerializedData stream, int constructor, boolean exception)` -> `card`
+- `readParams(InputSerializedData stream, boolean exception)` -> `void`
+- `serializeToStream(OutputSerializedData stream)` -> `void`
+
 ## `org.telegram.tgnet.tl.TL_wallet$currencyRate`
 - `static TLdeserialize(InputSerializedData stream, int constructor, boolean exception)` -> `currencyRate`
 - `readParams(InputSerializedData stream, boolean exception)` -> `void`
@@ -11868,6 +12063,10 @@
 - `set(walletTransaction t)` -> `boolean`
 
 ## `org.telegram.tgnet.tl.TL_wallet$walletTransactionPeerAddress`
+- `readParams(InputSerializedData stream, boolean exception)` -> `void`
+- `serializeToStream(OutputSerializedData stream)` -> `void`
+
+## `org.telegram.tgnet.tl.TL_wallet$walletTransactionPeerChannel`
 - `readParams(InputSerializedData stream, boolean exception)` -> `void`
 - `serializeToStream(OutputSerializedData stream)` -> `void`
 

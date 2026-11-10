@@ -1,4 +1,4 @@
-# function / login (68 методов)
+# function / login (72 методов)
 
 ## `org.telegram.messenger.AuthTokensHelper`
 - `static addLogOutToken(TLRPC.TL_auth_loggedOut response)` -> `void`
@@ -72,6 +72,9 @@
 - `static loadCurrentState(boolean newAccount, int currentAccount)` -> `Bundle`
 - `saveSelfArgs(Bundle outState)` -> `void`
 
+## `org.telegram.ui.LoginActivity$LoadingTextView`
+- `addColorKeys(HashSet<Integer> colors)` -> `void`
+
 ## `org.telegram.ui.LoginActivity$LoginActivityEmailCodeView`
 - `hasCustomKeyboard()` -> `boolean`
 - `saveStateParams(Bundle bundle)` -> `void`
@@ -110,6 +113,7 @@
 - `requestLayout()` -> `void`
 
 ## `org.telegram.ui.PasscodeActivity`
+- `addThemeColorKeys(HashSet<Integer> keys)` -> `void`
 - `hasForceLightStatusBar()` -> `boolean`
 
 ## `org.telegram.ui.Wallet.GramWalletStorageAuth`
@@ -117,3 +121,9 @@
 
 ## `org.telegram.ui.WearAuthSheet`
 - `static cancel()` -> `void`
+
+## `org.telegram.ui.WearAuthSheet$SheetContainer`
+- `addColorKeys(java.util.HashSet<Integer> colors)` -> `void`
+
+## `org.telegram.ui.iv.RichQuoteAuthorCell`
+- `addColorKeys(HashSet<Integer> colors)` -> `void`

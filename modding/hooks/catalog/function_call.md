@@ -1,4 +1,4 @@
-# function / call (653 методов)
+# function / call (664 методов)
 
 ## `org.telegram.PhoneFormat.CallingCodeInfo`
 - `format(String orig)` -> `String`
@@ -308,6 +308,8 @@
 
 ## `org.telegram.messenger.voip.VoIPService`
 - `acceptIncomingCall()` -> `void`
+- `addExtraLocalSink(VideoSink sink)` -> `void`
+- `addExtraRemoteSink(TLRPC.GroupCallParticipant participant, boolean presentation, VideoSink sink)` -> `boolean`
 - `addRemoteSink(TLRPC.GroupCallParticipant participant, boolean screencast, VideoSink remote, VideoSink background)` -> `ProxyVideoSink`
 - `callFailedFromConnectionService()` -> `void`
 - `checkVideoFrame(TLRPC.GroupCallParticipant participant, boolean screencast)` -> `void`
@@ -400,6 +402,8 @@
 - `playStartRecordSound()` -> `void`
 - `processMessageUpdate(MessageObject messageObject)` -> `void`
 - `registerStateListener(StateListener l)` -> `void`
+- `removeExtraLocalSink(VideoSink sink)` -> `void`
+- `removeExtraRemoteSink(TLRPC.GroupCallParticipant participant, boolean presentation, VideoSink sink)` -> `void`
 - `removeRemoteSink(TLRPC.GroupCallParticipant participant, boolean presentation)` -> `void`
 - `requestFullScreen(TLRPC.GroupCallParticipant participant, boolean full, boolean screencast)` -> `void`
 - `requestVideoCall(boolean screencast)` -> `void`
@@ -443,8 +447,12 @@
 - `onStateChanged(int state)` -> `void`
 
 ## `org.telegram.messenger.voip.VoIPService$ProxyVideoSink`
+- `addExtra(VideoSink sink)` -> `void`
+- `hasExtras()` -> `boolean`
+- `isUnused()` -> `boolean`
 - `onFrame(VideoFrame frame)` -> `void`
 - `removeBackground(VideoSink background)` -> `void`
+- `removeExtra(VideoSink sink)` -> `void`
 - `removeTarget(VideoSink target)` -> `void`
 - `setBackground(VideoSink newBackground)` -> `void`
 - `setTarget(VideoSink newTarget)` -> `void`
@@ -955,10 +963,14 @@
 - `serializeToStream(OutputSerializedData stream)` -> `void`
 
 ## `org.telegram.ui.CallLogActivity`
+- `addThemeColorKeys(HashSet<Integer> keys)` -> `void`
 - `canParentTabsSlide(MotionEvent ev, boolean forward)` -> `boolean`
 
 ## `org.telegram.ui.CallLogActivity$EmptyTextProgressView`
 - `hasOverlappingRendering()` -> `boolean`
+
+## `org.telegram.ui.Cells.ChatMessagePhoneCall`
+- `static getCallMessageText(MessageObject messageObject, boolean isMissed, boolean isBusy, boolean video)` -> `String`
 
 ## `org.telegram.ui.Cells.GroupCallInvitedCell`
 - `hasAvatarSet()` -> `boolean`
@@ -1063,4 +1075,5 @@
 - `isLongPressDragEnabled()` -> `boolean`
 
 ## `org.telegram.ui.VoIPFragment`
+- `getCallingUserVideoView()` -> `View`
 - `onMediaStateUpdated(int audioState, int videoState)` -> `void`

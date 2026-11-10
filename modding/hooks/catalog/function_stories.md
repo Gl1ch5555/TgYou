@@ -1,4 +1,4 @@
-# function / stories (286 методов)
+# function / stories (287 методов)
 
 ## `org.telegram.messenger.SendMessagesHelper$ImportingHistory`
 - `getTotalCount()` -> `long`
@@ -344,6 +344,7 @@
 - `requestLayout()` -> `void`
 
 ## `org.telegram.ui.Stories.recorder.PaintView`
+- `addColorKeys(HashSet<Integer> colors)` -> `void`
 - `checkAudioPermission(Runnable granted)` -> `boolean`
 - `deleteRound()` -> `void`
 - `editSelectedTextEntity()` -> `void`

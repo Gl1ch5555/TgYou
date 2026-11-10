@@ -1,4 +1,4 @@
-# visual / profile (617 методов)
+# visual / profile (663 методов)
 
 ## `org.telegram.tgnet.tl.TL_keyboard$TL_inlineButtonTypeUserProfile`
 - `serializeToStream(OutputSerializedData stream)` -> `void`
@@ -39,6 +39,7 @@
 - `onMeasure(int widthMeasureSpec, int heightMeasureSpec)` -> `void`
 - `static openLocation(Activity activity, TLRPC.TL_businessLocation location)` -> `void`
 - `set(TLRPC.TL_businessLocation value, boolean divider)` -> `void`
+- `updateColors()` -> `void`
 - `verifyDrawable(@NonNull Drawable who)` -> `boolean`
 
 ## `org.telegram.ui.Business.ProfileLocationCell$Factory`
@@ -65,6 +66,9 @@
 - `setTextAndValue(CharSequence text, CharSequence value, boolean animated, boolean divider)` -> `void`
 - `setTextColor(int color)` -> `void`
 - `setTextValueColor(int color)` -> `void`
+
+## `org.telegram.ui.Cells.ChatMessageAccessibilityNodeProvider$ProfileSpan`
+- `onClick(@NonNull View view)` -> `void`
 
 ## `org.telegram.ui.Cells.CheckBoxUserCell`
 - `getCheckBox()` -> `Switch`
@@ -101,6 +105,7 @@
 - `setPremium()` -> `void`
 - `showPremiumBlocked()` -> `GroupCreateUserCell`
 - `update(int mask)` -> `void`
+- `updateColors()` -> `void`
 
 ## `org.telegram.ui.Cells.InviteUserCell`
 - `getContact()` -> `ContactsController.Contact`
@@ -108,6 +113,7 @@
 - `setChecked(boolean checked, boolean animated)` -> `void`
 - `setUser(ContactsController.Contact contact, CharSequence name)` -> `void`
 - `update(int mask)` -> `void`
+- `updateColors()` -> `void`
 
 ## `org.telegram.ui.Cells.JoinSheetUserCell`
 - `onMeasure(int widthMeasureSpec, int heightMeasureSpec)` -> `void`
@@ -135,6 +141,7 @@
 - `setStoryItem(TL_stories.StoryItem storyItem, OnClickListener listener)` -> `void`
 - `setUsernameSubtitle()` -> `void`
 - `update(int mask)` -> `void`
+- `updateColors()` -> `void`
 
 ## `org.telegram.ui.Cells.ProfileChannelCell`
 - `dispatchDraw(Canvas canvas)` -> `void`
@@ -226,6 +233,7 @@
 - `setNameTypeface(Typeface typeface)` -> `void`
 - `setStatusColors(int color, int onlineColor)` -> `void`
 - `update(int mask)` -> `void`
+- `updateColors()` -> `void`
 
 ## `org.telegram.ui.ChannelColorActivity$ProfilePreview`
 - `setColor(int colorId, boolean animated)` -> `void`
@@ -248,6 +256,7 @@
 - `setData(TLObject object, int date, int num, boolean divider)` -> `void`
 - `setPlaceholderAlpha(float value)` -> `void`
 - `update(int mask)` -> `void`
+- `updateColors()` -> `void`
 
 ## `org.telegram.ui.Components.Premium.ProfilePremiumCell`
 - `dispatchDraw(Canvas canvas)` -> `void`
@@ -271,6 +280,7 @@
 - `setCustomUser(Drawable icon, CharSequence title, CharSequence subtitle)` -> `void`
 - `setOptions(View.OnClickListener listener)` -> `void`
 - `setUser(TLRPC.User user)` -> `void`
+- `updateColors()` -> `void`
 - `updateTimer()` -> `void`
 
 ## `org.telegram.ui.Components.Premium.boosts.cells.selector.SelectorUserCell$Factory`
@@ -282,8 +292,6 @@
 - `applyCallTransition(View callView, boolean isOpen, float maxBottom, float fraction)` -> `void`
 - `beginApplyingActions()` -> `void`
 - `commitActions()` -> `void`
-- `drawingBlur(boolean drawing)` -> `void`
-- `drawingBlur(RenderNode renderNode, ProfileActivity.AvatarImageView avatarView, float scale, float dy)` -> `void`
 - `getAccessibilityNodeProvider()` -> `AccessibilityNodeProvider`
 - `getRoundRadius()` -> `float`
 - `onDraw(@NonNull Canvas canvas)` -> `void`
@@ -291,6 +299,7 @@
 - `onTouchEvent(MotionEvent event)` -> `boolean`
 - `set(int key, boolean enabled)` -> `void`
 - `setActionsColor(int color, boolean hasColorById)` -> `void`
+- `setGlassFactory(@Nullable BlurredBackgroundDrawableViewFactory factory)` -> `void`
 - `setNotifications(boolean enabled)` -> `void`
 - `setOnActionClickListener(OnActionClickListener onActionClickListener)` -> `void`
 - `setParentExpanded(float expanded)` -> `void`
@@ -312,13 +321,43 @@
 - `updateDrawable(@RawRes int animatedRes, @DrawableRes int filledRes, @DrawableRes int outlineRes)` -> `void`
 - `updatePosition()` -> `void`
 
+## `org.telegram.ui.Components.ProfileBalanceView`
+- `drawContent(Canvas canvas, float alpha)` -> `void`
+- `getContentWidth(float maxWidth)` -> `float`
+- `setBalance(long nanograms)` -> `void`
+- `setEjectProgress(float progress)` -> `void`
+
+## `org.telegram.ui.Components.ProfileButtonsGlass`
+- `getButtonColor()` -> `int`
+- `setButtonColor(int color, boolean hasColorById)` -> `void`
+- `setPhotoProgress(float progress)` -> `void`
+- `setSimpleProgress(float progress)` -> `void`
+
+## `org.telegram.ui.Components.ProfileButtonsGlass$SettingsSource`
+- `draw(@NonNull Canvas canvas, float left, float top, float right, float bottom)` -> `void`
+- `drawDownsampled(@NonNull Canvas canvas, @NonNull RectF boundsRelativeRoot, int targetDownsample, float targetOriginX, float targetOriginY)` -> `void`
+- `getDownsample()` -> `int`
+- `getDownsampleOffsetX()` -> `int`
+- `getDownsampleOffsetY()` -> `int`
+
+## `org.telegram.ui.Components.ProfileButtonsGlass$Source`
+- `createDrawable()` -> `BlurredBackgroundDrawable`
+- `draw(@NonNull Canvas canvas, float left, float top, float right, float bottom)` -> `void`
+- `drawDownsampled(@NonNull Canvas canvas, @NonNull RectF boundsRelativeRoot, int targetDownsample, float targetOriginX, float targetOriginY)` -> `void`
+- `getDownsample()` -> `int`
+- `getDownsampleOffsetX()` -> `int`
+- `getDownsampleOffsetY()` -> `int`
+
 ## `org.telegram.ui.Components.ProfileGooeyView`
 - `draw(@NonNull Canvas canvas)` -> `void`
 - `getAvatarEndScale()` -> `float`
 - `getEndOffset(boolean occupyStatusBar, float avatarScale)` -> `float`
+- `getHiddenAvatarCenterY(float fallback)` -> `float`
+- `getHiddenAvatarSizeDp()` -> `float`
 - `onSizeChanged(int w, int h, int oldw, int oldh)` -> `void`
 - `setBlurIntensity(float intensity)` -> `void`
 - `setGooeyEnabled(boolean enabled)` -> `void`
+- `setHideProgress(float progress)` -> `void`
 - `setIntensity(float intensity)` -> `void`
 - `setPullProgress(float pullProgress)` -> `void`
 
@@ -353,16 +392,22 @@
 
 ## `org.telegram.ui.Components.ProfileMusicView`
 - `dispatchTouchEvent(MotionEvent event)` -> `boolean`
-- `drawingBlur(boolean drawing)` -> `void`
-- `drawingBlur(RenderNode renderNode, ProfileActivity.AvatarImageView avatarView, float scale, float dy)` -> `void`
+- `drawContent(Canvas canvas, float alpha)` -> `void`
 - `static getAuthor(TLRPC.Document document)` -> `CharSequence`
+- `getButtonBoundsOnScreen(RectF bounds)` -> `void`
+- `getContentWidth(float maxWidth)` -> `float`
 - `static getTitle(TLRPC.Document document)` -> `CharSequence`
+- `isOnProfilePhoto()` -> `boolean`
 - `onDraw(@NonNull Canvas canvas)` -> `void`
 - `onMeasure(int widthMeasureSpec, int heightMeasureSpec)` -> `void`
+- `setAlpha(float alpha)` -> `void`
+- `setButtonColor(int color, boolean hasColorById)` -> `void`
 - `setColor(MessagesController.PeerColor peerColor)` -> `void`
+- `setGlassFactory(@Nullable BlurredBackgroundDrawableViewFactory factory)` -> `void`
 - `setMusicDocument(TLRPC.Document document)` -> `void`
 - `setParentExpanded(float expanded)` -> `void`
 - `setText(CharSequence author, CharSequence title)` -> `void`
+- `setTrailingView(ProfileMusicView view)` -> `void`
 - `updatePosition(float y, float newHeight)` -> `void`
 
 ## `org.telegram.ui.Components.ProfileSuggestionView`
@@ -381,6 +426,7 @@
 - `onMeasure(int widthMeasureSpec, int heightMeasureSpec)` -> `void`
 - `setUser(TLObject object, int date)` -> `void`
 - `setUser(TLObject object, int date, boolean isVote)` -> `void`
+- `updateColors()` -> `void`
 
 ## `org.telegram.ui.PeerColorActivity$ProfilePreview`
 - `dispatchDraw(Canvas canvas)` -> `void`
@@ -392,6 +438,7 @@
 - `setEmoji(long docId, boolean isCollectible, boolean animated)` -> `void`
 - `setForum(boolean forum)` -> `void`
 - `setStatusEmoji(long docId, boolean isCollectible, boolean animated)` -> `void`
+- `updateColors()` -> `void`
 
 ## `org.telegram.ui.ProfileActivity`
 - `calculatePositionsOnFirstLoad()` -> `void`
@@ -410,7 +457,8 @@
 - `getCurrentChat()` -> `TLRPC.Chat`
 - `getDialogId()` -> `long`
 - `getEmojiStatusLocation(Rect rect)` -> `void`
-- `getGlassSource()` -> `BlurredBackgroundSourceRenderNode`
+- `getFrostedGlassSource()` -> `GlassSourceRenderNode`
+- `getGlassSource()` -> `GlassSourceRenderNode`
 - `getInternalTranslationX()` -> `float`
 - `getInternalVisibility()` -> `float`
 - `getLink(String username, int topicId)` -> `String`
@@ -436,7 +484,7 @@
 - `needDelayOpenAnimation()` -> `boolean`
 - `static of(long dialogId)` -> `ProfileActivity`
 - `onActivityResultFragment(int requestCode, int resultCode, Intent data)` -> `void`
-- `onBackPressed()` -> `boolean`
+- `onBackPressed(boolean invoked)` -> `boolean`
 - `onBecomeFullyHidden()` -> `void`
 - `onBecomeFullyVisible()` -> `void`
 - `onConfigurationChanged(Configuration newConfig)` -> `void`
@@ -451,6 +499,7 @@
 - `onPause()` -> `void`
 - `onRequestPermissionsResultFragment(int requestCode, String[] permissions, int[] grantResults)` -> `void`
 - `onResume()` -> `void`
+- `onThemeColorsChanged()` -> `void`
 - `onTransitionAnimationEnd(boolean isOpen, boolean backward)` -> `void`
 - `onTransitionAnimationProgress(boolean isOpen, float progress)` -> `void`
 - `onTransitionAnimationStart(boolean isOpen, boolean backward)` -> `void`
@@ -516,7 +565,6 @@
 - `setBackground(View view, int viewType)` -> `void`
 
 ## `org.telegram.ui.ProfileActivity$NestedFrameLayout`
-- `drawList(Canvas blurCanvas, boolean top, ArrayList<IViewWithInvalidateCallback> views)` -> `void`
 - `onNestedPreFling(View target, float velocityX, float velocityY)` -> `boolean`
 - `onNestedPreScroll(View target, int dx, int dy, int[] consumed, int type)` -> `void`
 - `onNestedScroll(View target, int dxConsumed, int dyConsumed, int dxUnconsumed, int dyUnconsumed, int type, int[] consumed)` -> `void`
@@ -609,6 +657,7 @@
 - `onFragmentCreate()` -> `boolean`
 - `onFragmentDestroy()` -> `void`
 - `onMemberClick(TLRPC.ChatParticipant participant, boolean b, boolean resultOnly, View view)` -> `boolean`
+- `onThemeColorsChanged()` -> `void`
 - `onTransitionAnimationStart(boolean isOpen, boolean backward)` -> `void`
 - `scrollToSharedMedia()` -> `void`
 - `setLoadingSpan(CharacterStyle span)` -> `void`
@@ -627,7 +676,6 @@
 
 ## `org.telegram.ui.ProfileActivity2$ContainerView`
 - `dispatchDraw(@NonNull Canvas canvas)` -> `void`
-- `drawList(Canvas blurCanvas, boolean top, ArrayList<IViewWithInvalidateCallback> views)` -> `void`
 - `onNestedPreFling(View target, float velocityX, float velocityY)` -> `boolean`
 - `onNestedPreScroll(View target, int dx, int dy, int[] consumed, int type)` -> `void`
 - `onNestedScroll(View target, int dxConsumed, int dyConsumed, int dxUnconsumed, int dyUnconsumed, int type, int[] consumed)` -> `void`
@@ -657,6 +705,7 @@
 ## `org.telegram.ui.ProfileNotificationsActivity`
 - `createView(final Context context)` -> `View`
 - `didReceivedNotification(int id, int account, Object... args)` -> `void`
+- `getListViewForSimpleGlass()` -> `RecyclerListView`
 - `getResourceProvider()` -> `Theme.ResourcesProvider`
 - `getThemeDescriptions()` -> `ArrayList<ThemeDescription>`
 - `isSupportEdgeToEdge()` -> `boolean`
@@ -664,7 +713,10 @@
 - `onFragmentCreate()` -> `boolean`
 - `onFragmentDestroy()` -> `void`
 - `onInsets(int left, int top, int right, int bottom)` -> `void`
+- `onThemeColorsChanged()` -> `void`
+- `onViewCreated(View view)` -> `void`
 - `setDelegate(ProfileNotificationsActivityDelegate profileNotificationsActivityDelegate)` -> `void`
+- `useSimpleActionBar()` -> `boolean`
 
 ## `org.telegram.ui.ProfileNotificationsActivity$ListAdapter`
 - `getItemCount()` -> `int`
@@ -746,3 +798,9 @@
 - `setRedCheckbox(boolean red)` -> `void`
 - `setType(int type, int count, TLRPC.User singleUser)` -> `void`
 - `setUser(TLRPC.User user)` -> `void`
+- `updateColors()` -> `void`
+
+## `org.telegram.ui.Wallet.ProfileWalletCardDialog`
+- `dismiss()` -> `void`
+- `onCreate(Bundle savedInstanceState)` -> `void`
+- `show()` -> `void`

@@ -1,4 +1,4 @@
-# visual / other (14917 методов)
+# visual / other (15727 методов)
 
 ## `org.telegram.SQLite.SQLitePreparedStatement`
 - `bindByteBuffer(int index, ByteBuffer value)` -> `void`
@@ -134,8 +134,8 @@
 - `static setBackgroundColor(int color)` -> `void`
 
 ## `org.telegram.messenger.RichMessageLayout`
-- `draw(Canvas canvas, int padLeft, int padRight, ChatMessageCell.TransitionParams tp)` -> `void`
-- `draw(Canvas canvas, int padLeft, int padRight, ChatMessageCell.TransitionParams tp, float clipTop, float clipBottom)` -> `void`
+- `draw(Canvas canvas, int padLeft, int padRight, ChatMessageTransitionParams tp)` -> `void`
+- `draw(Canvas canvas, int padLeft, int padRight, ChatMessageTransitionParams tp, float clipTop, float clipBottom)` -> `void`
 - `drawOverlay(Canvas canvas)` -> `boolean`
 - `drawOverlay(Canvas canvas, ColorFilter colorFilter)` -> `boolean`
 - `layout(RichMessageLayout prev)` -> `void`
@@ -409,15 +409,6 @@
 - `setInsets(int left, int top, int right, int bottom)` -> `void`
 - `setSide(@WindowInsetsCompat.Side.InsetsSide int side)` -> `void`
 
-## `org.telegram.messenger.utils.OnPostDrawView`
-- `bringToFrontIfNeeded()` -> `void`
-- `invalidate(int flags)` -> `void`
-- `onAttachedToWindow()` -> `void`
-- `onDetachedFromWindow()` -> `void`
-- `onDraw(@NonNull Canvas canvas)` -> `void`
-- `onMeasure(int widthMeasureSpec, int heightMeasureSpec)` -> `void`
-- `onPreDraw()` -> `boolean`
-
 ## `org.telegram.messenger.utils.ViewOutlineProviderImpl`
 - `static drawViewWithOutline(Canvas canvas, View view, Utilities.Callback<Canvas> draw)` -> `void`
 
@@ -469,6 +460,7 @@
 - `onLocationAddressAvailable(String address, String displayAddress, TLRPC.TL_messageMediaVenue city, TLRPC.TL_messageMediaVenue street, Location location)` -> `void`
 - `onRequestPermissionsResultFragment(int requestCode, String[] permissions, int[] grantResults)` -> `void`
 - `onResume()` -> `void`
+- `onThemeColorsChanged()` -> `void`
 - `setGroupCreateAddress(String address, String displayAddress, Location location)` -> `void`
 - `setOnOpenedSettings(Runnable openedSettings)` -> `void`
 - `setQrLoginDelegate(ActionIntroQRLoginDelegate actionIntroQRLoginDelegate)` -> `void`
@@ -477,11 +469,8 @@
 ## `org.telegram.ui.Adapters.BaseLocationAdapter`
 - `destroy()` -> `void`
 - `getLastSearchString()` -> `String`
-- `notifyStartSearch(boolean wasSearching, int oldItemCount, boolean animated)` -> `void`
-- `searchDelayed(final String query, final Location coordinate)` -> `void`
-- `searchPlacesWithQuery(final String query, final Location coordinate, boolean searchUser)` -> `void`
-- `searchPlacesWithQuery(final String query, final Location coordinate, boolean searchUser, boolean animated)` -> `void`
-- `setDelegate(long did, BaseLocationAdapterDelegate delegate)` -> `void`
+- `searchDelayed(final String query)` -> `void`
+- `setDelegate(BaseLocationAdapterDelegate delegate)` -> `void`
 - `update(boolean animated)` -> `void`
 
 ## `org.telegram.ui.Adapters.ContactsAdapter`
@@ -493,11 +482,14 @@
 - `getPositionForScrollProgress(RecyclerListView listView, float progress, int[] position)` -> `void`
 - `getSectionCount()` -> `int`
 - `getSectionHeaderView(int section, View view)` -> `View`
+- `getSortType()` -> `int`
 - `isEmpty()` -> `boolean`
 - `isEnabled(RecyclerView.ViewHolder holder, int section, int row)` -> `boolean`
 - `onBindViewHolder(int section, int position, RecyclerView.ViewHolder holder)` -> `void`
 - `onCreateViewHolder(@NonNull ViewGroup parent, int viewType)` -> `RecyclerView.ViewHolder`
 - `setDisableSections(boolean value)` -> `void`
+- `setSectionLetterTextSize(float sizeDp)` -> `void`
+- `setSectionLettersProgress(float progress)` -> `void`
 - `setSortType(int value, boolean force)` -> `void`
 - `sortOnlineContacts()` -> `void`
 
@@ -554,6 +546,7 @@
 - `onCreateViewHolder(ViewGroup parent, int viewType)` -> `RecyclerView.ViewHolder`
 - `onDirectionClick()` -> `void`
 - `onLocationAddressAvailable(String address, String displayAddress, TLRPC.TL_messageMediaVenue city, TLRPC.TL_messageMediaVenue street, Location location)` -> `void`
+- `onViewAttachedToWindow(@NonNull RecyclerView.ViewHolder holder)` -> `void`
 - `setAddressNameOverride(String address)` -> `void`
 - `setCustomLocation(Location location)` -> `void`
 - `setGpsLocation(Location location)` -> `void`
@@ -570,7 +563,6 @@
 - `getItem(int position)` -> `TLRPC.TL_messageMediaVenue`
 - `getItemCount()` -> `int`
 - `getItemViewType(int position)` -> `int`
-- `notifyStartSearch(boolean wasSearching, int oldItemCount, boolean animated)` -> `void`
 - `onBindViewHolder(RecyclerView.ViewHolder holder, int position)` -> `void`
 - `onCreateViewHolder(ViewGroup parent, int viewType)` -> `RecyclerView.ViewHolder`
 - `setMyLocationDenied(boolean myLocationDenied)` -> `void`
@@ -632,6 +624,7 @@
 ## `org.telegram.ui.Adapters.MentionsAdapter$HashtagHint`
 - `onMeasure(int widthMeasureSpec, int heightMeasureSpec)` -> `void`
 - `set(int type, String hashtag, TLRPC.Chat chat)` -> `void`
+- `updateColors()` -> `void`
 
 ## `org.telegram.ui.Adapters.MessagesSearchAdapter`
 - `attach()` -> `void`
@@ -786,6 +779,7 @@
 - `onTouchEvent(MotionEvent event)` -> `boolean`
 - `setBlock(TL_iv.pageBlockChannel block)` -> `void`
 - `setState(int state, boolean animated)` -> `void`
+- `updateColors()` -> `void`
 
 ## `org.telegram.ui.ArticleViewer$BlockCollageCell`
 - `fillTextLayoutBlocks(ArrayList<TextSelectionHelper.TextLayoutBlock> blocks)` -> `void`
@@ -1023,6 +1017,7 @@
 
 ## `org.telegram.ui.ArticleViewer$BlockRelatedArticlesShadowCell`
 - `onMeasure(int widthMeasureSpec, int heightMeasureSpec)` -> `void`
+- `updateColors()` -> `void`
 
 ## `org.telegram.ui.ArticleViewer$BlockSlideshowCell`
 - `fillTextLayoutBlocks(ArrayList<TextSelectionHelper.TextLayoutBlock> blocks)` -> `void`
@@ -1034,6 +1029,7 @@
 - `onMeasure(int widthMeasureSpec, int heightMeasureSpec)` -> `void`
 - `onTouchEvent(MotionEvent event)` -> `boolean`
 - `setBlock(TL_iv.pageBlockSlideshow block)` -> `void`
+- `updateColors()` -> `void`
 
 ## `org.telegram.ui.ArticleViewer$BlockSubheaderCell`
 - `fillTextLayoutBlocks(ArrayList<TextSelectionHelper.TextLayoutBlock> blocks)` -> `void`
@@ -1205,6 +1201,7 @@
 - `setTranslationX(float translationX)` -> `void`
 - `setType(int type)` -> `void`
 - `setWeb(CachedWeb web)` -> `void`
+- `updateThemedWebColors(int ivBackground)` -> `void`
 - `updateWeb()` -> `void`
 
 ## `org.telegram.ui.ArticleViewer$RealPageBlocksAdapter`
@@ -1346,6 +1343,7 @@
 - `onTouchEvent(MotionEvent event)` -> `boolean`
 - `setAlpha(float value)` -> `void`
 - `setInnerTranslationX(float value)` -> `void`
+- `updateColors()` -> `void`
 
 ## `org.telegram.ui.AspectRatioFrameLayout`
 - `getAspectRatio()` -> `float`
@@ -1364,9 +1362,12 @@
 ## `org.telegram.ui.AutoDeleteMessagesActivity`
 - `createView(Context context)` -> `View`
 - `didReceivedNotification(int id, int account, Object... args)` -> `void`
+- `getScrollViewForSimpleGlass()` -> `SectionsScrollView`
+- `isSupportEdgeToEdge()` -> `boolean`
 - `onFragmentCreate()` -> `boolean`
 - `onFragmentDestroy()` -> `void`
 - `onPause()` -> `void`
+- `useSimpleActionBar()` -> `boolean`
 
 ## `org.telegram.ui.AvatarPreviewPagerIndicator`
 - `getProfileGalleryView()` -> `ProfileGalleryView`
@@ -1470,11 +1471,12 @@
 ## `org.telegram.ui.Business.AwayMessagesActivity`
 - `createView(Context context)` -> `View`
 - `didReceivedNotification(int id, int account, Object... args)` -> `void`
+- `getListViewForSimpleGlass()` -> `RecyclerListView`
 - `isSupportEdgeToEdge()` -> `boolean`
 - `onBackPressed(boolean invoked)` -> `boolean`
 - `onFragmentCreate()` -> `boolean`
 - `onFragmentDestroy()` -> `void`
-- `onInsets(int left, int top, int right, int bottom)` -> `void`
+- `useSimpleActionBar()` -> `boolean`
 
 ## `org.telegram.ui.Business.BusinessBotButton`
 - `set(long dialogId, long botId, String url, int flags)` -> `void`
@@ -1490,19 +1492,21 @@
 - `createView(Context context)` -> `View`
 - `didReceivedNotification(int id, int account, Object... args)` -> `void`
 - `fillItems(ArrayList<UItem> items, UniversalAdapter adapter)` -> `void`
+- `getListViewForSimpleGlass()` -> `RecyclerListView`
 - `getTitle()` -> `CharSequence`
 - `onBackPressed(boolean invoked)` -> `boolean`
 - `onClick(UItem item, View view, int position, float x, float y)` -> `void`
 - `onFragmentCreate()` -> `boolean`
 - `onFragmentDestroy()` -> `void`
-- `onInsets(int left, int top, int right, int bottom)` -> `void`
 - `onLongClick(UItem item, View view, int position, float x, float y)` -> `boolean`
+- `useSimpleActionBar()` -> `boolean`
 
 ## `org.telegram.ui.Business.BusinessLinksActivity`
 - `static closeRenameAlert(boolean invoked)` -> `boolean`
 - `createView(Context context)` -> `View`
 - `didReceivedNotification(int id, int account, Object... args)` -> `void`
 - `fillItems(ArrayList<UItem> items, UniversalAdapter adapter)` -> `void`
+- `getListViewForSimpleGlass()` -> `RecyclerListView`
 - `getTitle()` -> `CharSequence`
 - `onBackPressed(boolean invoked)` -> `boolean`
 - `onClick(UItem item, View view, int position, float x, float y)` -> `void`
@@ -1510,6 +1514,7 @@
 - `onFragmentDestroy()` -> `void`
 - `onLongClick(UItem item, View view, int position, float x, float y)` -> `boolean`
 - `static openRenameAlert(Context context, int currentAccount, TL_account.TL_businessChatLink link, Theme.ResourcesProvider resourcesProvider, boolean forceNotAdaptive)` -> `void`
+- `useSimpleActionBar()` -> `boolean`
 
 ## `org.telegram.ui.Business.BusinessLinksActivity$BusinessLinkView`
 - `onDraw(Canvas canvas)` -> `void`
@@ -1545,33 +1550,38 @@
 - `createAdapter(RecyclerListView listView)` -> `RecyclerListView.SelectionAdapter`
 - `getTitle()` -> `CharSequence`
 - `onActionBarAlpha(float alpha)` -> `void`
+- `onThemeColorsChanged()` -> `void`
 
 ## `org.telegram.ui.Business.ChatbotsActivity`
 - `createView(Context context)` -> `View`
+- `getListViewForSimpleGlass()` -> `RecyclerListView`
 - `isSupportEdgeToEdge()` -> `boolean`
 - `notSelectedBot()` -> `boolean`
 - `onBackPressed(boolean invoked)` -> `boolean`
 - `onFragmentCreate()` -> `boolean`
-- `onInsets(int left, int top, int right, int bottom)` -> `void`
+- `onThemeColorsChanged()` -> `void`
+- `useSimpleActionBar()` -> `boolean`
 
 ## `org.telegram.ui.Business.GreetMessagesActivity`
 - `createView(Context context)` -> `View`
 - `didReceivedNotification(int id, int account, Object... args)` -> `void`
+- `getListViewForSimpleGlass()` -> `RecyclerListView`
 - `isSupportEdgeToEdge()` -> `boolean`
 - `onBackPressed(boolean invoked)` -> `boolean`
 - `onFragmentCreate()` -> `boolean`
 - `onFragmentDestroy()` -> `void`
-- `onInsets(int left, int top, int right, int bottom)` -> `void`
+- `useSimpleActionBar()` -> `boolean`
 
 ## `org.telegram.ui.Business.LocationActivity`
 - `createView(Context context)` -> `View`
 - `didReceivedNotification(int id, int account, Object... args)` -> `void`
+- `getListViewForSimpleGlass()` -> `RecyclerListView`
 - `isSupportEdgeToEdge()` -> `boolean`
 - `isSwipeBackEnabled(MotionEvent event)` -> `boolean`
 - `onBackPressed(boolean invoked)` -> `boolean`
 - `onFragmentCreate()` -> `boolean`
 - `onFragmentDestroy()` -> `void`
-- `onInsets(int left, int top, int right, int bottom)` -> `void`
+- `useSimpleActionBar()` -> `boolean`
 
 ## `org.telegram.ui.Business.OpeningHoursActivity`
 - `static adaptWeeklyOpen(ArrayList<TL_account.TL_businessWeeklyOpen> hours, int utc_offset)` -> `ArrayList<TL_account.TL_businessWeeklyOpen>`
@@ -1579,13 +1589,14 @@
 - `didReceivedNotification(int id, int account, Object... args)` -> `void`
 - `static fromDaysHours(ArrayList<Period>[] days)` -> `ArrayList<TL_account.TL_businessWeeklyOpen>`
 - `static getDaysHours(ArrayList<TL_account.TL_businessWeeklyOpen> hours)` -> `ArrayList<Period>[]`
+- `getListViewForSimpleGlass()` -> `RecyclerListView`
 - `static is24x7(TL_account.TL_businessWorkHours hours)` -> `boolean`
 - `static isFull(ArrayList<Period> periods)` -> `boolean`
 - `isSupportEdgeToEdge()` -> `boolean`
 - `onFragmentCreate()` -> `boolean`
 - `onFragmentDestroy()` -> `void`
-- `onInsets(int left, int top, int right, int bottom)` -> `void`
 - `static toString(int currentAccount, TLRPC.User user, TL_account.TL_businessWorkHours business_work_hours)` -> `String`
+- `useSimpleActionBar()` -> `boolean`
 
 ## `org.telegram.ui.Business.OpeningHoursActivity$Period`
 - `static timeToString(int time)` -> `String`
@@ -1594,19 +1605,24 @@
 
 ## `org.telegram.ui.Business.OpeningHoursDayActivity`
 - `createView(Context context)` -> `View`
+- `getListViewForSimpleGlass()` -> `RecyclerListView`
+- `isSupportEdgeToEdge()` -> `boolean`
 - `onApplied(Runnable whenApplied)` -> `OpeningHoursDayActivity`
 - `onBecomeFullyHidden()` -> `void`
 - `onDone(Runnable whenDone)` -> `OpeningHoursDayActivity`
 - `onFragmentDestroy()` -> `void`
+- `onThemeColorsChanged()` -> `void`
+- `useSimpleActionBar()` -> `boolean`
 
 ## `org.telegram.ui.Business.QuickRepliesActivity`
 - `createView(Context context)` -> `View`
 - `didReceivedNotification(int id, int account, Object... args)` -> `void`
+- `getListViewForSimpleGlass()` -> `RecyclerListView`
 - `isSupportEdgeToEdge()` -> `boolean`
 - `onFragmentCreate()` -> `boolean`
 - `onFragmentDestroy()` -> `void`
-- `onInsets(int left, int top, int right, int bottom)` -> `void`
 - `static openRenameReplyAlert(Context context, int currentAccount, String currentName, QuickRepliesController.QuickReply currentReply, Theme.ResourcesProvider resourcesProvider, boolean forceNotAdaptive, Utilities.Callback<String> whenDone)` -> `void`
+- `useSimpleActionBar()` -> `boolean`
 
 ## `org.telegram.ui.Business.QuickRepliesActivity$LargeQuickReplyView`
 - `invalidateEmojis()` -> `void`
@@ -1614,6 +1630,7 @@
 - `onMeasure(int widthMeasureSpec, int heightMeasureSpec)` -> `void`
 - `set(QuickRepliesController.QuickReply quickReply, boolean divider)` -> `void`
 - `setChecked(boolean checked, boolean animated)` -> `void`
+- `updateColors()` -> `void`
 
 ## `org.telegram.ui.Business.QuickRepliesActivity$MoreSpan`
 - `draw(@NonNull Canvas canvas, CharSequence text, int start, int end, float x, int top, int y, int bottom, @NonNull Paint paint)` -> `void`
@@ -1640,17 +1657,21 @@
 - `renameReply(int topicId, String name)` -> `void`
 - `reorder()` -> `void`
 
+## `org.telegram.ui.Business.QuickRepliesEmptyView`
+- `updateColors()` -> `void`
+
 ## `org.telegram.ui.Business.QuickRepliesEmptyView$DotTextView`
 - `dispatchDraw(Canvas canvas)` -> `void`
 
 ## `org.telegram.ui.Business.TimezoneSelector`
 - `createView(Context context)` -> `View`
 - `didReceivedNotification(int id, int account, Object... args)` -> `void`
+- `getListViewForSimpleGlass()` -> `RecyclerListView`
 - `isSupportEdgeToEdge()` -> `boolean`
 - `onFragmentCreate()` -> `boolean`
 - `onFragmentDestroy()` -> `void`
-- `onInsets(int left, int top, int right, int bottom)` -> `void`
 - `setValue(String timezoneKey)` -> `TimezoneSelector`
+- `useSimpleActionBar()` -> `boolean`
 - `whenSelected(Utilities.Callback<String> selected)` -> `TimezoneSelector`
 
 ## `org.telegram.ui.Business.TimezonesController`
@@ -1664,9 +1685,12 @@
 
 ## `org.telegram.ui.CacheChatsExceptionsFragment`
 - `createView(Context context)` -> `View`
+- `getListViewForSimpleGlass()` -> `RecyclerListView`
+- `isSupportEdgeToEdge()` -> `boolean`
 - `onFragmentCreate()` -> `boolean`
 - `setExceptions(ArrayList<CacheByChatsController.KeepMediaException> notificationsExceptionTopics)` -> `void`
 - `showPopupFor(CacheByChatsController.KeepMediaException newException)` -> `void`
+- `useSimpleActionBar()` -> `boolean`
 
 ## `org.telegram.ui.CacheChatsExceptionsFragment$Adapter`
 - `getItemCount()` -> `int`
@@ -1678,6 +1702,7 @@
 - `equals(Object o)` -> `boolean`
 
 ## `org.telegram.ui.CacheControlActivity`
+- `areTabsPinned()` -> `boolean`
 - `static calculateTotalSize(Utilities.Callback<Long> onDone)` -> `void`
 - `static cleanDirJava(String fileName, int docType, int[] p, Utilities.Callback<Float> onProgress)` -> `void`
 - `static countDirJava(String fileName, int docType)` -> `int`
@@ -1696,20 +1721,25 @@
 - `onInsets(int left, int top, int right, int bottom)` -> `void`
 - `onRequestPermissionsResultFragment(int requestCode, String[] permissions, int[] grantResults)` -> `void`
 - `onResume()` -> `void`
+- `onTabsPinnedChanged(boolean pinned)` -> `void`
+- `onThemeColorsChanged()` -> `void`
 - `onTransitionAnimationProgress(boolean isOpen, float progress)` -> `void`
 - `static resetCalculatedTotalSIze()` -> `void`
 - `scrollTo()` -> `void`
 - `setCacheModel(CacheModel cacheModel)` -> `void`
+- `useSimpleActionBar()` -> `boolean`
 
 ## `org.telegram.ui.CacheControlActivity$CacheChartHeader`
 - `dispatchDraw(Canvas canvas)` -> `void`
 - `onMeasure(int widthMeasureSpec, int heightMeasureSpec)` -> `void`
 - `setData(boolean hasCache, float percent, float usedPercent)` -> `void`
+- `updateColors()` -> `void`
 
 ## `org.telegram.ui.CacheControlActivity$ClearCacheButton`
 - `onMeasure(int widthMeasureSpec, int heightMeasureSpec)` -> `void`
 - `setDisabled(boolean disabled)` -> `void`
 - `setSize(boolean allSelected, long size)` -> `void`
+- `updateColors()` -> `void`
 
 ## `org.telegram.ui.CacheControlActivity$ClearCacheButtonInternal`
 - `updateSize()` -> `void`
@@ -1721,6 +1751,7 @@
 ## `org.telegram.ui.CacheControlActivity$ClearingCacheView$ProgressView`
 - `onDraw(Canvas canvas)` -> `void`
 - `setProgress(float t)` -> `void`
+- `updateColors()` -> `void`
 
 ## `org.telegram.ui.CacheControlActivity$DialogFileEntities`
 - `createCacheModel()` -> `CacheModel`
@@ -1742,13 +1773,20 @@
 - `actionModeIsVisible()` -> `boolean`
 - `static fileIsMedia(File file)` -> `boolean`
 - `getListView()` -> `RecyclerListView`
+- `getPageListView(View page)` -> `RecyclerListView`
+- `getViewPager()` -> `ViewPagerFixed`
 - `isAttached()` -> `boolean`
+- `onAttachedToWindow()` -> `void`
+- `onDetachedFromWindow()` -> `void`
 - `onMeasure(int widthMeasureSpec, int heightMeasureSpec)` -> `void`
-- `setBottomPadding(int padding)` -> `void`
 - `setCacheModel(CacheModel cacheModel)` -> `void`
 - `setDelegate(Delegate delegate)` -> `void`
+- `setListPadding(int top, int bottom)` -> `void`
+- `setTargetTabsPosition(int targetTabsPosition)` -> `void`
 - `showActionMode(boolean show)` -> `void`
+- `takeTabsContainer()` -> `FrameLayout`
 - `update()` -> `void`
+- `updateColors()` -> `void`
 - `updateVisibleRows()` -> `void`
 
 ## `org.telegram.ui.CachedMediaLayout$BaseAdapter`
@@ -1810,17 +1848,30 @@
 ## `org.telegram.ui.CalendarActivity`
 - `createView(Context context)` -> `View`
 - `didReceivedNotification(int id, int account, Object... args)` -> `void`
+- `getListViewForSimpleGlass()` -> `RecyclerListView`
 - `getThemeDescriptions()` -> `ArrayList<ThemeDescription>`
 - `isLightStatusBar()` -> `boolean`
+- `isSupportEdgeToEdge()` -> `boolean`
 - `needDelayOpenAnimation()` -> `boolean`
 - `onBackPressed(boolean invoked)` -> `boolean`
 - `onFragmentCreate()` -> `boolean`
 - `onFragmentDestroy()` -> `void`
+- `onInsets(int left, int top, int right, int bottom)` -> `void`
+- `onThemeColorsChanged()` -> `void`
 - `onTransitionAnimationEnd(boolean isOpen, boolean backward)` -> `void`
 - `onTransitionAnimationProgress(boolean isOpen, float progress)` -> `void`
 - `onTransitionAnimationStart(boolean isOpen, boolean backward)` -> `void`
+- `onViewCreated(View view)` -> `void`
 - `setCallback(Callback callback)` -> `void`
 - `setChatActivity(ChatActivity chatActivity)` -> `void`
+- `useSimpleActionBar()` -> `boolean`
+
+## `org.telegram.ui.CalendarActivity$BottomButton`
+- `dispatchTouchEvent(MotionEvent ev)` -> `boolean`
+- `onDraw(@NonNull Canvas canvas)` -> `void`
+- `onFactorChanged(int id, float factor, float fraction, FactorAnimator callee)` -> `void`
+- `setButton(TextView button, boolean animated)` -> `void`
+- `updateWidth()` -> `void`
 
 ## `org.telegram.ui.CalendarActivity$CalendarAdapter`
 - `getItemCount()` -> `int`
@@ -1890,6 +1941,7 @@
 - `setChannel(TLRPC.Chat channel, boolean last)` -> `void`
 - `setChecked(boolean checked, boolean animated)` -> `void`
 - `update()` -> `void`
+- `updateColors()` -> `void`
 
 ## `org.telegram.ui.Cells.AppIconsSelectorCell`
 - `didReceivedNotification(int id, int account, Object... args)` -> `void`
@@ -1908,6 +1960,7 @@
 
 ## `org.telegram.ui.Cells.AppIconsSelectorCell$IconHolderView`
 - `draw(Canvas canvas)` -> `void`
+- `updateColors()` -> `void`
 
 ## `org.telegram.ui.Cells.ArchiveHintCell`
 - `getViewPager()` -> `ViewPager`
@@ -1963,7 +2016,7 @@
 - `setColorFilter(@Nullable ColorFilter colorFilter)` -> `void`
 
 ## `org.telegram.ui.Cells.BotButton`
-- `draw(Canvas canvas, RectF rect, boolean drawProgress, boolean drawBuyCard, Theme.ResourcesProvider resourcesProvider)` -> `boolean`
+- `draw(Canvas canvas, RectF rect, boolean drawProgress, boolean drawBuyCard, boolean compact, Theme.ResourcesProvider resourcesProvider)` -> `boolean`
 - `getPressScale()` -> `float`
 - `setPressed(boolean pressed)` -> `void`
 
@@ -2136,6 +2189,48 @@
 - `onMeasure(int widthMeasureSpec, int heightMeasureSpec)` -> `void`
 - `setProgressVisible(boolean value)` -> `void`
 - `setVisiblePart(float viewTop, int backgroundHeight)` -> `void`
+- `updateColors()` -> `void`
+
+## `org.telegram.ui.Cells.ChatMessageAccessibilityNodeProvider`
+- `createAccessibilityNodeInfo(int virtualViewId)` -> `AccessibilityNodeInfo`
+- `performAction(int virtualViewId, int action, Bundle arguments)` -> `boolean`
+
+## `org.telegram.ui.Cells.ChatMessageBotButtons`
+- `drawButtons(Canvas canvas, ArrayList<BotButton> botButtons, int alpha)` -> `void`
+- `layoutButtons(MessageObject messageObject, BotInlineKeyboard.Source inlineButtons, int separatorHeight, boolean drawAvatar)` -> `void`
+
+## `org.telegram.ui.Cells.ChatMessageContact`
+- `createButtons()` -> `void`
+- `draw(Canvas canvas)` -> `void`
+
+## `org.telegram.ui.Cells.ChatMessageFactCheck`
+- `draw(Canvas canvas, float alpha)` -> `void`
+- `drawText(Canvas canvas, float alpha)` -> `void`
+- `layout(final int maxTextWidth)` -> `int`
+
+## `org.telegram.ui.Cells.ChatMessageLinkPreview`
+- `drawPreview(Canvas canvas, float alpha)` -> `void`
+
+## `org.telegram.ui.Cells.ChatMessageLocation`
+- `drawMapPin(Canvas canvas)` -> `void`
+- `drawOverlay(Canvas canvas)` -> `void`
+
+## `org.telegram.ui.Cells.ChatMessagePoll`
+- `createPollUI(int answersCount)` -> `void`
+- `drawPollOverlays(Canvas canvas)` -> `void`
+- `static normalizePollPercents(boolean hasDifferent, int restPercent, ArrayList<PollButton> sortedPollButtons)` -> `void`
+- `resetPollButtonSelectors()` -> `void`
+- `updatePollAnimations(long dt)` -> `void`
+
+## `org.telegram.ui.Cells.ChatMessageTransitionParams`
+- `animateChange()` -> `boolean`
+- `createStatusDrawableParams()` -> `int`
+- `onDetach()` -> `void`
+- `recordDrawingState()` -> `void`
+- `recordDrawingStatePreview()` -> `void`
+- `resetAnimation()` -> `void`
+- `supportChangeAnimation()` -> `boolean`
+- `updateCrossfadeProgress()` -> `void`
 
 ## `org.telegram.ui.Cells.ChatMessageUnsupportedCell`
 - `drawBackground(Canvas canvas)` -> `void`
@@ -2156,6 +2251,7 @@
 - `getTextView()` -> `TextView`
 - `onMeasure(int widthMeasureSpec, int heightMeasureSpec)` -> `void`
 - `setText(String text)` -> `void`
+- `updateColors()` -> `void`
 
 ## `org.telegram.ui.Cells.CheckBoxCell`
 - `allowMultiline()` -> `void`
@@ -2256,6 +2352,7 @@
 - `setChecked(boolean checked, boolean animated)` -> `void`
 - `setEnabled(boolean value, boolean animated)` -> `void`
 - `setEnabled(boolean value, ArrayList<Animator> animators)` -> `void`
+- `setHorizontalPadding(int paddingDp)` -> `void`
 - `setText(CharSequence text, boolean checked, boolean divider)` -> `void`
 - `setTextAndValue(CharSequence text, CharSequence value, boolean checked, boolean divider)` -> `void`
 - `setTextColor(int color)` -> `void`
@@ -2311,6 +2408,7 @@
 - `setShowLimitWhenNear(int near)` -> `void`
 - `setText(CharSequence text)` -> `void`
 - `setText(TLRPC.TL_textWithEntities text)` -> `void`
+- `updateColors()` -> `void`
 - `validate()` -> `boolean`
 - `whenHitEnter(Runnable whenEnter)` -> `void`
 
@@ -2428,6 +2526,8 @@
 ## `org.telegram.ui.Cells.LetterSectionCell`
 - `setCellHeight(int height)` -> `void`
 - `setLetter(String letter)` -> `void`
+- `setLetterProgress(float progress)` -> `void`
+- `setLetterTextSize(float sizeDp)` -> `void`
 
 ## `org.telegram.ui.Cells.LoadingCell`
 - `onMeasure(int widthMeasureSpec, int heightMeasureSpec)` -> `void`
@@ -2444,13 +2544,7 @@
 ## `org.telegram.ui.Cells.LocationDirectionCell`
 - `onMeasure(int widthMeasureSpec, int heightMeasureSpec)` -> `void`
 - `setOnButtonClick(OnClickListener onButtonClick)` -> `void`
-
-## `org.telegram.ui.Cells.LocationLoadingCell`
-- `onMeasure(int widthMeasureSpec, int heightMeasureSpec)` -> `void`
-- `setLoading(boolean value)` -> `void`
-
-## `org.telegram.ui.Cells.LocationPoweredCell`
-- `onMeasure(int widthMeasureSpec, int heightMeasureSpec)` -> `void`
+- `updateColors()` -> `void`
 
 ## `org.telegram.ui.Cells.ManageChatTextCell`
 - `getFullHeight()` -> `int`
@@ -2678,6 +2772,7 @@
 - `setObject(TLRPC.User user, long date, boolean b)` -> `void`
 - `setUserReaction(TLRPC.User user, TLRPC.Chat chat, TLRPC.Reaction reaction, boolean like, long date, TL_stories.StoryItem storyItem, boolean isForward, boolean dateIsSeen, boolean animated)` -> `void`
 - `setUserReaction(TLRPC.MessagePeerReaction reaction)` -> `void`
+- `updateColors()` -> `void`
 
 ## `org.telegram.ui.Cells.RecurrentPaymentsAcceptCell`
 - `getCheckBox()` -> `CheckBoxSquare`
@@ -2702,6 +2797,7 @@
 - `setDialogId(long did)` -> `void`
 - `setHasLocation(boolean value)` -> `void`
 - `setText(String title, String text)` -> `void`
+- `updateColors()` -> `void`
 - `verifyDrawable(@NonNull Drawable who)` -> `boolean`
 
 ## `org.telegram.ui.Cells.SessionCell`
@@ -2758,6 +2854,7 @@
 - `setPhotoEntry(MediaController.PhotoEntry entry)` -> `void`
 - `setTextAndValueAndTypeAndThumb(String text, String value, String type, String thumb, int resId, boolean divider)` -> `void`
 - `showReorderIcon(boolean show, boolean animated)` -> `void`
+- `updateColors()` -> `void`
 - `updateFileExistIcon(boolean animated)` -> `void`
 
 ## `org.telegram.ui.Cells.SharedLinkCell`
@@ -2775,6 +2872,7 @@
 - `setDelegate(SharedLinkCellDelegate sharedLinkCellDelegate)` -> `void`
 - `setLink(MessageObject messageObject, boolean divider)` -> `void`
 - `startCheckLongPress()` -> `void`
+- `updateColors()` -> `void`
 
 ## `org.telegram.ui.Cells.SharedLinkCell$CheckForLongPress`
 - `run()` -> `void`
@@ -2803,6 +2901,7 @@
 - `setItem(int a, int index, MessageObject messageObject)` -> `void`
 - `setItemsCount(int count)` -> `void`
 - `updateCheckboxColor()` -> `void`
+- `updateColors()` -> `void`
 
 ## `org.telegram.ui.Cells.SharedPhotoVideoCell$PhotoVideoView`
 - `clearAnimation()` -> `void`
@@ -2864,6 +2963,7 @@
 - `setDialog(MessageObject messageObject, Location userLocation, boolean userLocationDenied)` -> `void`
 - `setDialog(LocationActivity.LiveLocation info, Location userLocation)` -> `void`
 - `setDialog(LocationController.SharingLocationInfo info)` -> `void`
+- `updateColors()` -> `void`
 
 ## `org.telegram.ui.Cells.SlideIntChooseView`
 - `static cut(int[] steps, int max)` -> `int[]`
@@ -2874,6 +2974,7 @@
 - `set(int value, Options options, Utilities.Callback<Integer> whenChanged)` -> `void`
 - `setLabel(CharSequence label)` -> `void`
 - `setMinValueAllowed(int value)` -> `void`
+- `updateColors()` -> `void`
 - `updateTexts(int value, boolean animated)` -> `void`
 
 ## `org.telegram.ui.Cells.SlideIntChooseView$Options`
@@ -2906,6 +3007,7 @@
 - `static applyNewSpanTimed(CharSequence str, int since)` -> `CharSequence`
 - `dispatchDraw(Canvas canvas)` -> `void`
 - `getCheckBox()` -> `Switch`
+- `getDefaultImageLeft()` -> `int`
 - `getImageView()` -> `RLottieImageView`
 - `getOffsetFromImage(boolean colourful)` -> `int`
 - `getTextView()` -> `SimpleTextView`
@@ -2922,6 +3024,7 @@
 - `setColorfulIcon(int color, int resId)` -> `void`
 - `setColorfulIcon(int colorTop, int colorBottom, int resId)` -> `void`
 - `setColors(int icon, int text)` -> `void`
+- `setCompactLayout(boolean compact)` -> `void`
 - `setDrawLoading(boolean drawLoading, int size, boolean animated)` -> `void`
 - `setEnabled(boolean enabled)` -> `void`
 - `setEnabled(boolean enabled, boolean animated)` -> `void`
@@ -3078,6 +3181,7 @@
 - `setTextColorByKey(int key)` -> `void`
 - `setTextGravity(int gravity)` -> `void`
 - `setTopPadding(int topPadding)` -> `void`
+- `updateColors()` -> `void`
 - `updateRTL()` -> `void`
 
 ## `org.telegram.ui.Cells.TextPriceCell`
@@ -3231,6 +3335,9 @@
 ## `org.telegram.ui.Cells.TextSelectionHelper$ScalablePath`
 - `reset()` -> `void`
 
+## `org.telegram.ui.Cells.TextSelectionHelper$SelectionPopupLayout`
+- `updateColors()` -> `void`
+
 ## `org.telegram.ui.Cells.TextSelectionHelper$SimpleTextSelectionHelper`
 - `draw(Canvas canvas)` -> `void`
 - `fillLayoutForOffset(int offset, LayoutBlock layoutBlock, boolean maybe)` -> `void`
@@ -3259,15 +3366,18 @@
 - `setMessageText(String message)` -> `void`
 
 ## `org.telegram.ui.Cells.TopicExceptionCell`
+- `addColorKeys(java.util.HashSet<Integer> colors)` -> `void`
 - `dispatchDraw(Canvas canvas)` -> `void`
 - `onMeasure(int widthMeasureSpec, int heightMeasureSpec)` -> `void`
 - `setTopic(long dialogId, TLRPC.TL_forumTopic topic)` -> `void`
+- `updateColors()` -> `void`
 
 ## `org.telegram.ui.Cells.TopicSearchCell`
 - `dispatchDraw(Canvas canvas)` -> `void`
 - `getTopic()` -> `TLRPC.TL_forumTopic`
 - `onMeasure(int widthMeasureSpec, int heightMeasureSpec)` -> `void`
 - `setTopic(TLRPC.TL_forumTopic topic)` -> `void`
+- `updateColors()` -> `void`
 
 ## `org.telegram.ui.Cells.UserInfoCell`
 - `animating()` -> `boolean`
@@ -3296,6 +3406,7 @@
 - `setParams(int columns, boolean top, boolean bottom)` -> `void`
 - `setSize(int itemSize)` -> `void`
 - `setWallpaper(int type, int index, Object wallpaper, Object selectedWallpaper, Drawable themedWallpaper, boolean themed)` -> `void`
+- `updateColors()` -> `void`
 
 ## `org.telegram.ui.Cells.WallpaperCell$WallpaperView`
 - `clearAnimation()` -> `void`
@@ -3304,11 +3415,13 @@
 - `onTouchEvent(MotionEvent event)` -> `boolean`
 - `setChecked(final boolean checked, boolean animated)` -> `void`
 - `setWallpaper(Object object, Object selectedWallpaper, Drawable themedWallpaper, boolean themed)` -> `void`
+- `updateColors()` -> `void`
 
 ## `org.telegram.ui.ChangeBioActivity`
 - `createView(Context context)` -> `View`
 - `getThemeDescriptions()` -> `ArrayList<ThemeDescription>`
 - `onResume()` -> `void`
+- `onThemeColorsChanged()` -> `void`
 - `onTransitionAnimationEnd(boolean isOpen, boolean backward)` -> `void`
 
 ## `org.telegram.ui.ChangeNameActivity`
@@ -3320,7 +3433,9 @@
 
 ## `org.telegram.ui.ChangeUsernameActivity`
 - `createView(Context context)` -> `View`
+- `getListViewForSimpleGlass()` -> `RecyclerListView`
 - `getThemeDescriptions()` -> `ArrayList<ThemeDescription>`
+- `isSupportEdgeToEdge()` -> `boolean`
 - `onResume()` -> `void`
 - `onTransitionAnimationEnd(boolean isOpen, boolean backward)` -> `void`
 - `shakeIfOff()` -> `void`
@@ -3328,6 +3443,7 @@
 - `toggleUsername(TLRPC.TL_username username, boolean newActive, boolean shake)` -> `void`
 - `toggleUsername(int position, boolean newActive)` -> `void`
 - `toggleUsername(int position, boolean newActive, boolean shake)` -> `void`
+- `useSimpleActionBar()` -> `boolean`
 
 ## `org.telegram.ui.ChangeUsernameActivity$Adapter`
 - `getItemCount()` -> `int`
@@ -3341,6 +3457,7 @@
 
 ## `org.telegram.ui.ChangeUsernameActivity$InputCell`
 - `onMeasure(int widthMeasureSpec, int heightMeasureSpec)` -> `void`
+- `updateColors()` -> `void`
 
 ## `org.telegram.ui.ChangeUsernameActivity$LinkMovementMethodMy`
 - `onTouchEvent(TextView widget, Spannable buffer, MotionEvent event)` -> `boolean`
@@ -3357,6 +3474,7 @@
 - `set(TLRPC.TL_username username, boolean useDivider, boolean animated, long botId)` -> `void`
 - `setLoading(boolean loading)` -> `void`
 - `update()` -> `void`
+- `updateColors()` -> `void`
 - `updateUsername(String username)` -> `void`
 
 ## `org.telegram.ui.ChangeUsernameActivity$UsernameHelpCell`
@@ -3379,6 +3497,7 @@
 - `onPause()` -> `void`
 - `onRemoveFromParent()` -> `void`
 - `onResume()` -> `void`
+- `onThemeColorsChanged()` -> `void`
 - `onTransitionAnimationEnd(boolean isOpen, boolean backward)` -> `void`
 - `onTransitionAnimationStart(boolean isOpen, boolean backward)` -> `void`
 - `openVCard(TLRPC.User user, String vcard, String first_name, String last_name)` -> `void`
@@ -3416,32 +3535,32 @@
 - `onPause()` -> `void`
 - `onRequestPermissionsResultFragment(int requestCode, String[] permissions, int[] grantResults)` -> `void`
 - `onResume()` -> `void`
+- `onThemeColorsChanged()` -> `void`
 - `onTransitionAnimationEnd(boolean isOpen, boolean backward)` -> `void`
 - `onUploadProgressChanged(float progress)` -> `void`
 - `restoreSelfArgs(Bundle args)` -> `void`
 - `setOnFinishListener(Utilities.Callback2<BaseFragment, Long> onFinishListener)` -> `void`
 
 ## `org.telegram.ui.ChannelMonetizationLayout`
+- `configureTabsGlass(BaseFragmentSimpleGlass glass)` -> `void`
+- `getTransactionTabs()` -> `View`
+- `isTransactionTabsOverlayVisible()` -> `boolean`
+- `isTransactionTouch(float x, float y)` -> `boolean`
 - `static makeLearnSheet(Context context, boolean bots, Theme.ResourcesProvider resourcesProvider)` -> `BottomSheet`
 - `onAttachedToWindow()` -> `void`
 - `onDetachedFromWindow()` -> `void`
-- `onMeasure(int widthMeasureSpec, int heightMeasureSpec)` -> `void`
-- `onNestedPreFling(View target, float velocityX, float velocityY)` -> `boolean`
-- `onNestedPreScroll(View target, int dx, int dy, int[] consumed, int type)` -> `void`
-- `onNestedScroll(View target, int dxConsumed, int dyConsumed, int dxUnconsumed, int dyUnconsumed, int type, int[] consumed)` -> `void`
-- `onNestedScroll(View target, int dxConsumed, int dyConsumed, int dxUnconsumed, int dyUnconsumed, int type)` -> `void`
-- `onNestedScrollAccepted(@NonNull View child, @NonNull View target, int axes, int type)` -> `void`
-- `onStartNestedScroll(@NonNull View child, @NonNull View target, int axes, int type)` -> `boolean`
-- `onStopNestedScroll(@NonNull View target, int type)` -> `void`
-- `onStopNestedScroll(@NonNull View child)` -> `void`
+- `prepareTransactionGesture(float x, float y)` -> `boolean`
 - `reloadTransactions()` -> `void`
 - `static replaceTON(CharSequence text, TextPaint textPaint)` -> `CharSequence`
 - `static replaceTON(CharSequence text, TextPaint textPaint, boolean large)` -> `CharSequence`
 - `static replaceTON(CharSequence text, TextPaint textPaint, float scale, boolean large)` -> `CharSequence`
 - `static replaceTON(CharSequence text, TextPaint textPaint, float scale, float translateY, boolean large)` -> `CharSequence`
 - `setActionBar(ActionBar actionBar)` -> `void`
+- `setScreenInsets(int top, int bottom, int controlsHeight)` -> `void`
+- `setTabsPinnedChangedListener(Runnable listener)` -> `void`
 - `setupBalances(boolean ton, TLRPC.TL_starsRevenueStatus balances)` -> `void`
 - `static showTransactionSheet(Context context, int currentAccount, TL_stats.BroadcastRevenueTransaction transaction, long dialogId, Theme.ResourcesProvider resourcesProvider)` -> `void`
+- `updateColors()` -> `void`
 - `updateList()` -> `void`
 - `static validateTONAddress(String address)` -> `boolean`
 
@@ -3481,6 +3600,7 @@
 - `createView(Context context)` -> `View`
 - `findChildAt(int position)` -> `View`
 - `isDark()` -> `boolean`
+- `onThemeColorsChanged()` -> `void`
 - `setForceDark(boolean isDark, boolean playAnimation)` -> `void`
 - `setOnSelectedWallpaperChange(Utilities.Callback3<TLRPC.WallPaper, TLRPC.WallPaper, TLRPC.WallPaper> listener)` -> `void`
 - `setSelectedWallpaper(TLRPC.WallPaper wallpaper, TLRPC.WallPaper galleryWallpaper)` -> `void`
@@ -3714,6 +3834,7 @@
 - `dismissCurrentDialog()` -> `void`
 - `dismissDialogOnPause(Dialog dialog)` -> `boolean`
 - `getInitialSearchString()` -> `String`
+- `getScrollViewForSimpleGlass()` -> `SectionsScrollView`
 - `getThemeDescriptions()` -> `ArrayList<ThemeDescription>`
 - `isSupportEdgeToEdge()` -> `boolean`
 - `onActivityResultFragment(int requestCode, int resultCode, Intent data)` -> `void`
@@ -3725,6 +3846,7 @@
 - `onPause()` -> `void`
 - `onRequestPermissionsResultFragment(int requestCode, String[] permissions, int[] grantResults)` -> `void`
 - `onResume()` -> `void`
+- `onThemeColorsChanged()` -> `void`
 - `onUploadProgressChanged(float progress)` -> `void`
 - `openSetPhotoAlert()` -> `void`
 - `restoreSelfArgs(Bundle args)` -> `void`
@@ -3734,18 +3856,21 @@
 - `updateColorCell()` -> `void`
 - `updateSuggestedCell(boolean animated)` -> `void`
 - `updateSuggestedCell(Long forced, boolean animated)` -> `void`
+- `useSimpleActionBar()` -> `boolean`
 
 ## `org.telegram.ui.ChatEditTypeActivity`
 - `createView(Context context)` -> `View`
 - `didReceivedNotification(int id, int account, Object... args)` -> `void`
+- `getScrollViewForSimpleGlass()` -> `SectionsScrollView`
 - `getThemeDescriptions()` -> `ArrayList<ThemeDescription>`
 - `isSupportEdgeToEdge()` -> `boolean`
 - `onBecomeFullyVisible()` -> `void`
 - `onFragmentCreate()` -> `boolean`
 - `onFragmentDestroy()` -> `void`
-- `onInsets(int left, int top, int right, int bottom)` -> `void`
 - `onResume()` -> `void`
+- `onThemeColorsChanged()` -> `void`
 - `setInfo(TLRPC.ChatFull chatFull)` -> `void`
+- `useSimpleActionBar()` -> `boolean`
 
 ## `org.telegram.ui.ChatEditTypeActivity$UsernamesListView`
 - `dispatchDraw(Canvas canvas)` -> `void`
@@ -3767,11 +3892,15 @@
 ## `org.telegram.ui.ChatLinkActivity`
 - `createView(Context context)` -> `View`
 - `didReceivedNotification(int id, int account, Object... args)` -> `void`
+- `getListViewForSimpleGlass()` -> `RecyclerListView`
 - `getThemeDescriptions()` -> `ArrayList<ThemeDescription>`
+- `isSupportEdgeToEdge()` -> `boolean`
 - `onFragmentCreate()` -> `boolean`
 - `onFragmentDestroy()` -> `void`
 - `onResume()` -> `void`
+- `onThemeColorsChanged()` -> `void`
 - `setInfo(TLRPC.ChatFull chatFull)` -> `void`
+- `useSimpleActionBar()` -> `boolean`
 
 ## `org.telegram.ui.ChatLinkActivity$EmptyView`
 - `didReceivedNotification(int id, int account, Object... args)` -> `void`
@@ -3821,14 +3950,18 @@
 - `createView(Context context)` -> `View`
 - `didReceivedNotification(int id, int account, Object... args)` -> `void`
 - `static emptyAdminRights(boolean value)` -> `TLRPC.TL_chatAdminRights`
+- `getListViewForSimpleGlass()` -> `RecyclerListView`
 - `getThemeDescriptions()` -> `ArrayList<ThemeDescription>`
+- `isSupportEdgeToEdge()` -> `boolean`
 - `onBackPressed(boolean invoked)` -> `boolean`
 - `onFragmentCreate()` -> `boolean`
 - `onFragmentDestroy()` -> `void`
 - `onResume()` -> `void`
+- `onThemeColorsChanged()` -> `void`
 - `static rightsOR(TLRPC.TL_chatAdminRights a, TLRPC.TL_chatAdminRights b)` -> `TLRPC.TL_chatAdminRights`
 - `setDelegate(ChatRightsEditActivityDelegate channelRightsEditActivityDelegate)` -> `void`
 - `setLoading(boolean newLoading)` -> `void`
+- `useSimpleActionBar()` -> `boolean`
 
 ## `org.telegram.ui.ChatRightsEditActivity$ListAdapter`
 - `getItemCount()` -> `int`
@@ -3844,6 +3977,7 @@
 - `createView(Context context)` -> `View`
 - `didReceivedNotification(int id, int account, Object... args)` -> `void`
 - `static getChannelAdminParticipantType(TLObject participant)` -> `int`
+- `getListViewForSimpleGlass()` -> `RecyclerListView`
 - `getSelectType()` -> `int`
 - `static getSendMediaSelectedCount(TLRPC.TL_chatBannedRights bannedRights)` -> `int`
 - `getThemeDescriptions()` -> `ArrayList<ThemeDescription>`
@@ -3853,15 +3987,16 @@
 - `onBecomeFullyHidden()` -> `void`
 - `onFragmentCreate()` -> `boolean`
 - `onFragmentDestroy()` -> `void`
-- `onInsets(int left, int top, int right, int bottom)` -> `void`
 - `onPause()` -> `void`
 - `onResume()` -> `void`
+- `onThemeColorsChanged()` -> `void`
 - `onTransitionAnimationEnd(boolean isOpen, boolean backward)` -> `void`
 - `setDelegate(ChatUsersActivityDelegate chatUsersActivityDelegate)` -> `void`
 - `setIgnoresUsers(LongSparseArray<TLRPC.GroupCallParticipant> participants)` -> `void`
 - `setInfo(TLRPC.ChatFull chatFull)` -> `void`
 - `static sortAdmins(ArrayList<TLObject> participants)` -> `void`
 - `updateListAnimated(DiffCallback savedState)` -> `void`
+- `useSimpleActionBar()` -> `boolean`
 
 ## `org.telegram.ui.ChatUsersActivity$ChatUsersActivityDelegate`
 - `didAddParticipantToList(long uid, TLObject participant)` -> `default void`
@@ -3891,6 +4026,16 @@
 
 ## `org.telegram.ui.ChatsWidgetConfigActivity`
 - `handleIntent(Intent intent, boolean isNew, boolean restore, boolean fromPassword, int intentAccount, int state)` -> `boolean`
+
+## `org.telegram.ui.ChooseChannelFragment`
+- `createView(Context context)` -> `View`
+- `fillItems(ArrayList<UItem> items, UniversalAdapter adapter)` -> `void`
+- `getListViewForSimpleGlass()` -> `RecyclerListView`
+- `getTitle()` -> `CharSequence`
+- `onClick(UItem item, View view, int position, float x, float y)` -> `void`
+- `onLongClick(UItem item, View view, int position, float x, float y)` -> `boolean`
+- `onResume()` -> `void`
+- `useSimpleActionBar()` -> `boolean`
 
 ## `org.telegram.ui.ChooseDownloadQualityLayout`
 - `update(MessageObject messageObject)` -> `boolean`
@@ -3945,6 +4090,7 @@
 - `getTitle()` -> `CharSequence`
 - `onActionBarAlpha(float alpha)` -> `void`
 - `onContainerViewTranslation()` -> `void`
+- `onThemeColorsChanged()` -> `void`
 - `setOnSend(long dialogId, boolean editing, Utilities.Callback4<CharSequence, Integer, Integer, Boolean> onSend)` -> `AIEditorAlert`
 - `setOnSendRich(long dialogId, Utilities.Callback4<TL_iv.RichMessage, Integer, Integer, Boolean> onSend)` -> `AIEditorAlert`
 - `setOnUse(Utilities.Callback<CharSequence> onUse)` -> `AIEditorAlert`
@@ -3961,12 +4107,14 @@
 - `dismiss()` -> `void`
 - `getTitle()` -> `CharSequence`
 - `onActionBarAlpha(float alpha)` -> `void`
+- `onThemeColorsChanged()` -> `void`
 - `show()` -> `void`
 
 ## `org.telegram.ui.Components.AIEditorAlert$CreateAiStyleAlert`
 - `createAdapter(RecyclerListView listView)` -> `RecyclerListView.SelectionAdapter`
 - `getTitle()` -> `CharSequence`
 - `onSmoothContainerViewLayout(float ty)` -> `void`
+- `onThemeColorsChanged()` -> `void`
 - `setEditing(TL_aicompose.TL_aiComposeTone tone)` -> `CreateAiStyleAlert`
 - `setOnToneCreated(Utilities.Callback<TL_aicompose.AiComposeTone> listener)` -> `CreateAiStyleAlert`
 - `setOnToneEdited(Utilities.Callback<TL_aicompose.AiComposeTone> listener)` -> `CreateAiStyleAlert`
@@ -3991,6 +4139,7 @@
 - `setRoundRadius(int roundRadiusDp)` -> `void`
 
 ## `org.telegram.ui.Components.AIEditorAlert$Tabs$Tab`
+- `addColorKeys(HashSet<Integer> colors)` -> `void`
 - `set(int iconResId, CharSequence text)` -> `void`
 - `set(final String emoji, CharSequence text, Long documentId)` -> `void`
 - `setRoundRadius(int roundRadiusDp)` -> `Tab`
@@ -4011,6 +4160,7 @@
 - `getTitle()` -> `CharSequence`
 - `onClick(UItem item, View view, float x)` -> `void`
 - `onSmoothContainerViewLayout(float ty)` -> `void`
+- `onThemeColorsChanged()` -> `void`
 - `setAdminLogFilterAlertDelegate(AdminLogFilterAlertDelegate adminLogFilterAlertDelegate)` -> `void`
 - `setCurrentAdmins(ArrayList<TLRPC.ChannelParticipant> admins)` -> `void`
 
@@ -4028,7 +4178,6 @@
 - `static createApkRestrictedDialog(Context ctx, Theme.ResourcesProvider resourcesProvider)` -> `Dialog`
 - `static createAutoDeleteDatePickerDialog(Context context, int type, Theme.ResourcesProvider resourcesProvider, final ScheduleDatePickerDelegate datePickerDelegate)` -> `BottomSheet.Builder`
 - `static createBackgroundActivityDialog(Context ctx)` -> `Dialog`
-- `static createBackgroundLocationPermissionDialog(Activity activity, TLRPC.User selfUser, Runnable cancelRunnable, Theme.ResourcesProvider resourcesProvider)` -> `AlertDialog.Builder`
 - `static createBirthdayPickerDialog(Context context, String title, String button, TL_account.TL_birthday currentBirthday, final Utilities.Callback<TL_account.TL_birthday> whenSelectedBirthday, Runnable addPrivacyText, boolean showRemoveYear, boolean showDelete, Theme.ResourcesProvider resourcesProvider)` -> `BottomSheet.Builder`
 - `static createBlockDialogAlert(BaseFragment fragment, int count, boolean reportSpam, TLRPC.User user, BlockDialogCallback onProcessRunnable)` -> `void`
 - `static createBotLaunchAlert(BaseFragment fragment, TLRPC.User user, Runnable onConfirm, Runnable onDismiss)` -> `void`
@@ -4490,6 +4639,16 @@
 - `onTouchEvent(MotionEvent event)` -> `boolean`
 - `setOnRatingChangeListener(OnRatingChangeListener l)` -> `void`
 
+## `org.telegram.ui.Components.BitmapSectionsItemDecoration`
+- `capture(Canvas canvas, RectF position)` -> `void`
+- `getItemOffsets(@NonNull Rect outRect, @NonNull View view, @NonNull RecyclerView recyclerView, @NonNull RecyclerView.State state)` -> `void`
+- `isDrawBackground()` -> `boolean`
+- `isSectionItem(View view)` -> `boolean`
+- `onDraw(@NonNull Canvas canvas, @NonNull RecyclerView recyclerView, @NonNull RecyclerView.State state)` -> `void`
+- `onDrawOver(@NonNull Canvas canvas, @NonNull RecyclerView recyclerView, @NonNull RecyclerView.State state)` -> `void`
+- `setDrawBackground(boolean drawBackground)` -> `void`
+- `setDrawingMode(RecyclerListView.SectionsDrawingMode drawingMode)` -> `void`
+
 ## `org.telegram.ui.Components.BitmapShaderTools`
 - `getBitmap()` -> `Bitmap`
 - `getCanvas()` -> `Canvas`
@@ -4511,6 +4670,7 @@
 - `dispatchDraw(Canvas canvas)` -> `void`
 - `setVisibility(int visibility)` -> `void`
 - `show(int account, TLRPC.TL_help_appUpdate update, boolean check)` -> `void`
+- `updateColors()` -> `void`
 
 ## `org.telegram.ui.Components.BottomPagerTabs`
 - `createTabs()` -> `Tab[]`
@@ -4698,6 +4858,7 @@
 - `setCustomBackground(Drawable drawable)` -> `void`
 - `setOnClickListener(@Nullable OnClickListener l)` -> `void`
 - `setTop(boolean top)` -> `void`
+- `updateColors()` -> `void`
 - `updatePosition()` -> `void`
 - `verifyDrawable(@NonNull Drawable who)` -> `boolean`
 
@@ -4764,6 +4925,7 @@
 - `setText(CharSequence text)` -> `UndoButton`
 - `setUndoAction(Runnable undoAction)` -> `UndoButton`
 - `undo()` -> `void`
+- `updateColors()` -> `void`
 
 ## `org.telegram.ui.Components.Bulletin$UsersLayout`
 - `getAccessibilityText()` -> `CharSequence`
@@ -4922,6 +5084,7 @@
 - `setInterceptTouch(boolean value)` -> `void`
 - `setSegments(long totalSize, boolean animated, SegmentSize ...segments)` -> `void`
 - `setSelected(int index)` -> `void`
+- `updateColors()` -> `void`
 
 ## `org.telegram.ui.Components.CacheChart$Sector`
 - `draw(Canvas canvas, RectF outerRect, RectF innerRect, float angleCenter, float angleSize, float rounding, float alpha, float textAlpha)` -> `void`
@@ -5075,6 +5238,7 @@
 - `setText(CharSequence title, CharSequence description)` -> `void`
 - `setVisiblePart(float visibleTop, int parentH)` -> `void`
 - `static showPremiumSheet(Context context, int currentAccount, long dialogId, Theme.ResourcesProvider resourcesProvider)` -> `void`
+- `updateColors()` -> `void`
 
 ## `org.telegram.ui.Components.ChatReplyContainer`
 - `current()` -> `Layout`
@@ -5196,9 +5360,12 @@
 - `setProgress(float value)` -> `void`
 
 ## `org.telegram.ui.Components.ChecksHintView`
-- `getBaseTranslationY()` -> `float`
-- `hide()` -> `void`
 - `showForMessageCell(ChatMessageCell cell, boolean animated)` -> `boolean`
+- `verifyDrawable(@NonNull Drawable who)` -> `boolean`
+
+## `org.telegram.ui.Components.ChecksHintView$IconSpan`
+- `draw(@NonNull Canvas canvas, CharSequence text, int start, int end, float x, int top, int y, int bottom, @NonNull Paint paint)` -> `void`
+- `getSize(@NonNull Paint paint, CharSequence text, int start, int end, @Nullable Paint.FontMetricsInt fm)` -> `int`
 
 ## `org.telegram.ui.Components.ChevronView`
 - `onDraw(Canvas canvas)` -> `void`
@@ -5602,6 +5769,7 @@
 
 ## `org.telegram.ui.Components.CustomPhoneKeyboardView$NumberButtonView`
 - `onDraw(Canvas canvas)` -> `void`
+- `updateColors()` -> `void`
 
 ## `org.telegram.ui.Components.CustomPopupMenu`
 - `dismiss()` -> `void`
@@ -5612,6 +5780,7 @@
 - `dismiss()` -> `void`
 - `getTitle()` -> `CharSequence`
 - `onContainerLayout(int l, int t, int r, int b)` -> `void`
+- `onThemeColorsChanged()` -> `void`
 - `show()` -> `void`
 
 ## `org.telegram.ui.Components.DeleteMessagesBottomSheet$Action`
@@ -5676,6 +5845,7 @@
 ## `org.telegram.ui.Components.DotDividerSpan`
 - `draw(@NonNull Canvas canvas, CharSequence text, int start, int end, float x, int top, int y, int bottom, @NonNull Paint paint)` -> `void`
 - `getSize(@NonNull Paint paint, CharSequence charSequence, int i, int i1, @Nullable Paint.FontMetricsInt fontMetricsInt)` -> `int`
+- `setDotSize(float dotSize)` -> `void`
 - `setSize(float size)` -> `void`
 - `setTopPadding(int topPadding)` -> `void`
 
@@ -5739,12 +5909,19 @@
 - `extendActionMode(ActionMode actionMode, Menu menu)` -> `void`
 - `fixHandleView(boolean reset)` -> `void`
 - `getActionModeStyle()` -> `int`
+- `getActiveLineColor()` -> `int`
 - `getAutofillType()` -> `int`
+- `getCursorColor()` -> `int`
 - `getErrorLayout(int width)` -> `StaticLayout`
+- `getErrorLineColor()` -> `int`
 - `getExtendedPaddingBottom()` -> `int`
 - `getExtendedPaddingTop()` -> `int`
+- `getHandlesColor()` -> `int`
 - `getHeaderAnimationProgress()` -> `float`
+- `getHeaderHintColor()` -> `int`
+- `getHintColor()` -> `int`
 - `getHintLayoutEx()` -> `Layout`
+- `getLineColor()` -> `int`
 - `getLineSpacingExtra()` -> `float`
 - `getLineY()` -> `float`
 - `getOnPremiumMenuLockClickListener()` -> `Runnable`
@@ -5766,6 +5943,7 @@
 - `onTextChanged(CharSequence text, int start, int lengthBefore, int lengthAfter)` -> `void`
 - `onTouchEvent(MotionEvent event)` -> `boolean`
 - `postDelayed(Runnable action, long delayMillis)` -> `boolean`
+- `setActiveLineColor(int color)` -> `void`
 - `setAllowDrawCursor(boolean value)` -> `void`
 - `setBlurredBackgroundDrawableViewFactory(BlurredBackgroundDrawableViewFactory factory)` -> `void`
 - `setCursorColor(int color)` -> `void`
@@ -5785,6 +5963,7 @@
 - `setHintText(CharSequence text, boolean animated, TextPaint paint)` -> `void`
 - `setHintText2(CharSequence text, boolean animated)` -> `void`
 - `setHintVisible(boolean value, boolean animated)` -> `void`
+- `setLineColor(int color)` -> `void`
 - `setLineColors(int color, int active, int error)` -> `void`
 - `setLineSpacing(float add, float mult)` -> `void`
 - `setNextSetTextAnimated(boolean value)` -> `void`
@@ -6116,6 +6295,7 @@
 - `dismiss()` -> `void`
 - `static getCanAddDialogFilters(BaseFragment fragment, ArrayList<Long> selectedDialogs)` -> `ArrayList<MessagesController.DialogFilter>`
 - `static getDialogsCount(BaseFragment fragment, MessagesController.DialogFilter filter, ArrayList<Long> selectedDialogs, boolean always, boolean check)` -> `ArrayList<Long>`
+- `onThemeColorsChanged()` -> `void`
 - `setDelegate(FiltersListBottomSheetDelegate filtersListBottomSheetDelegate)` -> `void`
 
 ## `org.telegram.ui.Components.FiltersListBottomSheet$ListAdapter`
@@ -6211,6 +6391,7 @@
 - `createAdapter(RecyclerListView listView)` -> `RecyclerListView.SelectionAdapter`
 - `dismiss()` -> `void`
 - `getTitle()` -> `CharSequence`
+- `onThemeColorsChanged()` -> `void`
 - `onViewCreated(FrameLayout containerView)` -> `void`
 - `setOnDone(Utilities.Callback<Boolean> listener)` -> `void`
 - `static showForDeletion(final BaseFragment fragment, final int filterId, final Utilities.Callback<Boolean> whenDone)` -> `void`
@@ -6227,6 +6408,7 @@
 - `setEnabled(boolean enabled)` -> `void`
 - `setLoading(boolean loading)` -> `void`
 - `setText(CharSequence newText, boolean animated)` -> `void`
+- `updateColors()` -> `void`
 - `verifyDrawable(@NonNull Drawable who)` -> `boolean`
 
 ## `org.telegram.ui.Components.FolderBottomSheet$HeaderCell`
@@ -6238,10 +6420,12 @@
 ## `org.telegram.ui.Components.FolderBottomSheet$TitleCell`
 - `onMeasure(int widthMeasureSpec, int heightMeasureSpec)` -> `void`
 - `setSelectedCount(int count, boolean animated)` -> `void`
+- `updateColors()` -> `void`
 
 ## `org.telegram.ui.Components.FolderBottomSheet$TitleCell$FoldersPreview`
 - `onDraw(Canvas canvas)` -> `void`
 - `setCount(int count, boolean animated)` -> `void`
+- `updateColors()` -> `void`
 - `verifyDrawable(@NonNull Drawable who)` -> `boolean`
 
 ## `org.telegram.ui.Components.FolderDrawable`
@@ -6316,6 +6500,7 @@
 
 ## `org.telegram.ui.Components.Forum.ForumUtilities$GeneralTopicDrawable`
 - `draw(@NonNull Canvas canvas)` -> `void`
+- `getColorFilter()` -> `ColorFilter`
 - `getOpacity()` -> `int`
 - `setAlpha(int i)` -> `void`
 - `setColor(int color)` -> `void`
@@ -6524,6 +6709,7 @@
 - `isLightStatusBar()` -> `boolean`
 - `onFragmentCreate()` -> `boolean`
 - `onFragmentDestroy()` -> `void`
+- `useSimpleActionBar()` -> `boolean`
 
 ## `org.telegram.ui.Components.HashtagsSearchAdapter`
 - `fillItems(ArrayList<UItem> items, UniversalAdapter adapter)` -> `void`
@@ -6664,6 +6850,7 @@
 ## `org.telegram.ui.Components.ImportingAlert`
 - `didReceivedNotification(int id, int account, Object... args)` -> `void`
 - `dismissInternal()` -> `void`
+- `onThemeColorsChanged()` -> `void`
 - `setCompleted()` -> `void`
 
 ## `org.telegram.ui.Components.ImportingAlert$BottomSheetCell`
@@ -6689,6 +6876,7 @@
 - `toString()` -> `String`
 
 ## `org.telegram.ui.Components.InviteLinkBottomSheet`
+- `onThemeColorsChanged()` -> `void`
 - `setCanEdit(boolean canEdit)` -> `void`
 - `setInviteDelegate(InviteDelegate inviteDelegate)` -> `void`
 - `show()` -> `void`
@@ -6708,6 +6896,7 @@
 ## `org.telegram.ui.Components.InviteLinkBottomSheet$RevenueCell`
 - `onMeasure(int widthMeasureSpec, int heightMeasureSpec)` -> `void`
 - `set(TL_stars.TL_starsSubscriptionPricing pricing, int count)` -> `void`
+- `updateColors()` -> `void`
 
 ## `org.telegram.ui.Components.InviteLinkBottomSheet$TimerPrivacyCell`
 - `onAttachedToWindow()` -> `void`
@@ -6830,6 +7019,7 @@
 - `getBounds(RectF bounds)` -> `default void`
 
 ## `org.telegram.ui.Components.JoinGroupAlert`
+- `onThemeColorsChanged()` -> `void`
 - `setBulletinFactory(BulletinFactory bulletinFactory)` -> `JoinGroupAlert`
 - `static showBulletin(Context context, BaseFragment fragment, boolean isChannel)` -> `void`
 - `static showBulletin(Context context, BaseFragment fragment, BulletinFactory bulletinFactory, boolean isChannel)` -> `void`
@@ -7068,7 +7258,11 @@
 - `setColorFilter(ColorFilter cf)` -> `void`
 
 ## `org.telegram.ui.Components.MarkdownParser`
+- `static fromDiff(MessageObject messageObject)` -> `TLRPC.WebPage`
+- `static fromDocument(MessageObject messageObject)` -> `TLRPC.WebPage`
 - `static fromMarkdown(MessageObject messageObject)` -> `TLRPC.WebPage`
+- `static getDiffLineType(CharSequence text, int start)` -> `int`
+- `static maskDiff(CharSequence text)` -> `String`
 - `static parse(String source, ArrayList<TL_iv.PageBlock> blocks)` -> `String`
 - `static richTextToString(TL_iv.RichText text)` -> `String`
 
@@ -7151,7 +7345,6 @@
 - `getDialogId()` -> `long`
 - `getNavigationBarColor()` -> `int`
 - `getThemeDescriptions()` -> `ArrayList<ThemeDescription>`
-- `isLightStatusBar()` -> `boolean`
 - `isSupportEdgeToEdge()` -> `boolean`
 - `isSwipeBackEnabled(MotionEvent event)` -> `boolean`
 - `mediaCountUpdated()` -> `void`
@@ -7161,10 +7354,12 @@
 - `onGetDebugItems()` -> `List<FloatingDebugController.DebugItem>`
 - `onInsets(int left, int top, int right, int bottom)` -> `void`
 - `setChatInfo(TLRPC.ChatFull currentChatInfo)` -> `void`
+- `useSimpleActionBar()` -> `boolean`
 
 ## `org.telegram.ui.Components.MemberRequestsBottomSheet`
 - `onBackPressed()` -> `void`
 - `onSearchViewTouched(MotionEvent ev, EditTextBoldCursor searchEditText)` -> `void`
+- `onThemeColorsChanged()` -> `void`
 - `search(String text)` -> `void`
 - `setTranslationY(int newOffset)` -> `void`
 - `show()` -> `void`
@@ -7286,6 +7481,7 @@
 - `setBackground(Drawable background)` -> `void`
 - `setOnTabClick(Utilities.Callback<Integer> onTabClick)` -> `void`
 - `setSelectedTab(float position)` -> `void`
+- `updateColors()` -> `void`
 
 ## `org.telegram.ui.Components.MessagePreviewView$ToggleButton`
 - `dispatchDraw(Canvas canvas)` -> `void`
@@ -7293,6 +7489,7 @@
 - `onMeasure(int widthMeasureSpec, int heightMeasureSpec)` -> `void`
 - `onTouchEvent(MotionEvent event)` -> `boolean`
 - `setState(boolean state1, boolean animated)` -> `void`
+- `updateColors()` -> `void`
 - `verifyDrawable(@NonNull Drawable who)` -> `boolean`
 
 ## `org.telegram.ui.Components.MessagePrivateSeenView`
@@ -7417,6 +7614,37 @@
 - `setAlpha(int alpha)` -> `void`
 - `setColorFilter(@Nullable ColorFilter colorFilter)` -> `void`
 - `setMuted(boolean muted, boolean animated)` -> `void`
+
+## `org.telegram.ui.Components.NestedRecyclerCoordinatorLayout`
+- `createOuterLayoutManager(Context context)` -> `LinearLayoutManager`
+- `forgetInnerRecyclerView(@NonNull RecyclerView view)` -> `void`
+- `getDistanceToPinFloat()` -> `float`
+- `static getStartOffset(@NonNull RecyclerView view)` -> `float`
+- `isHeaderPinned()` -> `boolean`
+- `isPinned()` -> `boolean`
+- `onSectionChanged()` -> `void`
+- `onSectionTransition()` -> `void`
+- `prepareInnerRecyclerView(@NonNull RecyclerView view)` -> `void`
+- `setInnerContentGeometry(@NonNull RecyclerView view, int fixedTopInset, float translationY)` -> `void`
+- `setInnerContentTopInset(@NonNull RecyclerView view, int topInset)` -> `void`
+- `setOuterRecyclerView(@Nullable RecyclerView view)` -> `void`
+- `setPageSwitchPolicy(@NonNull PageSwitchPolicy policy)` -> `void`
+- `setSection(@Nullable Section value)` -> `void`
+
+## `org.telegram.ui.Components.NestedRecyclerCoordinatorLayout$Section`
+- `applyInnerContentGeometry(@NonNull NestedRecyclerCoordinatorLayout parent, @NonNull RecyclerView recyclerView, int fixedTopInset, float translationY)` -> `default void`
+- `getInnerContentMaxTopInset(@NonNull NestedRecyclerCoordinatorLayout parent)` -> `default float`
+- `getInnerScrollOffset(@NonNull RecyclerView recyclerView)` -> `default float`
+- `getPinnedHeaderOffset(@NonNull NestedRecyclerCoordinatorLayout parent)` -> `default float`
+- `getPinnedHeaderTop(@NonNull NestedRecyclerCoordinatorLayout parent)` -> `default float`
+- `onHeaderPinOffsetChanged(float distance)` -> `default void`
+- `onHeaderPinnedChanged(boolean pinned)` -> `default void`
+- `onPinOffsetChanged(float distance)` -> `default void`
+- `onPinnedChanged(boolean pinned)` -> `default void`
+
+## `org.telegram.ui.Components.NestedScrollCoupling`
+- `postScroll(boolean sourceIsOuter, int dyConsumed, int dyUnconsumed)` -> `int`
+- `preScroll(boolean sourceIsOuter, int dy)` -> `int`
 
 ## `org.telegram.ui.Components.NestedSizeNotifierLayout`
 - `isPinnedToTop()` -> `boolean`
@@ -7584,6 +7812,7 @@
 - `setTextOffset(int value)` -> `void`
 - `setValue(int value)` -> `void`
 - `setWrapSelectorWheel(boolean wrapSelectorWheel)` -> `void`
+- `updateColors()` -> `void`
 
 ## `org.telegram.ui.Components.NumberPicker$ChangeCurrentByOneFromLongPressCommand`
 - `run()` -> `void`
@@ -7637,6 +7866,7 @@
 ## `org.telegram.ui.Components.OutlineEditText`
 - `getEditText()` -> `EditTextBoldCursor`
 - `setHint(String hint)` -> `void`
+- `updateColors()` -> `void`
 
 ## `org.telegram.ui.Components.OutlineTextContainerView`
 - `animateError(float newValue)` -> `void`
@@ -7656,6 +7886,7 @@
 - `setLeftPadding(float padding)` -> `void`
 - `setText(@NonNull String text)` -> `void`
 - `updateColor()` -> `void`
+- `updateColors()` -> `void`
 
 ## `org.telegram.ui.Components.PacmanAnimation`
 - `draw(Canvas canvas, int cy)` -> `void`
@@ -7688,6 +7919,7 @@
 - `setUnderlineColorResource(int resId)` -> `void`
 - `setUnderlineHeight(int underlineHeightPx)` -> `void`
 - `setViewPager(ViewPager pager)` -> `void`
+- `updateColors()` -> `void`
 
 ## `org.telegram.ui.Components.PagerSlidingTabStrip$PageListener`
 - `onPageScrollStateChanged(int state)` -> `void`
@@ -8501,6 +8733,7 @@
 - `dismiss()` -> `void`
 - `dismissInternal()` -> `void`
 - `getThemeDescriptions()` -> `ArrayList<ThemeDescription>`
+- `onThemeColorsChanged()` -> `void`
 - `show()` -> `void`
 
 ## `org.telegram.ui.Components.PermissionAlert`
@@ -8518,6 +8751,7 @@
 ## `org.telegram.ui.Components.PhonebookShareAlert`
 - `onStart()` -> `void`
 - `onStop()` -> `void`
+- `onThemeColorsChanged()` -> `void`
 - `setDelegate(ChatAttachAlertContactsLayout.PhonebookShareAlertDelegate phonebookShareAlertDelegate)` -> `void`
 
 ## `org.telegram.ui.Components.PhonebookShareAlert$ListAdapter`
@@ -8698,6 +8932,7 @@
 - `getConnectionsManager()` -> `ConnectionsManager`
 - `getMessagesController()` -> `MessagesController`
 - `getThemeDescriptions()` -> `ArrayList<ThemeDescription>`
+- `onThemeColorsChanged()` -> `void`
 - `static showForPoll(BaseFragment parentFragment, MessageObject messageObject)` -> `void`
 
 ## `org.telegram.ui.Components.PollVotesAlert$Adapter`
@@ -8724,7 +8959,6 @@
 - `getCount()` -> `int`
 
 ## `org.telegram.ui.Components.PopupSwipeBackLayout`
-- `addOnSwipeBackProgressListener(OnSwipeBackProgressListener onSwipeBackProgressListener)` -> `void`
 - `addView(View child, int index, ViewGroup.LayoutParams params)` -> `void`
 - `closeForeground()` -> `void`
 - `closeForeground(boolean animated)` -> `void`
@@ -8738,6 +8972,7 @@
 - `onSizeChanged(int w, int h, int oldw, int oldh)` -> `void`
 - `openForeground(int viewIndex)` -> `void`
 - `setForegroundColor(int color)` -> `void`
+- `setForegroundOnGlass(boolean onGlass)` -> `void`
 - `setNewForegroundHeight(int index, int height, boolean animated)` -> `void`
 - `setOnForegroundOpenFinished(Runnable listener)` -> `void`
 - `setOnHeightUpdateListener(IntCallback onHeightUpdateListener)` -> `void`
@@ -8860,7 +9095,10 @@
 - `updateColors()` -> `void`
 
 ## `org.telegram.ui.Components.Premium.GLIcon.GLIconTextureView`
+- `getFrameDurationNanos(long targetFrameDurationNanos)` -> `long`
 - `getMaxFrameRate()` -> `int`
+- `getMsaaSamples()` -> `int`
+- `getRenderScale()` -> `float`
 - `isPaused()` -> `boolean`
 - `onAttachedToWindow()` -> `void`
 - `onDetachedFromWindow()` -> `void`
@@ -8885,6 +9123,7 @@
 - `startIdleAnimation()` -> `void`
 - `startThread(SurfaceTexture surface, int width, int height)` -> `void`
 - `stopThread()` -> `void`
+- `updateColors()` -> `void`
 - `whenReady(Runnable whenReady)` -> `void`
 
 ## `org.telegram.ui.Components.Premium.GLIcon.GLIconTextureView$RenderThread`
@@ -8943,6 +9182,7 @@
 - `setStatus(int currentLevel, int maxLevel, boolean animated)` -> `void`
 - `setType(int type)` -> `void`
 - `startDelayedAnimation()` -> `void`
+- `updateColors()` -> `void`
 
 ## `org.telegram.ui.Components.Premium.LimitPreviewView$CounterView`
 - `createAnimationLayouts()` -> `void`
@@ -8966,6 +9206,7 @@
 - `static limitTypeToServerString(int type)` -> `String`
 - `onAttachedToWindow()` -> `void`
 - `onDetachedFromWindow()` -> `void`
+- `onThemeColorsChanged()` -> `void`
 - `onViewCreated(FrameLayout containerView)` -> `void`
 - `static openBoostsForPostingStories(BaseFragment baseFragment, long dialogId, ChannelBoostsController.CanApplyBoost canApplyBoost, TL_stories.TL_premium_boostsStatus boostsStatus, Runnable statisticAction)` -> `void`
 - `static openBoostsForRemoveRestrictions(BaseFragment baseFragment, TL_stories.TL_premium_boostsStatus boostsStatus, ChannelBoostsController.CanApplyBoost canApplyBoos, long dialogId, boolean inFragment)` -> `LimitReachedBottomSheet`
@@ -9156,6 +9397,7 @@
 - `onMeasure(int widthMeasureSpec, int heightMeasureSpec)` -> `void`
 - `setClipWithGradient()` -> `void`
 - `setPaused(boolean paused)` -> `void`
+- `updateColors()` -> `void`
 
 ## `org.telegram.ui.Components.Premium.StarParticlesView$Drawable`
 - `getPathColor(int i)` -> `int`
@@ -9273,9 +9515,11 @@
 ## `org.telegram.ui.Components.Premium.boosts.ReassignBoostBottomSheet$AvatarHolderView`
 - `dispatchDraw(Canvas canvas)` -> `void`
 - `setChat(TLRPC.Chat chat)` -> `void`
+- `updateColors()` -> `void`
 
 ## `org.telegram.ui.Components.Premium.boosts.ReassignBoostBottomSheet$BoostIconView`
 - `onDraw(Canvas canvas)` -> `void`
+- `updateColors()` -> `void`
 
 ## `org.telegram.ui.Components.Premium.boosts.ReassignBoostBottomSheet$TopCell`
 - `setData(TLRPC.Chat chat, BottomSheet bottomSheet)` -> `void`
@@ -9307,6 +9551,7 @@
 - `dismissInternal()` -> `void`
 - `exceptUsers(long ...ids)` -> `UserSelectorBottomSheet`
 - `exceptUsers(Collection<Long> ids)` -> `UserSelectorBottomSheet`
+- `static formatAddressChips(String address, int textColor)` -> `CharSequence`
 - `getLimit()` -> `int`
 - `getTitle()` -> `CharSequence`
 - `getType()` -> `int`
@@ -9316,6 +9561,7 @@
 - `onConfigurationChanged(Configuration newConfig)` -> `void`
 - `onDetachedFromWindow()` -> `void`
 - `onPreDraw(Canvas canvas, int top, float progressToFullView)` -> `void`
+- `onThemeColorsChanged()` -> `void`
 - `static open()` -> `UserSelectorBottomSheet`
 - `static open(long userId, BirthdayController.BirthdayState birthdayState)` -> `UserSelectorBottomSheet`
 - `static open(int type, long userId, BirthdayController.BirthdayState birthdayState)` -> `UserSelectorBottomSheet`
@@ -9326,6 +9572,10 @@
 - `setOnUsersSelector(Utilities.Callback2<Boolean, HashSet<Long>> listener)` -> `UserSelectorBottomSheet`
 - `setTitle(String title)` -> `void`
 - `updateItems(boolean animated, boolean notify)` -> `void`
+
+## `org.telegram.ui.Components.Premium.boosts.UserSelectorBottomSheet$AddressChipSpan`
+- `draw(@NonNull Canvas canvas, CharSequence text, int start, int end, float x, int top, int y, int bottom, @NonNull Paint paint)` -> `void`
+- `getSize(@NonNull Paint paint, CharSequence text, int start, int end, @Nullable Paint.FontMetricsInt fm)` -> `int`
 
 ## `org.telegram.ui.Components.Premium.boosts.adapters.BoostAdapter`
 - `getItemCount()` -> `int`
@@ -9441,6 +9691,7 @@
 - `setChat(TLRPC.Chat chat, int boosts, boolean removable, int participants_count)` -> `void`
 - `setChatDeleteListener(ChatDeleteListener chatDeleteListener)` -> `void`
 - `setCounter(int count, int participants_count)` -> `void`
+- `updateColors()` -> `void`
 
 ## `org.telegram.ui.Components.Premium.boosts.cells.DateEndCell`
 - `getSelectedTime()` -> `long`
@@ -9506,6 +9757,7 @@
 
 ## `org.telegram.ui.Components.Premium.boosts.cells.TextInfoCell`
 - `setBackground(boolean onlyTopDivider)` -> `void`
+- `updateColors()` -> `void`
 
 ## `org.telegram.ui.Components.Premium.boosts.cells.msg.GiveawayMessageCell`
 - `draw(Canvas canvas, int marginTop, int marginLeft, Theme.ResourcesProvider resourcesProvider)` -> `void`
@@ -9548,6 +9800,7 @@
 - `setCloseImageVisible(boolean visible)` -> `void`
 - `setOnCloseClickListener(Runnable onCloseClickListener)` -> `void`
 - `setText(CharSequence text)` -> `void`
+- `updateColors()` -> `void`
 
 ## `org.telegram.ui.Components.Premium.boosts.cells.selector.SelectorLetterCell`
 - `onMeasure(int widthMeasureSpec, int heightMeasureSpec)` -> `void`
@@ -9565,6 +9818,7 @@
 - `setHintText(String text, boolean animated)` -> `void`
 - `setOnSearchTextChange(Utilities.Callback<String> listener)` -> `void`
 - `setText(CharSequence text)` -> `void`
+- `updateColors()` -> `void`
 - `updateSpans(boolean animated, HashSet<Long> selectedIds, Runnable afterDelete, List<TLRPC.TL_help_country> countries)` -> `void`
 
 ## `org.telegram.ui.Components.Premium.boosts.cells.selector.SelectorSearchCell$SpansContainer`
@@ -9653,6 +9907,7 @@
 
 ## `org.telegram.ui.Components.QRCodeBottomSheet`
 - `createQR(Context context, String key, Bitmap oldBitmap)` -> `Bitmap`
+- `onThemeColorsChanged()` -> `void`
 - `setCenterAnimation(int resId)` -> `void`
 - `setCenterImage(int resId)` -> `void`
 - `setCenterImage(Drawable drawable)` -> `void`
@@ -9667,6 +9922,7 @@
 - `width()` -> `int`
 
 ## `org.telegram.ui.Components.QuoteHighlight`
+- `continueFrom(QuoteHighlight prev)` -> `void`
 - `done()` -> `boolean`
 - `draw(Canvas canvas, float textX, float textY, android.graphics.Rect bounds, float alpha)` -> `void`
 - `getT()` -> `float`
@@ -9915,13 +10171,16 @@
 - `setNoProgress(boolean value)` -> `void`
 - `setProgress(float value)` -> `void`
 - `setProgressColor(int color)` -> `void`
+- `setProgressColorKey(int key)` -> `void`
 - `setSize(int value)` -> `void`
 - `setStrokeWidth(float value)` -> `void`
 - `setUseSelfAlpha(boolean value)` -> `void`
 - `sync(RadialProgressView from)` -> `void`
 - `toCircle(boolean toCircle, boolean animated)` -> `void`
+- `updateColors()` -> `void`
 
 ## `org.telegram.ui.Components.RadioButton`
+- `getCheckedColor()` -> `int`
 - `getColor()` -> `int`
 - `getProgress()` -> `float`
 - `isChecked()` -> `boolean`
@@ -10001,7 +10260,9 @@
 - `static bottom(View child)` -> `float`
 - `capture(Canvas canvas, RectF position)` -> `void`
 - `captureCalculateHash(IBlur3Hash builder, RectF position)` -> `void`
+- `captureChild(Canvas canvas, View child, long drawingTime)` -> `void`
 - `captureChildren(Canvas canvas, RectF position, long drawingTime)` -> `void`
+- `captureSectionsBackgrounds(Canvas canvas, RectF position)` -> `void`
 - `clickItem(View item, int position)` -> `void`
 - `disableSections()` -> `void`
 - `dispatchDraw(@NonNull Canvas canvas)` -> `void`
@@ -10032,8 +10293,13 @@
 - `getPinnedHeader()` -> `View`
 - `getPressedChildView()` -> `View`
 - `getResourceDeclareStyleableIntArray(String packageName, String name)` -> `int[]`
+- `getSectionColorForDecoration()` -> `int`
+- `getSectionsBackgroundColorForDecoration()` -> `int`
+- `getSectionsDrawBackground()` -> `boolean`
+- `getSectionsOverscanTop()` -> `int`
 - `getSelectorColor(int position)` -> `Integer`
 - `getSelectorDrawable()` -> `Drawable`
+- `getSelectorDrawableColor()` -> `int`
 - `getSelectorRect()` -> `Rect`
 - `getThemedColor(int key)` -> `int`
 - `getThemedDrawable(String key)` -> `Drawable`
@@ -10066,6 +10332,7 @@
 - `setAllowItemsInteractionDuringAnimation(boolean value)` -> `void`
 - `setAllowStopHeaveOperations(boolean allowStopHeaveOperations)` -> `void`
 - `setAnimateEmptyView(boolean animate, int emptyViewAnimationType)` -> `void`
+- `setBitmapSectionsBackgroundColorKey(int key)` -> `void`
 - `setCaptureSectionsDecoratorAllowed(boolean allowed)` -> `void`
 - `setDisableHighlightState(boolean value)` -> `void`
 - `setDisallowInterceptTouchEvents(boolean value)` -> `void`
@@ -10079,6 +10346,7 @@
 - `setItemAnimator(@Nullable ItemAnimator animator)` -> `void`
 - `setItemSelectorColorProvider(GenericProvider<Integer, Integer> getSelectorColor)` -> `void`
 - `setItemsEnterAnimator(RecyclerItemsEnterAnimator itemsEnterAnimator)` -> `void`
+- `setLegacySections(boolean legacySections)` -> `void`
 - `setListSelectorColor(Integer color)` -> `void`
 - `setOnInterceptTouchListener(OnInterceptTouchListener listener)` -> `void`
 - `setOnItemClickListener(OnItemClickListener listener)` -> `void`
@@ -10097,8 +10365,11 @@
 - `setSections()` -> `void`
 - `setSections(boolean topPadding)` -> `void`
 - `setSections(int padding, float roundRadius, boolean topPadding)` -> `void`
-- `setSections(Utilities.CallbackReturn<View, Boolean> isSectionView, int padding, float roundRadius, Utilities.Callback5<Canvas, RectF, Float, Float, Float> drawSectionBackground, boolean topPadding)` -> `void`
-- `setSections(Utilities.CallbackReturn<View, Boolean> isSectionView, Utilities.CallbackReturn<Integer, Boolean> isViewTypeSection, int padding, float roundRadius, Utilities.Callback5<Canvas, RectF, Float, Float, Float> drawSectionBackground, boolean topPadding)` -> `void`
+- `setSections(Utilities.CallbackReturn<View, Boolean> isSectionView, int padding, float roundRadius, boolean topPadding)` -> `void`
+- `setSections(Utilities.CallbackReturn<View, Boolean> isSectionView, Utilities.CallbackReturn<Integer, Boolean> isViewTypeSection, int padding, float roundRadius, boolean topPadding)` -> `void`
+- `setSectionsDrawBackground(boolean drawBackground)` -> `void`
+- `setSectionsDrawingMode(@NonNull SectionsDrawingMode drawingMode)` -> `void`
+- `setSectionsOverscanTop(int overscanTop)` -> `void`
 - `setSectionsType(@SectionsType int type)` -> `void`
 - `setSelectorDrawableColor(int color)` -> `void`
 - `setSelectorRadius(int radius)` -> `void`
@@ -10137,6 +10408,7 @@
 - `setProgress(float value)` -> `void`
 - `setVisibilityAlpha(float v)` -> `void`
 - `showFloatingDate()` -> `void`
+- `updateColors()` -> `void`
 
 ## `org.telegram.ui.Components.RecyclerListView$FastScrollAdapter`
 - `fastScrollIsVisible(RecyclerListView listView)` -> `boolean`
@@ -10186,11 +10458,46 @@
 ## `org.telegram.ui.Components.RecyclerListView$SelectionAdapter`
 - `getSelectionBottomPadding(View view)` -> `int`
 
+## `org.telegram.ui.Components.RecyclerPagerModel`
+- `static collapse(float pageOffset, float pinTop, float hiddenTop)` -> `float`
+- `static pageTranslation(float boundaryTop, float pinTop)` -> `float`
+- `static postScroll(ScrollHost host, boolean commonSource, int sourceConsumed, int unconsumed)` -> `int`
+- `static preScroll(ScrollHost host, boolean commonSource, int dy)` -> `int`
+
+## `org.telegram.ui.Components.RecyclerPagerModel$Transition`
+- `begin(float boundaryTop, float pageOffset, float pinTop, float hiddenTop)` -> `void`
+- `commonTail()` -> `float`
+- `commonTranslationX(float incomingPageX)` -> `float`
+- `getProgress()` -> `float`
+- `incomingPageTranslation()` -> `float`
+- `outgoingPageTranslation()` -> `float`
+- `setProgress(float value)` -> `void`
+- `tabsTop()` -> `float`
+- `wasCommonHidden()` -> `boolean`
+
+## `org.telegram.ui.Components.RecyclerPagerView`
+- `drawChild(Canvas canvas, View child, long drawingTime)` -> `boolean`
+- `getAvailableTranslationX()` -> `float`
+- `isCancelledPagePair(View current, View other)` -> `boolean`
+- `onInterceptTouchEvent(MotionEvent event)` -> `boolean`
+- `onPageBound(@NonNull View page)` -> `void`
+- `onScrollEnd()` -> `void`
+- `onStartTracking()` -> `void`
+- `onTabScrollEnd(int position)` -> `void`
+- `onTouchEvent(MotionEvent event)` -> `boolean`
+- `onTouchEventInternal(MotionEvent event)` -> `boolean`
+- `resetTouch()` -> `void`
+- `setTranslationX(View view, float translationX)` -> `void`
+
 ## `org.telegram.ui.Components.RecyclerViewItemRangeSelector`
 - `onInterceptTouchEvent(RecyclerView rv, MotionEvent e)` -> `boolean`
 - `onRequestDisallowInterceptTouchEvent(boolean disallowIntercept)` -> `void`
 - `onTouchEvent(RecyclerView rv, MotionEvent e)` -> `void`
 - `setIsActive(View view, boolean active, int selection, boolean select)` -> `boolean`
+
+## `org.telegram.ui.Components.RecyclerViewportFrameLayout`
+- `onMeasure(int widthMeasureSpec, int heightMeasureSpec)` -> `void`
+- `setViewportView(@Nullable View viewportView)` -> `void`
 
 ## `org.telegram.ui.Components.ReorderingBulletinLayout`
 - `onEnterTransitionEnd()` -> `void`
@@ -10253,6 +10560,46 @@
 ## `org.telegram.ui.Components.ReportAlert$BottomSheetCell`
 - `onMeasure(int widthMeasureSpec, int heightMeasureSpec)` -> `void`
 - `setText(CharSequence text)` -> `void`
+
+## `org.telegram.ui.Components.RichWidgetBlock`
+- `static bleed()` -> `int`
+- `static contentWidth(TL_iv.pageBlockEmbed embed, int maxWidth)` -> `int`
+- `demote()` -> `void`
+- `disallowParentIntercept(boolean disallow)` -> `void`
+- `drawnBottom()` -> `float`
+- `drawnRight()` -> `float`
+- `getHeight()` -> `int`
+- `getText()` -> `TextSelectionHelper.TextLayoutBlock[]`
+- `hostView()` -> `View`
+- `invalidateWidget()` -> `void`
+- `isHorizontallyDragging()` -> `boolean`
+- `lastDownTime()` -> `long`
+- `mayGiveSwipe()` -> `boolean`
+- `onAttachedToWindow()` -> `void`
+- `onBubbleHold()` -> `void`
+- `onDetachedFromWindow()` -> `void`
+- `onDraw(Canvas canvas)` -> `void`
+- `onHoverEvent(MotionEvent event)` -> `void`
+- `onResizedAway(String reason)` -> `void`
+- `onTouchEvent(MotionEvent event)` -> `boolean`
+- `onWidgetResized()` -> `void`
+- `promote()` -> `void`
+- `setCursor(String cursor)` -> `void`
+- `setSafeArea(int bottom, int corner)` -> `void`
+- `static supports(TL_iv.pageBlockEmbed embed)` -> `boolean`
+- `static timeBand()` -> `int`
+- `static timeCorner(int timeWidth, boolean out)` -> `int`
+- `static timePadding()` -> `int`
+- `widthPx()` -> `int`
+
+## `org.telegram.ui.Components.RichWidgetBlock$Cursors`
+- `static set(View view, String cursor)` -> `void`
+
+## `org.telegram.ui.Components.RichWidgetBlock$ParagraphBlock`
+- `getLayout()` -> `android.text.Layout`
+- `getRow()` -> `int`
+- `getX()` -> `int`
+- `getY()` -> `int`
 
 ## `org.telegram.ui.Components.RoundStatusDrawable`
 - `draw(Canvas canvas)` -> `void`
@@ -10448,6 +10795,7 @@
 - `onFieldTouchUp(EditTextBoldCursor editText)` -> `void`
 - `onTextChange(String text)` -> `void`
 - `setHint(String text)` -> `void`
+- `updateColors()` -> `void`
 
 ## `org.telegram.ui.Components.SearchStateDrawable`
 - `draw(@NonNull Canvas canvas)` -> `void`
@@ -10556,11 +10904,15 @@
 - `updateItems()` -> `void`
 
 ## `org.telegram.ui.Components.SectionsScrollView`
+- `capture(Canvas canvas, RectF position)` -> `void`
 - `dispatchDraw(@NonNull Canvas canvas)` -> `void`
-- `drawChild(@NonNull Canvas canvas, View child, long drawingTime)` -> `boolean`
+- `isDrawBackground()` -> `boolean`
 - `static isSectionView(View view)` -> `boolean`
+- `onDetachedFromWindow()` -> `void`
 - `onScroll(Runnable listener)` -> `void`
 - `onScrollChanged(int l, int t, int oldl, int oldt)` -> `void`
+- `overScrollBy(int deltaX, int deltaY, int scrollX, int scrollY, int scrollRangeX, int scrollRangeY, int maxOverScrollX, int maxOverScrollY, boolean isTouchEvent)` -> `boolean`
+- `setDrawBackground(boolean drawBackground)` -> `void`
 
 ## `org.telegram.ui.Components.SectionsScrollView$SectionsLinearLayout`
 - `drawChild(@NonNull Canvas canvas, View child, long drawingTime)` -> `boolean`
@@ -10624,6 +10976,7 @@
 - `setReportChanges(boolean value)` -> `void`
 - `setSeparatorsCount(int separatorsCount)` -> `void`
 - `setTwoSided(boolean value)` -> `void`
+- `updateColors()` -> `void`
 - `updateTimestamps(MessageObject messageObject, Long duration)` -> `void`
 - `verifyDrawable(Drawable who)` -> `boolean`
 
@@ -10670,6 +11023,9 @@
 - `setShown(boolean shown, boolean animated)` -> `void`
 - `setSpeed(float speed, boolean animated)` -> `void`
 
+## `org.telegram.ui.Components.SelectSendAsPremiumHintBulletinLayout`
+- `updateColors()` -> `void`
+
 ## `org.telegram.ui.Components.SenderSelectPopup`
 - `dismiss()` -> `void`
 - `showAtLocation(View parent, int gravity, int x, int y)` -> `void`
@@ -10691,6 +11047,7 @@
 - `setProgress(float progress)` -> `void`
 - `setProgress(float progress, boolean animate)` -> `void`
 - `setProgress(float progress, boolean animate, boolean useSpring)` -> `void`
+- `updateColors()` -> `void`
 - `verifyDrawable(@NonNull Drawable who)` -> `boolean`
 
 ## `org.telegram.ui.Components.SendingFileDrawable`
@@ -10719,6 +11076,7 @@
 - `onBackPressed()` -> `void`
 - `onSend(LongSparseArray<TLRPC.Dialog> dids, int count, TLRPC.TL_forumTopic topic, boolean showToast)` -> `void`
 - `onShareStory(View cell)` -> `void`
+- `onThemeColorsChanged()` -> `void`
 - `setDelegate(ShareAlertDelegate shareAlertDelegate)` -> `void`
 - `setStoryToShare(TL_stories.StoryItem storyItem)` -> `void`
 - `updateBottomOverlay()` -> `void`
@@ -10785,9 +11143,11 @@
 
 ## `org.telegram.ui.Components.SharedMediaFastScrollTooltip$TooltipDrawableView`
 - `onDraw(Canvas canvas)` -> `void`
+- `updateColors()` -> `void`
 
 ## `org.telegram.ui.Components.SharedMediaLayout`
 - `animateSearchToOptions(boolean toOptions, boolean animated)` -> `void`
+- `capturePages(Canvas canvas, RectF position, ViewGroup root)` -> `void`
 - `closeActionMode()` -> `boolean`
 - `closeActionMode(boolean uncheckAnimated)` -> `boolean`
 - `static createEmptyStubView(Context context, int currentType, long dialog_id, Theme.ResourcesProvider resourcesProvider)` -> `View`
@@ -10796,9 +11156,7 @@
 - `disableScroll(boolean disable)` -> `void`
 - `dispatchDraw(Canvas canvas)` -> `void`
 - `dispatchFastScrollEvent(MotionEvent ev)` -> `boolean`
-- `drawBackgroundWithBlur(Canvas canvas, float y, Rect rectTmp2, Paint backgroundPaint)` -> `void`
 - `drawChild(Canvas canvas, View child, long drawingTime)` -> `boolean`
-- `drawListForBlur(Canvas blurCanvas, ArrayList<SizeNotifierFrameLayout.IViewWithInvalidateCallback> views)` -> `void`
 - `forceHasOverlappingRendering(boolean hasOverlappingRendering)` -> `void`
 - `getActionModeSelected()` -> `SparseArray<MessageObject>`
 - `getBotPreviewsSubtitle(boolean edit)` -> `String`
@@ -10807,6 +11165,7 @@
 - `getCurrentListView()` -> `RecyclerListView`
 - `getInitialTab()` -> `int`
 - `getNextMediaColumnsCount(int i, int mediaColumnsCount, boolean up)` -> `int`
+- `static getPagesTabsTop(int headerHeight)` -> `int`
 - `getPhotoVideoOptionsAlpha(float progress)` -> `float`
 - `getPhotosVideosTypeFilter()` -> `int`
 - `getSaveItem()` -> `TextView`
@@ -10825,10 +11184,9 @@
 - `getTabTranslationX(int type, boolean includeSubtabs)` -> `float`
 - `getTabVisibility(int type, boolean includeSubtabs)` -> `float`
 - `getThemeDescriptions()` -> `ArrayList<ThemeDescription>`
+- `getTopPanelShift()` -> `int`
 - `includeSavedDialogs()` -> `boolean`
 - `includeStories()` -> `boolean`
-- `initBlurCapture(ViewGroup parent)` -> `void`
-- `invalidateBlur()` -> `void`
 - `isActionModeShown()` -> `boolean`
 - `isAnimatingForward()` -> `boolean`
 - `static isAnyStoryPageType(int type)` -> `boolean`
@@ -10876,12 +11234,18 @@
 - `setChatInfo(TLRPC.ChatFull chatInfo)` -> `void`
 - `setChatUsers(ArrayList<Integer> sortedUsers, TLRPC.ChatFull chatInfo)` -> `void`
 - `setCommonGroupsCount(int count)` -> `void`
-- `setForwardRestrictedHint(HintView hintView)` -> `void`
+- `setForwardRestrictedHint(HintView2 hintView)` -> `void`
 - `setMergeDialogId(long did)` -> `void`
 - `setNewMediaCounts(int[] mediaCounts)` -> `void`
+- `setOnTopPanelShiftChanged(Runnable listener)` -> `void`
 - `setPadding(int left, int top, int right, int bottom)` -> `void`
+- `setPagesGlassEngine(GlassEngine engine)` -> `void`
+- `setPagesInsets(int tabsTop, int overscanTop, int overscanBottom, int paddingBottom)` -> `void`
 - `setPagesPaddingBottom(int pagesPaddingBottom)` -> `void`
+- `setPagesVisibleOverscanTop(int top)` -> `void`
 - `setPinnedToTop(boolean pinnedToTop)` -> `void`
+- `setSimpleMenuItemsAllowed(boolean allowed, boolean animated)` -> `void`
+- `setSimpleMenuItemsAllowed(boolean allowed, boolean animated, boolean optionsAnimated)` -> `void`
 - `setStoriesFilter(boolean photos, boolean videos)` -> `void`
 - `setUserInfo(TLRPC.UserFull userInfo)` -> `void`
 - `setVisibleHeight(int height)` -> `void`
@@ -10892,6 +11256,7 @@
 - `startAlbumsReorder(int albumId)` -> `void`
 - `storyAlbums_getAlbumIdByTabType(int type)` -> `int`
 - `updateAdapters()` -> `void`
+- `updateColors()` -> `void`
 - `updateFastScrollVisibility(MediaPage mediaPage, boolean animated)` -> `void`
 - `updateSearchItemIcon(float progress)` -> `void`
 - `updateSearchItemIconAnimated()` -> `void`
@@ -10941,11 +11306,13 @@
 - `search(final String query, boolean animated)` -> `void`
 
 ## `org.telegram.ui.Components.SharedMediaLayout$InternalListView`
+- `setPadding(int left, int top, int right, int bottom)` -> `void`
 - `updateClip(int[] clip)` -> `void`
 
 ## `org.telegram.ui.Components.SharedMediaLayout$MediaPage`
 - `dispatchDraw(Canvas canvas)` -> `void`
 - `drawChild(Canvas canvas, View child, long drawingTime)` -> `boolean`
+- `verifyDrawable(@NonNull Drawable who)` -> `boolean`
 
 ## `org.telegram.ui.Components.SharedMediaLayout$MediaSearchAdapter`
 - `getItem(int i)` -> `MessageObject`
@@ -10960,6 +11327,7 @@
 
 ## `org.telegram.ui.Components.SharedMediaLayout$MoreRecommendationsCell`
 - `onMeasure(int widthMeasureSpec, int heightMeasureSpec)` -> `void`
+- `updateColors()` -> `void`
 
 ## `org.telegram.ui.Components.SharedMediaLayout$PollAdapter`
 - `destroy()` -> `void`
@@ -10982,9 +11350,7 @@
 - `search(String query, ReactionsLayoutInBubble.VisibleReaction reaction)` -> `void`
 
 ## `org.telegram.ui.Components.SharedMediaLayout$ScrollSlidingTextTabStripInner`
-- `dispatchDraw(@NonNull Canvas canvas)` -> `void`
 - `drawBackground(Canvas canvas)` -> `void`
-- `setBackgroundColor(int color)` -> `void`
 
 ## `org.telegram.ui.Components.SharedMediaLayout$SharedDocumentsAdapter`
 - `getItemCount()` -> `int`
@@ -11064,6 +11430,7 @@
 ## `org.telegram.ui.Components.SharingLocationsAlert`
 - `didReceivedNotification(int id, int account, Object... args)` -> `void`
 - `dismiss()` -> `void`
+- `onThemeColorsChanged()` -> `void`
 
 ## `org.telegram.ui.Components.SharingLocationsAlert$ListAdapter`
 - `getItemCount()` -> `int`
@@ -11082,6 +11449,64 @@
 - `setDelegate(ShutterButtonDelegate shutterButtonDelegate)` -> `void`
 - `setScaleX(float scaleX)` -> `void`
 - `setState(State value, boolean animated)` -> `void`
+
+## `org.telegram.ui.Components.SiblingRecyclerPagerLayout`
+- `alignCommonBoundaryToPin()` -> `void`
+- `areTabsPinned()` -> `boolean`
+- `captureScrollingContent(Canvas canvas, RectF bounds, ScrollCapture capture)` -> `void`
+- `createBoundarySpacer(Context context)` -> `View`
+- `createCommonLayoutManager(Context context)` -> `LinearLayoutManager`
+- `debugPagerEvent(String event)` -> `void`
+- `dispatchTouchEvent(MotionEvent event)` -> `boolean`
+- `getBottomBleed()` -> `int`
+- `getNestedScrollAxes()` -> `int`
+- `static getStartOffset(RecyclerView view)` -> `float`
+- `getTabsTop()` -> `float`
+- `getTopBleed()` -> `int`
+- `invalidateGeometry()` -> `void`
+- `isCommonContentAt(float x, float y)` -> `boolean`
+- `logDebugState()` -> `void`
+- `onAttachedToWindow()` -> `void`
+- `onDetachedFromWindow()` -> `void`
+- `onNestedFling(@NonNull View target, float vx, float vy, boolean consumed)` -> `boolean`
+- `onNestedPreFling(@NonNull View target, float vx, float vy)` -> `boolean`
+- `onNestedPreScroll(@NonNull View target, int dx, int dy, @NonNull int[] consumed, int type)` -> `void`
+- `onNestedPreScroll(View target, int dx, int dy, int[] consumed)` -> `void`
+- `onNestedScroll(@NonNull View target, int dxConsumed, int dyConsumed, int dxUnconsumed, int dyUnconsumed, int type, @NonNull int[] consumed)` -> `void`
+- `onNestedScroll(View target, int dxConsumed, int dyConsumed, int dxUnconsumed, int dyUnconsumed, int type)` -> `void`
+- `onNestedScroll(View target, int dxConsumed, int dyConsumed, int dxUnconsumed, int dyUnconsumed)` -> `void`
+- `onNestedScrollAccepted(@NonNull View child, @NonNull View target, int axes, int type)` -> `void`
+- `onNestedScrollAccepted(View child, View target, int axes)` -> `void`
+- `onPageBound(@NonNull View page)` -> `void`
+- `onPagerChanged()` -> `void`
+- `onStartNestedScroll(@NonNull View child, @NonNull View target, int axes, int type)` -> `boolean`
+- `onStartNestedScroll(View child, View target, int axes)` -> `boolean`
+- `onStopNestedScroll(@NonNull View target, int type)` -> `void`
+- `onStopNestedScroll(View target)` -> `void`
+- `setCommonInsetsManagedExternally(boolean value)` -> `void`
+- `setCommonRecyclerView(@NonNull RecyclerView view, @NonNull CommonContent content)` -> `void`
+- `setDebugLoggingEnabled(boolean enabled)` -> `void`
+- `setGeometry(@NonNull Geometry value)` -> `void`
+- `setPager(@NonNull ViewPagerFixed value, @NonNull Pages pageProvider)` -> `void`
+- `setPager(@NonNull View container, @NonNull ViewPagerFixed value, @NonNull Pages pageProvider)` -> `void`
+- `setTabs(@NonNull View value, int height)` -> `void`
+- `setVerticalBleed(int top, int bottom)` -> `void`
+- `traceNextDraws(String reason, int frames)` -> `void`
+
+## `org.telegram.ui.Components.SiblingRecyclerPagerLayout$CommonLayer`
+- `dispatchTouchEvent(MotionEvent event)` -> `boolean`
+- `drawChild(Canvas canvas, View child, long drawingTime)` -> `boolean`
+
+## `org.telegram.ui.Components.SiblingRecyclerPagerLayout$Geometry`
+- `commonHiddenTop(SiblingRecyclerPagerLayout parent)` -> `default float`
+- `commonTopInset(SiblingRecyclerPagerLayout parent)` -> `default int`
+- `onTabsPinnedChanged(boolean pinned)` -> `default void`
+- `onTabsPositionChanged(float top)` -> `default void`
+- `pageBottomInset(SiblingRecyclerPagerLayout parent)` -> `default int`
+
+## `org.telegram.ui.Components.SiblingRecyclerPagerLayout$Pages`
+- `resetToStart(RecyclerView view)` -> `default void`
+- `scrollOffset(RecyclerView view)` -> `default float`
 
 ## `org.telegram.ui.Components.SimpleAvatarView`
 - `isSelected()` -> `boolean`
@@ -11247,10 +11672,13 @@
 - `getIntrinsicHeight()` -> `int`
 - `getIntrinsicWidth()` -> `int`
 - `getOpacity()` -> `int`
+- `invalidateDrawable(@NonNull Drawable who)` -> `void`
+- `scheduleDrawable(@NonNull Drawable who, @NonNull Runnable what, long when)` -> `void`
 - `setAlpha(int alpha)` -> `void`
 - `setColor(int color)` -> `void`
 - `setColorFilter(@Nullable ColorFilter colorFilter)` -> `void`
 - `setValue(float value, boolean animated)` -> `void`
+- `unscheduleDrawable(@NonNull Drawable who, @NonNull Runnable what)` -> `void`
 
 ## `org.telegram.ui.Components.SpoilersShowcase`
 - `createView(Context context)` -> `View`
@@ -11283,6 +11711,7 @@
 - `setParentExpanded(float parentExpanded)` -> `void`
 - `setResourcesProvider(Theme.ResourcesProvider resourcesProvider)` -> `void`
 - `setVisibility(boolean isVisible)` -> `void`
+- `updateColors()` -> `void`
 - `updateColors(MessagesController.PeerColor peerColor)` -> `void`
 - `verifyDrawable(@NonNull Drawable who)` -> `boolean`
 
@@ -11327,6 +11756,7 @@
 - `onAttachedToWindow()` -> `void`
 - `onDetachedFromWindow()` -> `void`
 - `setStorageUsage(boolean calculating, long database, long totalSize, long totalDeviceFreeSize, long totalDeviceSize)` -> `void`
+- `updateColors()` -> `void`
 
 ## `org.telegram.ui.Components.StorageUsageView$ProgressView`
 - `onDraw(Canvas canvas)` -> `void`
@@ -11388,7 +11818,16 @@
 - `setOverrideColor(int override)` -> `void`
 - `setOverrideColorProgress(float cx, float cy, float rad)` -> `void`
 - `setProgress(float value)` -> `void`
+- `updateColors()` -> `void`
 - `verifyDrawable(Drawable who)` -> `boolean`
+
+## `org.telegram.ui.Components.TableColumnBalancer`
+- `static compute(List<Cell> cells, int columnCount, int available, int minColumnWidth)` -> `int[]`
+- `static fixed(int column, int span, int width)` -> `Cell`
+- `static measure(CharSequence text, TextPaint paint, int column, int span, int padding, int maxContentWidth, int laidOutWidth)` -> `Cell`
+
+## `org.telegram.ui.Components.TableColumnBalancer$Cell`
+- `widthFor(int lines)` -> `int`
 
 ## `org.telegram.ui.Components.TableLayout`
 - `static adjust(int measureSpec, int delta)` -> `int`
@@ -11412,6 +11851,7 @@
 - `onLayout(boolean changed, int left, int top, int right, int bottom)` -> `void`
 - `onMeasure(int widthSpec, int heightSpec)` -> `void`
 - `setAlignmentMode(int alignmentMode)` -> `void`
+- `setBalancedColumns(boolean balanced)` -> `void`
 - `setCellPadding(int horizontal, int top, int bottom)` -> `void`
 - `setColumnCount(int columnCount)` -> `void`
 - `setColumnOrderPreserved(boolean columnOrderPreserved)` -> `void`
@@ -11519,6 +11959,7 @@
 ## `org.telegram.ui.Components.TableView`
 - `clear()` -> `void`
 - `onLayout(boolean changed, int l, int t, int r, int b)` -> `void`
+- `updateColors()` -> `void`
 
 ## `org.telegram.ui.Components.TableView$TableRowContent`
 - `onDraw(Canvas canvas)` -> `void`
@@ -11733,7 +12174,63 @@
 - `setBackgroundHeight(int backgroundHeight)` -> `void`
 - `setOnTopicClickListener(Utilities.Callback<Long> listener)` -> `void`
 
+## `org.telegram.ui.Components.TopicsSidePanel`
+- `close()` -> `void`
+- `didReceivedNotification(int id, int account, Object... args)` -> `void`
+- `dispatchDraw(@NonNull Canvas canvas)` -> `void`
+- `dispatchTouchEvent(MotionEvent ev)` -> `boolean`
+- `getContentWidth()` -> `int`
+- `getProgress()` -> `float`
+- `holdsGesture()` -> `boolean`
+- `isOpen()` -> `boolean`
+- `onAttachedToWindow()` -> `void`
+- `onDetachedFromWindow()` -> `void`
+- `onInterceptTouchEvent(MotionEvent e)` -> `boolean`
+- `onLayout(boolean changed, int left, int top, int right, int bottom)` -> `void`
+- `onMeasure(int widthMeasureSpec, int heightMeasureSpec)` -> `void`
+- `onTouchEvent(MotionEvent e)` -> `boolean`
+- `open()` -> `void`
+- `setCurrentTopic(long topicId)` -> `void`
+- `setMenuAvailable(boolean available)` -> `void`
+- `setProgress(float value)` -> `void`
+- `settle(float velocityX)` -> `void`
+
+## `org.telegram.ui.Components.TopicsSidePanel$Adapter`
+- `getItemCount()` -> `int`
+- `isEnabled(RecyclerView.ViewHolder holder)` -> `boolean`
+- `onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position)` -> `void`
+- `onCreateViewHolder(@NonNull ViewGroup parent, int viewType)` -> `RecyclerView.ViewHolder`
+- `update()` -> `void`
+
+## `org.telegram.ui.Components.TopicsSidePanel$Delegate`
+- `drawOverDim(Canvas canvas)` -> `default void`
+- `getButtonReserve()` -> `default int`
+- `onTopicLongClick(TLRPC.TL_forumTopic topic, View row)` -> `default boolean`
+
+## `org.telegram.ui.Components.TopicsSidePanel$Item`
+- `getId()` -> `long`
+
+## `org.telegram.ui.Components.TopicsSidePanel$TagButton`
+- `onDraw(@NonNull Canvas canvas)` -> `void`
+- `onMeasure(int widthMeasureSpec, int heightMeasureSpec)` -> `void`
+- `set(IconGroup group)` -> `void`
+- `updateChosen(boolean animated)` -> `void`
+
+## `org.telegram.ui.Components.TopicsSidePanel$TagsAdapter`
+- `getItemCount()` -> `int`
+- `isEnabled(RecyclerView.ViewHolder holder)` -> `boolean`
+- `onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position)` -> `void`
+- `onCreateViewHolder(@NonNull ViewGroup parent, int viewType)` -> `RecyclerView.ViewHolder`
+
+## `org.telegram.ui.Components.TopicsSidePanel$TopicRow`
+- `drawScrim(Canvas canvas, float progress)` -> `void`
+- `onDraw(@NonNull Canvas canvas)` -> `void`
+- `onMeasure(int widthMeasureSpec, int heightMeasureSpec)` -> `void`
+- `set(Item item, boolean divider)` -> `void`
+- `setTranslationY(float translationY)` -> `void`
+
 ## `org.telegram.ui.Components.TopicsTabsView`
+- `areTabsEnabled()` -> `boolean`
 - `didReceivedNotification(int id, int account, Object... args)` -> `void`
 - `dispatchDraw(@NonNull Canvas canvas)` -> `void`
 - `doOnUpdateSideMenuPosition(Runnable runnable)` -> `void`
@@ -11742,9 +12239,11 @@
 - `getSideMenuT()` -> `float`
 - `getTabsVisibleSpaceWithPadding(Position position, float padding)` -> `float`
 - `getTopic(long id)` -> `TLRPC.TL_forumTopic`
+- `isSideMenuChosen()` -> `boolean`
 - `isSideMenuEnabled()` -> `boolean`
 - `onAttachedToWindow()` -> `void`
 - `onDetachedFromWindow()` -> `void`
+- `onFactorChangeFinished(int id, float finalFactor, FactorAnimator callee)` -> `void`
 - `onFactorChanged(int id, float factor, float fraction, FactorAnimator callee)` -> `void`
 - `onSizeChanged(int w, int h, int oldw, int oldh)` -> `void`
 - `selectTopic(long topicId, boolean fromMessage)` -> `void`
@@ -11756,7 +12255,10 @@
 - `setSideMenuBackgroundDrawable(BlurredBackgroundDrawable sideMenuBackgroundDrawable)` -> `void`
 - `setSideMenuBackgroundMarginBottom(float margin)` -> `void`
 - `setSideMenuBackgroundMarginTop(float margin)` -> `void`
+- `setTabsEnabled(boolean enabled)` -> `void`
 - `setTopMenuBackgroundDrawable(BlurredBackgroundDrawable sideMenuBackgroundDrawable)` -> `void`
+- `showTopicOptions(TLRPC.TL_forumTopic topic, View view, boolean fromSidePanel)` -> `boolean`
+- `updateColors()` -> `void`
 - `updateSidemenuPosition()` -> `void`
 
 ## `org.telegram.ui.Components.TopicsTabsView$BotNewTopicDrawable`
@@ -11779,6 +12281,7 @@
 - `setMf(long chatDialogId, TLRPC.TL_forumTopic dialog, boolean selected)` -> `void`
 - `setReorder(boolean value)` -> `void`
 - `setSelected(boolean selected)` -> `void`
+- `updateColors()` -> `void`
 
 ## `org.telegram.ui.Components.TopicsTabsView$HorizontalTabView$Factory`
 - `static asAdd()` -> `UItem`
@@ -11797,6 +12300,7 @@
 - `setMf(TLRPC.TL_forumTopic dialog, boolean selected)` -> `void`
 - `setReorder(boolean value)` -> `void`
 - `setSelected(boolean selected)` -> `void`
+- `updateColors()` -> `void`
 
 ## `org.telegram.ui.Components.TopicsTabsView$VerticalTabView$Factory`
 - `static asAdd(boolean monoforum)` -> `UItem`
@@ -11869,6 +12373,7 @@
 - `static languageNameCapital(String locale)` -> `String`
 - `static lowerFirst(String text)` -> `String`
 - `static lowerFirst(CharSequence text)` -> `CharSequence`
+- `onThemeColorsChanged()` -> `void`
 - `static preprocess(TLRPC.TL_textWithEntities source, TLRPC.TL_textWithEntities received)` -> `TLRPC.TL_textWithEntities`
 - `static preprocess(ArrayList<TLRPC.TL_textWithEntities> received)` -> `ArrayList<TLRPC.TL_textWithEntities>`
 - `static resetToLanguage()` -> `void`
@@ -11891,6 +12396,7 @@
 - `onDetachedFromWindow()` -> `void`
 - `onMeasure(int widthMeasureSpec, int heightMeasureSpec)` -> `void`
 - `setTranslationY(float translationY)` -> `void`
+- `updateColors()` -> `void`
 
 ## `org.telegram.ui.Components.TranslateAlert2$HeaderView`
 - `onMeasure(int widthMeasureSpec, int heightMeasureSpec)` -> `void`
@@ -11915,6 +12421,7 @@
 - `getTitle()` -> `CharSequence`
 - `onActionBarAlpha(float alpha)` -> `void`
 - `onContainerViewTranslation()` -> `void`
+- `onThemeColorsChanged()` -> `void`
 - `setMessage(long dialogId, int messageId)` -> `TranslateAlert3`
 - `setMessage(long dialogId, int messageId, boolean summarized)` -> `TranslateAlert3`
 - `setNoforwards(boolean noforwards)` -> `TranslateAlert3`
@@ -12062,6 +12569,7 @@
 - `static asTransaction(TL_stats.BroadcastRevenueTransaction transaction)` -> `UItem`
 - `static asUserCheckbox(int id, TLObject user)` -> `UItem`
 - `static asUserGroupCheckbox(int id, CharSequence text, CharSequence subtext)` -> `UItem`
+- `static asViewportCustom(View view)` -> `UItem`
 - `contentsEquals(AdapterWithDiffUtils.Item o)` -> `boolean`
 - `equals(Object o)` -> `boolean`
 - `static findFactory(int viewType)` -> `UItemFactory<?>`
@@ -12138,6 +12646,7 @@
 - `getBackground()` -> `Drawable`
 - `getCurrentInfoObject()` -> `Object`
 - `getEnterOffset()` -> `float`
+- `getUndoButton()` -> `View`
 - `hide(boolean apply, int animated)` -> `void`
 - `invalidate()` -> `void`
 - `isMultilineSubInfo()` -> `boolean`
@@ -12156,6 +12665,7 @@
 - `showWithAction(long did, int action, Object infoObject, Runnable actionRunnable, Runnable cancelRunnable)` -> `void`
 - `showWithAction(long did, int action, Object infoObject, Object infoObject2, Runnable actionRunnable, Runnable cancelRunnable)` -> `void`
 - `showWithAction(ArrayList<Long> dialogIds, int action, Object infoObject, Object infoObject2, Runnable actionRunnable, Runnable cancelRunnable)` -> `void`
+- `updateColors()` -> `void`
 
 ## `org.telegram.ui.Components.UndoView$LinkMovementMethodMy`
 - `onTouchEvent(TextView widget, Spannable buffer, MotionEvent event)` -> `boolean`
@@ -12176,6 +12686,7 @@
 - `reorderSectionEnd()` -> `void`
 - `reorderSectionStart()` -> `int`
 - `setApplyBackground(boolean applyBackground)` -> `void`
+- `setCompactTextCells(boolean compact)` -> `void`
 - `swapElements(int fromPosition, int toPosition)` -> `void`
 - `update(boolean animated)` -> `void`
 - `updateReorder(boolean allowReorder)` -> `void`
@@ -12221,8 +12732,6 @@
 - `onReorderRemove(ViewHolder viewHolder)` -> `void`
 - `onReorderStart(ViewHolder viewHolder)` -> `void`
 - `setReorderLongPressEnabled(boolean enabled)` -> `void`
-- `setSections()` -> `void`
-- `setSections(boolean topPadding)` -> `void`
 - `setSections(int padding, float roundRadius, boolean topPadding)` -> `void`
 - `setSpanCount(int spanCount)` -> `void`
 - `swappedElements()` -> `void`
@@ -12585,6 +13094,7 @@
 - `downloadUrlContent(AsyncTask parentTask, String url)` -> `String`
 - `downloadUrlContent(AsyncTask parentTask, String url, HashMap<String, String> headers, boolean tryGzip)` -> `String`
 - `enterFullscreen()` -> `void`
+- `exitFromInlineMode()` -> `void`
 - `exitFullscreen()` -> `void`
 - `getAspectRatioView()` -> `View`
 - `getControlsView()` -> `View`
@@ -12644,6 +13154,39 @@
 ## `org.telegram.ui.Components.WebPlayerView$YoutubeVideoTask`
 - `doInBackground(Void... voids)` -> `String[]`
 - `onPostExecute(String[] result)` -> `void`
+
+## `org.telegram.ui.Components.WidgetInlinePreview`
+- `disallowParentIntercept(boolean disallow)` -> `void`
+- `draw(Canvas canvas, float x, float y)` -> `void`
+- `heightPx(int widthPx)` -> `int`
+- `hide()` -> `void`
+- `invalidateWidget()` -> `void`
+- `onWidgetResized()` -> `void`
+- `show(int widthPx)` -> `void`
+- `static supports(TLRPC.BotInlineResult result)` -> `boolean`
+
+## `org.telegram.ui.Components.WidgetSandboxPlayer`
+- `bind(WidgetSandboxMessage message)` -> `void`
+- `blocksMessageMenu()` -> `boolean`
+- `draw(Canvas canvas, int width)` -> `boolean`
+- `heightPx()` -> `int`
+- `lastDownTime()` -> `long`
+- `mayGiveSwipe()` -> `boolean`
+- `message()` -> `WidgetSandboxMessage`
+- `msSinceTouch()` -> `long`
+- `onCursor(String cursor)` -> `void`
+- `onGesture(boolean x, boolean y, boolean hold)` -> `void`
+- `onHoverEvent(MotionEvent event, boolean inside)` -> `void`
+- `onMessageFailure()` -> `void`
+- `onMessageFrame(boolean resized)` -> `void`
+- `onTouchEvent(MotionEvent event)` -> `boolean`
+- `preview(WidgetSandboxMessage message)` -> `void`
+- `setVisible(boolean visible)` -> `void`
+- `unbind()` -> `void`
+
+## `org.telegram.ui.Components.WidgetSandboxPlayer$Host`
+- `onBubbleHold()` -> `default void`
+- `setCursor(String cursor)` -> `default void`
 
 ## `org.telegram.ui.Components.ZoomControlView`
 - `getZoom()` -> `float`
@@ -12706,9 +13249,9 @@
 - `destroy()` -> `void`
 
 ## `org.telegram.ui.Components.chat.WallpaperBitmapProvider`
-- `getNavigationBarColor(BlurredBackgroundSource source)` -> `int`
-- `getStatusBarColor(BlurredBackgroundSource source)` -> `int`
-- `updateSourceFromBackgroundViewDrawable(Drawable drawable)` -> `BlurredBackgroundSource`
+- `getNavigationBarColor(GlassSource source)` -> `int`
+- `getStatusBarColor(GlassSource source)` -> `int`
+- `updateSourceFromBackgroundViewDrawable(Drawable drawable)` -> `GlassSource`
 
 ## `org.telegram.ui.Components.inset.KeyboardState`
 - `getState()` -> `State`
@@ -12741,6 +13284,7 @@
 - `downloadStart()` -> `void`
 
 ## `org.telegram.ui.Components.poll.PollAddOptionFieldLayout`
+- `addColorKeys(java.util.HashSet<Integer> colors)` -> `void`
 - `doOnCancel(Runnable onCancel)` -> `void`
 - `doOnEmojiClick(Runnable runnable)` -> `void`
 - `drawInCell(Canvas canvas)` -> `void`
@@ -12753,6 +13297,7 @@
 - `setColor(int color)` -> `void`
 - `setEmojiKeyboardVisible(boolean isEmojiKeyboardVisible, boolean animated)` -> `void`
 - `updateCell()` -> `void`
+- `updateColors()` -> `void`
 
 ## `org.telegram.ui.Components.poll.PollAddOptionFieldLayout$ViewWrapper`
 - `drawChild(@NonNull Canvas canvas, View child, long drawingTime)` -> `boolean`
@@ -12961,6 +13506,7 @@
 ## `org.telegram.ui.Components.poll.sheets.PollStatisticsBottomSheet`
 - `createAdapter(RecyclerListView listView)` -> `RecyclerListView.SelectionAdapter`
 - `getTitle()` -> `CharSequence`
+- `onThemeColorsChanged()` -> `void`
 
 ## `org.telegram.ui.Components.quickforward.QuickShareAvatarCell`
 - `draw(Canvas c, float hardMinX, float hardMaxX, float softMinX, float softMaxX, float cx, float cy, float rad, float alpha, boolean withoutAvatar)` -> `void`
@@ -13100,6 +13646,7 @@
 - `getOpacity()` -> `int`
 - `setAlpha(int alpha)` -> `void`
 - `setColorFilter(@Nullable ColorFilter colorFilter)` -> `void`
+- `setIconSameSize(boolean iconSameSize)` -> `void`
 - `setIconTranslate(int tx, int ty)` -> `void`
 - `setIconVisible(boolean visible)` -> `void`
 - `setIconVisible(boolean visible, boolean animated)` -> `void`
@@ -13111,29 +13658,34 @@
 - `didUploadFailed()` -> `void`
 - `didUploadPhoto(TLRPC.InputFile photo, TLRPC.InputFile video, double videoStartTimestamp, String videoPath, TLRPC.PhotoSize bigSize, TLRPC.PhotoSize smallSize, boolean isVideo, TLRPC.VideoSize emojiMarkup)` -> `void`
 - `getInitialSearchString()` -> `String`
+- `getListViewForSimpleGlass()` -> `RecyclerListView`
 - `getResourceProvider()` -> `Theme.ResourcesProvider`
 - `getThemeDescriptions()` -> `ArrayList<ThemeDescription>`
+- `isSupportEdgeToEdge()` -> `boolean`
 - `onFragmentCreate()` -> `boolean`
 - `onFragmentDestroy()` -> `void`
 - `onPause()` -> `void`
 - `onResume()` -> `void`
+- `onThemeColorsChanged()` -> `void`
 - `onUploadProgressChanged(float progress)` -> `void`
 - `setDelegate(ContactAddActivityDelegate contactAddActivityDelegate)` -> `void`
+- `useSimpleActionBar()` -> `boolean`
 
 ## `org.telegram.ui.ContactsActivity`
-- `createActionBar(Context context)` -> `ActionBar`
 - `createView(Context context)` -> `View`
 - `didReceivedNotification(int id, int account, Object... args)` -> `void`
+- `drawEdgeNavigationBar()` -> `boolean`
 - `getAnimatedInsetsTargetView()` -> `View`
-- `getGlassSource()` -> `BlurredBackgroundSourceRenderNode`
+- `getFrostedGlassSource()` -> `GlassSourceRenderNode`
+- `getGlassSource()` -> `GlassSourceRenderNode`
 - `getListView()` -> `RecyclerListView`
+- `getListViewForSimpleGlass()` -> `RecyclerListView`
 - `getThemeDescriptions()` -> `ArrayList<ThemeDescription>`
 - `isSupportEdgeToEdge()` -> `boolean`
 - `onAnimatedInsetsChanged(View view, WindowInsetsCompat insets)` -> `void`
 - `onBackPressed(boolean invoked)` -> `boolean`
 - `onBecomeFullyVisible()` -> `void`
 - `onDialogDismiss(Dialog dialog)` -> `void`
-- `onFactorChangeFinished(int id, float finalFactor, FactorAnimator callee)` -> `void`
 - `onFactorChanged(int id, float factor, float fraction, FactorAnimator callee)` -> `void`
 - `onFragmentCreate()` -> `boolean`
 - `onFragmentDestroy()` -> `void`
@@ -13142,10 +13694,12 @@
 - `onPause()` -> `void`
 - `onRequestPermissionsResultFragment(int requestCode, String[] permissions, int[] grantResults)` -> `void`
 - `onResume()` -> `void`
+- `onThemeColorsChanged()` -> `void`
 - `onTransitionAnimationProgress(boolean isOpen, float progress)` -> `void`
 - `setDelegate(ContactsActivityDelegate delegate)` -> `void`
 - `setIgnoreUsers(LongSparseArray<TLRPC.User> users)` -> `void`
 - `setInitialSearchString(String initialSearchString)` -> `void`
+- `useSimpleActionBar()` -> `boolean`
 
 ## `org.telegram.ui.ContactsWidgetConfigActivity`
 - `handleIntent(Intent intent, boolean isNew, boolean restore, boolean fromPassword, int intentAccount, int state)` -> `boolean`
@@ -13205,6 +13759,7 @@
 - `onFragmentCreate()` -> `boolean`
 - `onFragmentDestroy()` -> `void`
 - `onResume()` -> `void`
+- `onThemeColorsChanged()` -> `void`
 - `setCountrySelectActivityDelegate(CountrySelectActivityDelegate delegate)` -> `void`
 - `setDisableAnonymousNumbers(boolean disableAnonymousNumbers)` -> `void`
 
@@ -13235,10 +13790,13 @@
 
 ## `org.telegram.ui.DataAutoDownloadActivity`
 - `createView(Context context)` -> `View`
+- `getListViewForSimpleGlass()` -> `RecyclerListView`
 - `getThemeDescriptions()` -> `ArrayList<ThemeDescription>`
+- `isSupportEdgeToEdge()` -> `boolean`
 - `onFragmentCreate()` -> `boolean`
 - `onPause()` -> `void`
 - `onResume()` -> `void`
+- `useSimpleActionBar()` -> `boolean`
 
 ## `org.telegram.ui.DataAutoDownloadActivity$ListAdapter`
 - `getItemCount()` -> `int`
@@ -13251,10 +13809,13 @@
 - `createView(Context context)` -> `View`
 - `getResourceProvider()` -> `Theme.ResourcesProvider`
 - `isLightStatusBar()` -> `boolean`
+- `isSupportEdgeToEdge()` -> `boolean`
 - `isSwipeBackEnabled(MotionEvent event)` -> `boolean`
+- `onInsets(int left, int top, int right, int bottom)` -> `void`
 - `onTransitionAnimationProgress(boolean isOpen, float progress)` -> `void`
 - `scrollToReset()` -> `void`
 - `selectTab(int tab)` -> `void`
+- `useSimpleActionBar()` -> `boolean`
 
 ## `org.telegram.ui.DataUsage2Activity$Cell`
 - `onDraw(Canvas canvas)` -> `void`
@@ -13298,6 +13859,7 @@
 - `onDraw(Canvas canvas)` -> `void`
 - `onMeasure(int widthMeasureSpec, int heightMeasureSpec)` -> `void`
 - `setTop(boolean top)` -> `void`
+- `updateColors()` -> `void`
 
 ## `org.telegram.ui.DataUsage2Activity$SubtitleCell`
 - `onMeasure(int widthMeasureSpec, int heightMeasureSpec)` -> `void`
@@ -13368,6 +13930,7 @@
 - `onFragmentDestroy()` -> `void`
 - `onPause()` -> `void`
 - `onResume()` -> `void`
+- `onThemeColorsChanged()` -> `void`
 
 ## `org.telegram.ui.DownloadProgressIcon`
 - `didReceivedNotification(int id, int account, Object... args)` -> `void`
@@ -13419,15 +13982,19 @@
 
 ## `org.telegram.ui.EnableTopicsActivity`
 - `createView(Context context)` -> `View`
+- `getListViewForSimpleGlass()` -> `RecyclerListView`
+- `isSupportEdgeToEdge()` -> `boolean`
 - `onFragmentCreate()` -> `boolean`
-- `setOnForumChanged(boolean forum, boolean tabs, Utilities.Callback2<Boolean, Boolean> listener)` -> `void`
+- `setOnForumChanged(boolean forum, boolean tabs, boolean sidebar, Utilities.Callback3<Boolean, Boolean, Boolean> listener)` -> `void`
+- `useSimpleActionBar()` -> `boolean`
 
 ## `org.telegram.ui.EnableTopicsActivity$TopicsLayoutSwitcher`
 - `onMeasure(int widthMeasureSpec, int heightMeasureSpec)` -> `void`
-- `setChecked(boolean checked, boolean animated)` -> `void`
+- `setSelected(int index, boolean animated)` -> `void`
+- `updateColors()` -> `void`
 
 ## `org.telegram.ui.EnableTopicsActivity$TopicsLayoutSwitcher$Factory`
-- `static asSwitcher(int id, View.OnClickListener leftClick, View.OnClickListener rightClick)` -> `UItem`
+- `static asSwitcher(int id, Utilities.Callback<Integer> onSelected)` -> `UItem`
 - `bindView(View view, UItem item, boolean divider, UniversalAdapter adapter, UniversalRecyclerView listView)` -> `void`
 - `createView(Context context, RecyclerListView listView, int currentAccount, int classGuid, Theme.ResourcesProvider resourcesProvider)` -> `TopicsLayoutSwitcher`
 
@@ -13458,12 +14025,15 @@
 
 ## `org.telegram.ui.FilterChatlistActivity`
 - `createView(Context context)` -> `View`
+- `getListViewForSimpleGlass()` -> `RecyclerListView`
+- `isSupportEdgeToEdge()` -> `boolean`
 - `onBackPressed(boolean invoked)` -> `boolean`
 - `onFragmentDestroy()` -> `void`
 - `onPause()` -> `void`
 - `setOnDelete(Utilities.Callback<TL_chatlists.TL_exportedChatlistInvite> onDelete)` -> `void`
 - `setOnEdit(Utilities.Callback<TL_chatlists.TL_exportedChatlistInvite> onEdit)` -> `void`
 - `updateRows()` -> `void`
+- `useSimpleActionBar()` -> `boolean`
 
 ## `org.telegram.ui.FilterChatlistActivity$HintInnerCell`
 - `getSubtitleTextView()` -> `SpoilersTextView`
@@ -13484,6 +14054,7 @@
 ## `org.telegram.ui.FilterChatlistActivity$InviteLinkCell$ButtonsBox`
 - `onDraw(Canvas canvas)` -> `void`
 - `setT(float t)` -> `void`
+- `updateColors()` -> `void`
 
 ## `org.telegram.ui.FilterChatlistActivity$ListAdapter`
 - `getItemCount()` -> `int`
@@ -13494,6 +14065,7 @@
 
 ## `org.telegram.ui.FilterCreateActivity`
 - `createView(Context context)` -> `View`
+- `getListViewForSimpleGlass()` -> `RecyclerListView`
 - `getThemeDescriptions()` -> `ArrayList<ThemeDescription>`
 - `getUndoView()` -> `UndoView`
 - `static hideNew(int type)` -> `void`
@@ -13503,6 +14075,8 @@
 - `onFragmentDestroy()` -> `void`
 - `onInsets(int left, int top, int right, int bottom)` -> `void`
 - `onResume()` -> `void`
+- `onThemeColorsChanged()` -> `void`
+- `useSimpleActionBar()` -> `boolean`
 - `static withNew(int type, CharSequence string, boolean outline)` -> `CharSequence`
 
 ## `org.telegram.ui.FilterCreateActivity$ButtonCell`
@@ -13522,6 +14096,7 @@
 - `createAdapter(RecyclerListView listView)` -> `RecyclerListView.SelectionAdapter`
 - `getTitle()` -> `CharSequence`
 - `getTitle(TextView textView)` -> `CharSequence`
+- `onThemeColorsChanged()` -> `void`
 - `onViewCreated(FrameLayout containerView)` -> `void`
 - `static show(BaseFragment fragment, MessagesController.DialogFilter filter, Runnable onLoaded)` -> `void`
 
@@ -13555,6 +14130,7 @@
 - `reload()` -> `void`
 - `setInvite(TL_chatlists.TL_exportedChatlistInvite invite, boolean divider)` -> `void`
 - `setRevoked(boolean value, boolean animated)` -> `void`
+- `updateColors()` -> `void`
 
 ## `org.telegram.ui.FilterCreateActivity$ListAdapter`
 - `getItemCount()` -> `int`
@@ -13569,6 +14145,7 @@
 - `getSize(@NonNull Paint paint, CharSequence text, int start, int end, @Nullable Paint.FontMetricsInt fm)` -> `int`
 - `makeLayout()` -> `StaticLayout`
 - `setColor(int color)` -> `void`
+- `setColorKey(int key, Theme.ResourcesProvider resourcesProvider)` -> `void`
 - `setText(CharSequence text)` -> `void`
 - `setTypeface(Typeface typeface)` -> `void`
 
@@ -13597,6 +14174,7 @@
 - `setUiCallback(UiCallback callback)` -> `void`
 - `setUseFromUserAsAvatar(boolean value)` -> `void`
 - `update()` -> `void`
+- `updateColors()` -> `void`
 
 ## `org.telegram.ui.FilteredSearchView$FloatingDateView`
 - `onDraw(@NonNull Canvas canvas)` -> `void`
@@ -13653,6 +14231,7 @@
 - `createFolder(INavigationLayout navigationLayout)` -> `void`
 - `createView(Context context)` -> `View`
 - `didReceivedNotification(int id, int account, Object... args)` -> `void`
+- `getListViewForSimpleGlass()` -> `RecyclerListView`
 - `getThemeDescriptions()` -> `ArrayList<ThemeDescription>`
 - `getUndoView()` -> `UndoView`
 - `highlightTags()` -> `FiltersSetupActivity`
@@ -13662,14 +14241,18 @@
 - `onFragmentDestroy()` -> `void`
 - `onInsets(int left, int top, int right, int bottom)` -> `void`
 - `onResume()` -> `void`
+- `useSimpleActionBar()` -> `boolean`
 
 ## `org.telegram.ui.FiltersSetupActivity$FilterCell`
 - `getCurrentFilter()` -> `MessagesController.DialogFilter`
+- `getDraggingProgress()` -> `float`
 - `onDraw(Canvas canvas)` -> `void`
 - `onMeasure(int widthMeasureSpec, int heightMeasureSpec)` -> `void`
+- `setDragging(boolean dragging)` -> `void`
 - `setFilter(MessagesController.DialogFilter filter, boolean divider, int position)` -> `void`
 - `setOnOptionsClick(OnClickListener listener)` -> `void`
 - `setOnReorderButtonTouchListener(OnTouchListener listener)` -> `void`
+- `updateColors()` -> `void`
 
 ## `org.telegram.ui.FiltersSetupActivity$HintInnerCell`
 - `onMeasure(int widthMeasureSpec, int heightMeasureSpec)` -> `void`
@@ -13699,11 +14282,13 @@
 - `onMeasure(int widthMeasureSpec, int heightMeasureSpec)` -> `void`
 - `setAddOnClickListener(OnClickListener onClickListener)` -> `void`
 - `setFilter(TLRPC.TL_dialogFilterSuggested filter, boolean divider)` -> `void`
+- `updateColors()` -> `void`
 
 ## `org.telegram.ui.FiltersSetupActivity$TextCell`
 - `onLayout(boolean changed, int left, int top, int right, int bottom)` -> `void`
 - `onMeasure(int widthMeasureSpec, int heightMeasureSpec)` -> `void`
 - `setTextAndIcon(String text, Drawable icon, boolean divider)` -> `void`
+- `updateColors()` -> `void`
 
 ## `org.telegram.ui.FragmentUsernameBottomSheet`
 - `static open(Context context, int type, String name, TLObject owner, TL_fragment.TL_collectibleInfo info, Theme.ResourcesProvider resourcesProvider)` -> `void`
@@ -13717,27 +14302,35 @@
 ## `org.telegram.ui.GradientHeaderActivity`
 - `applyScrolledPosition()` -> `void`
 - `applyScrolledPosition(boolean ignorePaddingView)` -> `void`
+- `attachMainList(Context context)` -> `void`
 - `configureHeader(CharSequence title, CharSequence subTitle, View aboveTitleView, View underSubTitleView)` -> `void`
 - `createContentView()` -> `ContentView`
+- `createMainLayoutManager(Context context)` -> `LinearLayoutManager`
 - `createParticlesView()` -> `StarParticlesView`
 - `createView(Context context)` -> `View`
 - `drawActionBarShadow()` -> `boolean`
 - `getHeader(Context context)` -> `View`
+- `getHeaderView()` -> `View`
+- `getMainListOffsetY()` -> `float`
+- `getMainScrollLayer()` -> `View`
 - `getThemeDescriptions()` -> `ArrayList<ThemeDescription>`
 - `isActionBarCrossfadeEnabled()` -> `boolean`
 - `isLightStatusBar()` -> `boolean`
 - `isSupportEdgeToEdge()` -> `boolean`
 - `isSwipeBackEnabled(MotionEvent event)` -> `boolean`
 - `onDialogDismiss(Dialog dialog)` -> `void`
+- `onHeaderBackgroundVisibilityChanged(boolean visible)` -> `void`
 - `onHeaderCollapseProgress(float progress)` -> `void`
 - `onInsets(int left, int top, int right, int bottom)` -> `void`
 - `onPause()` -> `void`
 - `onResume()` -> `void`
+- `onThemeColorsChanged()` -> `void`
 - `setDarkGradientLocation(float x, float y)` -> `Paint`
 - `setMinusHeaderHeight(int h)` -> `void`
 - `setWhiteBackground(boolean value)` -> `void`
 - `showDialog(Dialog dialog)` -> `Dialog`
 - `updateDialogVisibility(boolean isVisible)` -> `void`
+- `usesActionBarFadeBackground()` -> `boolean`
 
 ## `org.telegram.ui.GradientHeaderActivity$BackgroundView`
 - `setData(CharSequence title, CharSequence subTitle, View aboveTitleView, View underSubTitleView)` -> `void`
@@ -13763,6 +14356,7 @@
 - `onFactorChanged(int id, float factor, float fraction, FactorAnimator callee)` -> `void`
 - `onFragmentCreate()` -> `boolean`
 - `onFragmentDestroy()` -> `void`
+- `onThemeColorsChanged()` -> `void`
 - `select(ArrayList<Long> ids, boolean premium, boolean miniApps)` -> `void`
 - `setDelegate(GroupCreateActivityDelegate groupCreateActivityDelegate)` -> `void`
 - `setDelegate2(ContactsAddActivityDelegate contactsAddActivityDelegate)` -> `void`
@@ -13807,6 +14401,7 @@
 - `onPause()` -> `void`
 - `onRequestPermissionsResultFragment(int requestCode, String[] permissions, int[] grantResults)` -> `void`
 - `onResume()` -> `void`
+- `onThemeColorsChanged()` -> `void`
 - `onTransitionAnimationEnd(boolean isOpen, boolean backward)` -> `void`
 - `onUploadProgressChanged(float progress)` -> `void`
 - `restoreSelfArgs(Bundle args)` -> `void`
@@ -13824,10 +14419,14 @@
 ## `org.telegram.ui.GroupInviteActivity`
 - `createView(Context context)` -> `View`
 - `didReceivedNotification(int id, int account, Object... args)` -> `void`
+- `getListViewForSimpleGlass()` -> `RecyclerListView`
 - `getThemeDescriptions()` -> `ArrayList<ThemeDescription>`
+- `isSupportEdgeToEdge()` -> `boolean`
 - `onFragmentCreate()` -> `boolean`
 - `onFragmentDestroy()` -> `void`
 - `onResume()` -> `void`
+- `onThemeColorsChanged()` -> `void`
+- `useSimpleActionBar()` -> `boolean`
 
 ## `org.telegram.ui.GroupInviteActivity$ListAdapter`
 - `getItemCount()` -> `int`
@@ -13890,6 +14489,7 @@
 - `onFragmentDestroy()` -> `void`
 - `onPause()` -> `void`
 - `onResume()` -> `void`
+- `onThemeColorsChanged()` -> `void`
 - `setOnLogout()` -> `IntroActivity`
 
 ## `org.telegram.ui.IntroActivity$EGLThread`
@@ -13909,10 +14509,10 @@
 - `unregisterDataSetObserver(@NonNull DataSetObserver observer)` -> `void`
 
 ## `org.telegram.ui.InviteContactsActivity`
-- `createActionBar(Context context)` -> `ActionBar`
 - `createView(Context context)` -> `View`
 - `didReceivedNotification(int id, int account, Object... args)` -> `void`
 - `getAnimatedInsetsTargetView()` -> `View`
+- `getListViewForSimpleGlass()` -> `RecyclerListView`
 - `getThemeDescriptions()` -> `ArrayList<ThemeDescription>`
 - `isSupportEdgeToEdge()` -> `boolean`
 - `onAnimatedInsetsChanged(View view, WindowInsetsCompat insets)` -> `void`
@@ -13921,6 +14521,8 @@
 - `onFragmentCreate()` -> `boolean`
 - `onFragmentDestroy()` -> `void`
 - `onInsets(int left, int top, int right, int bottom)` -> `void`
+- `onThemeColorsChanged()` -> `void`
+- `useSimpleActionBar()` -> `boolean`
 
 ## `org.telegram.ui.InviteContactsActivity$InviteAdapter`
 - `getItemCount()` -> `int`
@@ -13933,12 +14535,10 @@
 - `searchDialogs(final String query)` -> `void`
 - `setSearching(boolean value)` -> `void`
 
-## `org.telegram.ui.InviteContactsActivity$SearchField`
+## `org.telegram.ui.InviteContactsActivity$SelectedStrip`
 - `dispatchDraw(@NonNull Canvas canvas)` -> `void`
-- `drawChild(@NonNull Canvas canvas, View child, long drawingTime)` -> `boolean`
+- `dispatchTouchEvent(MotionEvent ev)` -> `boolean`
 - `onMeasure(int widthMeasureSpec, int heightMeasureSpec)` -> `void`
-- `setSpansBounds(int spansCount, float height, float lastLineWidth, boolean over)` -> `void`
-- `updateColors()` -> `void`
 
 ## `org.telegram.ui.InviteContactsActivity$SpansContainer`
 - `onLayout(boolean changed, int left, int top, int right, int bottom)` -> `void`
@@ -13947,10 +14547,12 @@
 ## `org.telegram.ui.KeepMediaPopupView`
 - `setCallback(Callback callback)` -> `void`
 - `update(int type)` -> `void`
+- `updateColors()` -> `void`
 - `updateForDialog(boolean addedRecently)` -> `void`
 
 ## `org.telegram.ui.KeepMediaPopupView$ExceptionsView`
 - `onMeasure(int widthMeasureSpec, int heightMeasureSpec)` -> `void`
+- `updateColors()` -> `void`
 
 ## `org.telegram.ui.KeyboardHideHelper`
 - `disableScrolling()` -> `boolean`
@@ -13962,14 +14564,15 @@
 ## `org.telegram.ui.LanguageSelectActivity`
 - `createView(Context context)` -> `View`
 - `didReceivedNotification(int id, int account, Object... args)` -> `void`
+- `getListViewForSimpleGlass()` -> `RecyclerListView`
 - `getThemeDescriptions()` -> `ArrayList<ThemeDescription>`
 - `isSupportEdgeToEdge()` -> `boolean`
 - `onBecomeFullyVisible()` -> `void`
 - `onFragmentCreate()` -> `boolean`
 - `onFragmentDestroy()` -> `void`
-- `onInsets(int left, int top, int right, int bottom)` -> `void`
 - `onResume()` -> `void`
 - `search(final String query)` -> `void`
+- `useSimpleActionBar()` -> `boolean`
 
 ## `org.telegram.ui.LanguageSelectActivity$ListAdapter`
 - `getItemCount()` -> `int`
@@ -14001,7 +14604,7 @@
 - `getMainFragmentsCount()` -> `int`
 - `getMainFragmentsStackSize()` -> `int`
 - `getNavigationBarColor()` -> `int`
-- `getPipController()` -> `PipActivityController`
+- `getOrientationController()` -> `OrientationController`
 - `getResources()` -> `android.content.res.Resources`
 - `getRightActionBarLayout()` -> `INavigationLayout`
 - `getRootAnimatedInsetsListener()` -> `WindowAnimatedInsetsProvider`
@@ -14012,6 +14615,7 @@
 - `needAddFragmentToStack(BaseFragment fragment, INavigationLayout layout)` -> `boolean`
 - `needCloseLastFragment(INavigationLayout layout)` -> `boolean`
 - `needPresentFragment(INavigationLayout layout, INavigationLayout.NavigationParams params)` -> `boolean`
+- `notifyThemeColorsChanged()` -> `void`
 - `static obtainActivityVisibilityController()` -> `WindowVisibilityManager.Controller`
 - `onActionModeFinished(ActionMode mode)` -> `void`
 - `onActionModeStarted(ActionMode mode)` -> `void`
@@ -14049,7 +14653,7 @@
 - `setNavigateToPremiumBot(boolean val)` -> `void`
 - `setNavigateToPremiumGiftCallback(Runnable val)` -> `void`
 - `setNavigationBarColor(int color)` -> `void`
-- `setPictureInPictureParams(@NonNull PictureInPictureParams params)` -> `void`
+- `setRequestedOrientation(int requestedOrientation)` -> `void`
 - `showAlertDialog(AlertDialog.Builder builder)` -> `Dialog`
 - `static showAttachMenuBot(LaunchActivity launchActivity, int currentAccount, TLRPC.TL_attachMenuBot attachMenuBot, String startApp, boolean sidemenu)` -> `void`
 - `showBulletin(Function<BulletinFactory, Bulletin> createBulletin)` -> `void`
@@ -14078,9 +14682,12 @@
 ## `org.telegram.ui.LinkEditActivity`
 - `createView(Context context)` -> `View`
 - `finishFragment()` -> `void`
+- `getScrollViewForSimpleGlass()` -> `SectionsScrollView`
 - `getThemeDescriptions()` -> `ArrayList<ThemeDescription>`
+- `isSupportEdgeToEdge()` -> `boolean`
 - `setCallback(Callback callback)` -> `void`
 - `setInviteToEdit(TLRPC.TL_chatInviteExported invite)` -> `void`
+- `useSimpleActionBar()` -> `boolean`
 
 ## `org.telegram.ui.LinkManager`
 - `getConnectionsManager()` -> `ConnectionsManager`
@@ -14094,15 +14701,17 @@
 - `getAddressName()` -> `String`
 - `getThemeDescriptions()` -> `ArrayList<ThemeDescription>`
 - `isLightStatusBar()` -> `boolean`
+- `isSupportEdgeToEdge()` -> `boolean`
 - `isSwipeBackEnabled(MotionEvent event)` -> `boolean`
 - `onBackPressed(boolean invoked)` -> `boolean`
 - `onBecomeFullyHidden()` -> `void`
 - `onFragmentCreate()` -> `boolean`
 - `onFragmentDestroy()` -> `void`
+- `onInsets(int left, int top, int right, int bottom)` -> `void`
 - `onLowMemory()` -> `void`
 - `onPause()` -> `void`
-- `onRequestPermissionsResultFragment(int requestCode, String[] permissions, int[] grantResults)` -> `void`
 - `onResume()` -> `void`
+- `onThemeColorsChanged()` -> `void`
 - `onTransitionAnimationEnd(boolean isOpen, boolean backward)` -> `void`
 - `searchStories(TL_stories.MediaArea area)` -> `LocationActivity`
 - `setChatActivity(ChatActivity chatActivity)` -> `void`
@@ -14113,13 +14722,14 @@
 - `setInitialMaxZoom(boolean initialMaxZoom)` -> `void`
 - `setMessageObject(MessageObject message)` -> `void`
 - `setSharingAllowed(boolean allowed)` -> `void`
+- `useSimpleActionBar()` -> `boolean`
 
-## `org.telegram.ui.LocationActivity$MapOverlayView`
-- `updatePositions()` -> `void`
+## `org.telegram.ui.LocationActivity$MapTextureListener`
+- `onSurfaceTextureAvailable(@NonNull SurfaceTexture surface, int width, int height)` -> `void`
+- `onSurfaceTextureDestroyed(@NonNull SurfaceTexture surface)` -> `boolean`
+- `onSurfaceTextureSizeChanged(@NonNull SurfaceTexture surface, int width, int height)` -> `void`
 
 ## `org.telegram.ui.LocationActivity$NestedFrameLayout`
-- `drawChild(Canvas canvas, View child, long drawingTime)` -> `boolean`
-- `drawList(Canvas blurCanvas, boolean top, ArrayList<IViewWithInvalidateCallback> views)` -> `void`
 - `onLayout(boolean changed, int left, int top, int right, int bottom)` -> `void`
 - `onNestedPreFling(View target, float velocityX, float velocityY)` -> `boolean`
 - `onNestedPreScroll(View target, int dx, int dy, int[] consumed, int type)` -> `void`
@@ -14130,19 +14740,18 @@
 - `onStopNestedScroll(View target, int type)` -> `void`
 - `onStopNestedScroll(View child)` -> `void`
 
-## `org.telegram.ui.LocationActivity$SearchButton`
-- `getTranslationX()` -> `float`
-- `setTranslation(float value)` -> `void`
-- `setTranslationX(float translationX)` -> `void`
-
 ## `org.telegram.ui.LogoutActivity`
 - `createView(Context context)` -> `View`
+- `getListViewForSimpleGlass()` -> `RecyclerListView`
 - `getThemeDescriptions()` -> `ArrayList<ThemeDescription>`
+- `isSupportEdgeToEdge()` -> `boolean`
+- `static makeLogOutDialog(Context context, int currentAccount)` -> `AlertDialog`
 - `onDialogDismiss(Dialog dialog)` -> `void`
 - `onFragmentCreate()` -> `boolean`
 - `onResume()` -> `void`
 - `showLogOutDialog()` -> `void`
 - `showLogOutDialog(long grams)` -> `void`
+- `useSimpleActionBar()` -> `boolean`
 
 ## `org.telegram.ui.LogoutActivity$ListAdapter`
 - `getItemCount()` -> `int`
@@ -14178,6 +14787,7 @@
 - `onPause()` -> `void`
 - `onResume()` -> `void`
 - `onSlideProgress(boolean isOpen, float progress)` -> `void`
+- `onThemeColorsChanged()` -> `void`
 - `onViewPagerScrollEnd()` -> `void`
 - `openAccountSelector(View button)` -> `boolean`
 - `openCallsSelector(View anchor)` -> `boolean`
@@ -14196,7 +14806,8 @@
 - `setTabsVisible(boolean visible)` -> `void`
 
 ## `org.telegram.ui.MainTabsActivity$TabFragmentDelegate`
-- `getGlassSource()` -> `default BlurredBackgroundSourceRenderNode`
+- `getFrostedGlassSource()` -> `default GlassSourceRenderNode`
+- `getGlassSource()` -> `default GlassSourceRenderNode`
 - `onParentScrollToTop()` -> `default void`
 
 ## `org.telegram.ui.MainTabsLayout`
@@ -14220,15 +14831,19 @@
 - `createView(Context context)` -> `View`
 - `didReceivedNotification(int id, int account, Object... args)` -> `void`
 - `fixDate(TLRPC.TL_chatInviteExported edited)` -> `void`
+- `getListViewForSimpleGlass()` -> `RecyclerListView`
 - `getThemeDescriptions()` -> `ArrayList<ThemeDescription>`
+- `isSupportEdgeToEdge()` -> `boolean`
 - `needDelayOpenAnimation()` -> `boolean`
 - `onFragmentCreate()` -> `boolean`
 - `onFragmentDestroy()` -> `void`
 - `onResume()` -> `void`
+- `onThemeColorsChanged()` -> `void`
 - `onTransitionAnimationEnd(boolean isOpen, boolean backward)` -> `void`
 - `onTransitionAnimationStart(boolean isOpen, boolean backward)` -> `void`
 - `revokeLink(TLRPC.TL_chatInviteExported invite)` -> `void`
 - `setInfo(TLRPC.ChatFull chatFull, TLRPC.ExportedChatInvite invite)` -> `void`
+- `useSimpleActionBar()` -> `boolean`
 
 ## `org.telegram.ui.ManageLinksActivity$EmptyView`
 - `didReceivedNotification(int id, int account, Object... args)` -> `void`
@@ -14264,6 +14879,7 @@
 ## `org.telegram.ui.MessageSeenView`
 - `createListView()` -> `RecyclerListView`
 - `onMeasure(int widthMeasureSpec, int heightMeasureSpec)` -> `void`
+- `updateColors()` -> `void`
 
 ## `org.telegram.ui.MessageSendPreview`
 - `allowEffectSelector(BaseFragment fragment)` -> `void`
@@ -14312,6 +14928,7 @@
 - `onFragmentCreate()` -> `boolean`
 - `onFragmentDestroy()` -> `void`
 - `onResume()` -> `void`
+- `onThemeColorsChanged()` -> `void`
 
 ## `org.telegram.ui.MessageStatisticActivity$ListAdapter`
 - `getItem(int position)` -> `MessageObject`
@@ -14361,6 +14978,7 @@
 - `getThemeDescriptions()` -> `ArrayList<ThemeDescription>`
 - `onItemSelected(AdapterView<?> adapterView, View view, int i, long l)` -> `void`
 - `onNothingSelected(AdapterView<?> adapterView)` -> `void`
+- `onThemeColorsChanged()` -> `void`
 - `selectCountry(CountrySelectActivity.Country country)` -> `void`
 - `setInitialName(String firstName, String lastName)` -> `void`
 - `setInitialPhoneNumber(String value, boolean withCountryCode)` -> `NewContactBottomSheet`
@@ -14369,16 +14987,22 @@
 ## `org.telegram.ui.NewContactBottomSheet$AccountInfo`
 - `toString()` -> `String`
 
+## `org.telegram.ui.OrientationController`
+- `static of(@Nullable Activity activity)` -> `OrientationController`
+- `update()` -> `void`
+
 ## `org.telegram.ui.PasskeysActivity`
 - `createView(Context context)` -> `View`
+- `getListViewForSimpleGlass()` -> `RecyclerListView`
 - `isSupportEdgeToEdge()` -> `boolean`
-- `onInsets(int left, int top, int right, int bottom)` -> `void`
 - `static showLearnSheet(Context context, int currentAccount, Theme.ResourcesProvider resourcesProvider, boolean withCreateButton)` -> `void`
+- `useSimpleActionBar()` -> `boolean`
 
 ## `org.telegram.ui.PasskeysActivity$PasskeyCell`
 - `onDraw(@NonNull Canvas canvas)` -> `void`
 - `onMeasure(int widthMeasureSpec, int heightMeasureSpec)` -> `void`
 - `set(TL_account.Passkey passkey, View.OnClickListener onOptions, boolean divider)` -> `void`
+- `updateColors()` -> `void`
 
 ## `org.telegram.ui.PasskeysActivity$PasskeyCell$Factory`
 - `bindView(View view, UItem item, boolean divider, UniversalAdapter adapter, UniversalRecyclerView listView)` -> `void`
@@ -14403,6 +15027,7 @@
 - `onPause()` -> `void`
 - `onRequestPermissionsResultFragment(int requestCode, String[] permissions, int[] grantResults)` -> `void`
 - `onResume()` -> `void`
+- `onThemeColorsChanged()` -> `void`
 - `onTransitionAnimationEnd(boolean isOpen, boolean backward)` -> `void`
 - `restoreSelfArgs(Bundle args)` -> `void`
 - `setNeedActivityResult(boolean needActivityResult)` -> `void`
@@ -14424,10 +15049,12 @@
 - `onNextPressed(String code)` -> `void`
 - `onShow()` -> `void`
 - `setParams(Bundle params, boolean restore)` -> `void`
+- `updateColors()` -> `void`
 
 ## `org.telegram.ui.PassportActivity$ProgressView`
 - `onDraw(Canvas canvas)` -> `void`
 - `setProgress(float value)` -> `void`
+- `updateColors()` -> `void`
 
 ## `org.telegram.ui.PassportActivity$SecureDocumentCell`
 - `drawChild(Canvas canvas, View child, long drawingTime)` -> `boolean`
@@ -14467,6 +15094,7 @@
 - `onFragmentCreate()` -> `boolean`
 - `onFragmentDestroy()` -> `void`
 - `onResume()` -> `void`
+- `onThemeColorsChanged()` -> `void`
 - `onTransitionAnimationEnd(boolean isOpen, boolean backward)` -> `void`
 - `presentFragment(BaseFragment fragment)` -> `boolean`
 - `presentFragment(BaseFragment fragment, boolean removeLast)` -> `boolean`
@@ -14567,6 +15195,7 @@
 - `onFragmentDestroy()` -> `void`
 - `onPause()` -> `void`
 - `onResume()` -> `void`
+- `onThemeColorsChanged()` -> `void`
 - `setCaption(CharSequence text)` -> `void`
 - `setDelegate(PhotoPickerActivity.PhotoPickerActivityDelegate delegate)` -> `void`
 - `setMaxSelectedPhotos(int value, boolean order)` -> `void`
@@ -14594,7 +15223,6 @@
 - `createView(Context context)` -> `View`
 - `didReceivedNotification(int id, int account, Object... args)` -> `void`
 - `getEmojiPadding()` -> `int`
-- `getThemeDescriptions()` -> `ArrayList<ThemeDescription>`
 - `hideEmojiView()` -> `void`
 - `hideKeyboardOnShow()` -> `boolean`
 - `isAnimatePopupClosing()` -> `boolean`
@@ -14609,6 +15237,7 @@
 - `onPause()` -> `void`
 - `onResume()` -> `void`
 - `onSizeChanged(int height, boolean isWidthGreater)` -> `void`
+- `onThemeColorsChanged()` -> `void`
 - `setDelegate(PollCreateActivityDelegate pollCreateActivityDelegate)` -> `void`
 - `setEditing(TLRPC.MessageMedia media, boolean adding)` -> `void`
 - `setEditing(TLRPC.MessageMedia media, boolean adding, int index)` -> `void`
@@ -14635,10 +15264,13 @@
 
 ## `org.telegram.ui.PostSuggestionsEditActivity`
 - `createView(Context context)` -> `View`
+- `getListViewForSimpleGlass()` -> `RecyclerListView`
+- `isSupportEdgeToEdge()` -> `boolean`
 - `isSwipeBackEnabled(MotionEvent event)` -> `boolean`
 - `onBackPressed(boolean invoked)` -> `boolean`
 - `onFragmentCreate()` -> `boolean`
 - `setOnApplied(MessagesStorage.LongCallback stars)` -> `PostSuggestionsEditActivity`
+- `useSimpleActionBar()` -> `boolean`
 
 ## `org.telegram.ui.PremiumFeatureCell`
 - `dispatchDraw(Canvas canvas)` -> `void`
@@ -14682,6 +15314,7 @@
 - `onFragmentDestroy()` -> `void`
 - `onPause()` -> `void`
 - `onResume()` -> `void`
+- `onThemeColorsChanged()` -> `void`
 - `static sentPremiumButtonClick()` -> `void`
 - `static sentPremiumBuyCanceled()` -> `void`
 - `static sentShowFeaturePreview(int currentAccount, int type)` -> `void`
@@ -14725,14 +15358,16 @@
 - `didReceivedNotification(int id, int account, Object... args)` -> `void`
 - `didStartUpload(boolean fromAvatarConstructor, boolean isVideo)` -> `void`
 - `didUploadPhoto(TLRPC.InputFile photo, TLRPC.InputFile video, double videoStartTimestamp, String videoPath, TLRPC.PhotoSize bigSize, TLRPC.PhotoSize smallSize, boolean isVideo, TLRPC.VideoSize emojiMarkup)` -> `void`
+- `getListViewForSimpleGlass()` -> `RecyclerListView`
 - `getThemeDescriptions()` -> `ArrayList<ThemeDescription>`
 - `isSupportEdgeToEdge()` -> `boolean`
 - `onBackPressed(boolean invoked)` -> `boolean`
 - `onFragmentCreate()` -> `boolean`
 - `onFragmentDestroy()` -> `void`
-- `onInsets(int left, int top, int right, int bottom)` -> `void`
 - `onPause()` -> `void`
 - `onResume()` -> `void`
+- `onThemeColorsChanged()` -> `void`
+- `useSimpleActionBar()` -> `boolean`
 
 ## `org.telegram.ui.PrivacyControlActivity$ListAdapter`
 - `getItemCount()` -> `int`
@@ -14746,6 +15381,7 @@
 - `dispatchSetPressed(boolean pressed)` -> `void`
 - `dispatchTouchEvent(MotionEvent ev)` -> `boolean`
 - `invalidate()` -> `void`
+- `onAttachedToWindow()` -> `void`
 - `onDetachedFromWindow()` -> `void`
 - `onDraw(Canvas canvas)` -> `void`
 - `onInterceptTouchEvent(MotionEvent ev)` -> `boolean`
@@ -14754,13 +15390,15 @@
 ## `org.telegram.ui.PrivacyUsersActivity`
 - `createView(Context context)` -> `View`
 - `didReceivedNotification(int id, int account, Object... args)` -> `void`
+- `getListViewForSimpleGlass()` -> `RecyclerListView`
 - `getThemeDescriptions()` -> `ArrayList<ThemeDescription>`
 - `isSupportEdgeToEdge()` -> `boolean`
 - `onFragmentCreate()` -> `boolean`
 - `onFragmentDestroy()` -> `void`
-- `onInsets(int left, int top, int right, int bottom)` -> `void`
 - `onResume()` -> `void`
+- `onThemeColorsChanged()` -> `void`
 - `setDelegate(PrivacyActivityDelegate privacyActivityDelegate)` -> `void`
+- `useSimpleActionBar()` -> `boolean`
 
 ## `org.telegram.ui.PrivacyUsersActivity$ListAdapter`
 - `getItemCount()` -> `int`
@@ -14772,12 +15410,15 @@
 ## `org.telegram.ui.ProxyListActivity`
 - `createView(Context context)` -> `View`
 - `didReceivedNotification(int id, int account, Object... args)` -> `void`
+- `getListViewForSimpleGlass()` -> `RecyclerListView`
 - `getThemeDescriptions()` -> `ArrayList<ThemeDescription>`
+- `isSupportEdgeToEdge()` -> `boolean`
 - `onBackPressed(boolean invoked)` -> `boolean`
 - `onDialogDismiss(Dialog dialog)` -> `void`
 - `onFragmentCreate()` -> `boolean`
 - `onFragmentDestroy()` -> `void`
 - `onResume()` -> `void`
+- `useSimpleActionBar()` -> `boolean`
 
 ## `org.telegram.ui.ProxyListActivity$ListAdapter`
 - `clearSelected()` -> `void`
@@ -14800,33 +15441,194 @@
 - `setProxy(SharedConfig.ProxyInfo proxyInfo)` -> `void`
 - `setSelectionEnabled(boolean enabled, boolean animated)` -> `void`
 - `setValue(CharSequence value)` -> `void`
+- `updateColors()` -> `void`
 - `updateStatus()` -> `void`
 
-## `org.telegram.ui.QrActivity`
+## `org.telegram.ui.QrShare.Backdrops`
+- `static apply(java.util.List<org.telegram.tgnet.TLRPC.TL_shareThemeBackdropOption> list)` -> `boolean`
+- `static indexOfId(int id)` -> `int`
+- `static indexOfName(String name)` -> `int`
+- `static orderToIndex(int k)` -> `int`
+
+## `org.telegram.ui.QrShare.QrBackdrops`
+- `find(int id)` -> `TLRPC.TL_shareThemeBackdropOption`
+- `static get(int account)` -> `QrBackdrops`
+- `getList()` -> `List<TLRPC.TL_shareThemeBackdropOption>`
+
+## `org.telegram.ui.QrShare.QrCodeLayer`
+- `assemble(Code code)` -> `void`
+- `static build(String link, int px)` -> `Code`
+- `static build(String link, int px, ErrorCorrectionLevel level, float radiusFactor, android.graphics.drawable.Drawable center)` -> `Code`
+- `buildElapsedMs()` -> `long`
+- `buildProgress()` -> `float`
+- `draw(Canvas canvas, float left, float top, float size)` -> `void`
+- `inIntro()` -> `boolean`
+- `static introPlays()` -> `boolean`
+- `static logoShare(Code c)` -> `float`
+- `logoSize(float size)` -> `float`
+- `static mixOklab(int a, int b, float t)` -> `int`
+- `replaceSilently(Code code)` -> `void`
+- `set(Code code)` -> `void`
+- `setBuildOverride(float p)` -> `void`
+- `setCardBounds(float l, float t, float r, float b)` -> `void`
+- `setColor(int color)` -> `void`
+- `swapTo(Code code)` -> `void`
+- `swapTo(Code code, int mode)` -> `void`
+
+## `org.telegram.ui.QrShare.QrRender`
+- `static beginRecording(Object node, int width, int height)` -> `Canvas`
+- `static clipOut(Canvas canvas, android.graphics.Path path)` -> `void`
+- `static createNode(String name)` -> `Object`
+- `static draw(Canvas canvas, Object node)` -> `void`
+- `static endRecording(Object node)` -> `void`
+- `static hasDisplayList(Object node)` -> `boolean`
+- `static hasVertices()` -> `boolean`
+- `static screenCornerRadius(View view)` -> `float`
+- `static setAlpha(Object node, float alpha)` -> `void`
+- `static setBlendMode(Paint paint, int mode)` -> `void`
+- `static setBlur(Object node, float radius, Shader.TileMode mode)` -> `void`
+- `static setBlurAndColorMatrix(Object node, float radius, float[] matrix)` -> `void`
+- `static srcIn(int color)` -> `ColorFilter`
+
+## `org.telegram.ui.QrShare.QrScanOverlay`
+- `close()` -> `void`
+- `destroy()` -> `void`
+- `dispatchDraw(@NonNull Canvas canvas)` -> `void`
+- `dispatchTouchEvent(MotionEvent ev)` -> `boolean`
+- `static isTelegramLink(@Nullable String text)` -> `boolean`
+- `onLayout(boolean changed, int left, int top, int right, int bottom)` -> `void`
+- `static open(BaseFragment fragment, View button, Utilities.CallbackReturn<String, Boolean> accept, Utilities.Callback<String> onScanned, @Nullable Runnable onClosed)` -> `QrScanOverlay`
+- `static pickFromGallery(BaseFragment fragment, Utilities.CallbackReturn<String, Boolean> accept, Utilities.Callback<String> onScanned)` -> `void`
+- `setAccept(Utilities.CallbackReturn<String, Boolean> accept)` -> `void`
+- `setButtonLabel(@Nullable String label)` -> `void`
+- `setOnGallery(@Nullable Runnable onGallery)` -> `void`
+- `setPlainButton(boolean plain)` -> `void`
+
+## `org.telegram.ui.QrShare.QrShareActivity`
+- `clearViews()` -> `void`
+- `createActionBar(Context context)` -> `ActionBar`
 - `createView(Context context)` -> `View`
 - `drawEdgeNavigationBar()` -> `boolean`
-- `getEdgeToEdgeSupportMode()` -> `EdgeToEdgeSupportMode`
-- `getResourceProvider()` -> `Theme.ResourcesProvider`
-- `getThemeDescriptions()` -> `ArrayList<ThemeDescription>`
+- `getNavigationBarColor()` -> `int`
+- `isLightStatusBar()` -> `boolean`
 - `isSupportEdgeToEdge()` -> `boolean`
+- `isSwipeBackEnabled(android.view.MotionEvent event)` -> `boolean`
+- `onBackPressed(boolean invoked)` -> `boolean`
+- `onCustomTransitionAnimation(boolean isOpen, Runnable callback)` -> `android.animation.AnimatorSet`
 - `onFragmentCreate()` -> `boolean`
 - `onFragmentDestroy()` -> `void`
 - `onPause()` -> `void`
 - `onRequestPermissionsResultFragment(int requestCode, String[] permissions, int[] grantResults)` -> `void`
 - `onResume()` -> `void`
+- `onTransitionAnimationEnd(boolean isOpen, boolean backward)` -> `void`
 - `static openCameraScanActivity(BaseFragment fragment)` -> `void`
 - `performShare()` -> `void`
+- `static self(int account)` -> `QrShareActivity`
 
-## `org.telegram.ui.QrActivity$QrView`
+## `org.telegram.ui.QrShare.QrShareServer`
+- `didReceivedNotification(int id, int account, Object... args)` -> `void`
+- `onFeeMode(int newMode)` -> `void`
+- `onPaletteChanged()` -> `void`
+- `onResetCode()` -> `void`
+- `onThemeChanged()` -> `void`
+- `release()` -> `void`
+- `static resolveLink(int account, long userId, long chatId)` -> `Link`
+- `start()` -> `void`
+
+## `org.telegram.ui.QrShare.QrShareView`
+- `applyThemeDefault()` -> `void`
+- `applyThemeEmojiBackdrop(boolean hasBackdrop, int backdropId, java.util.List<TLRPC.Reaction> emojis)` -> `void`
+- `applyThemeGift(TL_stars.TL_starGiftUnique gift)` -> `void`
+- `cascadeProgress()` -> `float`
+- `closeFeeMenu()` -> `void`
+- `static contrastMatchedQr(int center, int edge)` -> `int`
+- `static contrastMatchedQr(int center, int edge, boolean cap)` -> `int`
+- `static contrastWhite(int c)` -> `double`
+- `drawBlur(Canvas c, float dx, float dy)` -> `boolean`
+- `drawSheetGlass(Canvas c, float dx, float dy, RectF clip)` -> `boolean`
+- `static easeOutBack(float u, float c1)` -> `float`
+- `emojiFor(String key)` -> `Drawable`
+- `feeMenuOpen()` -> `boolean`
+- `getCloseRect(RectF out)` -> `void`
+- `getCurrentLink()` -> `String`
+- `getPickedEmoji()` -> `ArrayList<TLRPC.Reaction>`
+- `getScanRect(RectF out)` -> `void`
+- `getThemeBackdropIndex()` -> `int`
+- `getThemeGift()` -> `TL_stars.TL_starGiftUnique`
+- `getThemeGiftSavedId()` -> `long`
+- `static insetBottom(View v)` -> `int`
+- `static insetTop(View v)` -> `int`
+- `isDefaultBackdrop(int index)` -> `boolean`
+- `islandFlatColor()` -> `int`
+- `islandTint()` -> `int`
+- `static latticeHash(int r, int c)` -> `double`
+- `navColor()` -> `int`
+- `static normKey(String e)` -> `String`
+- `static oklchRelight(int rgb, float L, float cMul, float cMax)` -> `int`
 - `onAttachedToWindow()` -> `void`
+- `onBackPressed()` -> `boolean`
+- `static onBackdropsChanged(int defaultIndex, int tunedIndex)` -> `void`
 - `onDetachedFromWindow()` -> `void`
-- `onDraw(Canvas canvas)` -> `void`
+- `onDraw(@NonNull Canvas canvas)` -> `void`
+- `onLayout(boolean changed, int l, int t, int r, int b)` -> `void`
 - `onSizeChanged(int w, int h, int oldw, int oldh)` -> `void`
-- `setCenterChangedListener(QrCenterChangedListener centerChangedListener)` -> `void`
-- `setColors(int c1, int c2, int c3, int c4)` -> `void`
-- `setData(String link, String username, boolean isPhone, boolean isTimer)` -> `void`
-- `setForShare(boolean enable)` -> `void`
-- `setPosAnimationProgress(float progress)` -> `void`
+- `onTouchEvent(MotionEvent e)` -> `boolean`
+- `panelFinalBottom()` -> `float`
+- `panelFinalLeft()` -> `float`
+- `panelFinalRight()` -> `float`
+- `panelFinalTop()` -> `float`
+- `pickCustomEmoji(long documentId, TLRPC.Document document)` -> `void`
+- `pickEmoji(String emoji)` -> `void`
+- `pickedKeys()` -> `java.util.List<String>`
+- `prewarmIslandColors()` -> `void`
+- `release()` -> `void`
+- `renderShareImage()` -> `Bitmap`
+- `replacePalette(java.util.List<TLRPC.TL_shareThemeBackdropOption> list)` -> `void`
+- `restoreFreeMode(boolean timer)` -> `void`
+- `revealTime()` -> `float`
+- `static rimLightFor(int edge)` -> `int`
+- `sectionHeaderColor()` -> `int`
+- `setFeeStars(long stars)` -> `void`
+- `setFreeLink(String link)` -> `void`
+- `setGiftsOwner(long dialogId)` -> `void`
+- `setImmediateOnOpen(boolean immediate)` -> `void`
+- `setInstantTheme(boolean instant)` -> `void`
+- `setLinkExpires(long expires)` -> `void`
+- `setLinks(String baseLink, String caption, boolean captionIsUsername)` -> `void`
+- `setOnPicksChanged(Runnable r)` -> `void`
+- `setReveal(float v)` -> `void`
+- `setRevealOpening(boolean opening)` -> `void`
+- `setRevealStatic()` -> `void`
+- `setScanHidden(boolean hidden)` -> `void`
+- `setTemporaryLink(boolean temporary)` -> `void`
+- `setThemeEditable(boolean editable)` -> `void`
+- `setTimerOnly(boolean timerOnly)` -> `void`
+- `static shadeFor(int center)` -> `int`
+- `sheetOpening()` -> `boolean`
+- `sheetProgress()` -> `float`
+- `showError(String error)` -> `void`
+- `showPremiumEmojiToast()` -> `void`
+- `showSavedToast()` -> `void`
+- `static slotIndex(int slot)` -> `int`
+- `verifyDrawable(@NonNull Drawable who)` -> `boolean`
+
+## `org.telegram.ui.QrShare.QrShareView$NodeSprings`
+- `clear()` -> `void`
+- `find(long key)` -> `int`
+- `obtain(long key)` -> `int`
+- `step(float dt)` -> `boolean`
+
+## `org.telegram.ui.QrShare.QrStarDrawable`
+- `draw(@NonNull Canvas canvas)` -> `void`
+- `getIntrinsicHeight()` -> `int`
+- `getIntrinsicWidth()` -> `int`
+- `getOpacity()` -> `int`
+- `setAlpha(int alpha)` -> `void`
+- `setColorFilter(@Nullable ColorFilter colorFilter)` -> `void`
+
+## `org.telegram.ui.QrShare.RimPainter`
+- `draw(Canvas c, RectF rect, float radius, int grp, float alpha)` -> `void`
+- `draw(Canvas c, RectF rect, float radius, int grp, float alpha, boolean layered)` -> `void`
 
 ## `org.telegram.ui.ReadAllMentionsMenu`
 - `static show(int type, Activity activity, INavigationLayout navigationLayout, FrameLayout contentView, View mentionButton, Theme.ResourcesProvider resourcesProvider, Runnable onRead)` -> `ActionBarPopupWindow`
@@ -14838,6 +15640,7 @@
 ## `org.telegram.ui.ReportBottomSheet`
 - `static continueReport(ChatActivity fragment, byte[] option, String message, ArrayList<Integer> ids, Utilities.Callback<Boolean> whenDone)` -> `void`
 - `onBackPressed()` -> `void`
+- `onThemeColorsChanged()` -> `void`
 - `static openChat(int currentAccount, Context context, long dialogId)` -> `void`
 - `static openChat(int currentAccount, Context context, BulletinFactory bulletinFactory, long dialogId)` -> `void`
 - `static openChat(ChatActivity fragment)` -> `void`
@@ -14868,6 +15671,7 @@
 - `setOption(TLRPC.TL_reportResultChooseOption option)` -> `void`
 - `setOption(TLRPC.TL_reportResultAddComment option)` -> `void`
 - `top()` -> `float`
+- `updateColors()` -> `void`
 - `updateTops()` -> `void`
 
 ## `org.telegram.ui.ReportBottomSheet$Page$BigHeaderCell`
@@ -14882,17 +15686,18 @@
 - `createView(Context context)` -> `View`
 - `didReceivedNotification(int id, int account, Object... args)` -> `void`
 - `static getExtendedDoNotTranslate(Utilities.Callback<HashSet<String>> onDone)` -> `void`
+- `getListViewForSimpleGlass()` -> `RecyclerListView`
 - `static getRestrictedLanguages()` -> `HashSet<String>`
 - `getThemeDescriptions()` -> `ArrayList<ThemeDescription>`
 - `static invalidateRestrictedLanguages()` -> `void`
 - `isSupportEdgeToEdge()` -> `boolean`
 - `onFragmentCreate()` -> `boolean`
 - `onFragmentDestroy()` -> `void`
-- `onInsets(int left, int top, int right, int bottom)` -> `void`
 - `onResume()` -> `void`
 - `search(final String query)` -> `void`
 - `static toggleLanguage(String language, boolean doNotTranslate)` -> `boolean`
 - `static updateRestrictedLanguages(HashSet<String> value, Boolean changed)` -> `void`
+- `useSimpleActionBar()` -> `boolean`
 
 ## `org.telegram.ui.RestrictedLanguagesSelectActivity$ListAdapter`
 - `getItemCount()` -> `int`
@@ -14905,6 +15710,7 @@
 - `createAdapter(RecyclerListView listView)` -> `RecyclerListView.SelectionAdapter`
 - `fillItems(ArrayList<UItem> items, UniversalAdapter adapter)` -> `void`
 - `getTitle()` -> `CharSequence`
+- `onThemeColorsChanged()` -> `void`
 - `static showAlert(Context context, BaseFragment fragment, boolean bot, Theme.ResourcesProvider resourcesProvider)` -> `RevenueSharingAdsInfoBottomSheet`
 - `static showAlert(Context context, BaseFragment fragment, boolean bot, Theme.ResourcesProvider resourcesProvider, Utilities.Callback<ItemOptions> options)` -> `RevenueSharingAdsInfoBottomSheet`
 
@@ -14993,6 +15799,7 @@
 - `createAdapter(RecyclerListView listView)` -> `RecyclerListView.SelectionAdapter`
 - `dismiss()` -> `void`
 - `getTitle()` -> `CharSequence`
+- `onThemeColorsChanged()` -> `void`
 
 ## `org.telegram.ui.SelectChatUserSheet$ParticipantsList`
 - `attach()` -> `void`
@@ -15012,6 +15819,7 @@
 ## `org.telegram.ui.SessionsActivity`
 - `createView(Context context)` -> `View`
 - `didReceivedNotification(int id, int account, Object... args)` -> `void`
+- `getListViewForSimpleGlass()` -> `RecyclerListView`
 - `getSessionsCount()` -> `int`
 - `getThemeDescriptions()` -> `ArrayList<ThemeDescription>`
 - `isSupportEdgeToEdge()` -> `boolean`
@@ -15025,6 +15833,7 @@
 - `onTransitionAnimationEnd(boolean isOpen, boolean backward)` -> `void`
 - `setDelegate(Delegate delegate)` -> `void`
 - `setHighlightLinkDesktopDevice()` -> `SessionsActivity`
+- `useSimpleActionBar()` -> `boolean`
 
 ## `org.telegram.ui.SessionsActivity$ListAdapter`
 - `getItemCount()` -> `int`
@@ -15039,6 +15848,7 @@
 - `onAttachedToWindow()` -> `void`
 - `onDetachedFromWindow()` -> `void`
 - `onMeasure(int widthMeasureSpec, int heightMeasureSpec)` -> `void`
+- `updateColors()` -> `void`
 
 ## `org.telegram.ui.ShareActivity`
 - `onCreate(Bundle savedInstanceState)` -> `void`
@@ -15073,21 +15883,18 @@
 - `createView(Context context)` -> `View`
 - `didReceivedNotification(int id, int account, Object... args)` -> `void`
 - `isLightStatusBar()` -> `boolean`
-- `isLoadingVisible()` -> `boolean`
+- `isSupportEdgeToEdge()` -> `boolean`
+- `isSwipeBackEnabled(MotionEvent event)` -> `boolean`
 - `onFragmentCreate()` -> `boolean`
 - `onFragmentDestroy()` -> `void`
+- `onInsets(int left, int top, int right, int bottom)` -> `void`
+- `onThemeColorsChanged()` -> `void`
 - `static untilString(int t)` -> `String`
+- `useSimpleActionBar()` -> `boolean`
 
-## `org.telegram.ui.Stars.BotStarsActivity$NestedFrameLayout`
-- `onMeasure(int widthMeasureSpec, int heightMeasureSpec)` -> `void`
-- `onNestedPreFling(View target, float velocityX, float velocityY)` -> `boolean`
-- `onNestedPreScroll(View target, int dx, int dy, int[] consumed, int type)` -> `void`
-- `onNestedScroll(View target, int dxConsumed, int dyConsumed, int dxUnconsumed, int dyUnconsumed, int type, int[] consumed)` -> `void`
-- `onNestedScroll(View target, int dxConsumed, int dyConsumed, int dxUnconsumed, int dyUnconsumed, int type)` -> `void`
-- `onNestedScrollAccepted(View child, View target, int axes, int type)` -> `void`
-- `onStartNestedScroll(View child, View target, int axes, int type)` -> `boolean`
-- `onStopNestedScroll(View target, int type)` -> `void`
-- `onStopNestedScroll(View child)` -> `void`
+## `org.telegram.ui.Stars.BotStarsActivity$TonTransactionsPage`
+- `onAttachedToWindow()` -> `void`
+- `onDetachedFromWindow()` -> `void`
 
 ## `org.telegram.ui.Stars.BotStarsController`
 - `botHasStars(long did)` -> `boolean`
@@ -15238,9 +16045,11 @@
 - `undo()` -> `void`
 
 ## `org.telegram.ui.Stars.StarsIntroActivity`
+- `applyScrolledPosition(boolean ignorePaddingView)` -> `void`
+- `attachMainList(Context context)` -> `void`
 - `attachedTransactionsLayout()` -> `boolean`
 - `createAdapter()` -> `RecyclerView.Adapter<?>`
-- `createContentView()` -> `ContentView`
+- `createMainLayoutManager(Context context)` -> `LinearLayoutManager`
 - `createParticlesView()` -> `StarParticlesView`
 - `createView(Context context)` -> `View`
 - `didReceivedNotification(int id, int account, Object... args)` -> `void`
@@ -15255,12 +16064,16 @@
 - `static formatTON(long ton)` -> `String`
 - `static getGiftStarsEmoji(long stars)` -> `String`
 - `getHeader(Context context)` -> `View`
+- `getMainListOffsetY()` -> `float`
+- `getMainScrollLayer()` -> `View`
 - `static getPremiumGiftMonthsEmoji(int months)` -> `String`
 - `static getTonGiftEmoji(long nanotons)` -> `String`
 - `static getTransactionTitle(int currentAccount, boolean bot, TL_stars.StarsTransaction t)` -> `CharSequence`
 - `static makeParticlesView(Context context, int particlesCount, int type)` -> `StarParticlesView`
 - `onFragmentCreate()` -> `boolean`
 - `onFragmentDestroy()` -> `void`
+- `onHeaderBackgroundVisibilityChanged(boolean visible)` -> `void`
+- `onInsets(int left, int top, int right, int bottom)` -> `void`
 - `onItemClick(UItem item, int position)` -> `void`
 - `onPause()` -> `void`
 - `onResume()` -> `void`
@@ -15308,6 +16121,9 @@
 - `static showTransactionSheet(Context context, int currentAccount, int date, TLRPC.TL_messageActionPaymentRefunded action, Theme.ResourcesProvider resourcesProvider)` -> `BottomSheet`
 - `static showTransactionSheet(Context context, boolean bot, int currentAccount, TLRPC.TL_payments_paymentReceiptStars receipt, Theme.ResourcesProvider resourcesProvider)` -> `BottomSheet`
 - `static showTransactionSheet(Context context, boolean bot, long dialogId, int currentAccount, TL_stars.StarsTransaction transaction, Theme.ResourcesProvider resourcesProvider)` -> `BottomSheet`
+- `useSimpleActionBar()` -> `boolean`
+- `usesActionBarFadeBackground()` -> `boolean`
+- `static whiteGram(boolean ton, T cs)` -> `T`
 
 ## `org.telegram.ui.Stars.StarsIntroActivity$ExpandView`
 - `onDetachedFromWindow()` -> `void`
@@ -15320,16 +16136,6 @@
 - `static asExpand(int id, CharSequence text, boolean collapsed)` -> `UItem`
 - `bindView(View view, UItem item, boolean divider, UniversalAdapter adapter, UniversalRecyclerView listView)` -> `void`
 - `createView(Context context, RecyclerListView listView, int currentAccount, int classGuid, Theme.ResourcesProvider resourcesProvider)` -> `ExpandView`
-
-## `org.telegram.ui.Stars.StarsIntroActivity$NestedFrameLayout`
-- `onNestedPreFling(View target, float velocityX, float velocityY)` -> `boolean`
-- `onNestedPreScroll(View target, int dx, int dy, int[] consumed, int type)` -> `void`
-- `onNestedScroll(View target, int dxConsumed, int dyConsumed, int dxUnconsumed, int dyUnconsumed, int type, int[] consumed)` -> `void`
-- `onNestedScroll(View target, int dxConsumed, int dyConsumed, int dxUnconsumed, int dyUnconsumed, int type)` -> `void`
-- `onNestedScrollAccepted(View child, View target, int axes, int type)` -> `void`
-- `onStartNestedScroll(View child, View target, int axes, int type)` -> `boolean`
-- `onStopNestedScroll(View target, int type)` -> `void`
-- `onStopNestedScroll(View child)` -> `void`
 
 ## `org.telegram.ui.Stars.StarsIntroActivity$StarTierView`
 - `onDraw(Canvas canvas)` -> `void`
@@ -15401,8 +16207,12 @@
 ## `org.telegram.ui.Stars.StarsIntroActivity$StarsTransactionsLayout`
 - `didReceivedNotification(int id, int account, Object... args)` -> `void`
 - `getCurrentListView()` -> `RecyclerListView`
+- `getPageListView(View page)` -> `RecyclerListView`
+- `getTabsContainer()` -> `FrameLayout`
+- `getViewPager()` -> `ViewPagerFixed`
 - `onAttachedToWindow()` -> `void`
 - `onDetachedFromWindow()` -> `void`
+- `setGlassEngine(GlassEngine engine)` -> `void`
 
 ## `org.telegram.ui.Stars.StarsIntroActivity$StarsTransactionsLayout$Page`
 - `didReceivedNotification(int id, int account, Object... args)` -> `void`
@@ -15432,7 +16242,6 @@
 ## `org.telegram.ui.StatisticActivity`
 - `static create(TLRPC.Chat chat)` -> `BaseFragment`
 - `static create(TLRPC.Chat chat, boolean startFromBoosts)` -> `BaseFragment`
-- `createActionBar(Context context)` -> `ActionBar`
 - `static createChartData(JSONObject jsonObject, int graphType, boolean isLanguages)` -> `ChartData`
 - `createView(Context context)` -> `View`
 - `static createViewData(TL_stats.StatsGraph graph, String title, int graphType, boolean isLanguages)` -> `ChartViewData`
@@ -15445,8 +16254,10 @@
 - `onFragmentCreate()` -> `boolean`
 - `onFragmentDestroy()` -> `void`
 - `onInsets(int left, int top, int right, int bottom)` -> `void`
+- `onThemeColorsChanged()` -> `void`
 - `selectTab(int position, boolean animated)` -> `void`
 - `setGestureSelectedOverride(float animatedPosition, boolean allow)` -> `void`
+- `useSimpleActionBar()` -> `boolean`
 
 ## `org.telegram.ui.StatisticActivity$Adapter`
 - `getItemCount()` -> `int`
@@ -15459,6 +16270,7 @@
 
 ## `org.telegram.ui.StatisticActivity$BaseChartCell`
 - `recolor()` -> `void`
+- `updateColors()` -> `void`
 - `updateData(ChartViewData viewData, boolean enterTransition)` -> `void`
 - `zoomChart(boolean skipTransition)` -> `void`
 
@@ -15482,6 +16294,7 @@
 - `setData(OverviewChannelData data, TLRPC.ChatFull chatFull)` -> `void`
 - `setData(OverviewChatData data)` -> `void`
 - `setData(int index, String primary, String secondary, String title)` -> `void`
+- `updateColors()` -> `void`
 
 ## `org.telegram.ui.StatisticActivity$RecentPostInfo`
 - `getDate()` -> `long`
@@ -15522,33 +16335,31 @@
 
 ## `org.telegram.ui.TON.TONIntroActivity`
 - `static allowTopUp()` -> `boolean`
+- `applyScrolledPosition(boolean ignorePaddingView)` -> `void`
+- `attachMainList(Context context)` -> `void`
 - `attachedTransactionsLayout()` -> `boolean`
 - `createAdapter()` -> `RecyclerView.Adapter<?>`
-- `createContentView()` -> `ContentView`
+- `createMainLayoutManager(Context context)` -> `LinearLayoutManager`
 - `createParticlesView()` -> `StarParticlesView`
 - `createView(Context context)` -> `View`
 - `didReceivedNotification(int id, int account, Object... args)` -> `void`
 - `drawActionBarShadow()` -> `boolean`
 - `fillItems(ArrayList<UItem> items, UniversalAdapter adapter)` -> `void`
 - `getHeader(Context context)` -> `View`
+- `getMainListOffsetY()` -> `float`
+- `getMainScrollLayer()` -> `View`
 - `getNavigationBarColor()` -> `int`
 - `static makeParticlesView(Context context, int particlesCount, int type)` -> `StarParticlesView`
 - `onFragmentCreate()` -> `boolean`
 - `onFragmentDestroy()` -> `void`
+- `onHeaderBackgroundVisibilityChanged(boolean visible)` -> `void`
 - `onHeaderCollapseProgress(float progress)` -> `void`
+- `onInsets(int left, int top, int right, int bottom)` -> `void`
 - `onItemClick(UItem item, int position)` -> `void`
 - `onPause()` -> `void`
 - `onResume()` -> `void`
-
-## `org.telegram.ui.TON.TONIntroActivity$NestedFrameLayout`
-- `onNestedPreFling(View target, float velocityX, float velocityY)` -> `boolean`
-- `onNestedPreScroll(View target, int dx, int dy, int[] consumed, int type)` -> `void`
-- `onNestedScroll(View target, int dxConsumed, int dyConsumed, int dxUnconsumed, int dyUnconsumed, int type, int[] consumed)` -> `void`
-- `onNestedScroll(View target, int dxConsumed, int dyConsumed, int dxUnconsumed, int dyUnconsumed, int type)` -> `void`
-- `onNestedScrollAccepted(View child, View target, int axes, int type)` -> `void`
-- `onStartNestedScroll(View child, View target, int axes, int type)` -> `boolean`
-- `onStopNestedScroll(View target, int type)` -> `void`
-- `onStopNestedScroll(View child)` -> `void`
+- `useSimpleActionBar()` -> `boolean`
+- `usesActionBarFadeBackground()` -> `boolean`
 
 ## `org.telegram.ui.TON.TONIntroActivity$StarsNeededSheet`
 - `createAdapter(RecyclerListView listView)` -> `RecyclerListView.SelectionAdapter`
@@ -15558,13 +16369,8 @@
 - `fillItems(ArrayList<UItem> items, UniversalAdapter adapter)` -> `void`
 - `getTitle()` -> `CharSequence`
 - `onItemClick(UItem item, UniversalAdapter adapter)` -> `void`
+- `onThemeColorsChanged()` -> `void`
 - `show()` -> `void`
-
-## `org.telegram.ui.TestActivity`
-- `createView(Context context)` -> `View`
-- `onFragmentCreate()` -> `boolean`
-- `onFragmentDestroy()` -> `void`
-- `onResume()` -> `void`
 
 ## `org.telegram.ui.TextMessageEnterTransition`
 - `onDraw(Canvas canvas)` -> `void`
@@ -15588,6 +16394,7 @@
 ## `org.telegram.ui.TooManyCommunitiesActivity`
 - `createView(Context context)` -> `View`
 - `getThemeDescriptions()` -> `ArrayList<ThemeDescription>`
+- `onThemeColorsChanged()` -> `void`
 
 ## `org.telegram.ui.TooManyCommunitiesActivity$Adapter`
 - `getItemCount()` -> `int`
@@ -15624,9 +16431,9 @@
 - `getContentView()` -> `SizeNotifierFrameLayout`
 - `getCurrentChat()` -> `TLRPC.Chat`
 - `getDialogId()` -> `long`
-- `getFrostedGlassSource()` -> `BlurredBackgroundSourceRenderNode`
+- `getFrostedGlassSource()` -> `GlassSourceRenderNode`
 - `getFullscreenView()` -> `View`
-- `getGlassSource()` -> `BlurredBackgroundSourceRenderNode`
+- `getGlassSource()` -> `GlassSourceRenderNode`
 - `getGroupCall()` -> `ChatObject.Call`
 - `getThemeDescriptions()` -> `ArrayList<ThemeDescription>`
 - `static getTopicsOrChat(BaseFragment parentFragment, Bundle args)` -> `BaseFragment`
@@ -15641,6 +16448,7 @@
 - `onPause()` -> `void`
 - `onResume()` -> `void`
 - `onSlideProgress(boolean isOpen, float progress)` -> `void`
+- `onThemeColorsChanged()` -> `void`
 - `onTransitionAnimationEnd(boolean isOpen, boolean backward)` -> `void`
 - `onTransitionAnimationProgress(boolean isOpen, float progress)` -> `void`
 - `onTransitionAnimationStart(boolean isOpen, boolean backward)` -> `void`
@@ -15724,6 +16532,7 @@
 - `onFragmentDestroy()` -> `void`
 - `onPause()` -> `void`
 - `onResume()` -> `void`
+- `onThemeColorsChanged()` -> `void`
 - `onTransitionAnimationEnd(boolean isOpen, boolean backward)` -> `void`
 - `preload(Runnable whenPreloaded)` -> `void`
 - `setBlockingAlert(int otherwiseRelogin)` -> `void`
@@ -15757,6 +16566,7 @@
 - `onPause()` -> `void`
 - `onReset()` -> `void`
 - `onResume()` -> `void`
+- `onThemeColorsChanged()` -> `void`
 - `onTransitionAnimationEnd(boolean isOpen, boolean backward)` -> `void`
 - `setBlockingAlert(int otherwiseRelogin)` -> `void`
 - `setCloseAfterSet(boolean value)` -> `void`
@@ -15779,29 +16589,23 @@
 - `createView(Context context)` -> `View`
 - `didReceivedNotification(int id, int account, Object... args)` -> `void`
 - `fillItems(ArrayList<UItem> items, UniversalAdapter adapter)` -> `void`
+- `getListViewForSimpleGlass()` -> `RecyclerListView`
 - `getTitle()` -> `CharSequence`
 - `onClick(UItem item, View view, int position, float x, float y)` -> `void`
 - `onFragmentCreate()` -> `boolean`
 - `onFragmentDestroy()` -> `void`
-- `onInsets(int left, int top, int right, int bottom)` -> `void`
 - `onLongClick(UItem item, View view, int position, float x, float y)` -> `boolean`
 - `onResume()` -> `void`
+- `useSimpleActionBar()` -> `boolean`
 
 ## `org.telegram.ui.UserInfoActivity$AdminedChannelsFetcher`
 - `invalidate()` -> `void`
 - `subscribe(Runnable whenDone)` -> `void`
 
-## `org.telegram.ui.UserInfoActivity$ChooseChannelFragment`
-- `createView(Context context)` -> `View`
-- `fillItems(ArrayList<UItem> items, UniversalAdapter adapter)` -> `void`
-- `getTitle()` -> `CharSequence`
-- `onClick(UItem item, View view, int position, float x, float y)` -> `void`
-- `onLongClick(UItem item, View view, int position, float x, float y)` -> `boolean`
-- `onResume()` -> `void`
-
 ## `org.telegram.ui.UserInfoActivity$InfoCell`
 - `onMeasure(int widthMeasureSpec, int heightMeasureSpec)` -> `void`
 - `set(int icon, CharSequence title, CharSequence subtitle, boolean accent, boolean red, int icon2)` -> `void`
+- `updateColors()` -> `void`
 
 ## `org.telegram.ui.UserInfoActivity$InfoCell$Factory`
 - `bindView(View view, UItem item, boolean divider, UniversalAdapter adapter, UniversalRecyclerView listView)` -> `void`
@@ -15818,6 +16622,7 @@
 - `onFragmentCreate()` -> `boolean`
 - `onFragmentDestroy()` -> `void`
 - `onResume()` -> `void`
+- `onThemeColorsChanged()` -> `void`
 - `setContainerHeight(int value)` -> `void`
 - `setDelegate(FilterUsersActivityDelegate filterUsersActivityDelegate)` -> `void`
 - `setTtlPeriod(int selectedTime)` -> `void`
@@ -15863,6 +16668,7 @@
 - `onPause()` -> `void`
 - `onRequestPermissionsResultFragment(int requestCode, String[] permissions, int[] grantResults)` -> `void`
 - `onResume()` -> `void`
+- `onThemeColorsChanged()` -> `void`
 - `onTransitionAnimationProgress(boolean isOpen, float progress)` -> `void`
 - `onViewPagerScrollEnd()` -> `void`
 - `setTitleOverlayText(String title, int titleId, Runnable action)` -> `void`
@@ -15912,8 +16718,11 @@
 - `createNewWallet(Utilities.Callback<String> whenDone)` -> `void`
 - `static createRecipientPeer(TLRPC.User user, String address, String domain)` -> `TL_wallet.WalletTransactionPeer`
 - `decryptTransactionComment(String encryptedComment, String senderAddress, Utilities.Callback2<String , String > whenDone)` -> `void`
+- `depositNFT(TLRPC.User user, TL_wallet.nftItem collectible, TL_stars.starGiftDepositPayload deposit, Utilities.Callback<String> whenSent)` -> `void`
+- `depositNFT(TLRPC.User user, TL_wallet.nftItem collectible, TL_stars.starGiftDepositPayload deposit, Utilities.Callback<String> whenSent, Utilities.Callback<Boolean> whenCompleted)` -> `void`
 - `disableBackup(PreparedDisableBackup prepared, Utilities.Callback<String> whenSent)` -> `void`
 - `disableBackupWithoutUpdatingPhrase(Utilities.Callback<String> whenDone)` -> `void`
+- `emulateDepositNFT(TL_stars.starGiftDepositPayload deposit, Utilities.Callback2<TL_wallet.walletTransaction, String> whenDone)` -> `Runnable`
 - `emulateDisableBackup(Utilities.Callback2<Long, String> whenDone)` -> `void`
 - `emulateSend(String address, long amount, String comment, byte[] comment_recipient_public_key, Utilities.Callback2<TL_wallet.walletTransaction, String> whenDone)` -> `Runnable`
 - `emulateSendNFT(String address, TL_wallet.nftItem collectible, Utilities.Callback2<TL_wallet.walletTransaction, String> whenDone)` -> `Runnable`
@@ -15928,6 +16737,8 @@
 - `static formatGramCapital(CharSequence formattedAmount)` -> `CharSequence`
 - `static formatGrams(long amount)` -> `String`
 - `static formatGrams(long amount, boolean manyZeros)` -> `String`
+- `static formatGramsBalance(long amount, boolean manyZeros)` -> `String`
+- `static formatGramsBalanceWithUnit(long amount, boolean manyZeros)` -> `CharSequence`
 - `static formatGramsScaled(long amount)` -> `SpannableStringBuilder`
 - `static formatGramsScaled(long amount, float scale)` -> `SpannableStringBuilder`
 - `static formatGramsScaled(String value, float scale)` -> `SpannableStringBuilder`
@@ -15956,10 +16767,12 @@
 - `makeSureSecretPhraseBackedUpLocally(Utilities.Callback<String > whenDone)` -> `void`
 - `makeSureSecretPhraseBackedUpLocally(boolean sheet, boolean progress, Utilities.Callback<String > whenDone)` -> `void`
 - `static mergeRecipientPeer(TL_wallet.WalletTransactionPeer local, TL_wallet.WalletTransactionPeer remote)` -> `TL_wallet.WalletTransactionPeer`
+- `static mergeTransactions(ArrayList<TL_wallet.walletTransaction> target, List<TL_wallet.walletTransaction> source)` -> `void`
 - `static messageMatchesTransaction(MessageObject message, TL_wallet.walletTransaction transaction)` -> `boolean`
 - `needsFingerprint()` -> `boolean`
 - `needsPasscode()` -> `boolean`
 - `notifyUpdate()` -> `void`
+- `onCollectibleReceived(String nftAddress)` -> `void`
 - `onEvent(JSONObject event)` -> `void`
 - `prepareDisableBackup(Utilities.Callback2<PreparedDisableBackup, String > whenDone)` -> `void`
 - `reset()` -> `void`
@@ -15969,6 +16782,7 @@
 - `setNeedsFingerprint(boolean value, Utilities.Callback<Boolean> whenDone)` -> `void`
 - `setNeedsPasscode(boolean value)` -> `void`
 - `tonConnectEngine()` -> `WalletEngine2`
+- `static transactionHashKey(String hash)` -> `String`
 - `static transactionMatches(TL_wallet.walletTransaction a, TL_wallet.walletTransaction b)` -> `boolean`
 - `updateState(TL_wallet.WalletState state)` -> `void`
 - `whenReady(Runnable callback)` -> `void`
@@ -16038,11 +16852,15 @@
 - `stop()` -> `void`
 
 ## `org.telegram.ui.Wallet.GramWalletTonConnect`
+- `static actionPrice(long nanotons)` -> `CharSequence`
 - `approveSession(ConnectRequest context, Utilities.Callback<String> whenDone)` -> `void`
+- `static block(Context context, IconBackgroundColors color, int iconRes, CharSequence title, CharSequence subtitle, CharSequence price, CharSequence comment, Theme.ResourcesProvider resourcesProvider)` -> `LinearLayout`
 - `createSession(String dappClientId, String manifestUrl, String requestJson, String traceId, String embeddedRequest, Utilities.Callback2<ConnectRequest, String> whenDone)` -> `void`
 - `decide(Pending request, boolean declined, Utilities.Callback<String> callback)` -> `void`
 - `disconnectSession(TL_wallet.tonConnectSession session, Utilities.Callback<String > whenDone)` -> `void`
+- `static domainView(Context context, String domain, Theme.ResourcesProvider resourcesProvider)` -> `TextView`
 - `static exception(String operation, Throwable error)` -> `String`
+- `static formatCardDebit(long nanotons)` -> `CharSequence`
 - `static log(String operation, String message)` -> `void`
 - `static openTransactionRequest(Context context, int currentAccount, long sessionId, int messageId, Theme.ResourcesProvider resourcesProvider)` -> `void`
 - `static openTransactionRequest(Context context, int currentAccount, long sessionId, int messageId, Theme.ResourcesProvider resourcesProvider, Runnable onDismiss)` -> `void`
@@ -16051,16 +16869,28 @@
 - `release(Pending request)` -> `void`
 - `static rpc(String operation, TLRPC.TL_error error)` -> `String`
 - `static sameIcon(TLRPC.WebDocument first, TLRPC.WebDocument second)` -> `boolean`
+- `static shortAddress(String address)` -> `String`
 - `static showConnectSheet(Context context, int currentAccount, ConnectRequest connection, Theme.ResourcesProvider resourcesProvider, Runnable onComplete)` -> `BottomSheet`
 - `static showOauthConnectSheet(Context context, int currentAccount, TLRPC.TL_urlAuthResultRequest auth, Theme.ResourcesProvider resourcesProvider, Utilities.Callback<TL_wallet.inputTonConnectOauthSession> onApproved, Runnable onCancel)` -> `BottomSheet`
 - `static showTransactionSheet(Context context, int currentAccount, Pending request, Theme.ResourcesProvider resourcesProvider)` -> `BottomSheet`
 - `static supportedFeatures()` -> `JSONArray`
+- `static transactionBlock(Context context, String title, Theme.ResourcesProvider resourcesProvider)` -> `LinearLayout`
+- `static validateSignData(JSONObject payload, String address)` -> `void`
+- `static validateTransaction(JSONObject transaction, String address, int now)` -> `void`
 
 ## `org.telegram.ui.Wallet.GramWalletTonConnect$Pending`
 - `setOnProcessed(Runnable callback)` -> `void`
 
 ## `org.telegram.ui.Wallet.GramWalletTonConnect$Transaction`
 - `fields()` -> `String[]`
+
+## `org.telegram.ui.Wallet.GramWalletWidget`
+- `static open(Context context, int account, TLRPC.User bot, JSONObject call, Theme.ResourcesProvider resourcesProvider, Delegate delegate)` -> `void`
+
+## `org.telegram.ui.Wallet.GramWalletWidget$Window`
+- `close()` -> `void`
+- `finish(Utilities.Callback<Delegate> outcome)` -> `void`
+- `guarded()` -> `boolean`
 
 ## `org.telegram.ui.Wallet.NavBottomSheet`
 - `closeKeyboard()` -> `void`
@@ -16166,24 +16996,33 @@
 - `fillItems(ArrayList<UItem> items, UniversalAdapter adapter)` -> `void`
 - `findSendLanding(TL_wallet.walletTransaction transaction)` -> `TransactionCell`
 - `static formatTransactionAddress(String address, Runnable copy)` -> `CharSequence`
+- `static formatTransactionFee(int currentAccount, long nanotons, Theme.ResourcesProvider resourceProvider)` -> `CharSequence`
 - `getTitle()` -> `CharSequence`
+- `onBackPressed(boolean invoked)` -> `boolean`
 - `onBeginSlide()` -> `void`
 - `onClick(UItem item, View view, int position, float x, float y)` -> `void`
 - `onFragmentCreate()` -> `boolean`
 - `onFragmentDestroy()` -> `void`
 - `onInsets(int left, int top, int right, int bottom)` -> `void`
 - `onLongClick(UItem item, View view, int position, float x, float y)` -> `boolean`
+- `onPause()` -> `void`
 - `onRequestPermissionsResultFragment(int requestCode, String[] permissions, int[] grantResults)` -> `void`
 - `onResume()` -> `void`
+- `onThemeColorsChanged()` -> `void`
 - `static openCollectibleSheet(Context context, TL_wallet.nftItem collectible, Theme.ResourcesProvider resourceProvider)` -> `void`
 - `static openOnramp(int currentAccount, long amount, Utilities.Callback<String> whenDone)` -> `void`
 - `static openTransactionSheet(Context context, int currentAccount, TL_wallet.walletTransaction initialTransaction, Utilities.Callback3<String, Boolean, Utilities.Callback<String>> onSend, Utilities.Callback2<String, Boolean> onDismiss, Theme.ResourcesProvider resourceProvider)` -> `void`
 - `static openTransactionSheet(Context context, int currentAccount, TL_wallet.walletTransaction initialTransaction, Utilities.Callback3<String, Boolean, Utilities.Callback<String>> onSend, Utilities.Callback2<String, Boolean> onDismiss, byte[] commentRecipientPublicKey, Runnable openWallet, Theme.ResourcesProvider resourceProvider)` -> `void`
+- `openWalletCollectible(TL_wallet.nftItem nft)` -> `void`
 - `static openWalletFirstGramsAlert(Context context, int currentAccount, Theme.ResourcesProvider resourceProvider)` -> `BottomSheet`
 - `static openWalletHowItWorksAlert(Context context, Theme.ResourcesProvider resourceProvider)` -> `void`
 - `static openWalletQRAlert(Context context, int currentAccount, Theme.ResourcesProvider resourcesProvider)` -> `void`
 - `prepareSendLanding(TL_wallet.walletTransaction transaction)` -> `void`
+- `static resolveWalletQrUser(int account, String username, Utilities.Callback<TLRPC.User> done)` -> `void`
+- `showCollectibles()` -> `void`
 - `showTransactions()` -> `void`
+- `static walletQrUri(String text)` -> `Uri`
+- `static walletQrUsername(Uri uri)` -> `String`
 
 ## `org.telegram.ui.Wallet.WalletActivity$AddressRingView`
 - `onAttachedToWindow()` -> `void`
@@ -16235,6 +17074,11 @@
 - `onStartNestedScroll(View child, View target, int axes, int type)` -> `boolean`
 - `onStopNestedScroll(View target, int type)` -> `void`
 
+## `org.telegram.ui.Wallet.WalletActivity$WalletQrCodeView`
+- `onAttachedToWindow()` -> `void`
+- `onDetachedFromWindow()` -> `void`
+- `onDraw(Canvas canvas)` -> `void`
+
 ## `org.telegram.ui.Wallet.WalletActivity$WalletQrView`
 - `setOnCopyAddressListener(Runnable listener)` -> `void`
 
@@ -16245,12 +17089,24 @@
 - `setAlpha(int alpha)` -> `void`
 - `setColorFilter(ColorFilter colorFilter)` -> `void`
 
+## `org.telegram.ui.Wallet.WalletCard2DMaterial`
+- `drawDepth(Canvas canvas, float[] style)` -> `void`
+- `drawQr(Canvas canvas)` -> `void`
+- `drawRim(Canvas canvas)` -> `void`
+- `drawStars(Canvas canvas, boolean hasCardNumber)` -> `void`
+- `drawSurface(Canvas canvas, float[] style)` -> `void`
+- `static prewarm(Context context)` -> `void`
+- `setIcon(int res)` -> `void`
+- `setRotation(float x, float y)` -> `void`
+- `updateDepthProjection(WalletCardProjection projection, int width, int height, boolean backFacing)` -> `void`
+
 ## `org.telegram.ui.Wallet.WalletCard2DView`
 - `applyRotation(float rotationX, float rotationY)` -> `void`
 - `getCardRotationX()` -> `float`
 - `getCardRotationY()` -> `float`
 - `getFrontFace()` -> `FrameLayout`
 - `getFrontFaceProjection(Matrix result)` -> `void`
+- `isBackFacing()` -> `boolean`
 - `onAccuracyChanged(Sensor sensor, int accuracy)` -> `void`
 - `onAttachedToWindow()` -> `void`
 - `onDetachedFromWindow()` -> `void`
@@ -16258,43 +17114,34 @@
 - `onSensorChanged(SensorEvent event)` -> `void`
 - `onSizeChanged(int w, int h, int oldw, int oldh)` -> `void`
 - `onTouchEvent(MotionEvent event)` -> `boolean`
+- `onVisibilityChanged(View changedView, int visibility)` -> `void`
+- `onWindowFocusChanged(boolean hasWindowFocus)` -> `void`
+- `onWindowVisibilityChanged(int visibility)` -> `void`
 - `performClick()` -> `boolean`
 - `setAdditionalTilt(float tilt)` -> `void`
 - `setCardIcon(int drawableResId)` -> `void`
-- `setEngravingBitmap(Bitmap bitmap)` -> `void`
+- `setHasCardNumber(boolean has)` -> `void`
+- `setStickerKick(float x, float y)` -> `void`
+- `setStickerStyle(float[] style)` -> `void`
 - `setUseGyroscope(float t)` -> `void`
+- `whenMaterialReady(Runnable action)` -> `void`
 
 ## `org.telegram.ui.Wallet.WalletCard2DView$CardSurface`
-- `onDraw(Canvas canvas)` -> `void`
+- `setCardIcon(int icon)` -> `void`
+- `setHasCardNumber(boolean has)` -> `void`
+- `setTilt(float x, float y)` -> `void`
+
+## `org.telegram.ui.Wallet.WalletCard2DView$FaceLayout`
+- `dispatchDraw(Canvas canvas)` -> `void`
 - `onSizeChanged(int w, int h, int oldw, int oldh)` -> `void`
-- `setCardIcon(int drawableResId)` -> `void`
-- `setEngravingBitmap(Bitmap bitmap)` -> `void`
-- `setTilt(float rotationX, float rotationY)` -> `void`
 
 ## `org.telegram.ui.Wallet.WalletCard2DView$GradientSurface`
-- `onDraw(Canvas canvas)` -> `void`
-- `onSizeChanged(int w, int h, int oldw, int oldh)` -> `void`
-- `setTilt(float rotationX, float rotationY)` -> `void`
+- `setTilt(float x, float y)` -> `void`
 
 ## `org.telegram.ui.Wallet.WalletCard2DView$ProjectedCardLayout`
 - `dispatchDraw(Canvas canvas)` -> `void`
+- `onSizeChanged(int w, int h, int oldw, int oldh)` -> `void`
 - `setProjectedCorners(float[] corners)` -> `void`
-
-## `org.telegram.ui.Wallet.WalletCard3D`
-- `destroy()` -> `void`
-- `draw(float[] mvpMatrix, float[] modelViewMatrix, float lightDirectionX, float lightDirectionY, float lightDirectionZ, float cardGradientRotation, int surfaceWidth, int surfaceHeight)` -> `void`
-- `static prepareTextures(Context context, int cardIconResId, int qrButtonRightPadding)` -> `void`
-- `setCardIcon(Context context, int drawableResId, int qrButtonRightPadding)` -> `void`
-- `setDiamondBounds(float[] bounds, float alpha)` -> `void`
-- `setEngravingBitmap(Bitmap bitmap)` -> `void`
-- `setFrontBitmap(Bitmap bitmap)` -> `void`
-
-## `org.telegram.ui.Wallet.WalletCard3D$MaterialProgram`
-- `bind(float[] mvpMatrix, float[] modelViewMatrix, float lightDirectionX, float lightDirectionY, float lightDirectionZ, float cardGradientRotation, float qrButtonRightPadding)` -> `void`
-- `setEngravingTexel(float x, float y)` -> `void`
-
-## `org.telegram.ui.Wallet.WalletCard3D$Mesh`
-- `destroy()` -> `void`
 
 ## `org.telegram.ui.Wallet.WalletCardComponent`
 - `attachBalanceToCard()` -> `void`
@@ -16311,7 +17158,12 @@
 - `getCardRotationY()` -> `float`
 - `getFrontFace()` -> `FrameLayout`
 - `getFrontFaceTransform(View target, Matrix result)` -> `boolean`
+- `getQrButtonPath(android.graphics.Path path, float width, float height)` -> `void`
+- `getStickerLayerIndex()` -> `int`
+- `getStickerObstacles()` -> `java.util.ArrayList<RectF>`
+- `getStickerStyle()` -> `float[]`
 - `getUsdBalanceView()` -> `AnimatedTextView`
+- `isBackFacing()` -> `boolean`
 - `isUse2D()` -> `boolean`
 - `listen(int currentAccount, GramWallet wallet)` -> `void`
 - `onAttachedToWindow()` -> `void`
@@ -16324,33 +17176,17 @@
 - `setCardNumber(String formattedNumber)` -> `void`
 - `setCardOnClickListener(OnClickListener listener)` -> `void`
 - `setDiamondOnCard(boolean enabled)` -> `void`
-- `setEngravingBitmap(Bitmap bitmap)` -> `void`
 - `setOnFrontContentPresented(Runnable callback)` -> `void`
-- `setUse2D(boolean use2D)` -> `void`
+- `setProfileCard(int account, TLRPC.User user, TL_wallet.card profileCard)` -> `void`
+- `setStickerImpact(float scale)` -> `void`
+- `setStickerKick(float h, float v)` -> `void`
+- `setStickerStyle(float[] style)` -> `void`
+- `setStickerTextShadow(float balance, float holder, float diamond, float number)` -> `void`
 - `setUseGyroscope(float t)` -> `void`
+- `stickerColor(int color)` -> `int`
+- `static transformToRoot(View view, Matrix result)` -> `void`
 - `update(GramWallet currentWallet)` -> `void`
-
-## `org.telegram.ui.Wallet.WalletCardFlecks`
-- `destroy()` -> `void`
-- `draw(int position, int normal, int region, int corner)` -> `void`
-
-## `org.telegram.ui.Wallet.WalletCardGLRenderer`
-- `acquireFrontBitmap(int width, int height)` -> `Bitmap`
-- `nextFrontRevision()` -> `long`
-- `onDrawFrame(GL10 gl)` -> `void`
-- `onSurfaceChanged(GL10 gl, int width, int height)` -> `void`
-- `onSurfaceCreated(GL10 gl, EGLConfig config)` -> `void`
-- `presentedFrontRevision(long timestamp)` -> `long`
-- `setCardIcon(int drawableResId)` -> `void`
-- `setDiamondAlpha(float alpha)` -> `void`
-- `setDiamondBounds(float x, float y, float width, float height)` -> `void`
-- `setEngravingBitmap(Bitmap bitmap)` -> `void`
-- `setLightOrbitPaused(boolean paused)` -> `void`
-- `setRotation(float rotationX, float rotationY)` -> `void`
-- `submitFrontBitmap(Bitmap bitmap)` -> `void`
-
-## `org.telegram.ui.Wallet.WalletCardGLRenderer$FaceProjection`
-- `project(int width, int height, float rotationX, float rotationY, boolean back, float[] result)` -> `void`
+- `whenMaterialReady(Runnable action)` -> `void`
 
 ## `org.telegram.ui.Wallet.WalletCardGeometry`
 - `static radiusX(float width)` -> `float`
@@ -16361,6 +17197,10 @@
 - `detach(View view)` -> `void`
 - `drawn(View view)` -> `void`
 - `static get(Context context)` -> `WalletCardMotion`
+
+## `org.telegram.ui.Wallet.WalletCardProjection`
+- `project(int width, int height, float rotationX, float rotationY, boolean back, float[] result)` -> `void`
+- `projectDepthContour(int width, int height, float[] uv, float[] front, float[] back, float[] depth)` -> `void`
 
 ## `org.telegram.ui.Wallet.WalletCardQrBounds`
 - `static compute(float[] m, int width, int height, float left, float top, float right, float bottom, int[] result, float[] uvFootprint)` -> `void`
@@ -16373,56 +17213,18 @@
 - `setSensorRotation(float rotationX, float rotationY, long timestampNanos)` -> `void`
 - `update(long frameTimeNanos)` -> `void`
 
-## `org.telegram.ui.Wallet.WalletCardView`
-- `dispatchDraw(Canvas canvas)` -> `void`
-- `getBackFace()` -> `FrameLayout`
-- `getCardRotationX()` -> `float`
-- `getCardRotationY()` -> `float`
-- `getFrontFace()` -> `FrameLayout`
-- `getFrontFaceProjection(Matrix result)` -> `void`
-- `isCardMaterialReady()` -> `boolean`
-- `onAccuracyChanged(Sensor sensor, int accuracy)` -> `void`
-- `onAttachedToWindow()` -> `void`
-- `onDetachedFromWindow()` -> `void`
-- `onLayout(boolean changed, int left, int top, int right, int bottom)` -> `void`
-- `onMeasure(int widthMeasureSpec, int heightMeasureSpec)` -> `void`
-- `onSensorChanged(SensorEvent event)` -> `void`
-- `onSizeChanged(int w, int h, int oldw, int oldh)` -> `void`
-- `onVisibilityChanged(View changedView, int visibility)` -> `void`
-- `onWindowFocusChanged(boolean hasWindowFocus)` -> `void`
-- `onWindowVisibilityChanged(int visibility)` -> `void`
-- `setAdditionalTilt(float tilt)` -> `void`
-- `setCardIcon(int drawableResId)` -> `void`
-- `setDiamondAlpha(float alpha)` -> `void`
-- `setDiamondBounds(float x, float y, float width, float height)` -> `void`
-- `setEngravingBitmap(Bitmap bitmap)` -> `void`
-- `setOnFrontContentPresented(Runnable callback)` -> `void`
-- `setUseGyroscope(float t)` -> `void`
-
-## `org.telegram.ui.Wallet.WalletCardView$ProjectedFaceLayout`
-- `captureContent(WalletCardGLRenderer renderer)` -> `void`
-- `dispatchDraw(Canvas canvas)` -> `void`
-- `getContent()` -> `FrameLayout`
-- `invalidateChildInParent(int[] location, Rect dirty)` -> `ViewParent`
-- `onDescendantInvalidated(View child, View target)` -> `void`
-- `onLayout(boolean changed, int left, int top, int right, int bottom)` -> `void`
-- `onSizeChanged(int w, int h, int oldw, int oldh)` -> `void`
-- `setProjectedCorners(float[] corners)` -> `void`
-
-## `org.telegram.ui.Wallet.WalletCardView$WalletCardTextureView`
-- `getMaxFrameRate()` -> `int`
-- `onDetachedFromWindow()` -> `void`
-- `onSurfaceTextureAvailable(SurfaceTexture surface, int width, int height)` -> `void`
-- `onSurfaceTextureDestroyed(SurfaceTexture surface)` -> `boolean`
-- `onTouchEvent(MotionEvent event)` -> `boolean`
-- `performClick()` -> `boolean`
-- `preferGles3()` -> `boolean`
-- `renderFirstFrameWhilePaused()` -> `boolean`
-- `setPaused(boolean paused)` -> `void`
-- `startIdleAnimation()` -> `void`
-
 ## `org.telegram.ui.Wallet.WalletChatSendTransition`
 - `animator()` -> `AnimatorSet`
+
+## `org.telegram.ui.Wallet.WalletDiamondSprite`
+- `draw(Canvas canvas)` -> `void`
+- `getIntrinsicHeight()` -> `int`
+- `getIntrinsicWidth()` -> `int`
+- `getOpacity()` -> `int`
+- `setAlpha(int alpha)` -> `void`
+- `setColorFilter(ColorFilter colorFilter)` -> `void`
+- `setShadowAlpha(float shadowAlpha)` -> `void`
+- `setTint(float r, float g, float b)` -> `void`
 
 ## `org.telegram.ui.Wallet.WalletDiamondView`
 - `copyRotationFrom(WalletDiamondView source)` -> `void`
@@ -16521,6 +17323,15 @@
 - `createView(Context context, RecyclerListView listView, int currentAccount, int classGuid, Theme.ResourcesProvider resourcesProvider)` -> `LocalWalletCell`
 - `static of(String address, long balance, int lastUsedDate, boolean outdated)` -> `UItem`
 
+## `org.telegram.ui.Wallet.WalletMessageHash`
+- `static normalized(byte[] boc)` -> `String`
+
+## `org.telegram.ui.Wallet.WalletQrDiamond`
+- `static isStatic(Context context)` -> `boolean`
+- `onAttachedToWindow()` -> `void`
+- `onDetachedFromWindow()` -> `void`
+- `onTouchEvent(MotionEvent event)` -> `boolean`
+
 ## `org.telegram.ui.Wallet.WalletRecipientView`
 - `getContentBottom()` -> `float`
 - `onLayout(boolean changed, int left, int top, int right, int bottom)` -> `void`
@@ -16535,6 +17346,15 @@
 - `onMeasure(int widthMeasureSpec, int heightMeasureSpec)` -> `void`
 - `onVisibilityChanged(View changedView, int visibility)` -> `void`
 - `setAddress(String address, boolean restart)` -> `void`
+
+## `org.telegram.ui.Wallet.WalletSearchTabs`
+- `dismissKeyboard()` -> `void`
+- `isOpen()` -> `boolean`
+- `onDetachedFromWindow()` -> `void`
+- `onDraw(Canvas canvas)` -> `void`
+- `onMeasure(int widthMeasureSpec, int heightMeasureSpec)` -> `void`
+- `setButtonVisibility(float value)` -> `void`
+- `setOpen(boolean value)` -> `void`
 
 ## `org.telegram.ui.Wallet.WalletSecretPhraseFragment`
 - `createView(Context context)` -> `View`
@@ -16561,6 +17381,7 @@
 - `onLongClick(UItem item, View view, int position, float x, float y)` -> `boolean`
 - `onPause()` -> `void`
 - `onResume()` -> `void`
+- `onThemeColorsChanged()` -> `void`
 - `onTransitionAnimationEnd(boolean isOpen, boolean backward)` -> `void`
 - `onTransitionAnimationStart(boolean isOpen, boolean backward)` -> `void`
 - `setAmount(long nanos)` -> `WalletSendEnterAmount`
@@ -16578,6 +17399,7 @@
 - `setCurrency(GramWallet wallet, boolean inCurrency)` -> `void`
 - `setIntroProgress(float progress, float revealProgress, boolean finished)` -> `void`
 - `setScaleProperty(float amplitude)` -> `void`
+- `updateColors()` -> `void`
 
 ## `org.telegram.ui.Wallet.WalletSendEnterAmount$AmountInputView$AmountCharacterSpan`
 - `draw(@NonNull Canvas canvas, CharSequence text, int start, int end, float x, int top, int y, int bottom, @NonNull Paint paint)` -> `void`
@@ -16600,6 +17422,7 @@
 - `createView(Context context)` -> `View`
 - `fillItems(ArrayList<UItem> items, UniversalAdapter adapter)` -> `void`
 - `getTitle()` -> `CharSequence`
+- `onBackPressed(boolean invoked)` -> `boolean`
 - `onClick(UItem item, View view, int position, float x, float y)` -> `void`
 - `onFragmentDestroy()` -> `void`
 - `onInsets(int left, int top, int right, int bottom)` -> `void`
@@ -16608,6 +17431,7 @@
 - `onPause()` -> `void`
 - `onRequestPermissionsResultFragment(int requestCode, String[] permissions, int[] grantResults)` -> `void`
 - `onResume()` -> `void`
+- `onThemeColorsChanged()` -> `void`
 - `setCollectible(TL_wallet.nftItem collectible)` -> `WalletSendSelectSender`
 
 ## `org.telegram.ui.Wallet.WalletSendTransition`
@@ -16668,13 +17492,16 @@
 - `createView(Context context)` -> `View`
 - `didReceivedNotification(int id, int account, Object... args)` -> `void`
 - `static fillDefaultColors(ArrayList<Object> wallPapers, boolean isDark)` -> `void`
+- `getListViewForSimpleGlass()` -> `RecyclerListView`
 - `getThemeDescriptions()` -> `ArrayList<ThemeDescription>`
+- `isSupportEdgeToEdge()` -> `boolean`
 - `onActivityResultFragment(int requestCode, int resultCode, Intent data)` -> `void`
 - `onConfigurationChanged(android.content.res.Configuration newConfig)` -> `void`
 - `onFragmentCreate()` -> `boolean`
 - `onFragmentDestroy()` -> `void`
 - `onResume()` -> `void`
 - `restoreSelfArgs(Bundle args)` -> `void`
+- `useSimpleActionBar()` -> `boolean`
 
 ## `org.telegram.ui.WallpapersListActivity$ListAdapter`
 - `getItemCount()` -> `int`
@@ -16708,6 +17535,7 @@
 - `isSwipeBackEnabled(MotionEvent event)` -> `boolean`
 - `onFragmentDestroy()` -> `void`
 - `onResume()` -> `void`
+- `onThemeColorsChanged()` -> `void`
 - `onTransitionAnimationEnd(boolean isOpen, boolean backward)` -> `void`
 - `static openGameInBrowser(String urlStr, MessageObject messageObject, Activity parentActivity, String short_name, String username)` -> `void`
 - `static supportWebview()` -> `boolean`
@@ -16828,6 +17656,7 @@
 - `setMenuText(String menuText)` -> `boolean`
 - `setOpened(boolean opened)` -> `void`
 - `setWebView(boolean webView)` -> `void`
+- `updateColors()` -> `void`
 - `verifyDrawable(@NonNull Drawable who)` -> `boolean`
 
 ## `org.telegram.ui.bots.BotCommandsMenuView$BotCommandView`
@@ -16856,6 +17685,7 @@
 - `onMeasure(int widthMeasureSpec, int heightMeasureSpec)` -> `void`
 - `set(FileDownload file)` -> `boolean`
 - `setArrow(int rightMargin)` -> `void`
+- `updateColors()` -> `void`
 
 ## `org.telegram.ui.bots.BotDownloads$DownloadBulletin$BackgroundDrawable`
 - `draw(@NonNull Canvas canvas)` -> `void`
@@ -16940,6 +17770,7 @@
 - `fillItems(ArrayList<UItem> items, UniversalAdapter adapter)` -> `void`
 - `getTitle()` -> `CharSequence`
 - `onCreate(Bundle savedInstanceState)` -> `void`
+- `onThemeColorsChanged()` -> `void`
 - `static share(Context context, int currentAccount, long botId, String id, Theme.ResourcesProvider resourcesProvider, Runnable whenOpened, Utilities.Callback2<String, ArrayList<Long>> whenDone)` -> `void`
 
 ## `org.telegram.ui.bots.BotStorage`
@@ -16975,7 +17806,6 @@
 - `getNavigationBarColor(int color)` -> `int`
 - `getWindowView()` -> `WindowView`
 - `hadDialog()` -> `boolean`
-- `isFullyVisible()` -> `boolean`
 - `static makeThemeParams(Theme.ResourcesProvider resourcesProvider)` -> `JSONObject`
 - `onAttachedBackPressed()` -> `boolean`
 - `onCheckDismissByUser()` -> `boolean`
@@ -17011,6 +17841,7 @@
 - `onDraw(Canvas canvas)` -> `void`
 - `onTouchEvent(MotionEvent event)` -> `boolean`
 - `setDrawingFromOverlay(boolean drawingFromOverlay)` -> `void`
+- `updateColors()` -> `void`
 
 ## `org.telegram.ui.bots.BotWebViewMenuContainer`
 - `didReceivedNotification(int id, int account, Object... args)` -> `void`
@@ -17044,6 +17875,7 @@
 - `setOnDismissGlobalListener(Runnable callback)` -> `void`
 - `show(int currentAccount, long botId, String botUrl)` -> `void`
 - `show()` -> `void`
+- `updateColors()` -> `void`
 
 ## `org.telegram.ui.bots.BotWebViewSheet`
 - `createErrorContainer()` -> `ArticleViewer.ErrorContainer`
@@ -17104,6 +17936,7 @@
 - `onDraw(Canvas canvas)` -> `void`
 - `onTouchEvent(MotionEvent event)` -> `boolean`
 - `setDrawingFromOverlay(boolean drawingFromOverlay)` -> `void`
+- `updateColors()` -> `void`
 
 ## `org.telegram.ui.bots.ChannelAffiliateProgramsFragment`
 - `createAdapter()` -> `RecyclerView.Adapter<?>`
@@ -17171,6 +18004,7 @@
 - `onFragmentCreate()` -> `boolean`
 - `onFragmentDestroy()` -> `void`
 - `onInsets(int left, int top, int right, int bottom)` -> `void`
+- `onThemeColorsChanged()` -> `void`
 
 ## `org.telegram.ui.community.CommunityCreateActivity$CommunityHeaderView`
 - `dispatchDraw(@NonNull Canvas canvas)` -> `void`
@@ -17196,6 +18030,7 @@
 - `onPause()` -> `void`
 - `onRequestPermissionsResultFragment(int requestCode, String[] permissions, int[] grantResults)` -> `void`
 - `onResume()` -> `void`
+- `onThemeColorsChanged()` -> `void`
 - `onUploadProgressChanged(float progress)` -> `void`
 - `openSetPhotoAlert()` -> `void`
 - `restoreSelfArgs(Bundle args)` -> `void`
@@ -17215,6 +18050,7 @@
 - `onFactorChanged(int id, float factor, float fraction, FactorAnimator callee)` -> `void`
 - `onFragmentCreate()` -> `boolean`
 - `onFragmentDestroy()` -> `void`
+- `onThemeColorsChanged()` -> `void`
 
 ## `org.telegram.ui.community.CommunitySheet`
 - `canSwipeToBack(MotionEvent event)` -> `boolean`
@@ -17224,6 +18060,7 @@
 - `onButtonClicked(DialogCell dialogCell)` -> `void`
 - `onButtonLongPress(DialogCell dialogCell)` -> `void`
 - `onFactorChanged(int id, float factor, float fraction, FactorAnimator callee)` -> `void`
+- `onThemeColorsChanged()` -> `void`
 - `openHiddenStories()` -> `void`
 - `openStory(DialogCell dialogCell, Runnable onDone)` -> `void`
 - `showChatPreview(DialogCell dialogCell)` -> `void`
@@ -17462,6 +18299,7 @@
 - `static of(BlockRow row, Delegate delegate)` -> `UItem`
 
 ## `org.telegram.ui.iv.RichDetailsEndCell`
+- `addColorKeys(HashSet<Integer> colors)` -> `void`
 - `bind(BlockRow row)` -> `void`
 - `getRow()` -> `BlockRow`
 - `onDraw(Canvas canvas)` -> `void`
@@ -17491,6 +18329,7 @@
 
 ## `org.telegram.ui.iv.RichDocumentCell`
 - `bind(BlockRow row, Delegate delegate)` -> `void`
+- `draw(Canvas canvas)` -> `void`
 - `refreshUploadState()` -> `void`
 - `updateButtonState(boolean animated)` -> `void`
 
@@ -17526,6 +18365,7 @@
 - `onSizeChanged(int w, int h, int oldw, int oldh)` -> `void`
 - `onTextContextMenuItem(int id)` -> `boolean`
 - `onTouchEvent(MotionEvent event)` -> `boolean`
+- `prependSilently(CharSequence text)` -> `void`
 - `setAccentHint(boolean enable)` -> `void`
 - `setAllowNewlines(boolean allow)` -> `void`
 - `setAutoBold(boolean enabled)` -> `void`
@@ -17538,6 +18378,7 @@
 - `setListener(Listener listener)` -> `void`
 - `setLocked(boolean locked)` -> `void`
 - `setSoftEnterNewline(boolean enable)` -> `void`
+- `setTextColor(int color)` -> `void`
 - `setTextColorKey(int textColorKey)` -> `void`
 - `setTextSilently(CharSequence text)` -> `void`
 - `updateColors()` -> `void`
@@ -17572,6 +18413,7 @@
 - `onFragmentDestroy()` -> `void`
 - `onInsets(int left, int top, int right, int bottom)` -> `void`
 - `onInsetsInternal(@NonNull View view, @NonNull WindowInsetsCompat windowInsets)` -> `WindowInsetsCompat`
+- `onThemeColorsChanged()` -> `void`
 - `onTransitionAnimationStart(boolean isOpen, boolean backward)` -> `void`
 - `static openConversionSheet(Context context, Runnable convert, Runnable openPremium, Theme.ResourcesProvider resourcesProvider)` -> `BottomSheet`
 - `setChatActivity(ChatActivity chatActivity)` -> `RichEditor`
@@ -17770,6 +18612,7 @@
 - `setTopGradientVisible(boolean visible)` -> `void`
 - `setTopPanelVisible(boolean visible)` -> `void`
 - `showFormattingPanel(boolean formatting, boolean animated)` -> `void`
+- `updateColors()` -> `void`
 
 ## `org.telegram.ui.iv.RichHtml`
 - `static inlineToHtml(CharSequence styled)` -> `String`
@@ -18255,6 +19098,7 @@
 - `onFragmentCreate()` -> `boolean`
 - `onFragmentDestroy()` -> `void`
 - `onLongClick(UItem item, View view, int position, float x, float y)` -> `boolean`
+- `onThemeColorsChanged()` -> `void`
 - `setSelected(MessageObject msg, boolean select)` -> `void`
 
 ## `org.telegram.ui.web.BotWebViewContainer`
@@ -18336,6 +19180,7 @@
 - `setWebViewProgressListener(Consumer<Float> webViewProgressListener)` -> `void`
 - `setWebViewScrollListener(WebViewScrollListener webViewScrollListener)` -> `void`
 - `showLinkCopiedBulletin()` -> `void`
+- `updateColors()` -> `void`
 - `updateFlickerBackgroundColor(int backgroundColor)` -> `void`
 
 ## `org.telegram.ui.web.BotWebViewContainer$BotWebViewProxy`
@@ -18357,6 +19202,7 @@
 - `onSharedTo(ArrayList<Long> dialogIds)` -> `default void`
 - `onWebAppBackgroundChanged(boolean actionBarColor, int color)` -> `default void`
 - `onWebAppReady()` -> `default void`
+- `onWebAppResetNavigationBarColor(int color)` -> `default void`
 - `onWebAppSetNavigationBarColor(int color)` -> `default void`
 
 ## `org.telegram.ui.web.BotWebViewContainer$MyWebView`
@@ -18504,3 +19350,79 @@
 
 ## `org.telegram.utils.code.highlight.CodeHighlighting$SyntaxFontSpan`
 - `updateDrawState(TextPaint paint)` -> `void`
+
+## `org.telegram.utils.recorder.round.RoundVideoTranscoder$FrameRenderer`
+- `drawFrame(long presentationTimeNs)` -> `void`
+
+## `org.telegram.utils.twidget.WidgetFrameNode`
+- `static create(String name, int left, int top, int right, int bottom)` -> `WidgetFrameNode`
+- `setLayered(boolean layered)` -> `void`
+
+## `org.telegram.utils.twidget.WidgetFrameNode$Node`
+- `canDraw(Canvas canvas)` -> `boolean`
+- `discard()` -> `void`
+- `draw(Canvas canvas, float alpha)` -> `void`
+- `endRecording()` -> `void`
+- `recorded()` -> `boolean`
+- `setLayered(boolean layered)` -> `void`
+
+## `org.telegram.utils.twidget.WidgetFrameNode$PictureNode`
+- `canDraw(Canvas canvas)` -> `boolean`
+- `discard()` -> `void`
+- `draw(Canvas canvas, float alpha)` -> `void`
+- `endRecording()` -> `void`
+- `recorded()` -> `boolean`
+
+## `org.telegram.utils.twidget.WidgetMedia`
+- `static measure(String url, int widthPx, boolean out)` -> `void`
+
+## `org.telegram.utils.twidget.WidgetSandboxBackend`
+- `canvas(int id)` -> `Bitmap`
+- `canvasBitmap(int id)` -> `Bitmap`
+- `canvasRead(int id, int x, int y, int width, int height)` -> `byte[]`
+- `canvasRelease(int id)` -> `void`
+- `canvasRun(int id, int width, int height, int[] ops)` -> `void`
+- `createFont(byte[] encodedFamilies, float size, int weight, boolean italic, byte[] encodedFeatures)` -> `float[]`
+- `deleteFont(int id)` -> `void`
+- `deviceFont(int id)` -> `Paint`
+- `font(int id)` -> `Paint`
+- `image(int id)` -> `Bitmap`
+- `textWidth(int id, byte[] value)` -> `float`
+
+## `org.telegram.utils.twidget.WidgetSandboxMessage`
+- `bind(WidgetSandboxPlayer player)` -> `void`
+
+## `org.telegram.utils.twidget.WidgetSandboxPainter`
+- `static stopOffsets(JSONArray stops)` -> `float[]`
+
+## `org.telegram.utils.twidget.WidgetSandboxPainter$State`
+- `pop()` -> `void`
+- `push()` -> `void`
+
+## `org.telegram.utils.twidget.WidgetText$Paragraph`
+- `layout()` -> `Layout`
+
+## `org.telegram.utils.twidget.WidgetText$ParagraphLayout`
+- `draw(Canvas canvas)` -> `void`
+- `draw(Canvas canvas, Path highlight, Paint highlightPaint, int cursorOffsetVertical)` -> `void`
+- `getBottomPadding()` -> `int`
+- `getEllipsisCount(int line)` -> `int`
+- `getEllipsisStart(int line)` -> `int`
+- `getLineContainsTab(int line)` -> `boolean`
+- `getLineCount()` -> `int`
+- `getLineDescent(int line)` -> `int`
+- `getLineDirections(int line)` -> `Directions`
+- `getLineForOffset(int offset)` -> `int`
+- `getLineLeft(int line)` -> `float`
+- `getLineMax(int line)` -> `float`
+- `getLineRight(int line)` -> `float`
+- `getLineStart(int line)` -> `int`
+- `getLineTop(int line)` -> `int`
+- `getLineWidth(int line)` -> `float`
+- `getOffsetForHorizontal(int line, float horiz)` -> `int`
+- `getParagraphDirection(int line)` -> `int`
+- `getPrimaryHorizontal(int offset)` -> `float`
+- `getSecondaryHorizontal(int offset)` -> `float`
+- `getSelectionPath(int start, int end, Path dest)` -> `void`
+- `getTopPadding()` -> `int`
+- `isRtlCharAt(int offset)` -> `boolean`

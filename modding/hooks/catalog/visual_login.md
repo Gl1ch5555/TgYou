@@ -1,4 +1,4 @@
-# visual / login (253 методов)
+# visual / login (263 методов)
 
 ## `org.telegram.messenger.RichMessageLayout$RichTextWithAuthorBlock`
 - `forcesTimeToNewLine()` -> `boolean`
@@ -85,6 +85,7 @@
 - `setProgress(float p)` -> `void`
 - `setRippleDrawable(Drawable d)` -> `void`
 - `setTransformType(@TransformType int transformType)` -> `void`
+- `updateColors()` -> `void`
 - `verifyDrawable(@NonNull Drawable who)` -> `boolean`
 
 ## `org.telegram.ui.LoginActivity`
@@ -110,6 +111,7 @@
 - `onPause()` -> `void`
 - `onRequestPermissionsResultFragment(int requestCode, String[] permissions, int[] grantResults)` -> `void`
 - `onResume()` -> `void`
+- `onThemeColorsChanged()` -> `void`
 - `open(String phone, TLRPC.auth_SentCode res)` -> `void`
 - `setIntroView(View intro, TextView startButton)` -> `LoginActivity`
 - `setPage(@ViewNumber int page, boolean animated, Bundle params, boolean back)` -> `void`
@@ -121,6 +123,7 @@
 - `onLayout(boolean changed, int left, int top, int right, int bottom)` -> `void`
 - `onTouchEvent(MotionEvent event)` -> `boolean`
 - `setText(CharSequence text, BufferType type)` -> `void`
+- `updateColors()` -> `void`
 - `verifyDrawable(@NonNull Drawable who)` -> `boolean`
 
 ## `org.telegram.ui.LoginActivity$LoginActivityEmailCodeView`
@@ -259,10 +262,12 @@
 - `onSizeChanged(int w, int h, int oldw, int oldh)` -> `void`
 - `resetProgressAnimation()` -> `void`
 - `startProgressAnimation(long duration)` -> `void`
+- `updateColors()` -> `void`
 
 ## `org.telegram.ui.MessageAuthorView`
 - `onMeasure(int widthMeasureSpec, int heightMeasureSpec)` -> `void`
 - `openUser(long userId)` -> `void`
+- `updateColors()` -> `void`
 
 ## `org.telegram.ui.OAuthSheet`
 - `static getBulletinFactory()` -> `BulletinFactory`
@@ -274,15 +279,19 @@
 - `createView(Context context)` -> `View`
 - `static determineOpenFragment()` -> `BaseFragment`
 - `didReceivedNotification(int id, int account, Object... args)` -> `void`
+- `getListViewForSimpleGlass()` -> `RecyclerListView`
 - `getThemeDescriptions()` -> `ArrayList<ThemeDescription>`
+- `isSupportEdgeToEdge()` -> `boolean`
 - `onConfigurationChanged(Configuration newConfig)` -> `void`
 - `onFragmentCreate()` -> `boolean`
 - `onFragmentDestroy()` -> `void`
 - `onPause()` -> `void`
 - `onResume()` -> `void`
+- `onThemeColorsChanged()` -> `void`
 - `onTransitionAnimationEnd(boolean isOpen, boolean backward)` -> `void`
 - `setOnEnteredCode(Runnable enteredCode)` -> `PasscodeActivity`
 - `setOnOpenedSettings(Runnable openedSettings)` -> `void`
+- `useSimpleActionBar()` -> `boolean`
 
 ## `org.telegram.ui.PasscodeActivity$ListAdapter`
 - `getItemCount()` -> `int`
@@ -309,6 +318,9 @@
 
 ## `org.telegram.ui.WearAuthSheet$AuthSession`
 - `acceptAndBuildAnswer()` -> `byte[]`
+
+## `org.telegram.ui.WearAuthSheet$SheetContainer`
+- `updateColors()` -> `void`
 
 ## `org.telegram.ui.iv.RichQuoteAuthorCell`
 - `bind(BlockRow row, Delegate delegate)` -> `void`

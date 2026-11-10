@@ -1,4 +1,4 @@
-# visual / stories (2021 методов)
+# visual / stories (2038 методов)
 
 ## `org.telegram.ui.Adapters.MessagesSearchAdapter$StoriesView`
 - `onDraw(Canvas canvas)` -> `void`
@@ -12,6 +12,7 @@
 - `measure(ChatMessageCell parent)` -> `void`
 
 ## `org.telegram.ui.Components.ClearHistoryAlert`
+- `onThemeColorsChanged()` -> `void`
 - `setDelegate(ClearHistoryAlertDelegate clearHistoryAlertDelegate)` -> `void`
 
 ## `org.telegram.ui.Components.ClearHistoryAlert$BottomSheetCell`
@@ -28,9 +29,6 @@
 - `setOnScrollListener(RecyclerView.OnScrollListener onScrollListener)` -> `void`
 - `setTopBottomPadding(int top, int bottom)` -> `void`
 - `update()` -> `void`
-
-## `org.telegram.ui.Components.MediaActivity$StoriesTabsView`
-- `createTabs()` -> `Tab[]`
 
 ## `org.telegram.ui.Components.Paint.Views.StoryLinkPreviewDialog`
 - `dismiss()` -> `void`
@@ -335,6 +333,7 @@
 - `onActionDown(MotionEvent ev)` -> `void`
 - `onActivityResult(int requestCode, int resultCode, Intent data)` -> `void`
 - `onAttachedToWindow()` -> `void`
+- `onDestroy()` -> `void`
 - `onDetachedFromWindow()` -> `void`
 - `onLayout(boolean changed, int left, int top, int right, int bottom)` -> `void`
 - `onMeasure(int widthMeasureSpec, int heightMeasureSpec)` -> `void`
@@ -438,6 +437,7 @@
 - `setListBottomPadding(float bottomPadding)` -> `void`
 - `setShadowDrawable(Drawable shadowDrawable)` -> `void`
 - `setStoryItem(long dialogId, SelfStoryViewsView.StoryItemInternal storyItem)` -> `void`
+- `updateColors()` -> `void`
 - `updateSharedState()` -> `void`
 
 ## `org.telegram.ui.Stories.SelfStoryViewsPage$FiltersState`
@@ -515,6 +515,7 @@
 - `getStoriesList(long dialogId, int type, int albumId)` -> `StoriesList`
 - `getStoriesStorage()` -> `StoriesStorage`
 - `getStoryAlbumsList(long dialogId)` -> `StoriesCollections`
+- `static getStoryVideoDocument(int currentAccount, TL_stories.StoryItem storyItem)` -> `TLRPC.Document`
 - `getTotalStoriesCount(boolean hidden)` -> `int`
 - `getUnreadState(long dialogId)` -> `int`
 - `getUnreadState(long dialogId, int storyId)` -> `int`
@@ -727,6 +728,7 @@
 - `getCurrentPeerView()` -> `PeerStoriesView`
 - `getDialogIds()` -> `ArrayList<Long>`
 - `lockTouchEvent(long duration)` -> `void`
+- `onDestroy()` -> `void`
 - `onInterceptTouchEvent(MotionEvent ev)` -> `boolean`
 - `onLayout(boolean changed, int l, int t, int r, int b)` -> `void`
 - `onNextIdle(Runnable runnable)` -> `void`
@@ -832,6 +834,7 @@
 - `getAlert()` -> `EmojiPacksAlert`
 - `onMeasure(int widthMeasureSpec, int heightMeasureSpec)` -> `void`
 - `setText(CharSequence text)` -> `void`
+- `updateColors()` -> `void`
 - `verifyDrawable(@NonNull Drawable who)` -> `boolean`
 
 ## `org.telegram.ui.Stories.StoryCustomParamsHelper`
@@ -845,6 +848,7 @@
 - `onDraw(Canvas canvas)` -> `void`
 - `set(TLRPC.TL_error error)` -> `void`
 - `setOnClickListener(@Nullable OnClickListener l)` -> `void`
+- `updateColors()` -> `void`
 
 ## `org.telegram.ui.Stories.StoryLinesDrawable`
 - `draw(Canvas canvas, int fullWidth, int index, float progress, int count, float hideInterfaceAlpha, float alpha, boolean buffering, boolean zoom, float zoomProgress)` -> `void`
@@ -948,12 +952,6 @@
 - `open(int account, Context context, TL_stories.StoryItem storyItem, ArrayList<Long> peerIds, int position, StoriesController.StoriesList storiesList, TL_stories.PeerStories userStories, PlaceProvider placeProvider, boolean reversed)` -> `void`
 - `openFor(BaseFragment fragment, RecyclerListView recyclerListView, ChatActionCell cell)` -> `void`
 - `openViews()` -> `void`
-- `pipCreatePictureInPictureView()` -> `View`
-- `pipCreatePictureInPictureViewBitmap()` -> `Bitmap`
-- `pipCreatePrimaryWindowViewBitmap()` -> `Bitmap`
-- `pipHidePrimaryWindowView(Runnable firstFrameCallback)` -> `void`
-- `pipIsAvailable()` -> `boolean`
-- `pipShowPrimaryWindowView(Runnable firstFrameCallback)` -> `void`
 - `presentFragment(BaseFragment fragment)` -> `void`
 - `release()` -> `void`
 - `setKeyboardHeightFromParent(int keyboardHeight)` -> `void`
@@ -1043,6 +1041,7 @@
 - `setVisibleHeight(int height)` -> `void`
 - `unselect(MessageObject messageObject)` -> `boolean`
 - `unselectAll()` -> `void`
+- `updateColors()` -> `void`
 - `updateSelection(boolean animated)` -> `void`
 
 ## `org.telegram.ui.Stories.bots.BotPreviewsEditContainer$BotPreviewsEditLangContainer`
@@ -1092,6 +1091,7 @@
 - `onAttachedToWindow()` -> `void`
 - `onDetachedFromWindow()` -> `void`
 - `onMeasure(int widthMeasureSpec, int heightMeasureSpec)` -> `void`
+- `updateColors()` -> `void`
 
 ## `org.telegram.ui.Stories.recorder.ButtonWithCounterView`
 - `calculateCounterWidth(float width, float percent)` -> `float`
@@ -1128,6 +1128,7 @@
 - `setText(CharSequence newText, boolean animated, boolean moveDown)` -> `void`
 - `setTextAlpha(float v)` -> `void`
 - `setTextColor(int color)` -> `void`
+- `setTextColorKey(int key)` -> `void`
 - `setTextHacks(boolean splitByWords, boolean preserveIndex, boolean startFromEnd, boolean enforceByLetter)` -> `void`
 - `setTimer(int seconds, Runnable whenTimerUp)` -> `void`
 - `setUseWrapContent(boolean useWrapContent)` -> `void`
@@ -1415,6 +1416,7 @@
 - `dismiss()` -> `void`
 - `static getCacheType(boolean stickers)` -> `int`
 - `getContainerViewHeight()` -> `int`
+- `onThemeColorsChanged()` -> `void`
 - `setBlurDelegate(Utilities.Callback2<Bitmap, Float> drawBlurBitmap)` -> `void`
 - `showPremiumBulletin(String text)` -> `void`
 - `whenDocumentSelected(Utilities.Callback3Return<Object, TLRPC.Document, Boolean, Boolean> listener)` -> `EmojiBottomSheet`
@@ -1484,6 +1486,7 @@
 - `onMeasure(int widthMeasureSpec, int heightMeasureSpec)` -> `void`
 - `setOnSearchQuery(Utilities.Callback2<String, Integer> onSearchQuery)` -> `void`
 - `showProgress(boolean progress)` -> `void`
+- `updateColors()` -> `void`
 
 ## `org.telegram.ui.Stories.recorder.EmojiBottomSheet$StoryWidgetsCell`
 - `dispatchDraw(Canvas canvas)` -> `void`
@@ -1541,15 +1544,20 @@
 - `static cutInFancyHalfText(CharSequence text, TextPaint paint)` -> `CharSequence`
 - `dispatchDraw(Canvas canvas)` -> `void`
 - `drawBgPath(Canvas canvas, float alpha)` -> `void`
+- `getAnchorView()` -> `View`
 - `getText()` -> `CharSequence`
 - `getTextPaint()` -> `TextPaint`
 - `hide()` -> `void`
 - `hide(boolean animated)` -> `void`
+- `isShowing()` -> `boolean`
 - `static measureCorrectly(CharSequence text, Paint paint)` -> `float`
 - `onDetachedFromWindow()` -> `void`
+- `onLayout(boolean changed, int left, int top, int right, int bottom)` -> `void`
 - `onMeasure(int widthMeasureSpec, int heightMeasureSpec)` -> `void`
 - `onTouchEvent(MotionEvent event)` -> `boolean`
 - `pause()` -> `void`
+- `setAnchorGap(float gapPx)` -> `HintView2`
+- `setAnchorOffsetX(float offsetPx)` -> `HintView2`
 - `setAnimatedTextHacks(boolean splitByWords, boolean preserveIndex, boolean startFromEnd)` -> `HintView2`
 - `setArrowSize(float halfWidthDp, float heightDp)` -> `HintView2`
 - `setBgColor(int color)` -> `HintView2`
@@ -1559,6 +1567,8 @@
 - `setDirection(int direction)` -> `HintView2`
 - `setDuration(long duration)` -> `HintView2`
 - `setFlicker(float lineWidthDp, int color)` -> `HintView2`
+- `setGlass(BlurredBackgroundDrawableViewFactory factory)` -> `HintView2`
+- `setGlass(BlurredBackgroundDrawableViewFactory factory, @Nullable BlurredBackgroundProvider style)` -> `HintView2`
 - `setHideByTouch(boolean enable)` -> `HintView2`
 - `setIcon(int resId)` -> `HintView2`
 - `setIcon(Drawable icon)` -> `HintView2`
@@ -1583,8 +1593,11 @@
 - `setTextTypeface(Typeface typeface)` -> `HintView2`
 - `show(boolean show)` -> `void`
 - `show()` -> `HintView2`
+- `showAt(float x, float y, boolean animated)` -> `void`
+- `showForView(View view, boolean animated)` -> `boolean`
 - `shown()` -> `boolean`
 - `unpause()` -> `void`
+- `updatePosition()` -> `void`
 - `useScale(boolean enable)` -> `HintView2`
 - `useTranslate(boolean enable)` -> `HintView2`
 - `verifyDrawable(@NonNull Drawable who)` -> `boolean`
@@ -1655,6 +1668,7 @@
 - `setOnCheckboxClick(View.OnClickListener listener)` -> `void`
 - `setPosition(int position)` -> `void`
 - `setSelected(boolean selected, boolean animated)` -> `void`
+- `updateColors()` -> `void`
 - `verifyDrawable(@NonNull Drawable who)` -> `boolean`
 
 ## `org.telegram.ui.Stories.recorder.MultipleStoriesSelector$EntryView$Factory`
@@ -2077,6 +2091,7 @@
 - `getStoriesController()` -> `StoriesController`
 - `isEdit(boolean isEdit)` -> `StoryPrivacyBottomSheet`
 - `onBackPressed()` -> `void`
+- `onThemeColorsChanged()` -> `void`
 - `set(boolean allowComments, boolean allowScreenshots, boolean keepOnMyPage, int price)` -> `StoryPrivacyBottomSheet`
 - `setCanChangePeer(boolean canChangePeer)` -> `StoryPrivacyBottomSheet`
 - `setCount(int storiesCount)` -> `StoryPrivacyBottomSheet`
@@ -2187,6 +2202,7 @@
 - `setContainerHeight(float value)` -> `void`
 - `setOnSearchTextChange(Utilities.Callback<String> listener)` -> `void`
 - `setText(CharSequence text)` -> `void`
+- `updateColors()` -> `void`
 
 ## `org.telegram.ui.Stories.recorder.StoryPrivacyBottomSheet$SearchUsersCell$SpansContainer`
 - `onLayout(boolean changed, int left, int top, int right, int bottom)` -> `void`
@@ -2316,6 +2332,7 @@
 - `onBind(Intent intent)` -> `IBinder`
 - `onDestroy()` -> `void`
 - `onStartCommand(Intent intent, int flags, int startId)` -> `int`
+- `onTimeout(int startId, int fgsType)` -> `void`
 
 ## `org.telegram.ui.Stories.recorder.TimelineView`
 - `computeScroll()` -> `void`
@@ -2444,11 +2461,6 @@
 - `createView(Context context, RecyclerListView listView, int currentAccount, int classGuid, Theme.ResourcesProvider resourcesProvider)` -> `SharedPhotoVideoCell2`
 - `equals(UItem a, UItem b)` -> `boolean`
 
-## `org.telegram.ui.Wallet.WalletCardFrameHistory`
-- `clear()` -> `void`
-- `record(long timestamp, long revision)` -> `void`
-- `revisionAt(long timestamp)` -> `long`
-
 ## `org.telegram.ui.iv.RichEditorHistory`
 - `flush()` -> `void`
 - `onBeforeChange(int removed, int added)` -> `void`
@@ -2477,4 +2489,5 @@
 - `static matches(String src, String q)` -> `boolean`
 - `onClick(UItem item, View view, int position, float x, float y)` -> `void`
 - `onLongClick(UItem item, View view, int position, float x, float y)` -> `boolean`
+- `onThemeColorsChanged()` -> `void`
 - `setSelected(MessageObject msg, boolean select)` -> `void`

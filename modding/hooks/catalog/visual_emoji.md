@@ -1,4 +1,4 @@
-# visual / emoji (1384 методов)
+# visual / emoji (1458 методов)
 
 ## `org.telegram.messenger.CompoundEmoji`
 - `static setPlaceholderColor(int color)` -> `void`
@@ -64,6 +64,7 @@
 - `onFocusChanged(boolean focused)` -> `void`
 - `onMeasure(int widthMeasureSpec, int heightMeasureSpec)` -> `void`
 - `onTextChanged(CharSequence newText)` -> `void`
+- `setAllowEmojiSearch(boolean allow)` -> `EditEmojiTextCell`
 - `setAllowEntities(boolean allow)` -> `EditEmojiTextCell`
 - `setDivider(boolean divider)` -> `void`
 - `setEmojiViewCacheType(int cacheType)` -> `void`
@@ -71,6 +72,7 @@
 - `setShowLimitWhenEmpty(boolean show)` -> `void`
 - `setShowLimitWhenNear(int near)` -> `void`
 - `setText(CharSequence text)` -> `void`
+- `updateColors()` -> `void`
 - `validate()` -> `boolean`
 - `whenHitEnter(Runnable whenEnter)` -> `void`
 
@@ -86,10 +88,13 @@
 ## `org.telegram.ui.ChatReactionsEditActivity`
 - `createView(Context context)` -> `View`
 - `didReceivedNotification(int id, int account, Object... args)` -> `void`
+- `getListViewForSimpleGlass()` -> `RecyclerListView`
 - `getThemeDescriptions()` -> `ArrayList<ThemeDescription>`
+- `isSupportEdgeToEdge()` -> `boolean`
 - `onFragmentCreate()` -> `boolean`
 - `onFragmentDestroy()` -> `void`
 - `setInfo(TLRPC.ChatFull info)` -> `void`
+- `useSimpleActionBar()` -> `boolean`
 
 ## `org.telegram.ui.Components.AnimatedArrowDrawable`
 - `draw(Canvas c)` -> `void`
@@ -109,6 +114,14 @@
 - `onLayout(boolean changed, int left, int top, int right, int bottom)` -> `void`
 - `onMeasure(int widthMeasureSpec, int heightMeasureSpec)` -> `void`
 
+## `org.telegram.ui.Components.AnimatedClickableSmallTextView`
+- `getLayerType()` -> `int`
+- `onDraw(Canvas canvas)` -> `void`
+- `onFactorChangeFinished(int id, float finalFactor, FactorAnimator callee)` -> `void`
+- `onFactorChanged(int id, float factor, float fraction, FactorAnimator callee)` -> `void`
+- `setLayerType(int layerType, @Nullable Paint paint)` -> `void`
+- `setTextAnimated(CharSequence text, boolean animated)` -> `boolean`
+
 ## `org.telegram.ui.Components.AnimatedEmojiDrawable`
 - `clear()` -> `void`
 - `draw(@NonNull Canvas canvas)` -> `void`
@@ -119,6 +132,7 @@
 - `static findStickerSet(int account, long documentId)` -> `TLRPC.InputStickerSet`
 - `getAlpha()` -> `int`
 - `static getCacheTypeForEnterView()` -> `int`
+- `getColorFilter()` -> `ColorFilter`
 - `getDocument()` -> `TLRPC.Document`
 - `static getDocumentFetcher(int account)` -> `EmojiDocumentFetcher`
 - `getDocumentId()` -> `long`
@@ -621,6 +635,7 @@
 - `onButtonClicked(boolean install)` -> `void`
 - `onCloseByLink()` -> `void`
 - `onDetachedFromWindow()` -> `void`
+- `onThemeColorsChanged()` -> `void`
 - `setPreviewEmoji(TLRPC.Document document)` -> `void`
 - `show()` -> `void`
 - `showPremiumAlert()` -> `void`
@@ -718,6 +733,7 @@
 - `setLock(Boolean lock, boolean animated)` -> `void`
 - `setStickerThumb(EmojiView.EmojiPack set)` -> `void`
 - `updateColor()` -> `void`
+- `updateColors()` -> `void`
 - `updateLockImageReceiver()` -> `void`
 - `updateSelect(boolean selected, boolean animated)` -> `void`
 - `updateVisibilityInbounds(boolean visible, boolean ignore)` -> `void`
@@ -840,6 +856,7 @@
 ## `org.telegram.ui.Components.EmojiView$EmojiPackButton`
 - `onMeasure(int widthMeasureSpec, int heightMeasureSpec)` -> `void`
 - `set(String title, boolean unlock, boolean installed, OnClickListener onClickListener)` -> `void`
+- `updateColors()` -> `void`
 - `updateInstall(boolean installed, boolean animated)` -> `void`
 
 ## `org.telegram.ui.Components.EmojiView$EmojiPackHeader`
@@ -849,6 +866,7 @@
 - `onLayout(boolean changed, int left, int top, int right, int bottom)` -> `void`
 - `onMeasure(int widthMeasureSpec, int heightMeasureSpec)` -> `void`
 - `setStickerSet(EmojiPack pack, boolean divider)` -> `void`
+- `updateColors()` -> `void`
 - `updateState(boolean animated)` -> `void`
 - `updateState(int state, boolean animated)` -> `void`
 
@@ -911,6 +929,7 @@
 - `search(String text, boolean delay)` -> `void`
 - `showKeyboard()` -> `void`
 - `showProgress(boolean progress)` -> `void`
+- `updateColors()` -> `void`
 
 ## `org.telegram.ui.Components.EmojiView$TrendingAdapter`
 - `getItemCount()` -> `int`
@@ -932,11 +951,13 @@
 - `setText(CharSequence before, CharSequence loaded, CharSequence after)` -> `void`
 
 ## `org.telegram.ui.Components.MessageContainsEmojiButton`
+- `addColorKeys(java.util.HashSet<Integer> colors)` -> `void`
 - `didReceivedNotification(int id, int account, Object... args)` -> `void`
 - `onAttachedToWindow()` -> `void`
 - `onDetachedFromWindow()` -> `void`
 - `onDraw(Canvas canvas)` -> `void`
 - `onMeasure(int widthMeasureSpec, int heightMeasureSpec)` -> `void`
+- `updateColors()` -> `void`
 
 ## `org.telegram.ui.Components.MessageContainsEmojiButton$BoldAndAccent`
 - `updateDrawState(TextPaint textPaint)` -> `void`
@@ -974,11 +995,13 @@
 - `set(TLRPC.TL_availableReaction reaction)` -> `void`
 
 ## `org.telegram.ui.Components.ReactionTabHolderView`
+- `addColorKeys(java.util.HashSet<Integer> colors)` -> `void`
 - `dispatchDraw(Canvas canvas)` -> `void`
 - `onInitializeAccessibilityNodeInfo(AccessibilityNodeInfo info)` -> `void`
 - `setCounter(int count)` -> `void`
 - `setCounter(int currentAccount, TLRPC.ReactionCount counter)` -> `void`
 - `setOutlineProgress(float outlineProgress)` -> `void`
+- `updateColors()` -> `void`
 
 ## `org.telegram.ui.Components.Reactions.AddReactionsSpan`
 - `draw(@NonNull Canvas canvas, CharSequence text, int start, int end, float _x, int top, int _y, int bottom, @NonNull Paint paint)` -> `void`
@@ -1004,13 +1027,18 @@
 ## `org.telegram.ui.Components.Reactions.ChatCustomReactionsEditActivity`
 - `createView(Context context)` -> `View`
 - `didReceivedNotification(int id, int account, Object... args)` -> `void`
+- `getListViewForSimpleGlass()` -> `RecyclerListView`
+- `isSupportEdgeToEdge()` -> `boolean`
 - `onBackPressed(boolean invoked)` -> `boolean`
 - `onFragmentCreate()` -> `boolean`
 - `onFragmentDestroy()` -> `void`
+- `onInsets(int left, int top, int right, int bottom)` -> `void`
 - `onPause()` -> `void`
 - `onResume()` -> `void`
+- `onThemeColorsChanged()` -> `void`
 - `onTransitionAnimationEnd(boolean isOpen, boolean backward)` -> `void`
 - `toggleStarsEnabled()` -> `void`
+- `useSimpleActionBar()` -> `boolean`
 
 ## `org.telegram.ui.Components.Reactions.ChatSelectionReactionMenuOverlay`
 - `invalidatePosition()` -> `void`
@@ -1033,6 +1061,7 @@
 - `dispatchDraw(Canvas canvas)` -> `void`
 - `invalidate()` -> `void`
 - `onMeasure(int widthMeasureSpec, int heightMeasureSpec)` -> `void`
+- `updateColors()` -> `void`
 
 ## `org.telegram.ui.Components.Reactions.CustomReactionEditText`
 - `dispatchTouchEvent(MotionEvent event)` -> `boolean`
@@ -1044,6 +1073,7 @@
 - `onSelectionChanged(int selStart, int selEnd)` -> `void`
 - `setMaxLength(int maxLength)` -> `void`
 - `setOnFocused(Runnable onFocused)` -> `void`
+- `updateColors()` -> `void`
 
 ## `org.telegram.ui.Components.Reactions.HwEmojis`
 - `static beforePreparing()` -> `void`
@@ -1237,6 +1267,7 @@
 - `showCustomEmojiReaction()` -> `boolean`
 - `showExpandableReactions()` -> `boolean`
 - `startEnterAnimation(boolean animatePopup)` -> `void`
+- `updateColors()` -> `void`
 
 ## `org.telegram.ui.Components.ReactionsContainerLayout$Adapter`
 - `getItemCount()` -> `int`
@@ -1371,15 +1402,73 @@
 ## `org.telegram.ui.EmojiAnimationsOverlay$DrawingObject`
 - `getProgress()` -> `float`
 
+## `org.telegram.ui.QrShare.EmojiPickOverlay`
+- `attach(ViewGroup v)` -> `void`
+- `attachGrid(androidx.recyclerview.widget.RecyclerView g)` -> `void`
+- `drawUnder(Canvas c, ViewGroup grid)` -> `void`
+- `fadeAt(float y)` -> `float`
+- `gridCutY(float glassBottomY)` -> `float`
+- `islandCut(RectF out, float[] radiusAlpha)` -> `boolean`
+- `onDraw(Canvas c)` -> `void`
+- `onTouchEvent(MotionEvent e)` -> `boolean`
+- `setGlassRight(float x)` -> `void`
+- `setTopClip(float y)` -> `void`
+- `static spring(float tMs, float zeta, float period)` -> `float`
+
+## `org.telegram.ui.QrShare.QrEmojiPanel`
+- `didReceivedNotification(int id, int account, Object... args)` -> `void`
+- `static drawEmoji(Canvas canvas, Drawable d)` -> `void`
+- `getGrid()` -> `Grid`
+- `getTabs()` -> `Tabs`
+- `isPreset(long documentId)` -> `boolean`
+- `static isTextColor(@Nullable Drawable d)` -> `boolean`
+- `onAttachedToWindow()` -> `void`
+- `onDetachedFromWindow()` -> `void`
+- `onSizeChanged(int w, int h, int oldw, int oldh)` -> `void`
+- `refreshRecent()` -> `void`
+- `setHeaderColor(int color)` -> `void`
+
+## `org.telegram.ui.QrShare.QrEmojiPanel$Adapter`
+- `getItemCount()` -> `int`
+- `getItemViewType(int position)` -> `int`
+- `onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position)` -> `void`
+- `onCreateViewHolder(@NonNull ViewGroup parent, int viewType)` -> `RecyclerView.ViewHolder`
+
+## `org.telegram.ui.QrShare.QrEmojiPanel$Cell`
+- `getKey()` -> `String`
+- `onAttachedToWindow()` -> `void`
+- `onDetachedFromWindow()` -> `void`
+- `onDraw(@NonNull Canvas canvas)` -> `void`
+- `onMeasure(int widthMeasureSpec, int heightMeasureSpec)` -> `void`
+- `set(TLRPC.Document document)` -> `void`
+- `setPressed(boolean pressed)` -> `void`
+
+## `org.telegram.ui.QrShare.QrEmojiPanel$Grid`
+- `dispatchDraw(@NonNull Canvas canvas)` -> `void`
+
+## `org.telegram.ui.QrShare.QrEmojiPanel$Header`
+- `set(@Nullable String text, boolean locked)` -> `void`
+
+## `org.telegram.ui.QrShare.QrEmojiPanel$Tab`
+- `onAttachedToWindow()` -> `void`
+- `onDetachedFromWindow()` -> `void`
+- `onDraw(@NonNull Canvas canvas)` -> `void`
+- `onTouchEvent(MotionEvent event)` -> `boolean`
+
+## `org.telegram.ui.QrShare.QrEmojiPanel$Tabs`
+- `draw(@NonNull Canvas canvas)` -> `void`
+- `select(int index, boolean animated)` -> `void`
+- `setSections(ArrayList<Section> sections)` -> `void`
+
 ## `org.telegram.ui.ReactionsDoubleTapManageActivity`
 - `createView(Context context)` -> `View`
 - `didReceivedNotification(int id, int account, Object... args)` -> `void`
+- `getListViewForSimpleGlass()` -> `RecyclerListView`
 - `getThemeDescriptions()` -> `ArrayList<ThemeDescription>`
 - `isSupportEdgeToEdge()` -> `boolean`
 - `onFragmentCreate()` -> `boolean`
 - `onFragmentDestroy()` -> `void`
-- `onInsets(int left, int top, int right, int bottom)` -> `void`
-- `showSelectStatusDialog(SetDefaultReactionCell cell)` -> `void`
+- `useSimpleActionBar()` -> `boolean`
 
 ## `org.telegram.ui.ReactionsDoubleTapManageActivity$SetDefaultReactionCell`
 - `dispatchDraw(Canvas canvas)` -> `void`
@@ -1450,6 +1539,7 @@
 - `switchGrids(boolean search, boolean liftUp)` -> `void`
 - `switchSearchEmptyView(boolean empty)` -> `void`
 - `unselect(Long documentId)` -> `boolean`
+- `updateColors()` -> `void`
 - `static updateSearchEmptyViewImage(int currentAccount, BackupImageView imageView)` -> `void`
 - `willApplyEmoji(View view, Long documentId, TLRPC.Document document, TL_stars.TL_starGiftUnique gift, Integer until)` -> `boolean`
 
@@ -1583,6 +1673,7 @@
 - `isTouchOutside(float x, float y)` -> `boolean`
 - `onAttachedToWindow()` -> `void`
 - `onDetachedFromWindow()` -> `void`
+- `onThemeColorsChanged()` -> `void`
 - `setLiveCommentsView(LiveCommentsView commentsView)` -> `StarsReactionsSheet`
 - `setMessageCell(ChatActivity chatActivity, int id, View cell)` -> `void`
 - `setOnSend(Utilities.Callback2Return<Long, Long, Integer> listener)` -> `StarsReactionsSheet`
@@ -1638,6 +1729,7 @@
 - `setMyPrivacy(long peer)` -> `void`
 - `setOnSenderClickListener(Utilities.Callback<Long> listener)` -> `void`
 - `setSenders(ArrayList<SenderData> senders)` -> `void`
+- `updateColors()` -> `void`
 
 ## `org.telegram.ui.Stars.StarsReactionsSheet$TopSendersView$Sender`
 - `detach()` -> `void`

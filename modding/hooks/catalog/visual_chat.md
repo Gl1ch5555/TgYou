@@ -1,4 +1,4 @@
-# visual / chat (2158 методов)
+# visual / chat (2225 методов)
 
 ## `org.telegram.messenger.MessageObject`
 - `static formatTextWithEntities(TLRPC.TL_textWithEntities text)` -> `CharSequence`
@@ -10,8 +10,11 @@
 - `measureVoiceTranscriptionHeight()` -> `float`
 
 ## `org.telegram.messenger.MessageObject$TextLayoutBlock`
+- `drawCompactCode(Canvas canvas, float width, int backgroundColor, int secondaryColor, boolean copyPressed, float alpha)` -> `void`
 - `drawCopyCodeButton(Canvas canvas, RectF bounds, int textColor, int backgroundColor, float alpha)` -> `void`
+- `isCompactCopyHit(float x, float y, float width)` -> `boolean`
 - `layoutCode(String lng, int codeLength, boolean noforwards)` -> `void`
+- `layoutCompactCode(String lng, boolean noforwards)` -> `void`
 
 ## `org.telegram.messenger.MessageObject$TextLayoutBlocks`
 - `bounceFrom(TextLayoutBlocks from)` -> `void`
@@ -31,6 +34,7 @@
 - `scrollToTop()` -> `void`
 - `setTranslationY(float translationY)` -> `void`
 - `setupBlurredSearchField(BlurredBackgroundDrawableViewFactory factory)` -> `void`
+- `updateColors()` -> `void`
 
 ## `org.telegram.ui.Business.ChatAttachAlertQuickRepliesLayout$ShareAdapter`
 - `getCountForSection(int section)` -> `int`
@@ -68,6 +72,7 @@
 - `update(int mask)` -> `void`
 
 ## `org.telegram.ui.Cells.ChatMessageCell`
+- `allowDrawPhotoImage()` -> `boolean`
 - `applyServiceShaderMatrix()` -> `void`
 - `applyServiceShaderMatrix(int measuredWidth, int backgroundHeight, float x, float viewTop)` -> `void`
 - `areTags()` -> `boolean`
@@ -78,12 +83,20 @@
 - `copyParamsTo(ChatMessageCell cell)` -> `void`
 - `copySpoilerEffect2AttachIndexFrom(ChatMessageCell cell)` -> `void`
 - `copyVisiblePartTo(ChatMessageCell cell)` -> `void`
+- `createDocumentLayout(int maxWidth, MessageObject messageObject)` -> `int`
+- `createInstantViewButton()` -> `void`
+- `createInstantViewButton(int type, String str, int availableWidth, float parentWidth)` -> `InstantViewButton`
 - `createSelectorDrawable(int num)` -> `void`
+- `didClickedImage()` -> `void`
+- `didClickedPollImage(ChatMessageCell cell, ImageReceiver imageReceiver, TLRPC.PollAnswer answer, TLRPC.MessageMedia media, float x, float y, int unshuffledIndex)` -> `void`
+- `didPressButton(boolean animated, boolean video)` -> `void`
+- `didPressMiniButton(boolean animated)` -> `void`
 - `didPressReactionFromLayout(TLRPC.ReactionCount reaction, boolean longpress, float x, float y)` -> `void`
 - `didPressVoteHint()` -> `void`
 - `didReceivedNotification(int id, int account, Object... args)` -> `void`
 - `didSetImage(ImageReceiver imageReceiver, boolean set, boolean thumb, boolean memCache)` -> `void`
 - `drawAnimatedEmojiCaption(Canvas canvas, float alpha)` -> `void`
+- `drawAnimatedEmojiMessageText(float textX, float textY, Canvas canvas, ArrayList<MessageObject.TextLayoutBlock> textLayoutBlocks, AnimatedEmojiSpan.EmojiGroupedSpans stack, boolean origin, float alpha, float rtlOffset, boolean drawAllBlocks)` -> `void`
 - `drawAnimatedEmojis(Canvas canvas, float alpha)` -> `void`
 - `drawBackground(Canvas canvas, int left, int top, int right, int bottom, boolean pinnedTop, boolean pinnedBottom, boolean selected, int keyboardHeight)` -> `void`
 - `drawBackgroundInParent()` -> `boolean`
@@ -95,9 +108,8 @@
 - `drawCheckBox(Canvas canvas)` -> `void`
 - `drawCommentButton(Canvas canvas, float alpha)` -> `void`
 - `drawCommentLayout(Canvas canvas, float alpha)` -> `void`
+- `drawCompactScrimBackground(Canvas canvas, float alpha)` -> `void`
 - `drawContent(Canvas canvas, boolean preview)` -> `void`
-- `drawFactCheck(Canvas canvas, float alpha)` -> `void`
-- `drawFactCheckText(Canvas canvas, float alpha)` -> `void`
 - `drawInternal(Canvas canvas)` -> `void`
 - `drawLinkPreview(Canvas canvas, float alpha)` -> `void`
 - `drawMessageText(Canvas canvas)` -> `void`
@@ -116,6 +128,7 @@
 - `drawReactionsLayout(Canvas canvas, float alpha, Integer only)` -> `void`
 - `drawReactionsLayoutOverlay(Canvas canvas, float alpha)` -> `boolean`
 - `drawRoundProgress(Canvas canvas)` -> `void`
+- `drawScrim(Canvas canvas, float progress)` -> `void`
 - `drawScrimReaction(Canvas canvas, Integer scrimViewReaction, float progress, boolean direction)` -> `void`
 - `drawScrimReactionPreview(View view, Canvas canvas, int offset, Integer scrimViewReaction, float progress)` -> `void`
 - `drawServiceBackground(Canvas canvas, RectF rect, float radius, float alpha)` -> `void`
@@ -126,11 +139,14 @@
 - `drawTime(Canvas canvas, float alpha, boolean fromParent)` -> `void`
 - `drawVideoTimestamps(Canvas canvas, int color)` -> `void`
 - `drawVoiceOnce(Canvas canvas, float progress, Runnable drawRadialProgress)` -> `void`
+- `ensureAudio()` -> `ChatMessageAudio`
 - `forceResetMessageObject()` -> `void`
 - `freezeCell(boolean freeze)` -> `void`
 - `static generateStaticLayout(CharSequence text, TextPaint paint, int maxWidth, int smallWidth, int linesCount, int maxLines)` -> `StaticLayout`
 - `getAccessibilityNodeProvider()` -> `AccessibilityNodeProvider`
+- `getAdaptiveEmojiColorFilter(int n, int color)` -> `ColorFilter`
 - `getAdditionalPaddingHeight()` -> `int`
+- `getAdminAccessibilityText()` -> `CharSequence`
 - `getAlpha()` -> `float`
 - `getAnimatedEmojiSpans()` -> `AnimatedEmojiSpan[]`
 - `getAnimationOffsetX()` -> `float`
@@ -143,6 +159,7 @@
 - `getBackgroundHeight()` -> `int`
 - `getBlurredPhotoImage()` -> `ImageReceiver`
 - `getBottomActionPadding()` -> `int`
+- `getBounds(RectF bounds)` -> `void`
 - `getBoundsLeft()` -> `int`
 - `getBoundsRight()` -> `int`
 - `getCaptionLayout()` -> `MessageObject.TextLayoutBlocks`
@@ -151,6 +168,9 @@
 - `getCheckBoxTranslation()` -> `float`
 - `getChecksX()` -> `int`
 - `getChecksY()` -> `int`
+- `getCompactContentWidth()` -> `int`
+- `getCompactLeft()` -> `int`
+- `getCompactRight()` -> `int`
 - `getCurrentBackgroundDrawable(boolean update)` -> `MessageDrawable`
 - `getCurrentBackgroundLeft()` -> `int`
 - `getCurrentBackgroundRight()` -> `int`
@@ -174,11 +194,13 @@
 - `getExplanationY()` -> `float`
 - `getExtraInsetHeight()` -> `int`
 - `getExtraTextX()` -> `int`
+- `getExtraTimeX()` -> `int`
 - `getFactCheckLayout()` -> `StaticLayout`
 - `getFilename()` -> `String`
 - `getForwardNameCenterX()` -> `int`
 - `getHighlightAlpha()` -> `float`
 - `getHighlightAlpha(boolean quote)` -> `float`
+- `getIconForCurrentState()` -> `int`
 - `getLastTouchX()` -> `float`
 - `getLastTouchY()` -> `float`
 - `getLayoutHeight()` -> `int`
@@ -186,6 +208,7 @@
 - `getMediaOffsetY()` -> `int`
 - `getMessageObject()` -> `MessageObject`
 - `static getMessageSize(int imageW, int imageH)` -> `PointF`
+- `getMiniIconForCurrentState()` -> `int`
 - `getNameStatusX()` -> `int`
 - `getNameStatusY()` -> `int`
 - `getNoSoundIconCenterX()` -> `int`
@@ -207,7 +230,10 @@
 - `getRadialProgress()` -> `RadialProgress2`
 - `getReactionButton(ReactionsLayoutInBubble.VisibleReaction visibleReaction)` -> `ReactionsLayoutInBubble.ReactionButton`
 - `getReactionsLayout()` -> `ReactionsLayoutInBubble`
+- `getRealSpanStartAndEnd(Spannable buffer, CharacterStyle link)` -> `int[]`
+- `getRepliesCount()` -> `int`
 - `getResourcesProvider()` -> `Theme.ResourcesProvider`
+- `getScrimBlockBounds()` -> `RectF`
 - `getSeekBarWaveform()` -> `SeekBarWaveform`
 - `getSideButtonStartX()` -> `float`
 - `getSideButtonStartY()` -> `float`
@@ -218,6 +244,7 @@
 - `getTextX()` -> `int`
 - `getTextY()` -> `int`
 - `getThemedColor(int key)` -> `int`
+- `getThemedDrawable(String key)` -> `Drawable`
 - `getThemedPaint(String paintKey)` -> `Paint`
 - `getTimeAlpha()` -> `float`
 - `getTimeX()` -> `float`
@@ -226,7 +253,7 @@
 - `getTodoIndex(int taskId)` -> `int`
 - `getTopMediaOffset()` -> `int`
 - `getTopicSeparatorTopPadding()` -> `int`
-- `getTransitionParams()` -> `TransitionParams`
+- `getTransitionParams()` -> `ChatMessageTransitionParams`
 - `getVideoTranscriptionProgress()` -> `float`
 - `getViewTop()` -> `float`
 - `getWidthForButtons()` -> `int`
@@ -236,10 +263,13 @@
 - `invalidateDrawable(Drawable drawable)` -> `void`
 - `invalidateLite()` -> `void`
 - `invalidateOutbounds()` -> `void`
+- `invalidateParentForce()` -> `boolean`
 - `isAdminLayoutChanged()` -> `boolean`
 - `isAnimatingPollAnswer()` -> `boolean`
 - `isCellAttachedToWindow()` -> `boolean`
 - `isCheckBoxVisible()` -> `boolean`
+- `isCompactLayout()` -> `boolean`
+- `isCompactMode()` -> `boolean`
 - `isDraggingdAnyMusicSeekBar()` -> `boolean`
 - `isDrawNameLayout()` -> `boolean`
 - `isDrawPinnedBottom()` -> `boolean`
@@ -251,14 +281,19 @@
 - `isInsideBackground(float x, float y)` -> `boolean`
 - `isLastInChatList()` -> `boolean`
 - `isNeedAuthorName()` -> `boolean`
+- `isOpenChatByShare(MessageObject messageObject)` -> `boolean`
 - `isPinnedBottom()` -> `boolean`
 - `isPinnedTop()` -> `boolean`
 - `isPlayingRound()` -> `boolean`
 - `isSeekBarDragAllowed()` -> `boolean`
+- `isSideMenuLeftMargin()` -> `boolean`
+- `isSmallImage()` -> `float`
 - `isUpdating()` -> `boolean`
+- `isWidgetPress()` -> `boolean`
 - `isWidthAdaptive()` -> `boolean`
 - `layoutTextXY(boolean parent)` -> `void`
 - `makeSpoilerEffect()` -> `SpoilerEffect2`
+- `measureTime(MessageObject messageObject)` -> `void`
 - `needDelayRoundProgressDraw()` -> `boolean`
 - `needDrawAvatar()` -> `boolean`
 - `needDrawTime()` -> `boolean`
@@ -282,10 +317,12 @@
 - `onSeekBarReleased()` -> `void`
 - `onSuccessDownload(String fileName)` -> `void`
 - `onTouchEvent(MotionEvent event)` -> `boolean`
+- `onWidgetHold()` -> `void`
 - `overrideAudioVisualizer(AudioVisualizerDrawable audioVisualizerDrawable)` -> `void`
 - `overrideDuration(long duration)` -> `void`
 - `performAccessibilityAction(int action, Bundle arguments)` -> `boolean`
 - `relayout()` -> `void`
+- `resetCodeSelectors()` -> `void`
 - `resetPressedLink(int type)` -> `void`
 - `reverseWaveform()` -> `boolean`
 - `setAllowAssistant(boolean value)` -> `void`
@@ -314,6 +351,7 @@
 - `setHighlightedText(String text, boolean quote, int quote_offset, boolean byClick)` -> `boolean`
 - `setImageCoords(RectF rect)` -> `void`
 - `setImageCoords(float x, float y, float w, float h)` -> `void`
+- `setInstantButtonPressed(boolean pressed)` -> `void`
 - `setInvalidateListener(Runnable listener)` -> `void`
 - `setInvalidateSpoilersParent(boolean invalidateSpoilersParent)` -> `void`
 - `setInvalidatesParent(boolean value)` -> `void`
@@ -321,11 +359,13 @@
 - `setLastTouchCoords(float x, float y)` -> `void`
 - `setMessageObject(MessageObject messageObject, MessageObject.GroupedMessages groupedMessages, boolean bottomNear, boolean topNear, boolean firstInChat)` -> `void`
 - `setMessageObject(MessageObject messageObject, MessageObject.GroupedMessages groupedMessages, boolean bottomNear, boolean topNear, boolean firstInChat, boolean lastInChatList)` -> `void`
+- `setMessageObjectInternal(MessageObject messageObject)` -> `void`
 - `setOverrideInvalidate(Runnable callback)` -> `void`
 - `setParentBounds(float chatListViewPaddingTop, int blurredViewBottomOffset)` -> `void`
 - `setParentViewSize(int parentW, int parentH)` -> `void`
 - `setPressed(boolean pressed)` -> `void`
 - `setResourcesProvider(Theme.ResourcesProvider resourcesProvider)` -> `void`
+- `setScrimBlockBounds(RectF bounds)` -> `void`
 - `setScrimReaction(Integer scrimViewReaction)` -> `void`
 - `setSelectedBackgroundProgress(float value)` -> `void`
 - `setShowTopic(boolean show)` -> `void`
@@ -339,9 +379,11 @@
 - `setupTextColors()` -> `void`
 - `shakeView()` -> `void`
 - `showHintButton(boolean show, boolean animated, int type)` -> `void`
+- `static spanSupportsLongPress(CharacterStyle span)` -> `boolean`
 - `startRevealMedia()` -> `void`
 - `startRevealMedia(float x, float y)` -> `void`
 - `syncTodoCheck(int index, ChatMessageCell from)` -> `void`
+- `static timeString(MessageObject current, MessageObject message, boolean edited, int editDate)` -> `String`
 - `toggleTodoCheck(int index, boolean vibrate)` -> `void`
 - `updateAnimatedEmojis()` -> `void`
 - `updateButtonState(boolean ifSame, boolean animated, boolean fromSet)` -> `void`
@@ -349,8 +391,11 @@
 - `updatePlayingMessageProgress()` -> `void`
 - `updatePollContentButtonState(boolean ifSame, boolean animated, boolean fromSet)` -> `void`
 - `updateProgressLoadingLink()` -> `void`
+- `updateReactionLayoutPosition()` -> `void`
+- `updateSeekBarWaveformWidth(Canvas canvas)` -> `void`
 - `updateTranslation()` -> `void`
 - `verifyDrawable(@NonNull Drawable who)` -> `boolean`
+- `widgetMayGiveSwipe()` -> `boolean`
 - `willRemovedAfterAnimation()` -> `boolean`
 
 ## `org.telegram.ui.Cells.ChatMessageCell$ChatMessageCellDelegate`
@@ -394,7 +439,8 @@
 - `didPressReaction(ChatMessageCell cell, TLRPC.ReactionCount reaction, boolean longpress, float x, float y)` -> `default void`
 - `didPressReplyMessage(ChatMessageCell cell, int id, float x, float y, boolean longpress)` -> `default void`
 - `didPressRevealSensitiveContent(ChatMessageCell cell)` -> `default void`
-- `didPressRichDocumentOptions(ChatMessageCell cell, TLRPC.Document document, float x, float y)` -> `default void`
+- `didPressRichCodeCopy(ChatMessageCell cell, String code, String language)` -> `default void`
+- `didPressRichDocumentOptions(ChatMessageCell cell, TLRPC.Document document, RectF blockBounds)` -> `default void`
 - `didPressShowMore(ChatMessageCell cell)` -> `default void`
 - `didPressSideButton(ChatMessageCell cell)` -> `default void`
 - `didPressSponsoredClose(ChatMessageCell cell)` -> `default void`
@@ -422,6 +468,7 @@
 - `forceUpdate(ChatMessageCell cell, boolean anchorScroll)` -> `default void`
 - `forceUpdate(ChatMessageCell cell, boolean anchorScroll, boolean scrollByTop)` -> `default void`
 - `forceUpdateNoAnimation(ChatMessageCell cell, boolean anchorScroll)` -> `default void`
+- `forceUpdateNoAnimation(ChatMessageCell cell, boolean anchorScroll, boolean scrollByTop)` -> `default void`
 - `getAddPollOptionInputFieldHeight(ChatMessageCell cell)` -> `default int`
 - `getAdminRank(long uid)` -> `default String`
 - `getPinchToZoomHelper()` -> `default PinchToZoomHelper`
@@ -441,6 +488,9 @@
 - `setShouldNotRepeatSticker(MessageObject message)` -> `default void`
 - `videoTimerReached()` -> `default void`
 
+## `org.telegram.ui.Cells.ChatMessageCell$CompactHeaderRow`
+- `set(CharSequence label, TLObject peer, CharSequence name, TextPaint namePaint, CharSequence text, int maxWidth)` -> `void`
+
 ## `org.telegram.ui.Cells.ChatMessageCell$MaskDrawable`
 - `draw(@NonNull Canvas canvas)` -> `void`
 - `getOpacity()` -> `int`
@@ -448,26 +498,10 @@
 - `setColorFilter(ColorFilter colorFilter)` -> `void`
 - `updatePath()` -> `void`
 
-## `org.telegram.ui.Cells.ChatMessageCell$MessageAccessibilityNodeProvider`
-- `createAccessibilityNodeInfo(int virtualViewId)` -> `AccessibilityNodeInfo`
-- `performAction(int virtualViewId, int action, Bundle arguments)` -> `boolean`
-
-## `org.telegram.ui.Cells.ChatMessageCell$MessageAccessibilityNodeProvider$ProfileSpan`
-- `onClick(@NonNull View view)` -> `void`
-
 ## `org.telegram.ui.Cells.ChatMessageCell$PollButton`
 - `attach()` -> `void`
 - `destroy()` -> `void`
 - `detach()` -> `void`
-
-## `org.telegram.ui.Cells.ChatMessageCell$TransitionParams`
-- `animateChange()` -> `boolean`
-- `createStatusDrawableParams()` -> `int`
-- `onDetach()` -> `void`
-- `recordDrawingState()` -> `void`
-- `recordDrawingStatePreview()` -> `void`
-- `resetAnimation()` -> `void`
-- `supportChangeAnimation()` -> `boolean`
 
 ## `org.telegram.ui.ChannelAdminLogActivity$ChatActivityAdapter`
 - `getItemCount()` -> `int`
@@ -564,6 +598,7 @@
 - `getFilterTag()` -> `ReactionsLayoutInBubble.VisibleReaction`
 - `getFilteredMessages()` -> `ArrayList<MessageObject>`
 - `getFragmentContextView()` -> `FragmentContextView`
+- `getGlassHintFactory()` -> `BlurredBackgroundDrawableViewFactory`
 - `getGroup(long id)` -> `MessageObject.GroupedMessages`
 - `getGroupCall()` -> `ChatObject.Call`
 - `getHeaderItem()` -> `ActionBarMenuItem`
@@ -584,6 +619,7 @@
 - `getReplyObjectTextView()` -> `SimpleTextView`
 - `getReplyQuote()` -> `ChatActivity.ReplyQuote`
 - `getReplyTopMessage()` -> `MessageObject`
+- `getReplyingQuote()` -> `ReplyQuote`
 - `getResourceProvider()` -> `Theme.ResourcesProvider`
 - `getSavedDialogId()` -> `long`
 - `getSendMessageSuggestionParams()` -> `MessageSuggestionParams`
@@ -607,6 +643,7 @@
 - `isChannel()` -> `boolean`
 - `isClearingHistory()` -> `boolean`
 - `static isClickableLink(String str)` -> `boolean`
+- `isCompactMode()` -> `boolean`
 - `isEditingMessageMedia()` -> `boolean`
 - `isFiltered()` -> `boolean`
 - `isForumInViewAsMessagesMode()` -> `boolean`
@@ -647,9 +684,11 @@
 - `onListItemAnimatorTick()` -> `void`
 - `onPageDownClicked()` -> `void`
 - `onPause()` -> `void`
+- `onRebuiltBehind()` -> `void`
 - `onRemoveFromParent()` -> `void`
 - `onRequestPermissionsResultFragment(int requestCode, String[] permissions, int[] grantResults)` -> `void`
 - `onResume()` -> `void`
+- `onThemeColorsChanged()` -> `void`
 - `onTransitionAnimationEnd(boolean isOpen, boolean backward)` -> `void`
 - `onTransitionAnimationStart(boolean isOpen, boolean backward)` -> `void`
 - `openAttachBotLayout(String botUsername)` -> `void`
@@ -689,6 +728,7 @@
 - `setIgnoreAttachOnPause(boolean value)` -> `void`
 - `setInMenuMode(boolean value)` -> `void`
 - `setInPreviewMode(boolean value)` -> `void`
+- `setKeepVoiceRecordingOnPause(boolean value)` -> `void`
 - `setMonoForumThreadMessages(int maxInboxReadId, int maxOutboxReadId, TLRPC.TL_forumTopic forumTopic)` -> `void`
 - `setNextChannels(ArrayList<TLRPC.Chat> channels)` -> `void`
 - `setOpenImport()` -> `void`
@@ -814,6 +854,7 @@
 - `drawList(Canvas blurCanvas, RectF position)` -> `void`
 - `getBottomOffset()` -> `float`
 - `getChatActivity()` -> `ChatActivity`
+- `getCompactBackground()` -> `Drawable`
 - `getKeyboardHeight()` -> `int`
 - `getListTranslationY()` -> `float`
 - `getNewDrawable()` -> `Drawable`
@@ -898,7 +939,8 @@
 - `didPressReaction(ChatMessageCell cell, TLRPC.ReactionCount reaction, boolean longpress, float x, float y)` -> `void`
 - `didPressReplyMessage(ChatMessageCell cell, int id, float x, float y, boolean longpress)` -> `void`
 - `didPressRevealSensitiveContent(ChatMessageCell cell)` -> `void`
-- `didPressRichDocumentOptions(ChatMessageCell cell, TLRPC.Document document, float x, float y)` -> `void`
+- `didPressRichCodeCopy(ChatMessageCell cell, String code, String language)` -> `void`
+- `didPressRichDocumentOptions(ChatMessageCell cell, TLRPC.Document document, RectF blockBounds)` -> `void`
 - `didPressShowMore(ChatMessageCell cell)` -> `void`
 - `didPressSideButton(ChatMessageCell cell)` -> `void`
 - `didPressSponsoredClose(ChatMessageCell cell)` -> `void`
@@ -926,6 +968,7 @@
 - `forceUpdate(ChatMessageCell cell, boolean anchorScroll, boolean scrollByTop)` -> `void`
 - `forceUpdate(ChatMessageCell cell, boolean anchorScroll, boolean withoutAnimation, boolean scrollByTop)` -> `void`
 - `forceUpdateNoAnimation(ChatMessageCell cell, boolean anchorScroll)` -> `void`
+- `forceUpdateNoAnimation(ChatMessageCell cell, boolean anchorScroll, boolean scrollByTop)` -> `void`
 - `getAddPollOptionInputFieldHeight(ChatMessageCell cell)` -> `int`
 - `getAdminRank(long uid)` -> `String`
 - `getPinchToZoomHelper()` -> `PinchToZoomHelper`
@@ -958,6 +1001,7 @@
 
 ## `org.telegram.ui.ChatActivity$PinnedMessageButton`
 - `onMeasure(int widthMeasureSpec, int heightMeasureSpec)` -> `void`
+- `updateColors()` -> `void`
 
 ## `org.telegram.ui.ChatActivity$RecyclerListViewInternal`
 - `updateClip(int[] clip)` -> `void`
@@ -968,7 +1012,10 @@
 - `static from(MessageObject messageObject)` -> `ReplyQuote`
 - `static from(MessageObject messageObject, int start, int end)` -> `ReplyQuote`
 - `static fromPollOption(MessageObject messageObject, byte[] task_id)` -> `ReplyQuote`
+- `static fromRich(MessageObject messageObject, ArrayList<TL_iv.RichText> rich, int offset)` -> `ReplyQuote`
 - `getEntities()` -> `ArrayList<TLRPC.MessageEntity>`
+- `static getFullLength(MessageObject messageObject)` -> `int`
+- `getQuoteOffset()` -> `int`
 - `getText()` -> `String`
 - `limited()` -> `boolean`
 
@@ -1080,6 +1127,7 @@
 - `getParentFragment()` -> `ChatActivity`
 - `getPopupViewHeight(View view)` -> `int`
 - `getRecordCircle()` -> `RecordCircle`
+- `getRecordTimerStartTime()` -> `long`
 - `getReplyingMessageObject()` -> `MessageObject`
 - `getSelectionLength()` -> `int`
 - `getSendButton()` -> `View`
@@ -1129,6 +1177,7 @@
 - `isSendButtonVisible()` -> `boolean`
 - `isStickersExpanded()` -> `boolean`
 - `isTopViewVisible()` -> `boolean`
+- `isVoiceOnce()` -> `boolean`
 - `isWaitingForKeyboard()` -> `boolean`
 - `onAdjustPanTransitionEnd()` -> `void`
 - `onAdjustPanTransitionStart(boolean keyboardVisible, int contentHeight)` -> `void`
@@ -1150,6 +1199,7 @@
 - `onPause()` -> `void`
 - `onRequestPermissionsResultFragment(int requestCode, String[] permissions, int[] grantResults)` -> `void`
 - `onResume()` -> `void`
+- `onRichEditorSent(boolean notify, int scheduleDate, int scheduleRepeatPeriod)` -> `void`
 - `onRoundVideoUiFrame(long durationMs)` -> `void`
 - `onSizeChanged(int w, int h, int oldw, int oldh)` -> `void`
 - `onSizeChanged(int height, boolean isWidthGreater)` -> `void`
@@ -1163,6 +1213,7 @@
 - `pannelAnimationEnabled()` -> `boolean`
 - `replaceWithText(int start, int len, CharSequence text, boolean parseEmoji)` -> `void`
 - `reset()` -> `void`
+- `restoreVoiceRecording(boolean once, long timerStartTime)` -> `void`
 - `runEmojiPanelAnimation()` -> `void`
 - `seekbarVisible()` -> `boolean`
 - `setAdjustPanLayoutHelper(AdjustPanLayoutHelper adjustPanLayoutHelper)` -> `void`
@@ -1421,6 +1472,9 @@
 
 ## `org.telegram.ui.Components.ChatActivityEnterViewAnimatedIconView`
 - `getCurrentState()` -> `State`
+- `isFormatMode()` -> `boolean`
+- `onDraw(Canvas canvas)` -> `void`
+- `setFormatMode(boolean format, boolean animated)` -> `void`
 - `setState(State state, boolean animate)` -> `void`
 
 ## `org.telegram.ui.Components.ChatActivityInterface`
@@ -1443,7 +1497,6 @@
 ## `org.telegram.ui.Components.ChatAttachAlert`
 - `applyCaption()` -> `void`
 - `avatarFor(ImageUpdater.AvatarFor avatarFor)` -> `void`
-- `blur3_InvalidateBlur()` -> `void`
 - `didReceivedNotification(int id, int account, Object... args)` -> `void`
 - `dismiss(boolean passConfirmationAlert)` -> `void`
 - `dismiss()` -> `void`
@@ -1496,6 +1549,7 @@
 - `onResume()` -> `void`
 - `onStart()` -> `void`
 - `onStop()` -> `void`
+- `onThemeColorsChanged()` -> `void`
 - `openAttachLayoutForType(int layoutType)` -> `void`
 - `openColorsLayout()` -> `void`
 - `presentFragment(PhotoPickerActivity fragment)` -> `void`
@@ -1551,7 +1605,6 @@
 - `getCustomActionBarBackground()` -> `int`
 - `getCustomBackground()` -> `int`
 - `getFirstOffset()` -> `int`
-- `getIBlur3Capture()` -> `IBlur3Capture`
 - `getListTopPadding()` -> `int`
 - `getSelectedItemsCount()` -> `int`
 - `getThemeDescriptions()` -> `ArrayList<ThemeDescription>`
@@ -1578,10 +1631,12 @@
 - `onPreMeasure(int availableWidth, int availableHeight)` -> `void`
 - `onResume()` -> `void`
 - `onSelectedItemsCountChanged(int count)` -> `void`
+- `onSheetBackground(float top, float round)` -> `void`
 - `onSheetKeyDown(int keyCode, KeyEvent event)` -> `boolean`
 - `onShow(AttachAlertLayout previousLayout)` -> `void`
 - `onShown()` -> `void`
 - `scrollToTop()` -> `void`
+- `setBlur3Capture(RecyclerListView iBlur3Capture)` -> `void`
 
 ## `org.telegram.ui.Components.ChatAttachAlert$AttachBotButton`
 - `onAttachedToWindow()` -> `void`
@@ -1691,6 +1746,7 @@
 - `setMultipleSelectionAllowed(boolean multipleSelectionAllowed)` -> `void`
 - `setTranslationY(float translationY)` -> `void`
 - `setupBlurredSearchField(BlurredBackgroundDrawableViewFactory factory)` -> `void`
+- `updateColors()` -> `void`
 
 ## `org.telegram.ui.Components.ChatAttachAlertContactsLayout$ListItemID`
 - `equals(Object o)` -> `boolean`
@@ -1830,13 +1886,17 @@
 
 ## `org.telegram.ui.Components.ChatAttachAlertLocationLayout`
 - `didReceivedNotification(int id, int account, Object... args)` -> `void`
+- `disableBottomFade()` -> `boolean`
+- `disableTopFade()` -> `boolean`
 - `getButtonsHideOffset()` -> `int`
 - `getCurrentItemTop()` -> `int`
 - `getFirstOffset()` -> `int`
 - `getListTopPadding()` -> `int`
 - `getThemeDescriptions()` -> `ArrayList<ThemeDescription>`
 - `needsActionBar()` -> `int`
+- `onAttachedToWindow()` -> `void`
 - `onDestroy()` -> `void`
+- `onDetachedFromWindow()` -> `void`
 - `onDismiss()` -> `boolean`
 - `onHide()` -> `void`
 - `onLayout(boolean changed, int left, int top, int right, int bottom)` -> `void`
@@ -1845,19 +1905,13 @@
 - `onPause()` -> `void`
 - `onPreMeasure(int availableWidth, int availableHeight)` -> `void`
 - `onResume()` -> `void`
+- `onSheetBackground(float top, float round)` -> `void`
 - `onShow(ChatAttachAlert.AttachAlertLayout previousLayout)` -> `void`
 - `openShareLiveLocation()` -> `void`
 - `scrollToTop()` -> `void`
 - `setDelegate(LocationActivityDelegate delegate)` -> `void`
 - `setTranslationY(float translationY)` -> `void`
-
-## `org.telegram.ui.Components.ChatAttachAlertLocationLayout$MapOverlayView`
-- `updatePositions()` -> `void`
-
-## `org.telegram.ui.Components.ChatAttachAlertLocationLayout$SearchButton`
-- `getTranslationX()` -> `float`
-- `setTranslation(float value)` -> `void`
-- `setTranslationX(float translationX)` -> `void`
+- `updateColors()` -> `void`
 
 ## `org.telegram.ui.Components.ChatAttachAlertPhotoLayout`
 - `applyCaption(CharSequence text)` -> `void`
@@ -2076,6 +2130,7 @@
 - `scrollToTop()` -> `void`
 - `setDelegate(PollCreateActivityDelegate pollCreateActivityDelegate)` -> `void`
 - `setTranslationY(float translationY)` -> `void`
+- `updateColors()` -> `void`
 
 ## `org.telegram.ui.Components.ChatAttachAlertPollLayout$ListAdapter`
 - `getItemCount()` -> `int`
@@ -2219,6 +2274,8 @@
 - `setFadeZoneBottom(int height)` -> `void`
 - `setFadeZoneTop(int height)` -> `void`
 - `setIgnoreFastWay(boolean ignoreFastWay)` -> `void`
+- `setOverlayColor(int color)` -> `void`
+- `setResourcesProvider(Theme.ResourcesProvider resourcesProvider)` -> `void`
 - `setup(BlurredBackgroundDrawableViewFactory factory)` -> `void`
 - `setup(BlurredBackgroundDrawableViewFactory factory, BlurredBackgroundColorProvider colorProvider)` -> `void`
 - `setupColorKey(int colorKey)` -> `void`
@@ -2252,6 +2309,7 @@
 - `setMeasuredButtonWidth(int width)` -> `void`
 - `setProgress(float progress)` -> `void`
 - `setupButtonParams(boolean isActive, String text, int color, int textColor, boolean isProgressVisible)` -> `void`
+- `updateColors()` -> `void`
 
 ## `org.telegram.ui.bots.ChatAttachAlertBotWebViewLayout`
 - `didReceivedNotification(int id, int account, Object... args)` -> `void`
@@ -2297,6 +2355,7 @@
 - `onDetachedFromWindow()` -> `void`
 - `setLoadProgress(float loadProgress)` -> `void`
 - `setLoadProgressAnimated(float loadProgress)` -> `void`
+- `updateColors()` -> `void`
 
 ## `org.telegram.ui.bots.ChatAttachAlertBotWebViewLayout$WebViewSwipeContainer`
 - `allowThisScroll(boolean x, boolean y)` -> `void`
